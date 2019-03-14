@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.affablebean.exception.CategoryNotFoundException;
+import com.affablebean.exception.MsgFeedbackNotFoundException;
 
 @ControllerAdvice
-public class CategoryNotFoundAdvice {
+public class MsgFeedbackNotFoundAdvice {
 
 	@ResponseBody
-	@ExceptionHandler(CategoryNotFoundException.class)
+	@ExceptionHandler(MsgFeedbackNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public String resourceNotFoundHandler(CategoryNotFoundException ex) {
+	public String resourceNotFoundHandler(MsgFeedbackNotFoundException ex) {
 		return ex.getMessage();
 	}
 }
