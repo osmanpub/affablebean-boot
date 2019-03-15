@@ -14,7 +14,8 @@ public class MsgSubjectResourceAssembler implements ResourceAssembler<MsgSubject
 
 	@Override
 	public Resource<MsgSubject> toResource(MsgSubject msgSubject) {
-		return new Resource<>(msgSubject, linkTo(methodOn(MsgSubjectController.class).one(msgSubject.getId())).withSelfRel(),
+		return new Resource<>(msgSubject,
+				linkTo(methodOn(MsgSubjectController.class).one(msgSubject.getId())).withSelfRel(),
 				linkTo(methodOn(MsgSubjectController.class).all()).withRel("subjects"));
 	}
 }

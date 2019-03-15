@@ -14,7 +14,8 @@ public class CustomerOrderResourceAssembler implements ResourceAssembler<Custome
 
 	@Override
 	public Resource<CustomerOrder> toResource(CustomerOrder customerOrder) {
-		return new Resource<>(customerOrder, linkTo(methodOn(CustomerOrderController.class).one(customerOrder.getId())).withSelfRel(),
+		return new Resource<>(customerOrder,
+				linkTo(methodOn(CustomerOrderController.class).one(customerOrder.getId())).withSelfRel(),
 				linkTo(methodOn(CustomerOrderController.class).all()).withRel("customerOrders"));
 	}
 }

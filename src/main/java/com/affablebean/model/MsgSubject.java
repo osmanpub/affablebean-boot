@@ -2,6 +2,8 @@ package com.affablebean.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,24 +17,30 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "msg_subject")
 @XmlRootElement
+@JsonIgnoreProperties(value = { "msgFeedbackCollection" })
 public class MsgSubject implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8637916068100816835L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
+
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 45)
 	@Column(name = "name")
 	private String name;
+
 	@OneToMany(mappedBy = "subjectId")
 	private Collection<MsgFeedback> msgFeedbackCollection;
 
@@ -75,27 +83,27 @@ public class MsgSubject implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		return Objects.hash(id);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof MsgSubject)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		MsgSubject other = (MsgSubject) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if (!(obj instanceof MsgSubject)) {
 			return false;
 		}
-		return true;
+		MsgSubject other = (MsgSubject) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "com.affablebean.entity.MsgSubject[ id=" + id + " ]";
+		return "MsgSubject [id=" + id + ", name=" + name + "]";
 	}
 
 }

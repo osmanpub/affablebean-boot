@@ -58,8 +58,8 @@ public class CustomerController {
 			throws URISyntaxException {
 
 		Customer updatedCustomer = repository.findById(id).map(customer -> {
-			customer.setAddress(newCustomer.getAddress());			
-			customer.setCcNumber(newCustomer.getCcNumber());			
+			customer.setAddress(newCustomer.getAddress());
+			customer.setCcNumber(newCustomer.getCcNumber());
 			customer.setCityRegion(customer.getCityRegion());
 			customer.setCustomerOrderCollection(customer.getCustomerOrderCollection());
 			customer.setEmail(customer.getEmail());

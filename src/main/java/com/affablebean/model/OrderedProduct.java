@@ -1,6 +1,8 @@
 package com.affablebean.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "ordered_product")
@@ -16,17 +19,22 @@ public class OrderedProduct implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8817504540585670297L;
+
 	@EmbeddedId
 	protected OrderedProductPK orderedProductPK;
+
 	@Basic(optional = false)
 	@Column(name = "quantity")
+	@NotBlank
 	private short quantity;
-	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
-	@ManyToOne(optional = false)
-	private Product product;
+
 	@JoinColumn(name = "customer_order_id", referencedColumnName = "id", insertable = false, updatable = false)
 	@ManyToOne(optional = false)
 	private CustomerOrder customerOrder;
+
+	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private Product product;
 
 	public OrderedProduct() {
 	}
@@ -78,28 +86,28 @@ public class OrderedProduct implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (orderedProductPK != null ? orderedProductPK.hashCode() : 0);
-		return hash;
+		return Objects.hash(orderedProductPK);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof OrderedProduct)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		OrderedProduct other = (OrderedProduct) object;
-		if ((this.orderedProductPK == null && other.orderedProductPK != null)
-				|| (this.orderedProductPK != null && !this.orderedProductPK.equals(other.orderedProductPK))) {
+		if (!(obj instanceof OrderedProduct)) {
 			return false;
 		}
-		return true;
+		OrderedProduct other = (OrderedProduct) obj;
+		return Objects.equals(orderedProductPK, other.orderedProductPK);
 	}
 
 	@Override
 	public String toString() {
-		return "entity.OrderedProduct[orderedProductPK=" + orderedProductPK + "]";
+		return "OrderedProduct [orderedProductPK=" + orderedProductPK + ", quantity=" + quantity + ", product="
+				+ product + ", customerOrder=" + customerOrder + "]";
 	}
 
 }

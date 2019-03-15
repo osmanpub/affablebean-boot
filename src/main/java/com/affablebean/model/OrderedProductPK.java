@@ -1,6 +1,8 @@
 package com.affablebean.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,9 +13,11 @@ public class OrderedProductPK implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3648458571429198808L;
+
 	@Basic(optional = false)
 	@Column(name = "customer_order_id")
 	private int customerOrderId;
+
 	@Basic(optional = false)
 	@Column(name = "product_id")
 	private int productId;
@@ -44,31 +48,27 @@ public class OrderedProductPK implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (int) customerOrderId;
-		hash += (int) productId;
-		return hash;
+		return Objects.hash(customerOrderId, productId);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof OrderedProductPK)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		OrderedProductPK other = (OrderedProductPK) object;
-		if (this.customerOrderId != other.customerOrderId) {
+		if (!(obj instanceof OrderedProductPK)) {
 			return false;
 		}
-		if (this.productId != other.productId) {
-			return false;
-		}
-		return true;
+		OrderedProductPK other = (OrderedProductPK) obj;
+		return customerOrderId == other.customerOrderId && productId == other.productId;
 	}
 
 	@Override
 	public String toString() {
-		return "entity.OrderedProductPK[customerOrderId=" + customerOrderId + ", productId=" + productId + "]";
+		return "OrderedProductPK [customerOrderId=" + customerOrderId + ", productId=" + productId + "]";
 	}
 
 }

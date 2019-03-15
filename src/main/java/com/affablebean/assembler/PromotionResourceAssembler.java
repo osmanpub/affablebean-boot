@@ -14,7 +14,8 @@ public class PromotionResourceAssembler implements ResourceAssembler<Promotion, 
 
 	@Override
 	public Resource<Promotion> toResource(Promotion promotion) {
-		return new Resource<>(promotion, linkTo(methodOn(PromotionController.class).one(promotion.getId())).withSelfRel(),
+		return new Resource<>(promotion,
+				linkTo(methodOn(PromotionController.class).one(promotion.getId())).withSelfRel(),
 				linkTo(methodOn(PromotionController.class).all()).withRel("promotions"));
 	}
 }

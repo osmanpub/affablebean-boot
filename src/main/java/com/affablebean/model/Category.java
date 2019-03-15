@@ -13,25 +13,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "category")
-@JsonIgnoreProperties(value = { "productCollection" }, ignoreUnknown = true)
+@JsonIgnoreProperties(value = { "productCollection" })
 public class Category implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4907487147078828473L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Short id;
+
 	@Basic(optional = false)
 	@Column(name = "name")
+	@NotBlank
 	private String name;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private Collection<Product> productCollection;
 

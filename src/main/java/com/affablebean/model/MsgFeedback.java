@@ -1,6 +1,8 @@
 package com.affablebean.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,16 +28,13 @@ public class MsgFeedback implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5195439023987008735L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
-	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 45)
-	@Column(name = "name")
-	private String name;
+
 	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
 	// message="Invalid email")//if the field contains email address consider using
 	// this annotation to enforce field validation
@@ -44,11 +43,19 @@ public class MsgFeedback implements Serializable {
 	@Size(min = 1, max = 45)
 	@Column(name = "email")
 	private String email;
+
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 1000)
 	@Column(name = "msg")
 	private String msg;
+
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 45)
+	@Column(name = "name")
+	private String name;
+
 	@JoinColumn(name = "subject_id", referencedColumnName = "id")
 	@ManyToOne
 	private MsgSubject subjectId;
@@ -109,27 +116,28 @@ public class MsgFeedback implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		return Objects.hash(id);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof MsgFeedback)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		MsgFeedback other = (MsgFeedback) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if (!(obj instanceof MsgFeedback)) {
 			return false;
 		}
-		return true;
+		MsgFeedback other = (MsgFeedback) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "com.affablebean.entity.MsgFeedback[ id=" + id + " ]";
+		return "MsgFeedback [id=" + id + ", name=" + name + ", email=" + email + ", msg=" + msg + ", subjectId="
+				+ subjectId + "]";
 	}
 
 }

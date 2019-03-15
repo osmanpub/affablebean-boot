@@ -1,0 +1,2280 @@
+Found a 531 line (2171 tokens) duplication in the following files: 
+Starting at line 39 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 39 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+public final class CustCtrl extends HttpServlet {
+
+	private String surcharge;
+	@EJB
+	private CategoryFacade categoryFacade;
+	@EJB
+	private MsgSubjectFacade subjectFacade;
+	@EJB
+	private MsgFeedbackFacade feedbackFacade;
+	@EJB
+	private OrderManager orderManager;
+	@EJB
+	private ProductFacade productFacade;
+	@EJB
+	private PromotionFacade promoFacade;
+
+	@Override
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
+
+		// initialize servlet with configuration information
+		surcharge = getServletContext().getInitParameter("deliverySurcharge");
+
+		getServletContext().setAttribute("categories", categoryFacade.findAll());
+		getServletContext().setAttribute("subjects", subjectFacade.findSubjects());
+		getServletContext().setAttribute("sale", promoFacade.findSale());
+		getServletContext().setAttribute("catProms", promoFacade.findCategories());
+		getServletContext().setAttribute("prodProms", promoFacade.findProducts());
+	}
+
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+					throws ServletException, IOException {
+
+//		setSessionData(request); // pick up new static data without restart
+		String userPath = request.getServletPath().substring(1);
+		// true even if string reads "false"!
+		boolean json = (request.getParameter("json") != null);
+
+		// if category page is requested
+		switch (userPath) {
+			case "category":
+				getCategoryProducts(request);
+
+				if (json) {
+					JsonFactory.categoryResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				break;
+
+			case "checkout":
+				// forward to checkout page and switch to a secure channel
+				break;
+
+			case "chooseLanguage":
+				userPath = setLanguage(request);
+				break;
+
+			case "viewCart":
+				checkCart(request);
+
+				if (json) {
+					JsonFactory.cartResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				userPath = "cart";
+				break;
+
+			default:
+//				System.err.println("No request handler found for " + userPath);
+		}
+
+		dispatchRequest(userPath, request, response, json);
+	}
+
+	/**
+	 * Handles the HTTP <code>POST</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+					throws ServletException, IOException {
+
+		// ensures that user input is interpreted as 8-bit Unicode (e.g., for 
+		// Czech characters)
+		request.setCharacterEncoding("UTF-8");
+		String userPath = request.getServletPath().substring(1);
+		// true even if string reads "false"!
+		boolean json = (request.getParameter("json") != null);
+
+		switch (userPath) {
+			case "addToCart":
+				addToCart(request);
+
+				if (json) {
+					JsonFactory.cartResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				userPath = "category";
+				break;
+
+			case "feedback":
+				if (json) {
+					boolean valid = saveFeedbackJson(request);
+
+					if (valid) {
+						JsonFactory.feedbackResponse(response.getWriter(), request);
+					}
+
+					return;
+				}
+
+				String fb = saveFeedback(request);
+
+				if (!fb.isEmpty()) {
+					userPath = fb;
+				}
+				break;
+
+			case "purchase":
+				if (json) {
+					boolean valid = purchaseJson(request);
+
+					if (valid) {
+						JsonFactory.confResponse(response.getWriter(), request,
+										getServletContext(), productFacade);
+					}
+
+					return;
+
+				} else {
+					boolean valid = purchase(request);
+
+					if (valid) {
+						int showJson = Integer.valueOf(
+										getServletContext().getInitParameter("showJson"));
+
+						if (showJson != 0) {
+							JsonFactory.confResponse(response.getWriter(), request,
+											getServletContext(), productFacade);
+							return;
+						}
+
+						userPath = "confirmation";
+
+					} else {
+						userPath = "checkout";
+					}
+				}
+
+				break;
+
+			case "showJSON":
+				showJSON(request, response.getWriter());
+				return;
+
+			case "updateCart":
+				updateCart(request);
+
+				if (json) {
+					JsonFactory.cartResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				userPath = "cart";
+				break;
+
+			default:
+//				System.err.println("No action handler found for " + userPath);
+		}
+
+		dispatchRequest(userPath, request, response, json);
+	}
+
+	private void addToCart(HttpServletRequest request)
+					throws NumberFormatException {
+
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		// if user is adding item to cart for first time create cart object and 
+		// attach it to user session
+		if (cart == null) {
+			cart = new ShoppingCart();
+			session.setAttribute("cart", cart);
+		}
+
+		// get user input from request		
+		String productId = request.getParameter("productId");
+
+		if (!productId.isEmpty()) {
+			Product product = productFacade.find(Integer.parseInt(productId));
+			cart.addItem(product);
+		}
+	}
+
+	private void checkCart(HttpServletRequest request) {
+		boolean clear = (request.getParameter("clear") != null);
+
+		if (clear) {
+			HttpSession session = request.getSession();
+			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+			cart.clear();
+		}
+	}
+
+	private void dispatchRequest(String userPath, HttpServletRequest request,
+					HttpServletResponse response, boolean json)
+					throws ServletException, IOException {
+
+		String url;
+
+		switch (userPath) {
+			case "contact":
+				if (json) {
+					JsonFactory.subjectList(response.getWriter(), getServletContext());
+					return;
+				}
+
+				url = "contact.jsp";
+				break;
+
+			case "index":
+				if (json) {
+					JsonFactory.indexResponse(response.getWriter(), getServletContext());
+					return;
+				}
+
+				url = "index.jsp";
+				break;
+
+			case "privacy":
+				url = "privacy.jsp";
+				break;
+
+			default:
+				url = "/WEB-INF/view/" + userPath + ".jsp";
+		}
+
+		request.getRequestDispatcher(url).forward(request, response);
+	}
+
+	private void getCategoryProducts(HttpServletRequest request)
+					throws NumberFormatException {
+
+		// get categoryId from request
+		String categoryId = request.getParameter("id");
+
+		if (categoryId != null) {
+			HttpSession session = request.getSession();
+			Category selectedCategory
+							= categoryFacade.find(Short.parseShort(categoryId));
+
+			// place selected category in session scope
+			session.setAttribute("selectedCategory", selectedCategory);
+
+			// get all products for selected category and place them in session scope
+			session.setAttribute("categoryProducts",
+							selectedCategory.getProductCollection());
+		}
+	}
+
+	private boolean purchase(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		if (cart == null) {
+			return false;
+		}
+
+		// extract user data from request
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String cityRegion = "1"; // dont'care
+		String ccNumber = request.getParameter("creditcard");
+
+		// validate user data
+		boolean valid = Validator.validateCheckOutForm(request, name, email, phone,
+						address, cityRegion, ccNumber);
+
+		if (valid) {
+			return saveOrder(request, name, email, phone, address, cityRegion,
+							ccNumber);
+		} else {
+			request.setAttribute("validationErrorFlag", true);
+			return false;
+		}
+	}
+
+	private boolean purchaseJson(HttpServletRequest request) throws IOException {
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		if (cart == null) {
+			return false;
+		}
+
+		String name, email, phone, address, ccNumber;
+		String cityRegion = "1"; // dont'care
+
+		try (JsonReader jsonReader = Json.createReader(request.getInputStream())) {
+			JsonObject data = jsonReader.readObject();
+			name = data.getJsonString("name").toString();
+			email = data.getJsonString("email").toString();
+			phone = data.getJsonString("phone").toString();
+			address = data.getJsonString("address").toString();
+			ccNumber = data.getJsonString("creditcard").toString();
+		}
+
+		// validate user data
+		boolean valid = Validator.validateCheckOutForm(request, name, email,
+						phone, address, cityRegion, ccNumber);
+
+		if (valid) {
+			return saveOrder(request, name, email, phone, address, cityRegion, ccNumber);
+		}
+
+		return false;
+	}
+
+	private String saveFeedback(HttpServletRequest request) {
+		String name, email, msg;
+
+		name = request.getParameter("name");
+		email = request.getParameter("email");
+		msg = request.getParameter("msg");
+
+		boolean valid = Validator.validateContactForm(request, name, email, msg);
+
+		if (valid) {
+			MsgSubject subject = null;
+
+			try {
+				int subjId = Integer.valueOf(request.getParameter("subject_sel"));
+				subject = subjectFacade.find(subjId);
+			} catch (NumberFormatException e) {
+			}
+
+			int id = feedbackFacade.save(name, email, msg, subject);
+
+			if (id != 0) {
+				return "index";
+			}
+
+		} else {
+			request.setAttribute("validationErrorFlag", true);
+		}
+
+		return "contact";
+	}
+
+	private boolean saveFeedbackJson(HttpServletRequest request)
+					throws IOException {
+
+		try (JsonReader jsonReader = Json.createReader(request.getInputStream())) {
+			JsonObject data = jsonReader.readObject();
+
+			String name = data.getJsonString("name").toString();
+			String email = data.getJsonString("email").toString();
+			String msg = data.getJsonString("msg").toString();
+
+			MsgSubject subject = null;
+
+			try {
+				int id = data.getJsonNumber("subject").intValue();
+				subject = subjectFacade.find(id);
+			} catch (NumberFormatException e) {
+			}
+
+			boolean valid = Validator.validateContactForm(request, name, email, msg);
+
+			if (valid) {
+				int id = feedbackFacade.save(name, email, msg, subject);
+			}
+
+			return valid;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	private boolean saveOrder(HttpServletRequest request, String... order) {
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		// see method call for order element types
+		int orderId = orderManager.placeOrder(cart, surcharge, order[0], order[1],
+						order[2], order[3], order[4], order[5]);
+
+		// if order processed successfully send user to confirmation page
+		if (orderId != 0) {
+			// in case language was set using toggle, get language choice before 
+			// destroying session
+			Locale locale = (Locale) session.getAttribute(
+							"javax.servlet.jsp.jstl.fmt.locale.session");
+			String language = "";
+
+			if (locale != null) {
+				language = (String) locale.getLanguage();
+			}
+
+			// dissociate shopping cart from session
+			cart = null;
+
+			// end session
+			session.invalidate();
+
+			// if user changed language using the toggle, reset the language attribute 
+			// otherwise language will be switched on confirmation page!			
+			if (!language.isEmpty()) {
+				request.setAttribute("language", language);
+			}
+
+			// get order details
+			Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
+
+			// place order details in request scope
+			request.setAttribute("customer", orderMap.get("customer"));
+			request.setAttribute("products", orderMap.get("products"));
+			request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+			request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
+			return true;
+
+			// otherwise, send back to checkout page and display error
+		} else {
+			request.setAttribute("orderFailureFlag", true);
+			return false;
+		}
+	}
+
+	private void updateCart(HttpServletRequest request) throws
+					NumberFormatException {
+
+		// get input from request
+		String productId = request.getParameter("productId");
+		String quantity = request.getParameter("quantity");
+
+		if (Validator.validateQuantity(productId, quantity)) {
+			Product product = productFacade.find(Integer.parseInt(productId));
+			HttpSession session = request.getSession();
+			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+			cart.update(product, quantity);
+		}
+	}
+
+	private String setLanguage(HttpServletRequest request) {
+		// get language choice
+		String language = request.getParameter("language");
+		// place in request scope
+		request.setAttribute("language", language);
+
+		HttpSession session = request.getSession();
+		String userView = (String) session.getAttribute("view");
+		String userPath;
+
+		if ((userView != null) && (!userView.equals("/index"))) {
+			// index.jsp exists outside 'view' folder so must be forwarded separately
+			userPath = userView;
+		} else {
+			// if previous view is index or cannot be determined, send user to
+			// welcome page
+			userPath = "/index";
+		}
+
+		return userPath.substring(1);
+	}
+
+	private void setSessionData(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		// scope ordering rules should pick up updates here
+		if (session.getAttribute("categories") == null) {
+			session.setAttribute("categories", categoryFacade.findAll());
+		}
+
+		if (session.getAttribute("subjects") == null) {
+			session.setAttribute("subjects", subjectFacade.findAll());
+		}
+
+		if (session.getAttribute("sale") == null) {
+			session.setAttribute("sale", promoFacade.findSale());
+		}
+	}
+
+	private void showJSON(HttpServletRequest request, Writer response) {
+		HttpSession session = request.getSession();
+		String source = (String) request.getParameter("src").substring(1);
+		source = source.substring(source.lastIndexOf('/') + 1, source.lastIndexOf(".jsp"));
+
+		switch (source) {
+			case "cart":
+				JsonFactory.cartResponse(response, session, getServletContext());
+				break;
+
+			case "category":
+				JsonFactory.categoryResponse(response, session, getServletContext());
+				break;
+
+			case "index":
+				JsonFactory.indexResponse(response, getServletContext());
+				break;
+
+			default:
+		}
+	}
+}
+=====================================================================
+Found a 317 line (1827 tokens) duplication in the following files: 
+Starting at line 26 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 26 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+
+public final class JsonFactory {
+
+	public static void cartResponse(Writer response, HttpSession session,
+					ServletContext ctx) {
+
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartObject();
+			writeCart(response, gen, (ShoppingCart) session.getAttribute("cart"));
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void categoryList(Writer response, ServletContext ctx) {
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartArray();
+
+			for (Category category : (List<Category>) ctx.getAttribute("categories")) {
+				gen.writeStartObject();
+				gen.write("id", category.getId()).write("name", category.getName());
+				gen.writeEnd();
+			}
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void categoryResponse(Writer response, HttpSession session,
+					ServletContext ctx) {
+
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			Category cat = (Category) session.getAttribute("selectedCategory");
+			gen.writeStartObject();
+
+			writeCategoryProducts(response, gen,
+							(Collection<Product>) session.getAttribute("categoryProducts"));
+			writeCatPromotions(response, gen,
+							(List<Promotion>) ctx.getAttribute("catProms"), (short) cat.getId());
+			writeProductPromotions(response, gen,
+							(List<Promotion>) ctx.getAttribute("prodProms"),
+							(Collection<Product>) session.getAttribute("categoryProducts"));
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void confResponse(Writer response, HttpServletRequest request,
+					ServletContext ctx, ProductFacade productFacade) {
+
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartObject();
+
+			writeCustomer(response, gen, (Customer) request.getAttribute("customer"));
+			writeCustomerOrder(response, gen,
+							(CustomerOrder) request.getAttribute("orderRecord"));
+			writeCOProducts(response, gen,
+							(List<OrderedProduct>) request.getAttribute("orderedProducts"),
+							productFacade);
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void feedbackResponse(Writer response,
+					HttpServletRequest request) {
+
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartObject();
+
+			if (request.getAttribute("nameError") != null) {
+				gen.write("name", "name: null,empty,> 45 chars");
+			}
+
+			if (request.getAttribute("emailError") != null) {
+				gen.write("email", "email: null,empty,missing '@'");
+			}
+
+			if (request.getAttribute("msgError") != null) {
+				gen.write("msg", "msg: null,empty,< 10 chars");
+			}
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void indexResponse(Writer response, ServletContext ctx) {
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartObject();
+
+			writeCategories(response, gen,
+							(List<Category>) ctx.getAttribute("categories"));
+			writeSalePromotion(response, gen, (Promotion) ctx.getAttribute("sale"));
+
+			gen.writeStartObject("properties");
+			gen.write("surcharge", ctx.getInitParameter("deliverySurcharge"));
+			gen.writeEnd();
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void subjectList(Writer response, ServletContext ctx) {
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartArray();
+
+			for (MsgSubject subject : (List<MsgSubject>) ctx.getAttribute("subjects")) {
+				gen.writeStartObject();
+				gen.write("id", subject.getId()).write("name", subject.getName());
+				gen.writeEnd();
+			}
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void writeCart(Writer response, JsonGenerator gen,
+					ShoppingCart shoppingCart) {
+
+		gen.writeStartArray("cartItems");
+
+		for (ShoppingCartItem item : shoppingCart.getItems()) {
+			gen.writeStartObject();
+			gen.write("product", item.getProduct().getId())
+							.write("name", item.getProduct().getName())
+							.write("price", item.getProduct().getPrice())
+							.write("qty", item.getQuantity())
+							.write("total", item.getTotal());
+			gen.writeEnd();
+		}
+
+		gen.writeEnd();
+
+		gen.writeStartObject("properties");
+		gen.write("items", shoppingCart.getNumberOfItems())
+						.write("subtotal", shoppingCart.getSubtotal());
+		gen.writeEnd();
+
+	}
+
+	private static void writeCategories(Writer response, JsonGenerator gen,
+					List<Category> data) {
+
+		gen.writeStartArray("categories");
+
+		for (Category category : data) {
+			gen.writeStartObject();
+			gen.write("id", category.getId()).write("name", category.getName());
+			gen.writeEnd();
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writeCategoryProducts(Writer response, JsonGenerator gen,
+					Collection<Product> data) {
+
+		gen.writeStartArray("products");
+
+		for (Product product : data) {
+			gen.writeStartObject();
+			gen.write("id", product.getId())
+							.write("name", product.getName())
+							.write("price", product.getPrice())
+							.write("description", product.getDescription())
+							.write("categoryId", product.getCategory().getId());
+			gen.writeEnd();
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writeCatPromotions(Writer response, JsonGenerator gen,
+					List<Promotion> data, short selectedCategory) {
+
+		gen.writeStartArray("categoryPromotions");
+
+		for (Promotion promo : data) {
+			if (promo.getCategoryId() == selectedCategory) {
+				writePromotion(gen, promo);
+			}
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writeCustomer(Writer response, JsonGenerator gen,
+					Customer customer) {
+		gen.writeStartObject("customer");
+
+		gen.write("id", customer.getId())
+						.write("name", customer.getName())
+						.write("address", customer.getAddress())
+						.write("region", customer.getCityRegion())
+						.write("phone", customer.getPhone())
+						.write("email", customer.getEmail())
+						.write("ccNumber", customer.getCcNumber());
+
+		gen.writeEnd();
+	}
+
+	private static void writeCustomerOrder(Writer response, JsonGenerator gen,
+					CustomerOrder co) {
+
+		gen.writeStartObject("customerOrder");
+		gen.write("id", co.getId())
+						.write("amount", co.getAmount())
+						.write("confNumber", co.getConfirmationNumber())
+						.write("dateCreated", co.getDateCreated().toString());
+		gen.writeEnd();
+	}
+
+	private static void writeCOProducts(Writer response, JsonGenerator gen,
+					List<OrderedProduct> orderedProducts, ProductFacade productFacade) {
+
+		gen.writeStartArray("orderedProducts");
+
+		for (OrderedProduct op : orderedProducts) {
+			gen.writeStartObject();
+
+			Product product = productFacade.find(
+							op.getOrderedProductPK().getProductId());
+
+			gen.write("coId", op.getOrderedProductPK().getCustomerOrderId())
+							.write("prodId", op.getOrderedProductPK().getProductId())
+							.write("name", product.getName())
+							.write("price", product.getPrice())
+							.write("qty", op.getQuantity());
+			gen.writeEnd();
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writePromotions(Writer response, JsonGenerator gen,
+					List<Promotion> data, String title) {
+
+		gen.writeStartArray(title);
+
+		for (Promotion promo : data) {
+			writePromotion(gen, promo);
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writeProductPromotions(Writer response, JsonGenerator gen,
+					List<Promotion> data, Collection<Product> catProds) {
+
+		gen.writeStartArray("productPromotions");
+
+		for (Promotion promo : data) {
+			int prodId = promo.getProductId();
+
+			for (Product product : catProds) {
+				if (product.getId() == prodId) {
+					writePromotion(gen, promo);
+					break;
+				}
+			}
+		}
+
+		gen.writeEnd();
+	}
+
+	private static void writeSalePromotion(Writer response, JsonGenerator gen,
+					Promotion data) {
+
+		gen.writeStartArray("salePromotion");
+		writePromotion(gen, data);
+		gen.writeEnd();
+	}
+
+	private static void writePromotion(JsonGenerator gen, Promotion promo) {
+		gen.writeStartObject();
+
+		gen.write("id", promo.getId())
+						.write("name", promo.getName())
+						.write("discount", promo.getDiscount())
+						.write("isSale", promo.getSale() != null
+										? promo.getSale().toString() : "(null)")
+						.write("categoryId", promo.getCategoryId() != null
+										? promo.getCategoryId().toString() : "(null)")
+						.write("productId", promo.getProductId() != null
+										? promo.getProductId().toString() : "(null)")
+						.write("qty", promo.getQty() != null
+										? promo.getQty().toString() : "(null)")
+						.write("sold", promo.getSold() != null
+										? promo.getSold().toString() : "(null)")
+						.write("description", promo.getDescription() != null
+										? promo.getDescription() : "(null)");
+
+		gen.writeEnd();
+	}
+
+	private JsonFactory() {
+	}
+}
+=====================================================================
+Found a 97 line (636 tokens) duplication in the following files: 
+Starting at line 16 of /data/src/java/affablebean-boot/src/main/resources/setup/validate/Validator.java
+Starting at line 16 of /data/src/java/affablebean-boot/target/classes/setup/validate/Validator.java
+
+public final class Validator {
+
+	// ensures that quantity input is number between 0 and 99 applies to 
+	// quantity fields in cart page
+	public static boolean validateQuantity(String productId, String quantity) {
+		boolean errorFlag = false;
+
+		if (!productId.isEmpty() && !quantity.isEmpty()) {
+			int i = -1;
+
+			try {
+				i = Integer.parseInt(quantity);
+			} catch (NumberFormatException nfe) {
+				System.out.println("User did not enter a number in the quantity field");
+				errorFlag = true;
+			}
+
+			if (i < 0 || i > 99) {
+				errorFlag = true;
+			}
+		}
+
+		return !errorFlag;
+	}
+
+	// performs simple validation on checkout form
+	public static boolean validateCheckOutForm(HttpServletRequest request,
+					String... data) {
+
+		boolean errorFlag = false;
+
+		if (data[0] == null || data[0].isEmpty() || data[0].trim().length() < 8
+						|| data[0].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("nameError", true);
+		}
+
+		if (data[1] == null || data[1].isEmpty() || !data[1].contains("@")
+						|| data[1].trim().length() < 8 || data[1].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("emailError", true);
+		}
+
+		if (data[2] == null || data[2].isEmpty() || data[2].trim().length() < 8
+						|| data[2].trim().length() > 30) {
+			errorFlag = true;
+			request.setAttribute("phoneError", true);
+		}
+
+		if (data[3] == null || data[3].isEmpty() || data[3].trim().length() < 8
+						|| data[3].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("addressError", true);
+		}
+
+//		if (data[4] == null || data[4].isEmpty() || data[4].trim().length() > 2) {
+//			errorFlag = true;
+//			request.setAttribute("cityRegionError", true);
+//		}
+		if (data[5] == null || data[5].isEmpty() || data[5].trim().length() < 8
+						|| data[5].trim().length() > 19) {
+			errorFlag = true;
+			request.setAttribute("ccNumberError", true);
+		}
+
+		return !errorFlag;
+	}
+
+	// performs simple validation on contact us form
+	public static boolean validateContactForm(HttpServletRequest request,
+					String... data) {
+
+		boolean errorFlag = false;
+
+		if (data[0] == null || data[0].isEmpty() || data[0].trim().length() < 5
+						|| data[0].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("nameError", true);
+		}
+
+		if (data[1] == null || data[1].isEmpty() || !data[1].contains("@")
+						|| data[1].trim().length() < 8 || data[1].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("emailError", true);
+		}
+
+		if (data[2] == null || data[2].isEmpty() || data[2].trim().length() < 10) {
+			errorFlag = true;
+			request.setAttribute("msgError", true);
+		}
+
+		return !errorFlag;
+	}
+
+	public Validator() {
+	}
+}
+=====================================================================
+Found a 115 line (510 tokens) duplication in the following files: 
+Starting at line 39 of /data/src/java/affablebean-boot/src/main/resources/setup/session/OrderManager.java
+Starting at line 39 of /data/src/java/affablebean-boot/target/classes/setup/session/OrderManager.java
+
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+public class OrderManager {
+
+	@PersistenceContext(unitName = "AffableBeanPU")
+	private EntityManager em;
+	@Resource
+	private SessionContext context;
+	@EJB
+	private ProductFacade productFacade;
+	@EJB
+	private CustomerOrderFacade customerOrderFacade;
+	@EJB
+	private OrderedProductFacade orderedProductFacade;
+
+	private static final Random random = new Random();
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public int placeOrder(ShoppingCart cart, String surcharge, String... order) {
+
+		try {
+			Customer customer = addCustomer(order);
+			CustomerOrder co = addOrder(customer, cart, surcharge);
+			addOrderedItems(co, cart);
+			return co.getId();
+
+		} catch (Exception e) {
+			context.setRollbackOnly();
+			return 0;
+		}
+	}
+
+	public Map<String, Object> getOrderDetails(int orderId) {
+		// get order
+		CustomerOrder order = customerOrderFacade.find(orderId);
+
+		// get customer
+		Customer customer = order.getCustomer();
+
+		// get all ordered products
+		List<OrderedProduct> orderedProducts
+						= orderedProductFacade.findByOrderId(orderId);
+
+		// get product details for ordered items
+		List<Product> products = new ArrayList<>();
+
+		for (OrderedProduct op : orderedProducts) {
+
+			Product p = (Product) productFacade.find(op.getOrderedProductPK().getProductId());
+			products.add(p);
+		}
+
+		// add each item to orderMap
+		Map<String, Object> orderMap = new HashMap<>();
+
+		orderMap.put("orderRecord", order);
+		orderMap.put("customer", customer);
+		orderMap.put("orderedProducts", orderedProducts);
+		orderMap.put("products", products);
+
+		return orderMap;
+	}
+
+	private Customer addCustomer(String... cust) {
+
+		Customer customer = new Customer();
+		customer.setName(cust[0]);
+		customer.setEmail(cust[1]);
+		customer.setPhone(cust[2]);
+		customer.setAddress(cust[3]);
+		customer.setCityRegion(cust[4]);
+		customer.setCcNumber(cust[5]);
+
+		em.persist(customer);
+		return customer;
+	}
+
+	private CustomerOrder addOrder(Customer customer, ShoppingCart cart,
+					String surcharge) {
+		// set up customer order
+		CustomerOrder order = new CustomerOrder();
+		order.setCustomer(customer);
+		order.setAmount(BigDecimal.valueOf(cart.getSubtotal()
+						+ Double.parseDouble(surcharge)));
+		// create confirmation number
+		int i = random.nextInt(999999999);
+		order.setConfirmationNumber(i);
+
+		em.persist(order);
+		return order;
+	}
+
+	private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
+		em.flush();
+		Collection<ShoppingCartItem> items = cart.getItems();
+
+		// iterate through shopping cart and create OrderedProducts
+		for (ShoppingCartItem scItem : items) {
+			int productId = scItem.getProduct().getId();
+
+			// set up primary key object
+			OrderedProductPK orderedProductPK = new OrderedProductPK();
+			orderedProductPK.setCustomerOrderId(order.getId());
+			orderedProductPK.setProductId(productId);
+
+			// create ordered item using PK object
+			OrderedProduct orderedItem = new OrderedProduct(orderedProductPK);
+
+			// set quantity
+			orderedItem.setQuantity(scItem.getQuantity());
+
+			em.persist(orderedItem);
+		}
+	}
+}
+=====================================================================
+Found a 131 line (407 tokens) duplication in the following files: 
+Starting at line 26 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/AdminCtrl.java
+Starting at line 26 of /data/src/java/affablebean-boot/target/classes/setup/controller/AdminCtrl.java
+
+public final class AdminCtrl extends HttpServlet {
+
+	@EJB
+	private OrderManager orderManager;
+	@EJB
+	private CustomerFacade customerFacade;
+	@EJB
+	private CustomerOrderFacade customerOrderFacade;
+	@EJB
+	private MsgFeedbackFacade feedbackFacade;
+
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+					throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	/**
+	 * Handles the HTTP <code>POST</code> method.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request,
+					HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+	 * methods.
+	 *
+	 * @param request servlet request
+	 * @param response servlet response
+	 * @throws ServletException if a servlet-specific error occurs
+	 * @throws IOException if an I/O error occurs
+	 */
+	private void processRequest(HttpServletRequest request,
+					HttpServletResponse response) throws ServletException, IOException {
+
+		String userPath = request.getServletPath();
+
+		switch (userPath) {
+			case "/admin/viewCustomers":
+				request.setAttribute("customerList", customerFacade.findAll());
+				break;
+
+			case "/admin/viewFeedback":
+				request.setAttribute("feedbackList", feedbackFacade.findAll());
+				break;
+
+			case "/admin/viewOrders":
+				request.setAttribute("orderList", customerOrderFacade.findAll());
+				break;
+
+			case "/admin/customerRecord":
+				getCustomerRecord(request);
+				break;
+
+			case "/admin/feedbackRecord":
+				getFeedbackRecord(request);
+				break;
+
+			case "/admin/orderRecord":
+				getOrderRecord(request);
+				break;
+
+			case "/admin/logout":
+				request.getSession().invalidate();   // terminate session
+				response.sendRedirect("/AffableBean/admin/");
+				return;
+
+			default:
+				System.err.println("No handler found for " + userPath);
+		}
+
+		// use RequestDispatcher to forward request internally
+		request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+	}
+
+	private void getCustomerRecord(HttpServletRequest request)
+					throws NumberFormatException {
+
+		// get customer ID from request
+		String customerId = request.getQueryString();
+
+		// get customer details
+		Customer customer = customerFacade.find(Integer.parseInt(customerId));
+		request.setAttribute("customerRecord", customer);
+
+		// get customer order details
+		request.setAttribute("order", customerOrderFacade.findByCustomer(customer));
+	}
+
+	private void getFeedbackRecord(HttpServletRequest request)
+					throws NumberFormatException {
+
+		String msgId = request.getQueryString();
+
+		MsgFeedback msg = feedbackFacade.find(Integer.parseInt(msgId));
+		request.setAttribute("feedbackRecord", msg);
+	}
+
+	private void getOrderRecord(HttpServletRequest request)
+					throws NumberFormatException {
+
+		// get customer ID from request
+		String orderId = request.getQueryString();
+
+		// get order details
+		Map<String, Object> orderMap
+						= orderManager.getOrderDetails(Integer.parseInt(orderId));
+
+		// place order details in request scope
+		request.setAttribute("customer", orderMap.get("customer"));
+		request.setAttribute("products", orderMap.get("products"));
+		request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+		request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
+	}
+}
+=====================================================================
+Found a 50 line (331 tokens) duplication in the following files: 
+Starting at line 19 of /data/src/java/affablebean-boot/src/main/resources/setup/session/AbstractFacade.java
+Starting at line 19 of /data/src/java/affablebean-boot/target/classes/setup/session/AbstractFacade.java
+
+public abstract class AbstractFacade<T> {
+
+	@PersistenceContext(unitName = "AffableBeanPU")
+	protected EntityManager em;
+	protected final Class<T> entityClass;
+
+	public AbstractFacade(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+
+	public void create(T entity) {
+		em.persist(entity);
+	}
+
+	public void edit(T entity) {
+		em.merge(entity);
+	}
+
+	public void remove(T entity) {
+		em.remove(em.merge(entity));
+	}
+
+	public T find(Object id) {
+		return em.find(entityClass, id);
+	}
+
+	public List<T> findAll() {
+		javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+		cq.select(cq.from(entityClass));
+		return em.createQuery(cq).getResultList();
+	}
+
+	public List<T> findRange(int[] range) {
+		javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+		cq.select(cq.from(entityClass));
+		javax.persistence.Query q = em.createQuery(cq);
+		q.setMaxResults(range[1] - range[0]);
+		q.setFirstResult(range[0]);
+		return q.getResultList();
+	}
+
+	public int count() {
+		javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+		javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+		cq.select(em.getCriteriaBuilder().count(rt));
+		javax.persistence.Query q = em.createQuery(cq);
+		return ((Long) q.getSingleResult()).intValue();
+	}
+
+}
+=====================================================================
+Found a 127 line (295 tokens) duplication in the following files: 
+Starting at line 18 of /data/src/java/affablebean-boot/src/main/resources/setup/cart/ShoppingCart.java
+Starting at line 18 of /data/src/java/affablebean-boot/target/classes/setup/cart/ShoppingCart.java
+
+public final class ShoppingCart {
+
+	private final Queue<ShoppingCartItem> items = new ConcurrentLinkedQueue<>();
+
+	/**
+	 * Adds a <code>ShoppingCartItem</code> to the <code>ShoppingCart</code>'s
+	 * <code>items</code> list. If item of the specified <code>product</code>
+	 * already exists in shopping cart list, the quantity of that item is
+	 * incremented.
+	 *
+	 * @param product the <code>Product</code> that defines the type of shopping
+	 * cart item
+	 * @see ShoppingCartItem
+	 */
+	public void addItem(Product product) {
+		boolean newItem = true;
+
+		for (ShoppingCartItem scItem : items) {
+			if (scItem.getProduct().getId() == product.getId()) {
+				newItem = false;
+				scItem.incrementQuantity();
+				break;
+			}
+		}
+
+		if (newItem) {
+			items.add(new ShoppingCartItem(product));
+		}
+	}
+
+	/**
+	 * Updates the <code>ShoppingCartItem</code> of the specified
+	 * <code>product</code> to the specified quantity. If '<code>0</code>' is the
+	 * given quantity, the <code>ShoppingCartItem</code> is removed from the
+	 * <code>ShoppingCart</code>'s <code>items</code> list.
+	 *
+	 * @param product the <code>Product</code> that defines the type of shopping
+	 * cart item
+	 * @param quantity the number which the <code>ShoppingCartItem</code> is
+	 * updated to
+	 * @see ShoppingCartItem
+	 */
+	public void update(Product product, String quantity) {
+		// cast quantity as short
+		short qty = Short.parseShort(quantity);
+
+		if (qty < 0) {
+			return;
+		}
+
+		ShoppingCartItem item = null;
+
+		for (ShoppingCartItem scItem : items) {
+			if (scItem.getProduct().getId() == product.getId()) {
+				if (qty != 0) {
+					scItem.setQuantity(qty);
+				} else {
+					// if quantity equals 0, save item and break
+					item = scItem;
+				}
+
+				break;
+			}
+		}
+
+		if (item != null) {
+			items.remove(item);
+		}
+	}
+
+	/**
+	 * Returns the list of <code>ShoppingCartItems</code>.
+	 *
+	 * @return the <code>items</code> list
+	 * @see ShoppingCartItem
+	 */
+	public Collection<ShoppingCartItem> getItems() {
+		return Collections.unmodifiableCollection(items);
+	}
+
+	/**
+	 * Returns the sum of quantities for all items maintained in shopping cart
+	 * <code>items</code> list.
+	 *
+	 * @return the number of items in shopping cart
+	 * @see ShoppingCartItem
+	 */
+	public int getNumberOfItems() {
+		int numberOfItems = 0;
+
+		for (ShoppingCartItem scItem : items) {
+			numberOfItems += scItem.getQuantity();
+		}
+
+		return numberOfItems;
+	}
+
+	/**
+	 * Returns the sum of the product price multiplied by the quantity for all
+	 * items in shopping cart list. This is the total cost excluding the
+	 * surcharge.
+	 *
+	 * @return the cost of all items times their quantities
+	 * @see ShoppingCartItem
+	 */
+	public double getSubtotal() {
+		double amount = 0;
+
+		for (ShoppingCartItem scItem : items) {
+			Product product = (Product) scItem.getProduct();
+			amount += (scItem.getQuantity() * product.getPrice().doubleValue());
+		}
+
+		return amount;
+	}
+
+	/**
+	 * Empties the shopping cart. All items are removed from the shopping cart
+	 * <code>items</code> list, <code>numberOfItems</code> and <code>total</code>
+	 * are reset to '<code>0</code>'.
+	 *
+	 * @see ShoppingCartItem
+	 */
+	public void clear() {
+		items.clear();
+	}
+}
+=====================================================================
+Found a 32 line (137 tokens) duplication in the following files: 
+Starting at line 17 of /data/src/java/affablebean-boot/src/main/resources/setup/session/MsgFeedbackFacade.java
+Starting at line 17 of /data/src/java/affablebean-boot/target/classes/setup/session/MsgFeedbackFacade.java
+
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+public class MsgFeedbackFacade extends AbstractFacade<MsgFeedback> {
+	@Resource
+	private SessionContext context;
+
+	public MsgFeedbackFacade() {
+		super(MsgFeedback.class);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public int save(Object... msg) {
+
+		try {
+			MsgFeedback mf = new MsgFeedback();
+
+			mf.setName((String) msg[0]);
+			mf.setEmail((String) msg[1]);
+			mf.setMsg((String) msg[2]);
+			mf.setSubjectId((MsgSubject) msg[3]);
+
+			em.persist(mf);
+			return mf.getId();
+
+		} catch (Exception e) {
+//			e.printStackTrace();
+			context.setRollbackOnly();
+			return 0;
+		}
+	}
+
+}
+=====================================================================
+Found a 33 line (132 tokens) duplication in the following files: 
+Starting at line 12 of /data/src/java/affablebean-boot/src/main/resources/setup/session/PromotionFacade.java
+Starting at line 12 of /data/src/java/affablebean-boot/target/classes/setup/session/PromotionFacade.java
+
+@Stateless
+public class PromotionFacade extends AbstractFacade<Promotion> {
+
+	public PromotionFacade() {
+		super(Promotion.class);
+	}
+
+	public List<Promotion> findCategories() {
+		Query findSales = em.createQuery(
+						"SELECT p FROM Promotion p WHERE p.categoryId > 0");
+		return findSales.getResultList();
+	}
+
+	public List<Promotion> findProducts() {
+		Query findSales = em.createQuery(
+						"SELECT p FROM Promotion p WHERE p.productId > 0");
+		return findSales.getResultList();
+	}
+
+	public Promotion findSale() {
+		Query qry = em.createQuery(
+						"SELECT p FROM Promotion p WHERE p.sale = :sale");
+		qry.setParameter("sale", true);
+		List<Promotion> promos = qry.getResultList();
+
+		// only the first found sale is used, rest ignored
+		if (!promos.isEmpty()) {
+			return promos.get(0);
+		} else {
+			return null;
+		}
+	}
+}
+=====================================================================
+Found a 12 line (132 tokens) duplication in the following files: 
+Starting at line 48 of /data/src/java/affablebean-boot/src/main/resources/setup/validate/Validator.java
+Starting at line 91 of /data/src/java/affablebean-boot/src/main/resources/setup/validate/Validator.java
+Starting at line 48 of /data/src/java/affablebean-boot/target/classes/setup/validate/Validator.java
+Starting at line 91 of /data/src/java/affablebean-boot/target/classes/setup/validate/Validator.java
+
+						|| data[0].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("nameError", true);
+		}
+
+		if (data[1] == null || data[1].isEmpty() || !data[1].contains("@")
+						|| data[1].trim().length() < 8 || data[1].trim().length() > 45) {
+			errorFlag = true;
+			request.setAttribute("emailError", true);
+		}
+
+		if (data[2] == null || data[2].isEmpty() || data[2].trim().length() < 8
+=====================================================================
+Found a 34 line (122 tokens) duplication in the following files: 
+Starting at line 17 of /data/src/java/affablebean-boot/src/main/resources/setup/cart/ShoppingCartItem.java
+Starting at line 17 of /data/src/java/affablebean-boot/target/classes/setup/cart/ShoppingCartItem.java
+
+public final class ShoppingCartItem {
+
+	private final Product product;
+	private final AtomicInteger quantity = new AtomicInteger(1);
+
+	public ShoppingCartItem(Product product) {
+		this.product = product;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public short getQuantity() {
+		return (short) quantity.get();
+	}
+
+	public void setQuantity(short quantity) {
+		this.quantity.set(quantity);;
+	}
+
+	public void incrementQuantity() {
+		quantity.incrementAndGet();
+	}
+
+	public void decrementQuantity() {
+		quantity.decrementAndGet();
+	}
+
+	public double getTotal() {
+		return quantity.doubleValue() * product.getPrice().doubleValue();
+	}
+
+}
+=====================================================================
+Found a 28 line (106 tokens) duplication in the following files: 
+Starting at line 25 of /data/src/java/affablebean-boot/src/main/resources/setup/filter/SessionTimeoutFilter.java
+Starting at line 25 of /data/src/java/affablebean-boot/target/classes/setup/filter/SessionTimeoutFilter.java
+
+@WebFilter(servletNames = {"CustCtrl"})
+public final class SessionTimeoutFilter implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+					FilterChain chain) throws IOException, ServletException {
+
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpSession session = req.getSession(false);
+
+		// if session doesn't exist, forward user to welcome page
+		if (session == null) {
+			req.getRequestDispatcher("/index.jsp").forward(request, response);
+			return;
+		}
+
+		chain.doFilter(request, response);
+	}
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+
+	@Override
+	public void destroy() {
+	}
+
+}
+=====================================================================
+Found a 23 line (91 tokens) duplication in the following files: 
+Starting at line 19 of /data/src/java/affablebean-boot/src/main/resources/setup/session/CustomerOrderFacade.java
+Starting at line 19 of /data/src/java/affablebean-boot/target/classes/setup/session/CustomerOrderFacade.java
+
+@Stateless
+public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
+    public CustomerOrderFacade() {
+        super(CustomerOrder.class);
+    }
+
+    // overridden - refresh method called to retrieve order id from database
+		@Override
+    public CustomerOrder find(Object id) {
+        CustomerOrder order = em.find(CustomerOrder.class, id);
+        em.refresh(order);
+        return order;
+    }
+
+    // in this implementation, there is only one order per customer
+    // the data model however allows for multiple orders per customer
+    @RolesAllowed("affableBeanAdmin")
+    public CustomerOrder findByCustomer(Object customer) {
+        return (CustomerOrder) 
+								em.createNamedQuery("CustomerOrder.findByCustomer").
+												setParameter("customer", customer).getSingleResult();
+    }
+}
+=====================================================================
+Found a 24 line (76 tokens) duplication in the following files: 
+Starting at line 135 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 140 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Product)) {
+=====================================================================
+Found a 27 line (72 tokens) duplication in the following files: 
+Starting at line 84 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+=====================================================================
+Found a 12 line (54 tokens) duplication in the following files: 
+Starting at line 18 of /data/src/java/affablebean-boot/src/main/resources/setup/session/OrderedProductFacade.java
+Starting at line 18 of /data/src/java/affablebean-boot/target/classes/setup/session/OrderedProductFacade.java
+
+@Stateless
+public class OrderedProductFacade extends AbstractFacade<OrderedProduct> {
+	public OrderedProductFacade() {
+		super(OrderedProduct.class);
+	}
+
+	// manually created
+	public List<OrderedProduct> findByOrderId(Object id) {
+		return em.createNamedQuery("OrderedProduct.findByCustomerOrderId").
+						setParameter("customerOrderId", id).getResultList();
+	}
+}
+=====================================================================
+Found a 16 line (53 tokens) duplication in the following files: 
+Starting at line 77 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Category.java
+Starting at line 148 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 128 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 115 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 82 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 143 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 148 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Category)) {
+=====================================================================
+Found a 13 line (53 tokens) duplication in the following files: 
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Integer id;
+	
+	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	// message="Invalid email")//if the field contains email address consider using
+	// this annotation to enforce field validation
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 45)
+	@Column(name = "email")
+=====================================================================
+Found a 7 line (53 tokens) duplication in the following files: 
+Starting at line 148 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/AdminCtrl.java
+Starting at line 477 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 148 of /data/src/java/affablebean-boot/target/classes/setup/controller/AdminCtrl.java
+Starting at line 477 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+						= orderManager.getOrderDetails(Integer.parseInt(orderId));
+
+		// place order details in request scope
+		request.setAttribute("customer", orderMap.get("customer"));
+		request.setAttribute("products", orderMap.get("products"));
+		request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+		request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
+=====================================================================
+Found a 13 line (49 tokens) duplication in the following files: 
+Starting at line 12 of /data/src/java/affablebean-boot/src/main/resources/setup/session/MsgSubjectFacade.java
+Starting at line 12 of /data/src/java/affablebean-boot/target/classes/setup/session/MsgSubjectFacade.java
+
+@Stateless
+public class MsgSubjectFacade extends AbstractFacade<MsgSubject> {
+
+	public MsgSubjectFacade() {
+		super(MsgSubject.class);
+	}
+
+	public List<MsgSubject> findSubjects() {
+		Query findSubs = em.createQuery(
+						"SELECT s FROM MsgSubject s ORDER BY s.name");
+		return findSubs.getResultList();
+	}
+}
+=====================================================================
+Found a 19 line (48 tokens) duplication in the following files: 
+Starting at line 84 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 87 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 76 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+=====================================================================
+Found a 17 line (48 tokens) duplication in the following files: 
+Starting at line 108 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 214 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 108 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 214 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+				checkCart(request);
+
+				if (json) {
+					JsonFactory.cartResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				userPath = "cart";
+				break;
+
+			default:
+//				System.err.println("No request handler found for " + userPath);
+		}
+
+		dispatchRequest(userPath, request, response, json);
+	}
+=====================================================================
+Found a 17 line (47 tokens) duplication in the following files: 
+Starting at line 84 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 57 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 87 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 76 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+=====================================================================
+Found a 7 line (44 tokens) duplication in the following files: 
+Starting at line 337 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 370 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 337 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 370 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+		boolean valid = Validator.validateCheckOutForm(request, name, email, phone,
+						address, cityRegion, ccNumber);
+
+		if (valid) {
+			return saveOrder(request, name, email, phone, address, cityRegion,
+							ccNumber);
+		} else {
+=====================================================================
+Found a 6 line (44 tokens) duplication in the following files: 
+Starting at line 42 of /data/src/java/affablebean-boot/src/main/resources/setup/validate/Validator.java
+Starting at line 85 of /data/src/java/affablebean-boot/src/main/resources/setup/validate/Validator.java
+Starting at line 42 of /data/src/java/affablebean-boot/target/classes/setup/validate/Validator.java
+Starting at line 85 of /data/src/java/affablebean-boot/target/classes/setup/validate/Validator.java
+
+	public static boolean validateCheckOutForm(HttpServletRequest request,
+					String... data) {
+
+		boolean errorFlag = false;
+
+		if (data[0] == null || data[0].isEmpty() || data[0].trim().length() < 8
+=====================================================================
+Found a 9 line (42 tokens) duplication in the following files: 
+Starting at line 45 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 190 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 45 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+Starting at line 190 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+
+			for (Category category : (List<Category>) ctx.getAttribute("categories")) {
+				gen.writeStartObject();
+				gen.write("id", category.getId()).write("name", category.getName());
+				gen.writeEnd();
+			}
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+=====================================================================
+Found a 8 line (40 tokens) duplication in the following files: 
+Starting at line 29 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 40 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Integer id;
+	
+	@Basic(optional = false)
+	@Column(name = "address")
+=====================================================================
+Found a 12 line (38 tokens) duplication in the following files: 
+Starting at line 81 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Category.java
+Starting at line 152 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 132 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 119 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 86 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 89 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/OrderedProduct.java
+Starting at line 51 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/OrderedProductPK.java
+Starting at line 147 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 152 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Category)) {
+=====================================================================
+Found a 8 line (36 tokens) duplication in the following files: 
+Starting at line 29 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 40 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Integer id;
+	
+	@Basic(optional = false)
+	@Column(name = "address")
+=====================================================================
+Found a 6 line (34 tokens) duplication in the following files: 
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CategoryController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerOrderController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgFeedbackController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgSubjectController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+
+		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+
+		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
+	}
+
+	@GetMapping("/categories/{id}")
+=====================================================================
+Found a 5 line (33 tokens) duplication in the following files: 
+Starting at line 69 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CategoryController.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 72 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 73 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+
+		Resource<Category> resource = assembler.toResource(updatedCategory);
+		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
+	}
+
+	@DeleteMapping("/categories/{id}")
+=====================================================================
+Found a 13 line (33 tokens) duplication in the following files: 
+Starting at line 59 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Category.java
+Starting at line 90 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 81 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 93 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 82 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	public void setId(Short id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Collection<Product> getProductCollection() {
+=====================================================================
+Found a 10 line (33 tokens) duplication in the following files: 
+Starting at line 320 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 349 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 320 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 349 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+	private boolean purchase(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		if (cart == null) {
+			return false;
+		}
+
+		// extract user data from request
+		String name = request.getParameter("name");
+=====================================================================
+Found a 4 line (32 tokens) duplication in the following files: 
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CategoryController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerOrderController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgFeedbackController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgSubjectController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+
+		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+				.collect(Collectors.toList());
+
+		return new Resources<>(categories, linkTo(methodOn(CategoryController.class).all()).withSelfRel());
+=====================================================================
+Found a 11 line (32 tokens) duplication in the following files: 
+Starting at line 59 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Category.java
+Starting at line 63 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+
+	public void setId(Short id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+=====================================================================
+Found a 7 line (32 tokens) duplication in the following files: 
+Starting at line 82 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 141 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 82 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 141 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+		String userPath = request.getServletPath().substring(1);
+		// true even if string reads "false"!
+		boolean json = (request.getParameter("json") != null);
+
+		// if category page is requested
+		switch (userPath) {
+			case "category":
+=====================================================================
+Found a 9 line (32 tokens) duplication in the following files: 
+Starting at line 108 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 147 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 214 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 108 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 147 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 214 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+				checkCart(request);
+
+				if (json) {
+					JsonFactory.cartResponse(response.getWriter(), request.getSession(),
+									getServletContext());
+					return;
+				}
+
+				userPath = "cart";
+=====================================================================
+Found a 6 line (31 tokens) duplication in the following files: 
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CategoryController.java
+Starting at line 69 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CategoryController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerOrderController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgFeedbackController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgSubjectController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 72 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+Starting at line 73 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+
+		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+
+		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
+	}
+
+	@GetMapping("/categories/{id}")
+=====================================================================
+Found a 7 line (31 tokens) duplication in the following files: 
+Starting at line 55 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 63 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+
+	@Basic(optional = false)
+	@Column(name = "name")
+	@NotBlank	
+	private String name;
+	
+	@Basic(optional = false)
+	@Column(name = "phone")
+=====================================================================
+Found a 11 line (31 tokens) duplication in the following files: 
+Starting at line 112 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 127 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+
+	}
+
+	public Collection<OrderedProduct> getOrderedProductCollection() {
+		return orderedProductCollection;
+	}
+
+	public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
+		this.orderedProductCollection = orderedProductCollection;
+	}
+
+	public Customer getCustomer() {
+=====================================================================
+Found a 7 line (31 tokens) duplication in the following files: 
+Starting at line 53 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 38 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 45 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 45)
+	@Column(name = "name")
+	private String name;
+	
+	@JoinColumn(name = "subject_id", referencedColumnName = "id")
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 45 of /data/src/java/affablebean-boot/src/main/resources/setup/session/AbstractFacade.java
+Starting at line 51 of /data/src/java/affablebean-boot/src/main/resources/setup/session/AbstractFacade.java
+Starting at line 45 of /data/src/java/affablebean-boot/target/classes/setup/session/AbstractFacade.java
+Starting at line 51 of /data/src/java/affablebean-boot/target/classes/setup/session/AbstractFacade.java
+
+	public List<T> findAll() {
+		javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+		cq.select(cq.from(entityClass));
+=====================================================================
+Found a 10 line (30 tokens) duplication in the following files: 
+Starting at line 47 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 150 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 47 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+Starting at line 150 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+
+				gen.write("id", category.getId()).write("name", category.getName());
+				gen.writeEnd();
+			}
+
+			gen.writeEnd();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+=====================================================================
+Found a 7 line (29 tokens) duplication in the following files: 
+Starting at line 29 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 40 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 42 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 27 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Integer id;
+	
+	@Basic(optional = false)
+=====================================================================
+Found a 8 line (28 tokens) duplication in the following files: 
+Starting at line 233 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 320 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 349 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 233 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 320 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 349 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+					throws NumberFormatException {
+
+		HttpSession session = request.getSession();
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
+		// if user is adding item to cart for first time create cart object and 
+		// attach it to user session
+		if (cart == null) {
+=====================================================================
+Found a 5 line (28 tokens) duplication in the following files: 
+Starting at line 41 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 144 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 41 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+Starting at line 144 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+
+	public static void categoryList(Writer response, ServletContext ctx) {
+		try (JsonGenerator gen = Json.createGenerator(response)) {
+			gen.writeStartArray();
+
+			for (Category category : (List<Category>) ctx.getAttribute("categories")) {
+=====================================================================
+Found a 4 line (28 tokens) duplication in the following files: 
+Starting at line 206 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 269 of /data/src/java/affablebean-boot/src/main/resources/setup/json/JsonFactory.java
+Starting at line 206 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+Starting at line 269 of /data/src/java/affablebean-boot/target/classes/setup/json/JsonFactory.java
+
+			gen.write("id", product.getId())
+							.write("name", product.getName())
+							.write("price", product.getPrice())
+							.write("description", product.getDescription())
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 35 of /data/src/java/affablebean-boot/src/main/resources/setup/cart/ShoppingCart.java
+Starting at line 70 of /data/src/java/affablebean-boot/src/main/resources/setup/cart/ShoppingCart.java
+Starting at line 35 of /data/src/java/affablebean-boot/target/classes/setup/cart/ShoppingCart.java
+Starting at line 70 of /data/src/java/affablebean-boot/target/classes/setup/cart/ShoppingCart.java
+
+		for (ShoppingCartItem scItem : items) {
+			if (scItem.getProduct().getId() == product.getId()) {
+=====================================================================
+Found a 5 line (26 tokens) duplication in the following files: 
+Starting at line 29 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Category.java
+Starting at line 29 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 40 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 32 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 42 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 27 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id")
+	private Short id;
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 28 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/Application.java
+Starting at line 44 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/Application.java
+
+			repository.findAll().forEach(category -> {
+				log.info(category.toString());
+			});
+			log.info("");
+=====================================================================
+Found a 7 line (25 tokens) duplication in the following files: 
+Starting at line 80 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerController.java
+Starting at line 57 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/CustomerOrderController.java
+Starting at line 57 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgFeedbackController.java
+Starting at line 57 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/MsgSubjectController.java
+Starting at line 77 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/ProductController.java
+Starting at line 78 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/controller/PromotionController.java
+
+	public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+
+		repository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
+
+}
+=====================================================================
+Found a 11 line (25 tokens) duplication in the following files: 
+Starting at line 84 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Customer.java
+Starting at line 80 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/CustomerOrder.java
+Starting at line 75 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 57 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgSubject.java
+Starting at line 87 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Product.java
+Starting at line 76 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 41 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 53 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/MsgFeedback.java
+Starting at line 45 of /data/src/java/affablebean-boot/src/main/java/com/affablebean/model/Promotion.java
+
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 45)
+	@Column(name = "email")
+=====================================================================
+Found a 2 line (25 tokens) duplication in the following files: 
+Starting at line 360 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 414 of /data/src/java/affablebean-boot/src/main/resources/setup/controller/CustCtrl.java
+Starting at line 360 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+Starting at line 414 of /data/src/java/affablebean-boot/target/classes/setup/controller/CustCtrl.java
+
+		try (JsonReader jsonReader = Json.createReader(request.getInputStream())) {
+			JsonObject data = jsonReader.readObject();

@@ -2,6 +2,8 @@ package com.affablebean.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,37 +13,55 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "customer")
+@JsonIgnoreProperties(value = { "customerOrderCollection" })
 public class Customer implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2950330004809284770L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
-	@Basic(optional = false)
-	@Column(name = "name")
-	private String name;
-	@Basic(optional = false)
-	@Column(name = "email")
-	private String email;
-	@Basic(optional = false)
-	@Column(name = "phone")
-	private String phone;
+
 	@Basic(optional = false)
 	@Column(name = "address")
+	@NotBlank
 	private String address;
-	@Basic(optional = false)
-	@Column(name = "city_region")
-	private String cityRegion;
+
 	@Basic(optional = false)
 	@Column(name = "cc_number")
+	@NotBlank
 	private String ccNumber;
+
+	@Basic(optional = false)
+	@Column(name = "city_region")
+	@NotBlank
+	private String cityRegion;
+
+	@Basic(optional = false)
+	@Column(name = "email")
+	@NotBlank
+	private String email;
+
+	@Basic(optional = false)
+	@Column(name = "name")
+	@NotBlank
+	private String name;
+
+	@Basic(optional = false)
+	@Column(name = "phone")
+	@NotBlank
+	private String phone;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Collection<CustomerOrder> customerOrderCollection;
 
@@ -129,27 +149,28 @@ public class Customer implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		return Objects.hash(id);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof Customer)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		Customer other = (Customer) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if (!(obj instanceof Customer)) {
 			return false;
 		}
-		return true;
+		Customer other = (Customer) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "entity.Customer[id=" + id + "]";
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", address="
+				+ address + ", cityRegion=" + cityRegion + ", ccNumber=" + ccNumber + "]";
 	}
 
 }

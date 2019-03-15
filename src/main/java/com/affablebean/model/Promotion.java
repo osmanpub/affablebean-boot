@@ -2,6 +2,8 @@ package com.affablebean.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,35 +23,44 @@ public class Promotion implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4012313487132279750L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
+
+	@Column(name = "category_id")
+	private Integer categoryId;
+
+	@Size(max = 255)
+	@Column(name = "description")
+	private String description;
+
+	@Basic(optional = false)
+	@NotNull
+	@Column(name = "discount")
+	private int discount;
+
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 45)
 	@Column(name = "name")
 	private String name;
-	@Basic(optional = false)
-	@NotNull
-	@Column(name = "discount")
-	private int discount;
-	@Column(name = "sale")
-	private Boolean sale;
-	@Column(name = "category_id")
-	private Integer categoryId;
+
 	@Column(name = "product_id")
 	private Integer productId;
+
 	@Column(name = "qty")
 	private Integer qty;
+
+	@Column(name = "sale")
+	private Boolean sale;
+
 	// @Max(value=?) @Min(value=?)//if you know range of your decimal fields
 	// consider using these annotations to enforce field validation
 	@Column(name = "sold")
 	private BigDecimal sold;
-	@Size(max = 255)
-	@Column(name = "description")
-	private String description;
 
 	public Promotion() {
 	}
@@ -138,27 +149,29 @@ public class Promotion implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
+		return Objects.hash(id);
 	}
 
 	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof Promotion)) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
 			return false;
 		}
-		Promotion other = (Promotion) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if (!(obj instanceof Promotion)) {
 			return false;
 		}
-		return true;
+		Promotion other = (Promotion) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "com.affablebean.entity.Promotion[ id=" + id + " ]";
+		return "Promotion [id=" + id + ", name=" + name + ", discount=" + discount + ", sale=" + sale + ", categoryId="
+				+ categoryId + ", productId=" + productId + ", qty=" + qty + ", sold=" + sold + ", description="
+				+ description + "]";
 	}
 
 }
