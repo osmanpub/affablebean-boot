@@ -6,15 +6,15 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
-import com.affablebean.controller.CategoryController;
-import com.affablebean.model.Category;
+import com.affablebean.controller.MsgFeedbackController;
+import com.affablebean.model.MsgFeedback;
 
 @Component
-public class MsgFeedbackResourceAssembler implements ResourceAssembler<Category, Resource<Category>> {
+public class MsgFeedbackResourceAssembler implements ResourceAssembler<MsgFeedback, Resource<MsgFeedback>> {
 
 	@Override
-	public Resource<Category> toResource(Category category) {
-		return new Resource<>(category, linkTo(methodOn(CategoryController.class).one(category.getId())).withSelfRel(),
-				linkTo(methodOn(CategoryController.class).all()).withRel("categories"));
+	public Resource<MsgFeedback> toResource(MsgFeedback msgFeedback) {
+		return new Resource<>(msgFeedback, linkTo(methodOn(MsgFeedbackController.class).one(msgFeedback.getId())).withSelfRel(),
+				linkTo(methodOn(MsgFeedbackController.class).all()).withRel("allFeedback"));
 	}
 }

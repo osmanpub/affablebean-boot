@@ -6,15 +6,15 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
-import com.affablebean.controller.CategoryController;
-import com.affablebean.model.Category;
+import com.affablebean.controller.ProductController;
+import com.affablebean.model.Product;
 
 @Component
-public class ProductResourceAssembler implements ResourceAssembler<Category, Resource<Category>> {
+public class ProductResourceAssembler implements ResourceAssembler<Product, Resource<Product>> {
 
 	@Override
-	public Resource<Category> toResource(Category category) {
-		return new Resource<>(category, linkTo(methodOn(CategoryController.class).one(category.getId())).withSelfRel(),
-				linkTo(methodOn(CategoryController.class).all()).withRel("categories"));
+	public Resource<Product> toResource(Product product) {
+		return new Resource<>(product, linkTo(methodOn(ProductController.class).one(product.getId())).withSelfRel(),
+				linkTo(methodOn(ProductController.class).all()).withRel("products"));
 	}
 }

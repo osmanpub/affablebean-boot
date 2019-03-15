@@ -6,15 +6,15 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
-import com.affablebean.controller.CategoryController;
-import com.affablebean.model.Category;
+import com.affablebean.controller.MsgSubjectController;
+import com.affablebean.model.MsgSubject;
 
 @Component
-public class MsgSubjectResourceAssembler implements ResourceAssembler<Category, Resource<Category>> {
+public class MsgSubjectResourceAssembler implements ResourceAssembler<MsgSubject, Resource<MsgSubject>> {
 
 	@Override
-	public Resource<Category> toResource(Category category) {
-		return new Resource<>(category, linkTo(methodOn(CategoryController.class).one(category.getId())).withSelfRel(),
-				linkTo(methodOn(CategoryController.class).all()).withRel("categories"));
+	public Resource<MsgSubject> toResource(MsgSubject msgSubject) {
+		return new Resource<>(msgSubject, linkTo(methodOn(MsgSubjectController.class).one(msgSubject.getId())).withSelfRel(),
+				linkTo(methodOn(MsgSubjectController.class).all()).withRel("allSubjects"));
 	}
 }
