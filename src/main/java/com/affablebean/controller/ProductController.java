@@ -1,9 +1,9 @@
 package com.affablebean.controller;
 
-import com.affablebean.assembler.CategoryResourceAssembler;
-import com.affablebean.exception.CategoryNotFoundException;
-import com.affablebean.model.Category;
-import com.affablebean.repository.CategoryRepository;
+import com.affablebean.assembler.ProductResourceAssembler;
+import com.affablebean.exception.ProductNotFoundException;
+import com.affablebean.model.Product;
+import com.affablebean.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -24,54 +24,57 @@ import java.util.stream.Collectors;
 public class ProductController {
 
 	@Autowired
-	CategoryRepository repository;
+	ProductRepository repository;
 
 	@Autowired
-	CategoryResourceAssembler assembler;
+	ProductResourceAssembler assembler;
 
-	@GetMapping("/categories")
-	public Resources<Resource<Category>> all() {
+	@GetMapping("/products")
+	public Resources<Resource<Product>> all() {
 
-		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+		List<Resource<Product>> products = repository.findAll().stream().map(assembler::toResource)
 				.collect(Collectors.toList());
 
-		return new Resources<>(categories, linkTo(methodOn(ProductController.class).all()).withSelfRel());
+		return new Resources<>(products, linkTo(methodOn(ProductController.class).all()).withSelfRel());
 	}
 
-	@PostMapping("/categories")
-	public ResponseEntity<?> newCategory(@RequestBody Category newCategory) throws URISyntaxException {
+	@PostMapping("/products")
+	public ResponseEntity<?> newProduct(@RequestBody Product newProduct) throws URISyntaxException {
 
-		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+		Resource<Product> resource = assembler.toResource(repository.save(newProduct));
 
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@GetMapping("/categories/{id}")
-	public Resource<Category> one(@PathVariable Short id) {
+	@GetMapping("/products/{id}")
+	public Resource<Product> one(@PathVariable Integer id) {
 
-		Category category = repository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-		return assembler.toResource(category);
+		Product product = repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+		return assembler.toResource(product);
 	}
 
-	@PutMapping("/categories/{id}")
-	public ResponseEntity<?> replaceCategory(@RequestBody Category newCategory, @PathVariable Short id)
+	@PatchMapping("/products/{id}")
+	public ResponseEntity<?> replaceProduct(@RequestBody Product newProduct, @PathVariable Integer id)
 			throws URISyntaxException {
 
-		Category updatedCategory = repository.findById(id).map(category -> {
-			category.setName(newCategory.getName());
-			return repository.save(category);
+		Product updatedProduct = repository.findById(id).map(product -> {
+			product.setCategory(newProduct.getCategory());
+			product.setDescription(newProduct.getDescription());
+			product.setName(newProduct.getName());
+			product.setPrice(newProduct.getPrice());
+			return repository.save(product);
 
 		}).orElseGet(() -> {
-			newCategory.setId(id);
-			return repository.save(newCategory);
+			newProduct.setId(id);
+			return repository.save(newProduct);
 		});
 
-		Resource<Category> resource = assembler.toResource(updatedCategory);
+		Resource<Product> resource = assembler.toResource(updatedProduct);
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@DeleteMapping("/categories/{id}")
-	public ResponseEntity<?> deleteCategory(@PathVariable Short id) {
+	@DeleteMapping("/products/{id}")
+	public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
 
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();

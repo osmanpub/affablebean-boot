@@ -1,9 +1,9 @@
 package com.affablebean.controller;
 
-import com.affablebean.assembler.CategoryResourceAssembler;
-import com.affablebean.exception.CategoryNotFoundException;
-import com.affablebean.model.Category;
-import com.affablebean.repository.CategoryRepository;
+import com.affablebean.assembler.CustomerOrderResourceAssembler;
+import com.affablebean.exception.CustomerOrderNotFoundException;
+import com.affablebean.model.CustomerOrder;
+import com.affablebean.repository.CustomerOrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -24,54 +24,37 @@ import java.util.stream.Collectors;
 public class CustomerOrderController {
 
 	@Autowired
-	CategoryRepository repository;
+	CustomerOrderRepository repository;
 
 	@Autowired
-	CategoryResourceAssembler assembler;
+	CustomerOrderResourceAssembler assembler;
 
-	@GetMapping("/categories")
-	public Resources<Resource<Category>> all() {
+	@GetMapping("/customerOrders")
+	public Resources<Resource<CustomerOrder>> all() {
 
-		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+		List<Resource<CustomerOrder>> customerOrders = repository.findAll().stream().map(assembler::toResource)
 				.collect(Collectors.toList());
 
-		return new Resources<>(categories, linkTo(methodOn(CustomerOrderController.class).all()).withSelfRel());
+		return new Resources<>(customerOrders, linkTo(methodOn(CustomerOrderController.class).all()).withSelfRel());
 	}
 
-	@PostMapping("/categories")
-	public ResponseEntity<?> newCategory(@RequestBody Category newCategory) throws URISyntaxException {
+	@PostMapping("/customerOrders")
+	public ResponseEntity<?> newCustomerOrder(@RequestBody CustomerOrder newCustomerOrder) throws URISyntaxException {
 
-		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+		Resource<CustomerOrder> resource = assembler.toResource(repository.save(newCustomerOrder));
 
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@GetMapping("/categories/{id}")
-	public Resource<Category> one(@PathVariable Short id) {
+	@GetMapping("/customerOrders/{id}")
+	public Resource<CustomerOrder> one(@PathVariable Integer id) {
 
-		Category category = repository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-		return assembler.toResource(category);
+		CustomerOrder customerOrder = repository.findById(id).orElseThrow(() -> new CustomerOrderNotFoundException(id));
+		return assembler.toResource(customerOrder);
 	}
 
-	@PutMapping("/categories/{id}")
-	public ResponseEntity<?> replaceCategory(@RequestBody Category newCategory, @PathVariable Short id)
-			throws URISyntaxException {
-
-		Category updatedCategory = repository.findById(id).map(category -> {
-			category.setName(newCategory.getName());
-			return repository.save(category);
-
-		}).orElseGet(() -> {
-			newCategory.setId(id);
-			return repository.save(newCategory);
-		});
-
-		Resource<Category> resource = assembler.toResource(updatedCategory);
-		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
-	}
-
-	@DeleteMapping("/categories/{id}")
-	public ResponseEntity<?> deleteCategory(@PathVariable Short id) {
+	@DeleteMapping("/customerOrders/{id}")
+	public ResponseEntity<?> deleteCustomerOrder(@PathVariable Integer id) {
 
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();

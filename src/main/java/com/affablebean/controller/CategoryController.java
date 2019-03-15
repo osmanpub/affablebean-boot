@@ -53,7 +53,7 @@ public class CategoryController {
 		return assembler.toResource(category);
 	}
 
-	@PutMapping("/categories/{id}")
+	@PatchMapping("/categories/{id}")
 	public ResponseEntity<?> replaceCategory(@RequestBody Category newCategory, @PathVariable Short id)
 			throws URISyntaxException {
 

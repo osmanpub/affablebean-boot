@@ -15,6 +15,6 @@ public class MsgFeedbackResourceAssembler implements ResourceAssembler<MsgFeedba
 	@Override
 	public Resource<MsgFeedback> toResource(MsgFeedback msgFeedback) {
 		return new Resource<>(msgFeedback, linkTo(methodOn(MsgFeedbackController.class).one(msgFeedback.getId())).withSelfRel(),
-				linkTo(methodOn(MsgFeedbackController.class).all()).withRel("allFeedback"));
+				linkTo(methodOn(MsgFeedbackController.class).all()).withRel("feedbacks"));
 	}
 }

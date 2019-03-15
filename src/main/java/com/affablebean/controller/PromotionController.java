@@ -1,9 +1,9 @@
 package com.affablebean.controller;
 
-import com.affablebean.assembler.CategoryResourceAssembler;
-import com.affablebean.exception.CategoryNotFoundException;
-import com.affablebean.model.Category;
-import com.affablebean.repository.CategoryRepository;
+import com.affablebean.assembler.PromotionResourceAssembler;
+import com.affablebean.exception.PromotionNotFoundException;
+import com.affablebean.model.Promotion;
+import com.affablebean.repository.PromotionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -24,54 +24,58 @@ import java.util.stream.Collectors;
 public class PromotionController {
 
 	@Autowired
-	CategoryRepository repository;
+	PromotionRepository repository;
 
 	@Autowired
-	CategoryResourceAssembler assembler;
+	PromotionResourceAssembler assembler;
 
-	@GetMapping("/categories")
-	public Resources<Resource<Category>> all() {
+	@GetMapping("/promotions")
+	public Resources<Resource<Promotion>> all() {
 
-		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+		List<Resource<Promotion>> promotions = repository.findAll().stream().map(assembler::toResource)
 				.collect(Collectors.toList());
 
-		return new Resources<>(categories, linkTo(methodOn(PromotionController.class).all()).withSelfRel());
+		return new Resources<>(promotions, linkTo(methodOn(PromotionController.class).all()).withSelfRel());
 	}
 
-	@PostMapping("/categories")
-	public ResponseEntity<?> newCategory(@RequestBody Category newCategory) throws URISyntaxException {
+	@PostMapping("/promotions")
+	public ResponseEntity<?> newPromotion(@RequestBody Promotion newPromotion) throws URISyntaxException {
 
-		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+		Resource<Promotion> resource = assembler.toResource(repository.save(newPromotion));
 
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@GetMapping("/categories/{id}")
-	public Resource<Category> one(@PathVariable Short id) {
+	@GetMapping("/promotions/{id}")
+	public Resource<Promotion> one(@PathVariable Integer id) {
 
-		Category category = repository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-		return assembler.toResource(category);
+		Promotion promotion = repository.findById(id).orElseThrow(() -> new PromotionNotFoundException(id));
+		return assembler.toResource(promotion);
 	}
 
-	@PutMapping("/categories/{id}")
-	public ResponseEntity<?> replaceCategory(@RequestBody Category newCategory, @PathVariable Short id)
+	@PatchMapping("/promotions/{id}")
+	public ResponseEntity<?> replacePromotion(@RequestBody Promotion newPromotion, @PathVariable Integer id)
 			throws URISyntaxException {
 
-		Category updatedCategory = repository.findById(id).map(category -> {
-			category.setName(newCategory.getName());
-			return repository.save(category);
+		Promotion updatedPromotion = repository.findById(id).map(promotion -> {
+			promotion.setDescription(newPromotion.getDescription());
+			promotion.setDiscount(newPromotion.getDiscount());
+			promotion.setName(newPromotion.getName());
+			promotion.setQty(newPromotion.getQty());
+			promotion.setSale(newPromotion.getSale());
+			return repository.save(promotion);
 
 		}).orElseGet(() -> {
-			newCategory.setId(id);
-			return repository.save(newCategory);
+			newPromotion.setId(id);
+			return repository.save(newPromotion);
 		});
 
-		Resource<Category> resource = assembler.toResource(updatedCategory);
+		Resource<Promotion> resource = assembler.toResource(updatedPromotion);
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@DeleteMapping("/categories/{id}")
-	public ResponseEntity<?> deleteCategory(@PathVariable Short id) {
+	@DeleteMapping("/promotions/{id}")
+	public ResponseEntity<?> deletePromotion(@PathVariable Integer id) {
 
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();

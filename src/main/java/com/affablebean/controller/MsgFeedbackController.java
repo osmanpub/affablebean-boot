@@ -1,9 +1,9 @@
 package com.affablebean.controller;
 
-import com.affablebean.assembler.CategoryResourceAssembler;
-import com.affablebean.exception.CategoryNotFoundException;
-import com.affablebean.model.Category;
-import com.affablebean.repository.CategoryRepository;
+import com.affablebean.assembler.MsgFeedbackResourceAssembler;
+import com.affablebean.exception.MsgFeedbackNotFoundException;
+import com.affablebean.model.MsgFeedback;
+import com.affablebean.repository.MsgFeedbackRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -24,54 +24,37 @@ import java.util.stream.Collectors;
 public class MsgFeedbackController {
 
 	@Autowired
-	CategoryRepository repository;
+	MsgFeedbackRepository repository;
 
 	@Autowired
-	CategoryResourceAssembler assembler;
+	MsgFeedbackResourceAssembler assembler;
 
-	@GetMapping("/categories")
-	public Resources<Resource<Category>> all() {
+	@GetMapping("/feedbacks")
+	public Resources<Resource<MsgFeedback>> all() {
 
-		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+		List<Resource<MsgFeedback>> feedbacks = repository.findAll().stream().map(assembler::toResource)
 				.collect(Collectors.toList());
 
-		return new Resources<>(categories, linkTo(methodOn(MsgFeedbackController.class).all()).withSelfRel());
+		return new Resources<>(feedbacks, linkTo(methodOn(MsgFeedbackController.class).all()).withSelfRel());
 	}
 
-	@PostMapping("/categories")
-	public ResponseEntity<?> newCategory(@RequestBody Category newCategory) throws URISyntaxException {
+	@PostMapping("/feedbacks")
+	public ResponseEntity<?> newMsgFeedback(@RequestBody MsgFeedback newMsgFeedback) throws URISyntaxException {
 
-		Resource<Category> resource = assembler.toResource(repository.save(newCategory));
+		Resource<MsgFeedback> resource = assembler.toResource(repository.save(newMsgFeedback));
 
 		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
 	}
 
-	@GetMapping("/categories/{id}")
-	public Resource<Category> one(@PathVariable Short id) {
+	@GetMapping("/feedbacks/{id}")
+	public Resource<MsgFeedback> one(@PathVariable Integer id) {
 
-		Category category = repository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-		return assembler.toResource(category);
+		MsgFeedback feedback = repository.findById(id).orElseThrow(() -> new MsgFeedbackNotFoundException(id));
+		return assembler.toResource(feedback);
 	}
 
-	@PutMapping("/categories/{id}")
-	public ResponseEntity<?> replaceCategory(@RequestBody Category newCategory, @PathVariable Short id)
-			throws URISyntaxException {
-
-		Category updatedCategory = repository.findById(id).map(category -> {
-			category.setName(newCategory.getName());
-			return repository.save(category);
-
-		}).orElseGet(() -> {
-			newCategory.setId(id);
-			return repository.save(newCategory);
-		});
-
-		Resource<Category> resource = assembler.toResource(updatedCategory);
-		return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
-	}
-
-	@DeleteMapping("/categories/{id}")
-	public ResponseEntity<?> deleteCategory(@PathVariable Short id) {
+	@DeleteMapping("/feedbacks/{id}")
+	public ResponseEntity<?> deleteMsgFeedback(@PathVariable Integer id) {
 
 		repository.deleteById(id);
 		return ResponseEntity.noContent().build();
