@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "category")
-@JsonIgnoreProperties(value = { "productCollection" })
+@JsonIgnoreProperties(value = { "productCollection" }, ignoreUnknown = true)
 public class Category implements Serializable {
 	/**
 	 * 

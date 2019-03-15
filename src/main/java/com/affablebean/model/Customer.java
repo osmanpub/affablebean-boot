@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "customer")
-@JsonIgnoreProperties(value = { "customerOrderCollection" })
+@JsonIgnoreProperties(value = { "customerOrderCollection" }, ignoreUnknown = true)
 public class Customer implements Serializable {
 	/**
 	 * 

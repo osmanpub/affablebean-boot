@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "product")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "lastUpdate" })
+@JsonIgnoreProperties(value = { "lastUpdate", "orderedProductCollection" }, ignoreUnknown = true)
 public class Product implements Serializable {
 
 	/**
@@ -44,10 +44,6 @@ public class Product implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
-
-	@JoinColumn(name = "category_id", referencedColumnName = "id")
-	@ManyToOne(optional = false)
-	private Category category;
 
 	@Size(max = 255)
 	@Column(name = "description")
@@ -69,6 +65,10 @@ public class Product implements Serializable {
 	@Column(name = "price")
 	@NotBlank
 	private BigDecimal price;
+
+	@JoinColumn(name = "category_id", referencedColumnName = "id")
+	@ManyToOne(optional = false)
+	private Category category;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private Collection<OrderedProduct> orderedProductCollection;

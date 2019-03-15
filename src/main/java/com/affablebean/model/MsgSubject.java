@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "msg_subject")
 @XmlRootElement
-@JsonIgnoreProperties(value = { "msgFeedbackCollection" })
+@JsonIgnoreProperties(value = { "msgFeedbackCollection" }, ignoreUnknown = true)
 public class MsgSubject implements Serializable {
 	/**
 	 * 

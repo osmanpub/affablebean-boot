@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "customer_order")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "dateCreated", "orderedProductCollection" })
+@JsonIgnoreProperties(value = { "dateCreated", "orderedProductCollection" }, ignoreUnknown = true)
 public class CustomerOrder implements Serializable {
 	/**
 	 * 
