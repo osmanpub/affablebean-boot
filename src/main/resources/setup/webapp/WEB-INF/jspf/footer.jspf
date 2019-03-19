@@ -1,0 +1,68 @@
+<%--
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
+
+ * author: tgiunipero
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="footer">
+	<br>
+
+	<c:if test="${!empty sale}">
+		<c:choose>
+
+			<c:when test="${fn:contains(pageContext.request.servletPath,'/index')}">
+				<hr id="footerDivider">
+				<p id="footerText" class="reallySmallText">
+				</c:when>
+
+				<c:otherwise>
+				<hr id="footerDivider1">
+				<p id="footerText1" class="reallySmallText">
+				</c:otherwise>
+
+			</c:choose>
+		</c:if>
+
+		<button class="btn btn-link" 
+						onclick="location.href = '<c:url value='privacy'/>'">
+			<fmt:message key="privacy" />
+		</button>
+
+		&nbsp;&nbsp;&nbsp;
+
+		<button class="btn btn-link" 
+						onclick="location.href = '<c:url value='contact'/>'">
+			<fmt:message key="contact" />
+		</button>
+
+		&nbsp;&nbsp;&copy;&nbsp;2014 the affable bean company
+
+		<c:if test="${initParam.showJson != 0}">
+			<c:if test="${fn:contains(pageContext.request.servletPath,'/index') || 
+										fn:contains(pageContext.request.servletPath,'/cart') || 
+										fn:contains(pageContext.request.servletPath,'/category')}">
+
+			<form action="<c:url value='showJSON'/>" method="post">
+				<p class="bg-info" style="margin-left: 350px; width: 120px">
+					<input type="hidden" name="src" 
+								 value="${pageContext.request.servletPath}">
+
+					<button  type="submit" class="btn btn-link">
+						show JSON
+					</button>				
+				</p>						
+			</form>		
+
+		</c:if>
+	</c:if>
+
+</p>
+</div>
+</div>
+</body>
+</html>
