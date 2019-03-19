@@ -1,10 +1,237 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Getting Started: Serving Web Content</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+<title>Affablebean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/affablebean.css" th:href="@{/css/affablebean.css}" />
+
+<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+
 </head>
+
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+	<div id="main">
+		<div id="header">
+			<div id="widgetBar">
+				<div class="headerWidget">
+
+					<!-- 					<%-- If servlet path contains '/confirmation', do not display -->
+					<!-- 					language toggle --%> -->
+					<!-- 					<c:if -->
+					<!-- 						test="${!fn:contains(pageContext.request.servletPath,'/confirmation')}"> -->
+
+					<!-- 							<%-- language selection widget --%> -->
+					<!-- 							<c:choose> -->
+					<!-- 								<%-- When user hasn't explicitly set language, -->
+					<!-- 											render toggle according to browser's preferred locale --%> -->
+					<!-- 								<c:when -->
+					<!-- 								test="${empty sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}"> -->
+					<!-- 								<c:set var="req_locale" -->
+					<!-- 									value="${pageContext.request.locale.language}" /> -->
+
+					<!-- 								<ab:lang language="en" display="english" -->
+					<!-- 									test="${req_locale ne 'cs' && req_locale ne 'es'}" /> -->
+
+					<!-- 								<ab:lang language="cs" display="česky" -->
+					<!-- 									test="${req_locale eq 'cs'}" /> -->
+
+					<!-- 								<ab:lang language="es" display="español" -->
+					<!-- 									test="${req_locale eq 'es'}" /> -->
+					<!-- 							</c:when> -->
+
+					<!-- 								<%-- Otherwise, render widget according to the set locale --%> -->
+					<!-- 								<c:otherwise> -->
+					<!-- 								<c:set var="locale" -->
+					<!-- 									value="${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}" /> -->
+
+					<!-- 								<ab:lang language="en" display="english" -->
+					<!-- 									test="${locale ne 'cs' && locale ne 'es'}" /> -->
+
+					<!-- 								<ab:lang language="cs" display="česky" test="${locale eq 'cs'}" /> -->
+
+					<!-- 								<ab:lang language="es" display="español" -->
+					<!-- 									test="${locale eq 'es'}" /> -->
+					<!-- 							</c:otherwise> -->
+					<!-- 						</c:choose> -->
+
+					<!-- 					</c:if> -->
+				</div>
+
+				<!-- 				<%-- checkout widget --%> -->
+				<div class="headerWidget">
+
+					<!-- 					<c:if -->
+					<!-- 						test="${!empty cart && cart.numberOfItems != 0 && -->
+
+					<!-- 													!fn:contains(pageContext.request.servletPath,'/checkout') && -->
+					<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/checkout' && -->
+
+					<!-- 													!fn:contains(pageContext.request.servletPath,'/cart') && -->
+					<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/cart' && -->
+
+					<!-- 													validationErrorFlag ne true && -->
+					<!-- 													orderFailureFlag ne true}"> -->
+
+					<!-- 						<a href="<c:url value='checkout'/>" class="bubble"> <fmt:message -->
+					<!-- 								key="proceedCheckout" /> -->
+					<!-- 						</a> -->
+					<!-- 					</c:if> -->
+				</div>
+
+				<!-- 				<%-- shopping cart widget --%> -->
+				<div class="headerWidget" id="viewCart">
+					<img src="../../img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
+						alt="shopping cart icon">
+
+					<!-- 						<%-- If 'numberOfItems' property doesn't exist, -->
+					<!-- 					or if number of items in cart is 0, output '0', otherwise output -->
+					<!-- 					'numberOfItems' --%>  -->
+
+					<!-- 					<span class="horizontalMargin"> <c:choose> -->
+					<!-- 							<c:when test="${cart.numberOfItems == null}"> -->
+					<!-- 									0 -->
+					<!-- 								</c:when> -->
+					<!-- 							<c:otherwise> -->
+					<!-- 									${cart.numberOfItems} -->
+					<!-- 								</c:otherwise> -->
+					<!-- 						</c:choose> <%-- Handle singular/plural forms of 'item' --%> <c:choose> -->
+					<!-- 							<c:when test="${cart.numberOfItems == 1}"> -->
+					<!-- 								<fmt:message key="item" /> -->
+					<!-- 							</c:when> -->
+					<!-- 							<c:when -->
+					<!-- 								test="${cart.numberOfItems >= 2 && -->
+					<!-- 																cart.numberOfItems <= 4}"> -->
+					<!-- 								<fmt:message key="items2-4" /> -->
+					<!-- 							</c:when> -->
+					<!-- 							<c:otherwise> -->
+					<!-- 								<fmt:message key="items" /> -->
+					<!-- 							</c:otherwise> -->
+					<!-- 						</c:choose> -->
+					<!-- 					</span> -->
+
+					<!-- 					<c:if -->
+					<!-- 						test="${!empty cart && cart.numberOfItems != 0 && -->
+
+					<!-- 													!fn:contains(pageContext.request.servletPath,'/cart') && -->
+					<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}"> -->
+
+					<!-- 						<a href="<c:url value='viewCart'/>" class="bubble"> <fmt:message -->
+					<!-- 								key="cart" /> -->
+					<!-- 						</a> -->
+					<!-- 					</c:if> -->
+				</div>
+			</div>
+
+			<!-- 			<a href="<c:url value='/'/>"> <img src="img/logo.png" id="logo" -->
+			<!-- 				alt="Affable Bean logo"> -->
+			<!-- 			</a>  -->
+
+				<img src="../../img/logo.png" th:src="@{/img/logo.png}" id="logo"
+					alt="Affable Bean logo"> 
+					
+				<img src="../../img/logoText.png"
+					th:src="@{/img/logoText.png}" id="logoText" alt="the affable bean">
+
+			<!-- 			<c:if test="${!empty sale}"> -->
+			<!-- 				<img class="sale" src="/AffableBean/img/sales.jpg" id="saleText" -->
+			<!-- 					alt="sale now on!"> -->
+			<!-- 				<br> -->
+			<!-- 				<br> -->
+
+			<!-- 				<c:choose> -->
+			<!-- 					<c:when -->
+			<!-- 						test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
+			<!-- 						<span class="saleText"> -->
+			<!-- 					</c:when> -->
+			<!-- 					<c:otherwise> -->
+			<!-- 						<span class="saleText1"> -->
+			<!-- 					</c:otherwise> -->
+			<!-- 				</c:choose> -->
+			<!-- 				<fmt:message key="pro${sale.description}" /> -->
+			<!-- 				</span> -->
+			<!-- 			</c:if> -->
+
+		</div>
+	</div>
+
+	<div id="footer">
+		<br>
+
+		<!-- 	<c:if test="${!empty sale}"> -->
+		<!-- 		<c:choose> -->
+
+		<!-- 			<c:when test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
+		<!-- 				<hr id="footerDivider"> -->
+		<!-- 				<p id="footerText" class="reallySmallText"> -->
+		<!-- 				</c:when> -->
+
+		<!-- 				<c:otherwise> -->
+		<!-- 				<hr id="footerDivider1"> -->
+		<!-- 				<p id="footerText1" class="reallySmallText"> -->
+		<!-- 				</c:otherwise> -->
+
+		<!-- 			</c:choose> -->
+		<!-- 		</c:if> -->
+
+		<!-- 		<button class="btn btn-link"  -->
+		<!-- 						onclick="location.href = '<c:url value='privacy'/>'"> -->
+		<!-- 			<fmt:message key="privacy" /> -->
+		<!-- 		</button> -->
+
+		&nbsp;&nbsp;&nbsp;
+
+		<!-- 		<button class="btn btn-link" onclick="location.href = '<c:url value='contact'/>'"> -->
+		<!-- 			<fmt:message key="contact" /> -->
+		<!-- 		</button> -->
+
+		&nbsp;&nbsp;&copy;&nbsp;2019 the affable bean company
+	</div>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('a.categoryButton').hover(function() {
+				$(this).animate({
+					backgroundColor : '#b2d2d2'
+				});
+			}, function() {
+				$(this).animate({
+					backgroundColor : '#d3ede8'
+				});
+			});
+
+			$('div.categoryBox').hover(function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.3
+				});
+				$(span[1]).animate({
+					color : 'white'
+				});
+			}, function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.7
+				});
+				$(span[1]).animate({
+					color : '#444'
+				});
+			});
+		});
+	</script>
+
 </body>
 </html>
