@@ -1,20 +1,9 @@
-/*
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
- */
 package com.affablebean.cart;
 
-import com.affablebean.entity.Product;
+import com.affablebean.model.Product;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- *
- * @author tgiunipero
- */
 public final class ShoppingCart {
 
 	private final Queue<ShoppingCartItem> items = new ConcurrentLinkedQueue<>();
@@ -26,7 +15,7 @@ public final class ShoppingCart {
 	 * incremented.
 	 *
 	 * @param product the <code>Product</code> that defines the type of shopping
-	 * cart item
+	 *                cart item
 	 * @see ShoppingCartItem
 	 */
 	public void addItem(Product product) {
@@ -51,10 +40,10 @@ public final class ShoppingCart {
 	 * given quantity, the <code>ShoppingCartItem</code> is removed from the
 	 * <code>ShoppingCart</code>'s <code>items</code> list.
 	 *
-	 * @param product the <code>Product</code> that defines the type of shopping
-	 * cart item
-	 * @param quantity the number which the <code>ShoppingCartItem</code> is
-	 * updated to
+	 * @param product  the <code>Product</code> that defines the type of shopping
+	 *                 cart item
+	 * @param quantity the number which the <code>ShoppingCartItem</code> is updated
+	 *                 to
 	 * @see ShoppingCartItem
 	 */
 	public void update(Product product, String quantity) {
@@ -71,8 +60,8 @@ public final class ShoppingCart {
 			if (Objects.equals(scItem.getProduct().getId(), product.getId())) {
 				if (qty != 0) {
 					scItem.setQuantity(qty);
+
 				} else {
-					// if quantity equals 0, save item and break
 					item = scItem;
 				}
 
@@ -103,32 +92,19 @@ public final class ShoppingCart {
 	 * @see ShoppingCartItem
 	 */
 	public int getNumberOfItems() {
-		int numberOfItems = 0;
-
-		for (ShoppingCartItem scItem : items) {
-			numberOfItems += scItem.getQuantity();
-		}
-
-		return numberOfItems;
+		return items.stream().mapToInt(ShoppingCartItem::getQuantity).sum();
 	}
 
 	/**
-	 * Returns the sum of the product price multiplied by the quantity for all
-	 * items in shopping cart list. This is the total cost excluding the
-	 * surcharge.
+	 * Returns the sum of the product price multiplied by the quantity for all items
+	 * in shopping cart list. This is the total cost excluding the surcharge.
 	 *
 	 * @return the cost of all items times their quantities
 	 * @see ShoppingCartItem
 	 */
 	public double getSubtotal() {
-		double amount = 0;
-
-		for (ShoppingCartItem scItem : items) {
-			Product product = (Product) scItem.getProduct();
-			amount += (scItem.getQuantity() * product.getPrice().doubleValue());
-		}
-
-		return amount;
+		return items.stream().mapToDouble(item -> item.getQuantity() * item.getProduct().getPrice().doubleValue())
+				.sum();
 	}
 
 	/**

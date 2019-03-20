@@ -13,8 +13,8 @@ import com.affablebean.model.MsgSubject;
 public interface MsgSubjectRepository extends JpaRepository<MsgSubject, Integer> {
 
 	List<MsgSubject> findByName(String name);
-	
-	 @Query("SELECT s FROM MsgSubject s ORDER BY s.name")
-	 List<MsgSubject> findSubjects();	
+
+	@Query("SELECT s FROM MsgSubject s ORDER BY s.name")
+	List<MsgSubject> findSubjects();
 
 }

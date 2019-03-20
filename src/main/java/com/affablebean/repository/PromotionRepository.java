@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import com.affablebean.model.Promotion;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -26,4 +28,13 @@ public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
 	List<Promotion> findBySold(BigDecimal sold);
 
 	List<Promotion> findByDescription(String description);
+
+	@Query("SELECT p FROM Promotion p WHERE p.categoryId > 0")
+	List<Promotion> findCategories();
+
+	@Query("SELECT p FROM Promotion p WHERE p.productId > 0")
+	List<Promotion> findProducts();
+
+	@Query("SELECT p FROM Promotion p WHERE p.sale = ?1")
+	List<Promotion> findSale(Boolean sale);
 }

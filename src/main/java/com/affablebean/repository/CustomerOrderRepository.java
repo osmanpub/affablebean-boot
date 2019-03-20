@@ -21,4 +21,20 @@ public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, In
 
 	List<CustomerOrder> findByConfirmationNumber(Integer confirmationNumber);
 
+	// overridden - refresh method called to retrieve order id from database
+//	@Override
+//    public CustomerOrder find(Object id) {
+//        CustomerOrder order = em.find(CustomerOrder.class, id);
+//        em.refresh(order);
+//        return order;
+//    }
+
+	// in this implementation, there is only one order per customer
+	// the data model however allows for multiple orders per customer
+//    @RolesAllowed("affableBeanAdmin")
+//    public CustomerOrder findByCustomer(Object customer) {
+//        return (CustomerOrder) 
+//			em.createNamedQuery("CustomerOrder.findByCustomer").
+//							setParameter("customer", customer).getSingleResult();
+//    }
 }

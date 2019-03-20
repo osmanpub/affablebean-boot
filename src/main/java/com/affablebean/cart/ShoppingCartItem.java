@@ -1,19 +1,8 @@
-/*
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
- *
- * You may not modify, use, reproduce, or distribute this software
- * except in compliance with the terms of the license at:
- * http://developer.sun.com/berkeley_license.html
- */
 package com.affablebean.cart;
 
-import com.affablebean.entity.Product;
+import com.affablebean.model.Product;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- *
- * @author tgiunipero
- */
 public final class ShoppingCartItem {
 
 	private final Product product;
