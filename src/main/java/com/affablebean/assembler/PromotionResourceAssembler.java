@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.PromotionController;
-import com.affablebean.model.Promotion;
+import com.affablebean.domain.Promotion;
 
 @Component
 public class PromotionResourceAssembler implements ResourceAssembler<Promotion, Resource<Promotion>> {

@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.ProductResourceAssembler;
+import com.affablebean.domain.Product;
 import com.affablebean.exception.ProductNotFoundException;
-import com.affablebean.model.Product;
 import com.affablebean.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class ProductController {
 
 	@Autowired
-	ProductRepository repository;
+	private ProductRepository repository;
 
 	@Autowired
-	ProductResourceAssembler assembler;
+	private ProductResourceAssembler assembler;
 
 	@GetMapping("/products")
 	public Resources<Resource<Product>> all() {

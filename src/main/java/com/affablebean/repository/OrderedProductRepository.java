@@ -1,17 +1,20 @@
 package com.affablebean.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.affablebean.model.OrderedProduct;
-import com.affablebean.model.OrderedProductPK;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.affablebean.domain.OrderedProduct;
+import com.affablebean.domain.OrderedProductPK;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
 public interface OrderedProductRepository extends JpaRepository<OrderedProduct, OrderedProductPK> {
 
-//	public List<OrderedProduct> findByOrderId(Object id) {
-//		
-//		return em.createNamedQuery("OrderedProduct.findByCustomerOrderId").
-//						setParameter("customerOrderId", id).getResultList();
-//	}
+	@Query("SELECT op FROM OrderedProduct op WHERE op.orderedProductPK.customerOrderId = :id")
+	List<OrderedProduct> findByOrderId(@Param("id") Integer id);
+
 }

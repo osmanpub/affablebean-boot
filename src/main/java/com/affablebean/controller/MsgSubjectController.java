@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.MsgSubjectResourceAssembler;
+import com.affablebean.domain.MsgSubject;
 import com.affablebean.exception.MsgSubjectNotFoundException;
-import com.affablebean.model.MsgSubject;
 import com.affablebean.repository.MsgSubjectRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class MsgSubjectController {
 
 	@Autowired
-	MsgSubjectRepository repository;
+	private MsgSubjectRepository repository;
 
 	@Autowired
-	MsgSubjectResourceAssembler assembler;
+	private MsgSubjectResourceAssembler assembler;
 
 	@GetMapping("/subjects")
 	public Resources<Resource<MsgSubject>> all() {

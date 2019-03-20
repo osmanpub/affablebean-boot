@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.ProductController;
-import com.affablebean.model.Product;
+import com.affablebean.domain.Product;
 
 @Component
 public class ProductResourceAssembler implements ResourceAssembler<Product, Resource<Product>> {

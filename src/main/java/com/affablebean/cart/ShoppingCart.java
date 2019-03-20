@@ -1,8 +1,9 @@
 package com.affablebean.cart;
 
-import com.affablebean.model.Product;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import com.affablebean.domain.Product;
 
 public final class ShoppingCart {
 

@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.MsgFeedbackController;
-import com.affablebean.model.MsgFeedback;
+import com.affablebean.domain.MsgFeedback;
 
 @Component
 public class MsgFeedbackResourceAssembler implements ResourceAssembler<MsgFeedback, Resource<MsgFeedback>> {

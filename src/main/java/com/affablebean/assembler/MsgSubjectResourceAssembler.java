@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.MsgSubjectController;
-import com.affablebean.model.MsgSubject;
+import com.affablebean.domain.MsgSubject;
 
 @Component
 public class MsgSubjectResourceAssembler implements ResourceAssembler<MsgSubject, Resource<MsgSubject>> {

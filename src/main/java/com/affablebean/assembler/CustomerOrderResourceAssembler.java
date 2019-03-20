@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.CustomerOrderController;
-import com.affablebean.model.CustomerOrder;
+import com.affablebean.domain.CustomerOrder;
 
 @Component
 public class CustomerOrderResourceAssembler implements ResourceAssembler<CustomerOrder, Resource<CustomerOrder>> {

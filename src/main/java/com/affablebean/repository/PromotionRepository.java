@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import com.affablebean.model.Promotion;
+import com.affablebean.domain.Promotion;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
@@ -35,6 +36,6 @@ public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
 	@Query("SELECT p FROM Promotion p WHERE p.productId > 0")
 	List<Promotion> findProducts();
 
-	@Query("SELECT p FROM Promotion p WHERE p.sale = ?1")
-	List<Promotion> findSale(Boolean sale);
+	@Query("SELECT p FROM Promotion p WHERE p.sale = :sale")
+	List<Promotion> findSale(@Param("sale") Boolean sale);
 }

@@ -7,7 +7,7 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.affablebean.controller.CategoryController;
-import com.affablebean.model.Category;
+import com.affablebean.domain.Category;
 
 @Component
 public class CategoryResourceAssembler implements ResourceAssembler<Category, Resource<Category>> {

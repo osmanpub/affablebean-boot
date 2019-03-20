@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.CategoryResourceAssembler;
+import com.affablebean.domain.Category;
 import com.affablebean.exception.CategoryNotFoundException;
-import com.affablebean.model.Category;
 import com.affablebean.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class CategoryController {
 
 	@Autowired
-	CategoryRepository repository;
+	private CategoryRepository repository;
 
 	@Autowired
-	CategoryResourceAssembler assembler;
+	private CategoryResourceAssembler assembler;
 
 	@GetMapping("/categories")
 	public Resources<Resource<Category>> all() {

@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.CustomerOrderResourceAssembler;
+import com.affablebean.domain.CustomerOrder;
 import com.affablebean.exception.CustomerOrderNotFoundException;
-import com.affablebean.model.CustomerOrder;
 import com.affablebean.repository.CustomerOrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class CustomerOrderController {
 
 	@Autowired
-	CustomerOrderRepository repository;
+	private CustomerOrderRepository repository;
 
 	@Autowired
-	CustomerOrderResourceAssembler assembler;
+	private CustomerOrderResourceAssembler assembler;
 
 	@GetMapping("/customerOrders")
 	public Resources<Resource<CustomerOrder>> all() {

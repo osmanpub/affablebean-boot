@@ -1,7 +1,8 @@
 package com.affablebean.cart;
 
-import com.affablebean.model.Product;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.affablebean.domain.Product;
 
 public final class ShoppingCartItem {
 

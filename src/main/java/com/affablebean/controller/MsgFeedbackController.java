@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.MsgFeedbackResourceAssembler;
+import com.affablebean.domain.MsgFeedback;
 import com.affablebean.exception.MsgFeedbackNotFoundException;
-import com.affablebean.model.MsgFeedback;
 import com.affablebean.repository.MsgFeedbackRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class MsgFeedbackController {
 
 	@Autowired
-	MsgFeedbackRepository repository;
+	private MsgFeedbackRepository repository;
 
 	@Autowired
-	MsgFeedbackResourceAssembler assembler;
+	private MsgFeedbackResourceAssembler assembler;
 
 	@GetMapping("/feedbacks")
 	public Resources<Resource<MsgFeedback>> all() {

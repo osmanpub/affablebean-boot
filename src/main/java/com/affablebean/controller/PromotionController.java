@@ -1,8 +1,8 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.PromotionResourceAssembler;
+import com.affablebean.domain.Promotion;
 import com.affablebean.exception.PromotionNotFoundException;
-import com.affablebean.model.Promotion;
 import com.affablebean.repository.PromotionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class PromotionController {
 
 	@Autowired
-	PromotionRepository repository;
+	private PromotionRepository repository;
 
 	@Autowired
-	PromotionResourceAssembler assembler;
+	private PromotionResourceAssembler assembler;
 
 	@GetMapping("/promotions")
 	public Resources<Resource<Promotion>> all() {
