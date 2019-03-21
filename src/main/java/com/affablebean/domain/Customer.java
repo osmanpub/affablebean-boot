@@ -68,8 +68,7 @@ public class Customer implements Serializable {
 	public Customer() {
 	}
 
-	public Customer(String name, String email, String phone, String address, String cityRegion,
-			String ccNumber) {
+	public Customer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
