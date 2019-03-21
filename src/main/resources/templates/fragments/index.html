@@ -9,7 +9,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" media="all"
-	href="../../static/css/affablebean.css" th:href="@{/css/affablebean.css}" />
+	href="../../static/css/affablebean.css"
+	th:href="@{/css/affablebean.css}" />
 
 <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
 
@@ -17,34 +18,31 @@
 
 <body>
 	<div th:fragment="frag_index">
-<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
-<!-- 		     This is used by the language mechanism in the Controller so that -->
-<!-- 		     users view the same page when switching between English and Czech. --%> -->
-<!-- 		<c:set var='view' value='/index' scope='session' /> -->
-		
-<!-- 		<%-- HTML markup starts below --%> -->
-		
+		<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
+		<!-- 		     This is used by the language mechanism in the Controller so that -->
+		<!-- 		     users view the same page when switching between English and Czech. --%> -->
+		<!-- 		<c:set var='view' value='/index' scope='session' /> -->
+
+		<!-- 		<%-- HTML markup starts below --%> -->
+
 		<div id="indexLeftColumn">
 			<div id="welcomeText">
-				<p th:text="#{greeting}" style="font-size: larger"/>
-				<p th:text="#{introText}"/>
+				<p th:text="#{greeting}" style="font-size: larger" />
+				<p th:text="#{introText}" />
 			</div>
 		</div>
-		
+
 		<div id="indexRightColumn">
-<!-- 			<c:forEach var="category" items="${categories}"> -->
-				
+			<div th:each="category : ${categories}">
 				<div class="categoryBox">
-					<a href="<c:url value='category?id=${category.id}'/>">
-						<span class="categoryLabel"></span>						
-						<span class="categoryLabelText" th:text="#{category.name}"></span>
-		
-						<img src="${initParam.categoryImagePath}${category.name}.jpg"
-								 alt="#{category.name}" class="categoryImage">
+					<a th:href="@{/category(id=${category.id})}"> 
+					<span class="categoryLabel"></span> 
+					<span class="categoryLabelText" th:text="#{${category.name}}"></span> 
+					<img th:src="@{img/categories/${category.name}.jpg}"
+						alt="#{${category.name}}" class="categoryImage">
 					</a>
 				</div>
-								 
-<!-- 			</c:forEach> -->
+			</div>
 		</div>
 	</div>
 
