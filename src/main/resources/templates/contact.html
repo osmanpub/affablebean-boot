@@ -13,23 +13,26 @@
 
 <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
 
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
 <body>
 	<div id="main">
 		<div th:replace="fragments/header.html :: frag_header"></div>
-		<div th:replace="fragments/index.html :: frag_index"></div>
+		<div th:replace="fragments/contact.html :: frag_contact"></div>		
 	</div>
 
 	<div th:replace="fragments/footer.html :: frag_footer"></div>
-
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

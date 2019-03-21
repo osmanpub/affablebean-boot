@@ -9,19 +9,48 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" media="all"
-	href="../../css/affablebean.css" th:href="@{/css/affablebean.css}" />
+	href="../../static/css/affablebean.css" th:href="@{/css/affablebean.css}" />
 
 <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
 
 </head>
 
 <body>
-	<div id="main">
-		<div th:replace="fragments/header.html :: frag_header"></div>
-		<div th:replace="fragments/index.html :: frag_index"></div>
+	<div th:fragment="frag_index">
+<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
+<!-- 		     This is used by the language mechanism in the Controller so that -->
+<!-- 		     users view the same page when switching between English and Czech. --%> -->
+<!-- 		<c:set var='view' value='/index' scope='session' /> -->
+		
+<!-- 		<%-- HTML markup starts below --%> -->
+		
+<!-- 		<div id="indexLeftColumn"> -->
+<!-- 			<div id="welcomeText"> -->
+<!-- 				<p style="font-size: larger"><fmt:message key='greeting' /></p> -->
+<!-- 				<p><fmt:message key='introText' /></p> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+<!-- 		<div id="indexRightColumn"> -->
+<!-- 			<c:forEach var="category" items="${categories}"> -->
+				
+<!-- 				<div class="categoryBox"> -->
+<!-- 					<a href="<c:url value='category?id=${category.id}'/>"> -->
+<!-- 						<span class="categoryLabel"></span> -->
+						
+<!-- 						<span class="categoryLabelText"> -->
+<!-- 							<fmt:message key='${category.name}'/> -->
+<!-- 						</span> -->
+		
+<!-- 						<img src="${initParam.categoryImagePath}${category.name}.jpg" -->
+<!-- 								 alt="<fmt:message key='${category.name}'/>"  -->
+<!-- 								 class="categoryImage"> -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+								 
+<!-- 			</c:forEach> -->
+<!-- 		</div> -->
 	</div>
-
-	<div th:replace="fragments/footer.html :: frag_footer"></div>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

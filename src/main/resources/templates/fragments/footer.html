@@ -9,19 +9,52 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" media="all"
-	href="../../css/affablebean.css" th:href="@{/css/affablebean.css}" />
+	href="../../static/css/affablebean.css" th:href="@{/css/affablebean.css}" />
 
 <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
 
 </head>
 
 <body>
-	<div id="main">
-		<div th:replace="fragments/header.html :: frag_header"></div>
-		<div th:replace="fragments/index.html :: frag_index"></div>
-	</div>
 
-	<div th:replace="fragments/footer.html :: frag_footer"></div>
+	<div th:fragment="frag_footer">
+		<div id="footer">
+			<br>
+
+			<!-- 	<c:if test="${!empty sale}"> -->
+			<!-- 		<c:choose> -->
+
+			<!-- 			<c:when test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
+			<!-- 				<hr id="footerDivider"> -->
+			<!-- 				<p id="footerText" class="reallySmallText"> -->
+			<!-- 				</c:when> -->
+
+			<!-- 				<c:otherwise> -->
+			<!-- 				<hr id="footerDivider1"> -->
+			<!-- 				<p id="footerText1" class="reallySmallText"> -->
+			<!-- 				</c:otherwise> -->
+
+			<!-- 			</c:choose> -->
+			<!-- 		</c:if> -->
+
+			<!-- 		<button class="btn btn-link"  -->
+			<!-- 						onclick="location.href = '<c:url value='privacy'/>'"> -->
+			<!-- 			<fmt:message key="privacy" /> -->
+			<!-- 		</button> -->
+
+			<button class="btn btn-link" onclick="location.href = '/privacy'">
+				Privacy</button>
+
+			<!-- 		<button class="btn btn-link" onclick="location.href = '<c:url value='contact'/>'"> -->
+			<!-- 			<fmt:message key="contact" /> -->
+			<!-- 		</button> -->
+
+			<button class="btn btn-link" onclick="location.href = '/contact'">
+				Contact</button>
+
+			&nbsp;&copy;&nbsp;2019 the affable bean company
+		</div>
+	</div>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

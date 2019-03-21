@@ -27,10 +27,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.affablebean.controller.IndexController;
+import com.affablebean.controller.MainController;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = IndexController.class)
+@WebMvcTest(controllers = MainController.class)
 public class ApplicationTest {
 
     @Autowired
