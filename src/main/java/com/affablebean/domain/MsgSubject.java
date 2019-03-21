@@ -47,12 +47,7 @@ public class MsgSubject implements Serializable {
 	public MsgSubject() {
 	}
 
-	public MsgSubject(Integer id) {
-		this.id = id;
-	}
-
-	public MsgSubject(Integer id, String name) {
-		this.id = id;
+	public MsgSubject(String name) {
 		this.name = name;
 	}
 

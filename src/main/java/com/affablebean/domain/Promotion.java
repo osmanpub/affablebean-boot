@@ -65,12 +65,7 @@ public class Promotion implements Serializable {
 	public Promotion() {
 	}
 
-	public Promotion(Integer id) {
-		this.id = id;
-	}
-
-	public Promotion(Integer id, String name, int discount) {
-		this.id = id;
+	public Promotion(String name, int discount) {
 		this.name = name;
 		this.discount = discount;
 	}

@@ -63,12 +63,7 @@ public class MsgFeedback implements Serializable {
 	public MsgFeedback() {
 	}
 
-	public MsgFeedback(Integer id) {
-		this.id = id;
-	}
-
-	public MsgFeedback(Integer id, String name, String email, String msg) {
-		this.id = id;
+	public MsgFeedback(String name, String email, String msg) {
 		this.name = name;
 		this.email = email;
 		this.msg = msg;
