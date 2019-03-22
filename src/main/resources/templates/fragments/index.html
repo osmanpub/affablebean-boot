@@ -33,16 +33,16 @@
 		</div>
 
 		<div id="indexRightColumn">
-			<div th:each="category : ${categories}">
-				<div class="categoryBox">
+			<span th:each="category : ${categories}">
+				<span class="categoryBox">
 					<a th:href="@{/category(id=${category.id})}"> 
 					<span class="categoryLabel"></span> 
 					<span class="categoryLabelText" th:text="#{${category.name}}"></span> 
-					<img th:src="@{img/categories/${category.name}.jpg}"
-						alt="#{${category.name}}" class="categoryImage">
+					<img th:src="@{img/categories/__${category.name}__.jpg}"
+						th:alt="#{${category.name}}" class="categoryImage">
 					</a>
-				</div>
-			</div>
+				</span>
+			</span>
 		</div>
 	</div>
 
