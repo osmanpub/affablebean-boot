@@ -25,149 +25,131 @@
 		
 <!-- 		<%-- HTML markup starts below --%> -->
 		
-<!-- 		<div id="singleColumn"> -->
+		<div id="singleColumn">
 		
-<!-- 			<p><fmt:message key="pr1"/></p> -->
+			<p th:utext="#{pr1}"></p>
 		
-<!-- 			<div id="contents"> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr2'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr2" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr3'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr3" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr4'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr4" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr5'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr5" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr6'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr6" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr7'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr7" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr8'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr8" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr9'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr9" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 				<button class="btn btn-link"  -->
-<!-- 								onclick="location.href = '<c:url value='#pr10'/>'"> -->
-<!-- 					&#8226; <fmt:message key="pr10" /> -->
-<!-- 				</button> -->
-<!-- 				<br> -->
-<!-- 			</div> -->
-<!-- 			<br> -->
+			<div id="contents">
+				<button class="btn btn-link" onclick="location.href = '#pr2'">
+					&#8226; <span th:utext="#{pr2}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr3'">
+					&#8226; <span th:utext="#{pr3}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr4'">
+					&#8226; <span th:utext="#{pr4}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr5'">
+					&#8226; <span th:utext="#{pr5}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr6'">
+					&#8226; <span th:utext="#{pr6}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr7'">
+					&#8226; <span th:utext="#{pr7}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr8'">
+					&#8226; <span th:utext="#{pr8}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr9'">
+					&#8226; <span th:utext="#{pr9}"></span>
+				</button>
+				<br>
+				<button class="btn btn-link" onclick="location.href = '#pr10'">
+					&#8226; <span th:utext="#{pr10}"></span>
+				</button>
+				<br>
+			</div>
+			<br>
 		
-<!-- 			<div id="pr2"> -->
-<!-- 				<p><b><fmt:message key="pr2"/></b></p> -->
-<!-- 				<p><fmt:message key="pr12"/></p> -->
-<!-- 			</div> -->
+			<div id="pr2">
+				<p><b><span th:utext="#{pr2}"></span></b></p>
+				<p th:utext="#{pr12}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr3"> -->
-<!-- 				<p><b><fmt:message key="pr3"/></b></p> -->
-<!-- 				<p><fmt:message key="pr13"/></p> -->
-<!-- 			</div> -->
+			<div id="pr3">
+				<p><b><span th:utext="#{pr3}"></span></b></p>
+				<p th:utext="#{pr13}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr4"> -->
-<!-- 				<p><b><fmt:message key="pr4"/></b></p> -->
-<!-- 				<p><fmt:message key="pr14"/></p> -->
-<!-- 			</div> -->
+			<div id="pr4">
+				<p><b><span th:utext="#{pr4}"></span></b></p>
+				<p th:utext="#{pr14}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr5"> -->
-<!-- 				<p><b><fmt:message key="pr5"/></b></p> -->
-<!-- 				<p><fmt:message key="pr15"/></p> -->
-<!-- 			</div> -->
+			<div id="pr5">
+				<p><b><span th:utext="#{pr5}"></span></b></p>
+				<p th:utext="#{pr15}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr6"> -->
-<!-- 				<p><b><fmt:message key="pr6"/></b></p> -->
-<!-- 				<p><fmt:message key="pr16"/></p> -->
-<!-- 			</div> -->
+			<div id="pr6">
+				<p><b><span th:utext="#{pr6}"></span></b></p>
+				<p th:utext="#{pr16}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr7"> -->
-<!-- 				<p><b><fmt:message key="pr7"/></b></p> -->
-<!-- 				<p><fmt:message key="pr17"/></p> -->
-<!-- 			</div> -->
+			<div id="pr7">
+				<p><b><span th:utext="#{pr7}"></span></b></p>
+				<p th:utext="#{pr17}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr8"> -->
-<!-- 				<p><b><fmt:message key="pr8"/></b></p> -->
-<!-- 				<p><fmt:message key="pr18"/></p> -->
-<!-- 			</div> -->
+			<div id="pr8">
+				<p><b><span th:utext="#{pr8}"></span></b></p>
+				<p th:utext="#{pr18}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr9"> -->
-<!-- 				<p><b><fmt:message key="pr9"/></b></p> -->
-<!-- 				<p><fmt:message key="pr19"/></p> -->
-<!-- 			</div> -->
+			<div id="pr9">
+				<p><b><span th:utext="#{pr9}"></span></b></p>
+				<p th:utext="#{pr19}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
 		
-<!-- 			<div id="pr10"> -->
-<!-- 				<p><b><fmt:message key="pr10"/></b></p> -->
-<!-- 				<p><fmt:message key="pr20"/></p> -->
-<!-- 			</div> -->
+			<div id="pr10">
+				<p><b><span th:utext="#{pr10}"></span></b></p>
+				<p th:utext="#{pr20}"></p>
+			</div>
 		
-<!-- 			<button class="btn btn-link"  -->
-<!-- 							onclick="location.href = '<c:url value='#contents'/>'"> -->
-<!-- 				<fmt:message key="pr22" /> -->
-<!-- 			</button> -->
-<!-- 		</div>	 -->
+			<button class="btn btn-link"  onclick="location.href = '#contents'">
+				<span th:utext="#{pr22}"></span>
+			</button>
+		</div>	
 	</div>
 
 	<script type="text/javascript"

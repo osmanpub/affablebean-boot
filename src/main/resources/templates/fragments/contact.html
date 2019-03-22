@@ -26,30 +26,13 @@
 		
 		<div id="singleColumn">
 			<div>
-<!-- 				<h2><fmt:message key="co1"/></h2> -->
-<!-- 				<p><fmt:message key="co2"/></p> -->
+				<h2 th:utext="#{co1}"></h2>
+				<p th:utext="#{co2}"></p>
 			</div>
 		
-			<script type="text/javascript">
-		
-				$(document).ready(function() {
-					$("#feedbackForm").validate({
-						rules: {
-							name: "required",
-							email: {
-								required: true,
-								email: true
-							},
-							msg: {
-								required: true
-							}
-						}
-					});
-				});
-			</script>
-		
 			<div>
-					<!--<p><fmt:message key="co8"/></p>-->
+			
+				<p th:utext="#{co8}"></p>
 		
 				<table id="feedbackTable">
 <!-- 					<c:if test="${!empty validationErrorFlag}"> -->
@@ -83,13 +66,13 @@
 						action="<c:url value='feedback'/>" method="post">
 		
 				<div class="form-group">
-<!-- 					<label for="subject_sel" class="col-sm-2 control-label"> -->
-<!-- 						<fmt:message key="co3"/> -->
-<!-- 					</label> -->
+					<label for="subject_sel" class="col-sm-2 control-label">
+						<span th:text="#{co3}"></span>					
+					</label>
 		
 					<div class="col-sm-10">
-<!-- 						<select name="subject_sel" class="form-control"> -->
-<!-- 							<option><fmt:message key="coPlease select"/></option> -->
+						<select name="subject_sel" class="form-control">
+							<option th:text="#{coPlease select}"/>
 		
 <!-- 							<c:forEach var="subject" items="${subjects}"> -->
 <!-- 								<option value="${subject.id}"> -->
@@ -97,14 +80,14 @@
 <!-- 								</option> -->
 <!-- 							</c:forEach>   -->
 		
-<!-- 						</select>	 -->
+						</select>	
 					</div>			
 				</div>
 		
 				<div class="form-group">
-<!-- 					<label for="name" class="col-sm-2 control-label"> -->
-<!-- 						<fmt:message key="customerName"/> -->
-<!-- 					</label> -->
+					<label for="name" class="col-sm-2 control-label">
+						<span th:text="#{customerName}"></span>					
+					</label>
 		
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="name"
@@ -116,9 +99,9 @@
 				</div>
 		
 				<div class="form-group">
-<!-- 					<label for="email" class="col-sm-2 control-label"> -->
-<!-- 						<fmt:message key="email"/> -->
-<!-- 					</label> -->
+					<label for="email" class="col-sm-2 control-label">
+						<span th:text="#{email}"></span>					
+					</label>
 		
 					<div class="col-sm-10">
 						<input type="email" class="form-control" name="email"
@@ -130,9 +113,9 @@
 				</div>
 		
 				<div class="form-group">
-<!-- 					<label for="msg" class="col-sm-2 control-label"> -->
-<!-- 						<fmt:message key="coMsg"/> -->
-<!-- 					</label> -->
+					<label for="msg" class="col-sm-2 control-label">
+						<span th:text="#{coMsg}"></span>					
+					</label>
 		
 					<div class="col-sm-10">
 						<textarea dir="ltr" class="form-control" name="msg"
@@ -144,27 +127,45 @@
 		
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-<!-- 						<button type="submit" class="btn btn-primary"> -->
-<!-- 							<fmt:message key='coSubmit'/> -->
-<!-- 						</button> -->
+						<button type="submit" class="btn btn-primary">
+							<span th:text="#{coSubmit}"></span>
+						</button>
 					</div>
 				</div>
 			</form>
 		
 			<div>
-<!-- 				<h3><fmt:message key="co4"/></h3> -->
-<!-- 				<p><fmt:message key="co5"/></p> -->
-<!-- 				<p><fmt:message key="co6"/></p> -->
+			
+				<h3 th:utext="#{co4}"></h3>
+				<p th:utext="#{co5}"></p>
+				<p th:utext="#{co6}"></p>
 		
-<!-- 				<p> -->
-<!-- 					<fmt:message key="co7"/> -->
-<!-- 					<span class="privacy">  -->
-<!-- 						<a href="<c:url value="privacy"/>"><fmt:message key="co9"/></a> -->
-<!-- 					</span> -->
-<!-- 				</p> -->
+				<p th:utext="#{co7}">
+					<span class="privacy"> 
+						<a th:href="@{/privacy}"><span th:utext="#{co9}"></span></a>
+					</span>
+				</p>
 		
 			</div>
 		</div>	
+				
+		<script type="text/javascript">
+	
+			$(document).ready(function() {
+				$("#feedbackForm").validate({
+					rules: {
+						name: "required",
+						email: {
+							required: true,
+							email: true
+						},
+						msg: {
+							required: true
+						}
+					}
+				});
+			});
+		</script>		
 	</div>
 
 	<script type="text/javascript"
