@@ -44,87 +44,83 @@
 		
 		<div id="categoryRightColumn">
 		
-			<!--<p id="categoryTitle"><fmt:message key="${selectedCategory.name}" /></p> -->
+			<p id="categoryTitle" th:text="${selectedCategory.name}"></p>
 		
-<!-- 			<c:forEach var="promo" items="${catProms}"> -->
-<!-- 				<c:if test="${promo.categoryId == selectedCategory.id}"> -->
-<!-- 					<span class="saleCat"><fmt:message key='pro${promo.description}'/></span> -->
-<!-- 				</c:if> -->
-<!-- 			</c:forEach> -->
+			<span th:each="promo : ${catProms}">
+				<span th:if="${promo.categoryId == selectedCategory.id}">
+					<span class="saleCat" th:text="#{pro__${promo.description}__}">
+					</span>
+				</span>			
+			</span>
 		
-			<table id="productTable">
+			<table id="productTable" th:each="product : ${categoryProducts}">
 		
-<!-- 				<c:forEach var="product" items="${categoryProducts}" varStatus="iter"> -->
-		
-<!-- 					<tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}"> -->
-<!-- 						<td> -->
-<!-- 							<img src="${initParam.productImagePath}${product.name}.png" -->
-<!-- 									 alt="<fmt:message key='${product.name}'/>"> -->
-<!-- 						</td> -->
-		
-<!-- 						<td> -->
-<!-- 							<fmt:message key="${product.name}"/> -->
-<!-- 							<br> -->
-<!-- 							<span class="smallText"> -->
-<!-- 								<fmt:message key='${product.name}Description'/> -->
-<!-- 							</span> -->
-<!-- 						</td> -->
-		
-<!-- 						<c:set var="new_price" value="${product.price}"/> -->
-		
-<!-- 						<c:if test="${!empty sale}"> -->
-<!-- 							<c:set var="new_price" value="${new_price / (1 - sale.discount/100)}"/> -->
-<!-- 						</c:if> -->
-		
-<!-- 						<c:if test="${!empty catProms}"> -->
-<!-- 							<c:forEach var="promo" items="${catProms}"> -->
-<!-- 								<c:if test="${promo.categoryId == selectedCategory.id}"> -->
-<!-- 									<c:set var="new_price" value="${new_price / (1 - promo.discount/100)}"/> -->
-<!-- 								</c:if> -->
-<!-- 							</c:forEach> -->
-<!-- 						</c:if>				 -->
-		
-<!-- 						<c:if test="${!empty sale || !empty catProms}"> -->
-<!-- 							<td> -->
-<!-- 								<span style="text-decoration: line-through; color: red;"> -->
-<!-- 									<span style="color: gray;"> -->
-<!-- 										<fmt:formatNumber type="currency" currencySymbol="&euro; "  -->
-<!-- 																			value="${new_price}"/> -->
-<!-- 									</span> -->
-<!-- 								</span>							 -->
-<!-- 							</td> -->
-<!-- 						</c:if> -->
-		
-<!-- 						<td><fmt:formatNumber type="currency" currencySymbol="&euro; "  -->
-<!-- 															value="${product.price}"/> -->
-<!-- 						</td> -->
-		
-<!-- 						<td> -->
-<!-- 							<form action="<c:url value='addToCart'/>" method="post"> -->
-<!-- 								<input type="hidden" -->
-<!-- 											 name="productId" -->
-<!-- 											 value="${product.id}"> -->
-		
-<!-- 								<button type="submit" class="btn btn-primary btn-sm"> -->
-<!-- 									<fmt:message key='addToCart'/> -->
-<!-- 								</button>							 -->
-<!-- 							</form> -->
-<!-- 						</td> -->
-		
-<!-- 						<c:if test="${!empty prodProms}"> -->
-<!-- 							<c:forEach var="promo" items="${prodProms}"> -->
-<!-- 								<c:if test="${promo.productId == product.id}"> -->
-<!-- 									<td class = "productOffer"> -->
-<!-- 										${promo.description} -->
-<!-- 									</td>				 -->
-<!-- 								</c:if> -->
-<!-- 							</c:forEach> -->
-<!-- 						</c:if>				 -->
-		
-<!-- 					</tr> -->
-		
-<!-- 				</c:forEach> -->
-		
+				<tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
+					<td>
+						<img th:src="@{__${prodPath}__/__${product.name}__.png}"
+							th:alt="#{${product.name}}">					
+					</td>
+	
+					<td>
+						<span th:text="#{${product.name}}"></span>
+						<br>
+						<span class="smallText" th:text="#{__${product.name}__Description}">
+						</span>
+					</td>
+	
+<!-- 					<c:set var="new_price" value="${product.price}"/> -->
+	
+					<c:if test="${!empty sale}">
+						<c:set var="new_price" value="${new_price / (1 - sale.discount/100)}"/>
+					</c:if>
+	
+					<c:if test="${!empty catProms}">
+						<c:forEach var="promo" items="${catProms}">
+							<c:if test="${promo.categoryId == selectedCategory.id}">
+								<c:set var="new_price" value="${new_price / (1 - promo.discount/100)}"/>
+							</c:if>
+						</c:forEach>
+					</c:if>				
+	
+					<c:if test="${!empty sale || !empty catProms}">
+						<td>
+							<span style="text-decoration: line-through; color: red;">
+								<span style="color: gray;">
+									<fmt:formatNumber type="currency" currencySymbol="&euro; " 
+																		value="${new_price}"/>
+								</span>
+							</span>							
+						</td>
+					</c:if>
+	
+					<td><fmt:formatNumber type="currency" currencySymbol="&euro; " 
+														value="${product.price}"/>
+					</td>
+	
+					<td>
+						<form action="<c:url value='addToCart'/>" method="post">
+							<input type="hidden"
+										 name="productId"
+										 value="${product.id}">
+	
+							<button type="submit" class="btn btn-primary btn-sm">
+								<fmt:message key='addToCart'/>
+							</button>							
+						</form>
+					</td>
+	
+					<c:if test="${!empty prodProms}">
+						<c:forEach var="promo" items="${prodProms}">
+							<c:if test="${promo.productId == product.id}">
+								<td class = "productOffer">
+									${promo.description}
+								</td>				
+							</c:if>
+						</c:forEach>
+					</c:if>				
+	
+				</tr>
+	
 			</table>
 		</div>
 	</div>

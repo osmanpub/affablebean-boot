@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.affablebean.domain.Category;
 import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgSubjectRepository;
+import com.affablebean.repository.PromotionRepository;
 
 @Controller
 public class MainController {
@@ -19,16 +20,25 @@ public class MainController {
 	@Value("${categoryImagePath:img/categories}")
 	private String imgPath;
 
+	@Value("${productImagePath:img/products}")
+	private String prodPath;
+	
 	@Resource
 	private CategoryRepository categoryRepository;
 
 	@Resource
 	private MsgSubjectRepository msgSubjectRepository;
 
+	@Resource
+	private PromotionRepository promotionRepository;
+	
 	@GetMapping({ "/category" })
 	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") String id) {
-		getCategoryProducts(model, id);
 		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("catProms", promotionRepository.findCategories());
+		model.addAttribute("prodPath", prodPath);
+		
+		getCategoryProducts(model, id);
 		return "category";
 	}
 
