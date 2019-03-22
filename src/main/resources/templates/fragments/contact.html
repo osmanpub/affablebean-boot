@@ -72,15 +72,10 @@
 		
 					<div class="col-sm-10">
 						<select name="subject_sel" class="form-control">
-							<option th:text="#{coPlease select}"/>
-		
-<!-- 							<c:forEach var="subject" items="${subjects}"> -->
-<!-- 								<option value="${subject.id}"> -->
-<!-- 									<fmt:message key="co${subject.name}"/> -->
-<!-- 								</option> -->
-<!-- 							</c:forEach>   -->
-		
-						</select>	
+						    <option th:each="subject : ${subjects}" th:value="${subject}" 
+						    	th:text="#{co__${subject.name}__}">
+						    </option>
+						</select>					
 					</div>			
 				</div>
 		

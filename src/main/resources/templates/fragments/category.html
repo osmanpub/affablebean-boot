@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Affablebean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../static/css/affablebean.css"
+	th:href="@{/css/affablebean.css}" />
+
+<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+
+</head>
+
+<body>
+	<div th:fragment="frag_category">
+<!-- 		<c:set var="view" value="/category" scope="session" /> -->
+		
+<!-- 		<%-- HTML markup starts below --%> -->
+		
+		<div id="categoryLeftColumn">	
+			<span th:each="category : ${categories}">
+				<span th:if="${category.name == selectedCategory.name}">
+					<span class="categoryButton" id="selectedCategory">
+						<span class="categoryText" th:text="#{${category.name}}">								
+						</span>
+					</span>
+				</span>
+
+				<span th:if="${category.name != selectedCategory.name}">
+					<span class="categoryButton">
+						<a th:href="@{/category(id=${category.id})}"> 
+							<span class="categoryText" th:text="#{${category.name}}">								
+							</span>
+						</a>
+					</span>
+				</span>
+			</span>
+		</div>
+		
+		<div id="categoryRightColumn">
+		
+			<!--<p id="categoryTitle"><fmt:message key="${selectedCategory.name}" /></p> -->
+		
+<!-- 			<c:forEach var="promo" items="${catProms}"> -->
+<!-- 				<c:if test="${promo.categoryId == selectedCategory.id}"> -->
+<!-- 					<span class="saleCat"><fmt:message key='pro${promo.description}'/></span> -->
+<!-- 				</c:if> -->
+<!-- 			</c:forEach> -->
+		
+			<table id="productTable">
+		
+<!-- 				<c:forEach var="product" items="${categoryProducts}" varStatus="iter"> -->
+		
+<!-- 					<tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}"> -->
+<!-- 						<td> -->
+<!-- 							<img src="${initParam.productImagePath}${product.name}.png" -->
+<!-- 									 alt="<fmt:message key='${product.name}'/>"> -->
+<!-- 						</td> -->
+		
+<!-- 						<td> -->
+<!-- 							<fmt:message key="${product.name}"/> -->
+<!-- 							<br> -->
+<!-- 							<span class="smallText"> -->
+<!-- 								<fmt:message key='${product.name}Description'/> -->
+<!-- 							</span> -->
+<!-- 						</td> -->
+		
+<!-- 						<c:set var="new_price" value="${product.price}"/> -->
+		
+<!-- 						<c:if test="${!empty sale}"> -->
+<!-- 							<c:set var="new_price" value="${new_price / (1 - sale.discount/100)}"/> -->
+<!-- 						</c:if> -->
+		
+<!-- 						<c:if test="${!empty catProms}"> -->
+<!-- 							<c:forEach var="promo" items="${catProms}"> -->
+<!-- 								<c:if test="${promo.categoryId == selectedCategory.id}"> -->
+<!-- 									<c:set var="new_price" value="${new_price / (1 - promo.discount/100)}"/> -->
+<!-- 								</c:if> -->
+<!-- 							</c:forEach> -->
+<!-- 						</c:if>				 -->
+		
+<!-- 						<c:if test="${!empty sale || !empty catProms}"> -->
+<!-- 							<td> -->
+<!-- 								<span style="text-decoration: line-through; color: red;"> -->
+<!-- 									<span style="color: gray;"> -->
+<!-- 										<fmt:formatNumber type="currency" currencySymbol="&euro; "  -->
+<!-- 																			value="${new_price}"/> -->
+<!-- 									</span> -->
+<!-- 								</span>							 -->
+<!-- 							</td> -->
+<!-- 						</c:if> -->
+		
+<!-- 						<td><fmt:formatNumber type="currency" currencySymbol="&euro; "  -->
+<!-- 															value="${product.price}"/> -->
+<!-- 						</td> -->
+		
+<!-- 						<td> -->
+<!-- 							<form action="<c:url value='addToCart'/>" method="post"> -->
+<!-- 								<input type="hidden" -->
+<!-- 											 name="productId" -->
+<!-- 											 value="${product.id}"> -->
+		
+<!-- 								<button type="submit" class="btn btn-primary btn-sm"> -->
+<!-- 									<fmt:message key='addToCart'/> -->
+<!-- 								</button>							 -->
+<!-- 							</form> -->
+<!-- 						</td> -->
+		
+<!-- 						<c:if test="${!empty prodProms}"> -->
+<!-- 							<c:forEach var="promo" items="${prodProms}"> -->
+<!-- 								<c:if test="${promo.productId == product.id}"> -->
+<!-- 									<td class = "productOffer"> -->
+<!-- 										${promo.description} -->
+<!-- 									</td>				 -->
+<!-- 								</c:if> -->
+<!-- 							</c:forEach> -->
+<!-- 						</c:if>				 -->
+		
+<!-- 					</tr> -->
+		
+<!-- 				</c:forEach> -->
+		
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('a.categoryButton').hover(function() {
+				$(this).animate({
+					backgroundColor : '#b2d2d2'
+				});
+			}, function() {
+				$(this).animate({
+					backgroundColor : '#d3ede8'
+				});
+			});
+
+			$('div.categoryBox').hover(function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.3
+				});
+				$(span[1]).animate({
+					color : 'white'
+				});
+			}, function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.7
+				});
+				$(span[1]).animate({
+					color : '#444'
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>
