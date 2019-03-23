@@ -3,20 +3,26 @@ package com.affablebean.controller;
 import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.affablebean.cart.ShoppingCart;
 import com.affablebean.domain.Category;
 import com.affablebean.domain.MsgFeedback;
 import com.affablebean.domain.MsgSubject;
 import com.affablebean.domain.Product;
+import com.affablebean.forms.ContactForm;
 import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.repository.MsgSubjectRepository;
@@ -25,7 +31,7 @@ import com.affablebean.repository.PromotionRepository;
 
 @Controller
 @SessionAttributes("cart")
-public class WebController {
+public class WebController implements WebMvcConfigurer {
 
 	@Value("${categoryImagePath:img/categories}")
 	private String imgPath;
@@ -48,6 +54,11 @@ public class WebController {
 	@Resource
 	private PromotionRepository promotionRepository;
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/index").setViewName("index");
+    }
+
 	@PostMapping({ "/addToCart" })
 	public String addToCart(Model model, @ModelAttribute("cart") ShoppingCart cart,
 			@RequestParam(name = "productId", required = true) String id) {
@@ -68,19 +79,20 @@ public class WebController {
 	}
 
 	@GetMapping({ "/contact" })
-	public String contact(Model model) {
+	public String contact(ContactForm contactForm, Model model) {
 		model.addAttribute("subjects", msgSubjectRepository.findAll());
 		return "contact";
 	}
 
 	@PostMapping({ "/feedback" })
-	public String feedback(@RequestParam(name = "subjectId", required = true) Integer subjectId,
-			@RequestParam(name = "name", required = true) String name,
-			@RequestParam(name = "email", required = true) String email,
-			@RequestParam(name = "msg", required = true) String msg) {
-		return saveFeedback(subjectId, name, email, msg);
-	}
+    public String feedback(@Valid ContactForm contactForm, BindingResult bindingResult) {
 
+        if (bindingResult.hasErrors()) {
+            return "contact";
+        }
+
+		return saveFeedback(contactForm);        
+    }	
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
 		model.addAttribute("categories", categoryRepository.findAll());
@@ -160,14 +172,14 @@ public class WebController {
 //		}
 //	}
 
-	private String saveFeedback(Integer subjectId, String name, String email, String msg) {
-		MsgFeedback feedback = new MsgFeedback(name, email, msg);
-		Optional<MsgSubject> subject = msgSubjectRepository.findById(subjectId);
+	private String saveFeedback(ContactForm contactForm) {
+		MsgFeedback feedback = new MsgFeedback(contactForm.getName(), contactForm.getEmail(), contactForm.getMsg());
+		Optional<MsgSubject> subject = msgSubjectRepository.findById(contactForm.getSubjectId());
 
 		if (subject.isPresent()) {
 			feedback.setSubject(subject.get());
 			MsgFeedback msgFeedback = msgFeedbackRepository.save(feedback);
-			return (msgFeedback == null) ? "contact" : "index";
+			return (msgFeedback == null) ? "contact" : "redirect:/index";
 
 		} else {
 			return "contact";

@@ -1,15 +1,17 @@
 package com.affablebean.forms;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.affablebean.domain.MsgSubject;
 
 public class ContactForm {
 
 	@NotNull
-	private MsgSubject subjectId;
+	@Min(1)
+	@Max(7)
+	private Integer subjectId;
 
 	@NotNull
 	@Email
@@ -24,11 +26,11 @@ public class ContactForm {
 	@Size(min = 1, max = 45)
 	private String name;
 
-	public MsgSubject getSubjectId() {
+	public Integer getSubjectId() {
 		return subjectId;
 	}
 
-	public void setSubjectId(MsgSubject subjectId) {
+	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
 
