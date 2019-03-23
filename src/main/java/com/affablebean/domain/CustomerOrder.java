@@ -69,16 +69,6 @@ public class CustomerOrder implements Serializable {
 	public CustomerOrder() {
 	}
 
-	public CustomerOrder(Integer id) {
-		this.id = id;
-	}
-
-	public CustomerOrder(Integer id, BigDecimal amount, int confirmationNumber) {
-		this.id = id;
-		this.amount = amount;
-		this.confirmationNumber = confirmationNumber;
-	}
-
 	public Integer getId() {
 		return id;
 	}

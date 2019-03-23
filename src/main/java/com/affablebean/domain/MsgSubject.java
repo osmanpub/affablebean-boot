@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,14 +42,10 @@ public class MsgSubject implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(mappedBy = "subjectId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private Collection<MsgFeedback> msgFeedbackCollection;
 
 	public MsgSubject() {
-	}
-
-	public MsgSubject(String name) {
-		this.name = name;
 	}
 
 	public Integer getId() {

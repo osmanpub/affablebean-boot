@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.affablebean.cart.ShoppingCart;
 import com.affablebean.domain.Category;
+import com.affablebean.domain.MsgFeedback;
+import com.affablebean.domain.MsgSubject;
 import com.affablebean.domain.Product;
 import com.affablebean.repository.CategoryRepository;
+import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.repository.MsgSubjectRepository;
 import com.affablebean.repository.ProductRepository;
 import com.affablebean.repository.PromotionRepository;
 
 @Controller
 @SessionAttributes("cart")
-public class MainController {
+public class WebController {
 
 	@Value("${categoryImagePath:img/categories}")
 	private String imgPath;
@@ -32,6 +35,9 @@ public class MainController {
 
 	@Resource
 	private CategoryRepository categoryRepository;
+
+	@Resource
+	private MsgFeedbackRepository msgFeedbackRepository;
 
 	@Resource
 	private MsgSubjectRepository msgSubjectRepository;
@@ -65,6 +71,14 @@ public class MainController {
 	public String contact(Model model) {
 		model.addAttribute("subjects", msgSubjectRepository.findAll());
 		return "contact";
+	}
+
+	@PostMapping({ "/feedback" })
+	public String feedback(@RequestParam(name = "subjectId", required = true) Integer subjectId,
+			@RequestParam(name = "name", required = true) String name,
+			@RequestParam(name = "email", required = true) String email,
+			@RequestParam(name = "msg", required = true) String msg) {
+		return saveFeedback(subjectId, name, email, msg);
 	}
 
 	@GetMapping({ "/", "/index" })
@@ -146,36 +160,19 @@ public class MainController {
 //		}
 //	}
 
-//	private String saveFeedback(HttpServletRequest request) {
-//		String name, email, msg;
-//
-//		name = request.getParameter("name");
-//		email = request.getParameter("email");
-//		msg = request.getParameter("msg");
-//
-//		boolean valid = Validator.validateContactForm(request, name, email, msg);
-//
-//		if (valid) {
-//			MsgSubject subject = null;
-//
-//			try {
-//				int subjId = Integer.valueOf(request.getParameter("subject_sel"));
-//				subject = subjectFacade.find(subjId);
-//			} catch (NumberFormatException e) {
-//			}
-//
-//			int id = feedbackFacade.save(name, email, msg, subject);
-//
-//			if (id != 0) {
-//				return "index";
-//			}
-//
-//		} else {
-//			request.setAttribute("validationErrorFlag", true);
-//		}
-//
-//		return "contact";
-//	}
+	private String saveFeedback(Integer subjectId, String name, String email, String msg) {
+		MsgFeedback feedback = new MsgFeedback(name, email, msg);
+		Optional<MsgSubject> subject = msgSubjectRepository.findById(subjectId);
+
+		if (subject.isPresent()) {
+			feedback.setSubject(subject.get());
+			MsgFeedback msgFeedback = msgFeedbackRepository.save(feedback);
+			return (msgFeedback == null) ? "contact" : "index";
+
+		} else {
+			return "contact";
+		}
+	}
 
 //	private boolean saveOrder(HttpServletRequest request, String... order) {
 //		HttpSession session = request.getSession();

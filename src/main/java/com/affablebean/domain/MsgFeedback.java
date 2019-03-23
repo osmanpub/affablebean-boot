@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,6 +40,7 @@ public class MsgFeedback implements Serializable {
 	// message="Invalid email")//if the field contains email address consider using
 	// this annotation to enforce field validation
 	@Basic(optional = false)
+	@Email
 	@NotNull
 	@Size(min = 1, max = 45)
 	@Column(name = "email")
@@ -58,7 +60,7 @@ public class MsgFeedback implements Serializable {
 
 	@JoinColumn(name = "subject_id", referencedColumnName = "id")
 	@ManyToOne
-	private MsgSubject subjectId;
+	private MsgSubject subject;
 
 	public MsgFeedback() {
 	}
@@ -101,12 +103,12 @@ public class MsgFeedback implements Serializable {
 		this.msg = msg;
 	}
 
-	public MsgSubject getSubjectId() {
-		return subjectId;
+	public MsgSubject getSubject() {
+		return subject;
 	}
 
-	public void setSubjectId(MsgSubject subjectId) {
-		this.subjectId = subjectId;
+	public void setSubject(MsgSubject subject) {
+		this.subject = subject;
 	}
 
 	@Override
@@ -131,8 +133,8 @@ public class MsgFeedback implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MsgFeedback [id=" + id + ", name=" + name + ", email=" + email + ", msg=" + msg + ", subjectId="
-				+ subjectId + "]";
+		return "MsgFeedback [id=" + id + ", name=" + name + ", email=" + email + ", msg=" + msg + ", subject=" + subject
+				+ "]";
 	}
 
 }

@@ -31,47 +31,33 @@
 			</div>
 		
 			<div>
-			
 				<p th:utext="#{co8}"></p>
-		
-				<table id="feedbackTable">
-<!-- 					<c:if test="${!empty validationErrorFlag}"> -->
-		
-<!-- 						<tr> -->
-<!-- 							<td colspan="2" style="text-align:left"> -->
-<!-- 								<span class="error smallText"> -->
-<!-- 									<fmt:message key="validationErrorMessage"/> -->
-		
-<!-- 									<c:if test="${!empty nameError}"> -->
-<!-- 										<br><span class="indent"><fmt:message key="nameError"/></span> -->
-<!-- 									</c:if> -->
-		
-<!-- 									<c:if test="${!empty emailError}"> -->
-<!-- 										<br><span class="indent"><fmt:message key="emailError"/></span> -->
-<!-- 									</c:if> -->
-		
-<!-- 									<c:if test="${!empty msgError}"> -->
-<!-- 										<br><span class="indent"><fmt:message key="msgError"/></span> -->
-<!-- 									</c:if> -->
-		
-<!-- 								</span> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-		
-<!-- 					</c:if>							 -->
-				</table>
 			</div>
 		
-			<form class="form-horizontal" role="form" 
-						action="<c:url value='feedback'/>" method="post">
-		
+	        <form class="form-horizontal" action="#" th:action="@{/feedback}" th:object="${contactForm}" method="post">
+	            <table>
+	                <tr>
+	                    <td>Name:</td>
+	                    <td><input type="text" th:field="*{name}" /></td>
+	                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+	                </tr>
+	                <tr>
+	                    <td>Age:</td>
+	                    <td><input type="text" th:field="*{age}" /></td>
+	                    <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+	                </tr>
+	                <tr>
+	                    <td><button type="submit">Submit</button></td>
+	                </tr>
+	            </table>
+	            
 				<div class="form-group">
 					<label for="subject_sel" class="col-sm-2 control-label">
 						<span th:text="#{co3}"></span>					
 					</label>
 		
 					<div class="col-sm-10">
-						<select name="subject_sel" class="form-control">
+						<select name="subject_sel" class="form-control" th:field="*{name}">
 						    <option th:each="subject : ${subjects}" th:value="${subject}" 
 						    	th:text="#{co__${subject.name}__}">
 						    </option>
@@ -126,9 +112,9 @@
 							<span th:text="#{coSubmit}"></span>
 						</button>
 					</div>
-				</div>
-			</form>
-		
+				</div>	            
+	        </form>
+        		
 			<div>
 			
 				<h3 th:utext="#{co4}"></h3>

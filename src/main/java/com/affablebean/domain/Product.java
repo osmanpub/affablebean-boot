@@ -76,11 +76,6 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public Product(String name, BigDecimal price) {
-		this.name = name;
-		this.price = price;
-	}
-
 	public Integer getId() {
 		return id;
 	}

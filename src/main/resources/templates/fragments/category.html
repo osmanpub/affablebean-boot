@@ -99,13 +99,12 @@
 					</td>	
 	
 					<td>
-						<form action="/addToCart" method="post">
-							<input type="hidden" name="productId" value="${product.id}">
-	
+				        <form action="#" th:action="@{//addToCart}" th:object="${productForm}" method="post">
+		                    <input type="hidden" th:field="*{productId}" />
 							<button type="submit" class="btn btn-primary btn-sm">
 								<span th:text="#{addToCart}"></span>
 							</button>							
-						</form>
+				        </form>		
 					</td>
 	
 <!-- 					<span th:each="promo : ${prodProms}"> -->
