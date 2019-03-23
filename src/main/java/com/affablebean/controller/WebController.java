@@ -54,20 +54,20 @@ public class WebController implements WebMvcConfigurer {
 	@Resource
 	private PromotionRepository promotionRepository;
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index").setViewName("index");
-    }
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/index").setViewName("index");
+	}
 
 	@PostMapping({ "/addToCart" })
-	public String addToCart(Model model, @ModelAttribute("cart") ShoppingCart cart,
-			@RequestParam(name = "productId", required = true) String id) {
-		addToShoppingCart(model, cart, id);
-		return "category";
+	public String addToCart(@ModelAttribute("cart") ShoppingCart cart,
+			@RequestParam(name = "id", required = true) Integer id) {
+		addToShoppingCart(cart, id);
+		return "redirect:/category";
 	}
 
 	@GetMapping({ "/category" })
-	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") String id) {
+	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") Short id) {
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("catProms", promotionRepository.findCategories());
 		model.addAttribute("prodPath", prodPath);
@@ -85,14 +85,14 @@ public class WebController implements WebMvcConfigurer {
 	}
 
 	@PostMapping({ "/feedback" })
-    public String feedback(@Valid ContactForm contactForm, BindingResult bindingResult) {
+	public String feedback(@Valid ContactForm contactForm, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "contact";
+		}
 
-        if (bindingResult.hasErrors()) {
-            return "contact";
-        }
+		return saveFeedback(contactForm);
+	}
 
-		return saveFeedback(contactForm);        
-    }	
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
 		model.addAttribute("categories", categoryRepository.findAll());
@@ -110,10 +110,9 @@ public class WebController implements WebMvcConfigurer {
 		return new ShoppingCart();
 	}
 
-	private void addToShoppingCart(Model model, ShoppingCart cart, String productId) {
-
-		if (!productId.isEmpty()) {
-			Optional<Product> product = productRepository.findById(Integer.parseInt(productId));
+	private void addToShoppingCart(ShoppingCart cart, Integer productId) {
+		if (productId != null) {
+			Optional<Product> product = productRepository.findById(productId);
 
 			if (product.isPresent()) {
 				cart.addItem(product.get());
@@ -131,9 +130,9 @@ public class WebController implements WebMvcConfigurer {
 //		}
 //	}
 
-	private void getCategoryProducts(Model model, String categoryId) {
+	private void getCategoryProducts(Model model, Short categoryId) {
 		if (categoryId != null) {
-			Optional<Category> selectedCategory = categoryRepository.findById(Short.parseShort(categoryId));
+			Optional<Category> selectedCategory = categoryRepository.findById(categoryId);
 
 			if (selectedCategory.isPresent()) {
 				Category category = selectedCategory.get();
