@@ -62,7 +62,7 @@ public class Application extends SpringBootServletInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
-		
+
 		servletContext.addListener(new HttpSessionListener() {
 			@Override
 			public void sessionCreated(HttpSessionEvent event) {
@@ -71,9 +71,9 @@ public class Application extends SpringBootServletInitializer {
 
 			@Override
 			public void sessionDestroyed(HttpSessionEvent event) {
-			}			
+			}
 		});
-		
+
 		servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
 	}
 }

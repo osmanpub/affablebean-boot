@@ -87,51 +87,28 @@
 	
 					<!-- 				<%-- shopping cart widget --%> -->
 					<div class="headerWidget" id="viewCart">
-						<img src="../static/img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
-							alt="shopping cart icon">
+						<a th:href="@{/viewCart}">
+							<img src="../static/img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
+								alt="shopping cart icon">
+						</a>
+						
+						<span th:text="${cart.numberOfItems == null}? ('0 ' + #{items}) : (${cart.numberOfItems} + ' ' + #{items})"
+							class="horizontalMargin" >
+						</span> 														
+						
+						
+<!-- 											<c:if -->
+<!-- 												test="${!empty cart && cart.numberOfItems != 0 && -->
 	
-						<!-- 						<%-- If 'numberOfItems' property doesn't exist, -->
-						<!-- 					or if number of items in cart is 0, output '0', otherwise output -->
-						<!-- 					'numberOfItems' --%>  -->
+<!-- <!-- 																			!fn:contains(pageContext.request.servletPath,'/cart') && --> -->
+<!-- <!-- 																			requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}"> --> -->
 	
-						<!-- 					<span class="horizontalMargin"> <c:choose> -->
-						<!-- 							<c:when test="${cart.numberOfItems == null}"> -->
-						<!-- 									0 -->
-						<!-- 								</c:when> -->
-						<!-- 							<c:otherwise> -->
-						<!-- 									${cart.numberOfItems} -->
-						<!-- 								</c:otherwise> -->
-						<!-- 						</c:choose> <%-- Handle singular/plural forms of 'item' --%> <c:choose> -->
-						<!-- 							<c:when test="${cart.numberOfItems == 1}"> -->
-						<!-- 								<fmt:message key="item" /> -->
-						<!-- 							</c:when> -->
-						<!-- 							<c:when -->
-						<!-- 								test="${cart.numberOfItems >= 2 && -->
-						<!-- 																cart.numberOfItems <= 4}"> -->
-						<!-- 								<fmt:message key="items2-4" /> -->
-						<!-- 							</c:when> -->
-						<!-- 							<c:otherwise> -->
-						<!-- 								<fmt:message key="items" /> -->
-						<!-- 							</c:otherwise> -->
-						<!-- 						</c:choose> -->
-						<!-- 					</span> -->
-	
-						<!-- 					<c:if -->
-						<!-- 						test="${!empty cart && cart.numberOfItems != 0 && -->
-	
-						<!-- 													!fn:contains(pageContext.request.servletPath,'/cart') && -->
-						<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}"> -->
-	
-						<!-- 						<a href="<c:url value='viewCart'/>" class="bubble"> <fmt:message -->
-						<!-- 								key="cart" /> -->
-						<!-- 						</a> -->
-						<!-- 					</c:if> -->
+<!-- 												<a href="<c:url value='viewCart'/>" class="bubble"> <fmt:message -->
+<!-- 														key="cart" /> -->
+<!-- 												</a> -->
+<!-- 											</c:if> -->
 					</div>
 				</div>
-	
-				<!-- 			<a href="<c:url value='/'/>"> <img src="img/logo.png" id="logo" -->
-				<!-- 				alt="Affable Bean logo"> -->
-				<!-- 			</a>  -->
 	
 					<a th:href="@{/index}">
 						<img src="../static/img/logo.png" th:src="@{/img/logo.png}" id="logo"

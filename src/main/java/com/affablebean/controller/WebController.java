@@ -57,6 +57,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/index").setViewName("index");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/privacy").setViewName("privacy");
 	}
@@ -130,6 +131,7 @@ public class WebController implements WebMvcConfigurer {
 	@GetMapping({ "/viewCart" })
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {
+
 		checkCart(cart, clear);
 		model.addAttribute("cart", cart);
 		return "cart";
