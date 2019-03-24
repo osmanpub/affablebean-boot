@@ -47,20 +47,17 @@ public final class ShoppingCart {
 	 *                 to
 	 * @see ShoppingCartItem
 	 */
-	public void update(Product product, String quantity) {
-		// cast quantity as short
-		short qty = Short.parseShort(quantity);
-
-		if (qty < 0) {
+	public void update(Product product, Short quantity) {
+		if(quantity == null || quantity < 0) {
 			return;
 		}
-
+		
 		ShoppingCartItem item = null;
 
 		for (ShoppingCartItem scItem : items) {
 			if (Objects.equals(scItem.getProduct().getId(), product.getId())) {
-				if (qty != 0) {
-					scItem.setQuantity(qty);
+				if (quantity != 0) {
+					scItem.setQuantity(quantity);
 
 				} else {
 					item = scItem;

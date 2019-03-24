@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Affablebean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/affablebean.css" th:href="@{/css/affablebean.css}" />
+
+<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+
+</head>
+
+<body>
+	<div id="main">
+		<div th:replace="fragments/header.html :: frag_header"></div>
+		<div th:replace="fragments/cart.html :: frag_cart"></div>
+	</div>
+
+	<div th:replace="fragments/footer.html :: frag_footer"></div>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -26,7 +26,7 @@ public class OrderedProduct implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "quantity")
 	@NotBlank
-	private short quantity;
+	private Short quantity;
 
 	@JoinColumn(name = "customer_order_id", referencedColumnName = "id", insertable = false, updatable = false)
 	@ManyToOne(optional = false)
@@ -60,11 +60,11 @@ public class OrderedProduct implements Serializable {
 		this.orderedProductPK = orderedProductPK;
 	}
 
-	public short getQuantity() {
+	public Short getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(short quantity) {
+	public void setQuantity(Short quantity) {
 		this.quantity = quantity;
 	}
 

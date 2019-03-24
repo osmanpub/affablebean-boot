@@ -51,7 +51,7 @@ public class CustomerOrder implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "confirmation_number")
 	@NotBlank
-	private int confirmationNumber;
+	private Integer confirmationNumber;
 
 	@Basic(optional = false)
 	@Column(name = "date_created")
@@ -93,11 +93,11 @@ public class CustomerOrder implements Serializable {
 		this.dateCreated = dateCreated;
 	}
 
-	public int getConfirmationNumber() {
+	public Integer getConfirmationNumber() {
 		return confirmationNumber;
 	}
 
-	public void setConfirmationNumber(int confirmationNumber) {
+	public void setConfirmationNumber(Integer confirmationNumber) {
 		this.confirmationNumber = confirmationNumber;
 	}
 

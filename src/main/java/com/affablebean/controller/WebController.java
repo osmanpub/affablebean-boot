@@ -22,6 +22,7 @@ import com.affablebean.domain.Category;
 import com.affablebean.domain.MsgFeedback;
 import com.affablebean.domain.MsgSubject;
 import com.affablebean.domain.Product;
+import com.affablebean.form.CartForm;
 import com.affablebean.form.ContactForm;
 import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgFeedbackRepository;
@@ -56,6 +57,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/checkout").setViewName("checkout");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/privacy").setViewName("privacy");
 	}
@@ -101,6 +103,21 @@ public class WebController implements WebMvcConfigurer {
 		return "index";
 	}
 
+	@PostMapping({ "/updateCart" })
+	public String updateCart(@ModelAttribute("cart") ShoppingCart cart,
+			@RequestParam(name = "id", required = true) Integer id) {
+		updateCart(cart, id);
+		return "redirect:/cart";
+	}
+	
+	@GetMapping({ "/viewCart" })
+	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
+			@RequestParam(name = "clear", required = true) Boolean clear) {
+		checkCart(cart, clear);		
+		model.addAttribute("cart", cart);
+		return "cart";
+	}
+	
 	@ModelAttribute("cart")
 	public ShoppingCart getCart() {
 		return new ShoppingCart();
@@ -116,15 +133,11 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
-//	private void checkCart(HttpServletRequest request) {
-//		boolean clear = (request.getParameter("clear") != null);
-//
-//		if (clear) {
-//			HttpSession session = request.getSession();
-//			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//			cart.clear();
-//		}
-//	}
+	private void checkCart(ShoppingCart cart, Boolean clear) {
+		if (clear != null && clear) {
+			cart.clear();
+		}
+	}
 
 	private void getCategoryProducts(Model model, Short categoryId) {
 		if (categoryId != null) {
@@ -181,6 +194,17 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
+	private void updateCart(CartForm cartForm, ShoppingCart cart)  {
+		Integer productId = cartForm.getProductId();
+		Short quantity = cartForm.getQuantity();
+		
+		Optional<Product> product = productRepository.findById(productId);
+		
+		if (product.isPresent()) {
+			cart.update(product.get(), quantity);
+		}
+	}
+	
 //	private boolean saveOrder(HttpServletRequest request, String... order) {
 //		HttpSession session = request.getSession();
 //		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
@@ -231,20 +255,6 @@ public class WebController implements WebMvcConfigurer {
 //		}
 //	}
 
-//	private void updateCart(HttpServletRequest request) throws
-//					NumberFormatException {
-//
-//		// get input from request
-//		String productId = request.getParameter("productId");
-//		String quantity = request.getParameter("quantity");
-//
-//		if (Validator.validateQuantity(productId, quantity)) {
-//			Product product = productFacade.find(Integer.parseInt(productId));
-//			HttpSession session = request.getSession();
-//			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//			cart.update(product, quantity);
-//		}
-//	}
 
 //	private String setLanguage(HttpServletRequest request) {
 //		// get language choice
@@ -268,21 +278,5 @@ public class WebController implements WebMvcConfigurer {
 //		return userPath.substring(1);
 //	}
 
-//	private void setSessionData(HttpServletRequest request) {
-//		HttpSession session = request.getSession();
-//
-//		// scope ordering rules should pick up updates here
-//		if (session.getAttribute("categories") == null) {
-//			session.setAttribute("categories", categoryFacade.findAll());
-//		}
-//
-//		if (session.getAttribute("subjects") == null) {
-//			session.setAttribute("subjects", subjectFacade.findAll());
-//		}
-//
-//		if (session.getAttribute("sale") == null) {
-//			session.setAttribute("sale", promoFacade.findSale());
-//		}
-//	}
 
 }

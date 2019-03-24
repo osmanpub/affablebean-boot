@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Affablebean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../static/css/affablebean.css"
+	th:href="@{/css/affablebean.css}" />
+
+<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+
+</head>
+
+<body>
+	<div th:fragment="frag_cart">
+<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
+<!-- 		     This is used by the language mechanism in the Controller so that -->
+<!-- 		     users view the same page when switching between English and Czech. --%> -->
+<!-- 		<c:set var="view" value="/cart" scope="session"/> -->
+		
+<!-- 		<%-- HTML markup starts below --%> -->
+		
+		<div id="singleColumn">
+		
+			<div th:if="${cart.numberOfItems < 1}}">
+				<span th:text="#{yourCartEmpty}"></span>				
+			</div>
+						
+			<div th:if="${cart.numberOfItems === 1}}">
+				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{item}"></span>				
+			</div>
+						
+			<div th:if="${cart.numberOfItems > 1}}">
+				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{items}"></span>				
+			</div>
+		
+			<div id="actionBar">
+		
+<!-- 				<%-- clear cart widget --%> -->
+				<c:if test="${!empty cart && cart.numberOfItems > 0}">
+					<c:url var="url" value="viewCart">
+						<c:param name="clear" value="true"/>
+					</c:url>
+		
+					<a href="${url}" class="bubble hMargin">
+						<fmt:message key="clearCart"/></a>
+					</c:if>
+		
+<!-- 				<%-- continue shopping widget --%> -->
+				<c:set var="value">
+					<c:choose>
+<!-- 						<%-- if 'selectedCategory' session object exists, send user to  -->
+<!-- 								previously viewed category --%> -->
+						<c:when test="${!empty selectedCategory}">
+							category
+						</c:when>
+<!-- 						<%-- otherwise send user to welcome page --%> -->
+						<c:otherwise>
+							index.jsp
+						</c:otherwise>
+					</c:choose>
+				</c:set>
+		
+				<c:url var="url" value="${value}"/>
+				<a href="${url}" class="bubble hMargin">
+					<fmt:message key="continueShopping"/></a>
+		
+<!-- 				<%-- checkout widget --%> -->
+				<c:if test="${!empty cart && cart.numberOfItems != 0}">
+					<a href="<c:url value='checkout'/>" class="bubble hMargin">
+						<fmt:message key="proceedCheckout"/></a>
+					</c:if>
+			</div>
+		
+			<c:if test="${!empty cart && cart.numberOfItems != 0}">
+		
+				<h4 id="subtotal"><fmt:message key="subtotal"/>:
+					<fmt:formatNumber type="currency" currencySymbol="&euro; " 
+														value="${cart.subtotal}"/>
+				</h4>
+		
+				<table id="cartTable">
+		
+					<tr class="header">
+						<th th:text="#{product}"></th>
+						<th th:text="#{name}"></th>
+						<th th:text="#{price}"></th>
+						<th th:text="#{quantity}"></th>
+					</tr>
+		
+					<c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
+		
+						<c:set var="product" value="${cartItem.product}"/>
+		
+						<tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
+		
+							<td>
+								<img src="${initParam.productImagePath}${product.name}.png"
+										 alt="<fmt:message key="${product.name}"/>">
+							</td>
+		
+							<td th:utext="#{product.name}"></td>
+		
+							<td>
+								<fmt:formatNumber type="currency" currencySymbol="&euro; " 
+																	value="${cartItem.total}"/>
+								<br>
+								<span class="smallText">(
+									<fmt:formatNumber type="currency" currencySymbol="&euro; " 
+																		value="${product.price}"/>
+									/ <fmt:message key="unit"/> )
+								</span>
+							</td>
+		
+							<td>
+								<form class="form-horizontal" role="form" 
+											action="<c:url value='updateCart'/>" method="post">
+		
+									<input type="hidden" name="productId" value="${product.id}">
+		
+									<div class="form-group">
+										<div class="col-sm-10">
+											<input type="number" class="form-control"
+														 maxlength="2"
+														 size="2"
+														 value="${cartItem.quantity}"
+														 name="quantity"
+														 style="margin:5px">
+										</div>
+									</div>
+		
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<button type="submit" class="btn btn-primary btn-sm">
+												<fmt:message key='update'/>
+											</button>										
+										</div>
+									</div>
+								</form>						
+							</td>
+						</tr>
+		
+					</c:forEach>
+		
+				</table>
+		
+			</c:if>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('a.categoryButton').hover(function() {
+				$(this).animate({
+					backgroundColor : '#b2d2d2'
+				});
+			}, function() {
+				$(this).animate({
+					backgroundColor : '#d3ede8'
+				});
+			});
+
+			$('div.categoryBox').hover(function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.3
+				});
+				$(span[1]).animate({
+					color : 'white'
+				});
+			}, function() {
+				var span = this.getElementsByTagName('span');
+				$(span[0]).animate({
+					opacity : 0.7
+				});
+				$(span[1]).animate({
+					color : '#444'
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>

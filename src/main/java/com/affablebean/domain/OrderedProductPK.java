@@ -16,11 +16,11 @@ public class OrderedProductPK implements Serializable {
 
 	@Basic(optional = false)
 	@Column(name = "customer_order_id")
-	private int customerOrderId;
+	private Integer customerOrderId;
 
 	@Basic(optional = false)
 	@Column(name = "product_id")
-	private int productId;
+	private Integer productId;
 
 	public OrderedProductPK() {
 	}
@@ -30,19 +30,19 @@ public class OrderedProductPK implements Serializable {
 		this.productId = productId;
 	}
 
-	public int getCustomerOrderId() {
+	public Integer getCustomerOrderId() {
 		return customerOrderId;
 	}
 
-	public void setCustomerOrderId(int customerOrderId) {
+	public void setCustomerOrderId(Integer customerOrderId) {
 		this.customerOrderId = customerOrderId;
 	}
 
-	public int getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 
