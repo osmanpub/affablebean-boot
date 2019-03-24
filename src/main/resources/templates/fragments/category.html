@@ -104,23 +104,16 @@
 								<span th:text="#{addToCart}"></span>
 							</button>							
 				        </form>					
-				        
-<!-- 				        <form action="#" th:action="@{/addToCart}" th:object="${productForm}" method="post"> -->
-<!-- 		                    <input type="text" th:field="*{productId}" th:value="${product.id}"/> -->
-<!-- 							<button type="submit" class="btn btn-primary btn-sm"> -->
-<!-- 								<span th:text="#{addToCart}"></span> -->
-<!-- 							</button>							 -->
-<!-- 				        </form>		 -->
 					</td>
 	
-<!-- 					<span th:each="promo : ${prodProms}"> -->
-<!-- 						<span th:if="${promo.productId == product.id}"> -->
-<!-- 							<td class = "productOffer"> -->
-<!-- 								${promo.description} -->
-<!-- 							</td>						 -->
-<!-- 						</span>			 -->
-<!-- 					</span> -->
-
+					<td>
+						<span th:each="promo : ${prodProms}">
+							<span th:if="${promo.productId == product.id}">
+								<span class = "productOffer" th:utext="${promo.description}">
+								</span>						
+							</span>			
+						</span>
+					</td>
 				</tr>
 	
 			</table>

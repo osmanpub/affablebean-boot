@@ -1,0 +1,88 @@
+package com.affablebean.form;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class CheckoutForm {
+
+	@NotNull
+	@Email
+	@Size(min = 8, max = 45)
+	private String email;
+
+	@NotNull
+	@Size(min = 3, max = 45)
+	private String name;
+
+	@NotNull
+	@Size(min = 8, max = 30)
+	private String phone;
+
+	@NotNull
+	@Size(min = 8, max = 45)
+	private String address;
+
+	@NotNull
+	@Size(min = 1, max = 2)
+	private String cityRegion;
+
+	@NotNull
+	@Size(min = 16, max = 19)
+	private String ccNumber;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCityRegion() {
+		return cityRegion;
+	}
+
+	public void setCityRegion(String cityRegion) {
+		this.cityRegion = cityRegion;
+	}
+
+	public String getCcNumber() {
+		return ccNumber;
+	}
+
+	public void setCcNumber(String ccNumber) {
+		this.ccNumber = ccNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "CheckoutForm [email=" + email + ", name=" + name + ", phone=" + phone + ", address=" + address
+				+ ", cityRegion=" + cityRegion + ", ccNumber=" + ccNumber + "]";
+	}
+
+}

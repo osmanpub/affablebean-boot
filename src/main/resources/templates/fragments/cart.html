@@ -27,7 +27,7 @@
 		
 		<div id="singleColumn">
 		
-			<div th:if="${cart.numberOfItems < 1}}">
+			<div th:if="${cart.numberOfItems &lt; 1}}">
 				<span th:text="#{yourCartEmpty}"></span>				
 			</div>
 						
@@ -35,13 +35,16 @@
 				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{item}"></span>				
 			</div>
 						
-			<div th:if="${cart.numberOfItems > 1}}">
+			<div th:if="${cart.numberOfItems &gt; 1}}">
 				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{items}"></span>				
 			</div>
 		
 			<div id="actionBar">
 		
 <!-- 				<%-- clear cart widget --%> -->
+			<div th:if="${cart.numberOfItems === 1}}">
+				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{item}"></span>				
+			</div>
 				<c:if test="${!empty cart && cart.numberOfItems > 0}">
 					<c:url var="url" value="viewCart">
 						<c:param name="clear" value="true"/>

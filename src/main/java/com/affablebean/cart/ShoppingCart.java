@@ -48,10 +48,10 @@ public final class ShoppingCart {
 	 * @see ShoppingCartItem
 	 */
 	public void update(Product product, Short quantity) {
-		if(quantity == null || quantity < 0) {
+		if (quantity == null || quantity < 0) {
 			return;
 		}
-		
+
 		ShoppingCartItem item = null;
 
 		for (ShoppingCartItem scItem : items) {

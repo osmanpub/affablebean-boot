@@ -22,7 +22,7 @@ import com.affablebean.domain.Category;
 import com.affablebean.domain.MsgFeedback;
 import com.affablebean.domain.MsgSubject;
 import com.affablebean.domain.Product;
-import com.affablebean.form.CartForm;
+import com.affablebean.form.CheckoutForm;
 import com.affablebean.form.ContactForm;
 import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgFeedbackRepository;
@@ -57,7 +57,6 @@ public class WebController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/checkout").setViewName("checkout");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/privacy").setViewName("privacy");
 	}
@@ -65,6 +64,7 @@ public class WebController implements WebMvcConfigurer {
 	@PostMapping({ "/addToCart" })
 	public String addToCart(@ModelAttribute("cart") ShoppingCart cart,
 			@RequestParam(name = "id", required = true) Integer id) {
+
 		addToShoppingCart(cart, id);
 		return "redirect:/category";
 	}
@@ -79,6 +79,11 @@ public class WebController implements WebMvcConfigurer {
 
 		getCategoryProducts(model, id);
 		return "category";
+	}
+
+	@GetMapping({ "/checkout" })
+	public String checkout(CheckoutForm checkoutForm) {
+		return "checkout";
 	}
 
 	@GetMapping({ "/contact" })
@@ -103,21 +108,33 @@ public class WebController implements WebMvcConfigurer {
 		return "index";
 	}
 
+	@PostMapping({ "/purchase" })
+	public String purchase(@ModelAttribute("cart") ShoppingCart cart, @Valid CheckoutForm checkoutForm,
+			BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "checkout";
+		}
+
+		boolean valid = purchase(cart, checkoutForm);
+		return valid ? "redirect:/confirmation" : "checkout";
+	}
+
 	@PostMapping({ "/updateCart" })
 	public String updateCart(@ModelAttribute("cart") ShoppingCart cart,
 			@RequestParam(name = "id", required = true) Integer id) {
-		updateCart(cart, id);
+//		updateCart(cart, id);
 		return "redirect:/cart";
 	}
-	
+
 	@GetMapping({ "/viewCart" })
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {
-		checkCart(cart, clear);		
+		checkCart(cart, clear);
 		model.addAttribute("cart", cart);
 		return "cart";
 	}
-	
+
 	@ModelAttribute("cart")
 	public ShoppingCart getCart() {
 		return new ShoppingCart();
@@ -151,64 +168,12 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
-//	private boolean purchase(HttpServletRequest request) {
-//		HttpSession session = request.getSession();
-//		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//
-//		if (cart == null) {
-//			return false;
-//		}
-//
-//		// extract user data from request
-//		String name = request.getParameter("name");
-//		String email = request.getParameter("email");
-//		String phone = request.getParameter("phone");
-//		String address = request.getParameter("address");
-//		String cityRegion = "1"; // dont'care
-//		String ccNumber = request.getParameter("creditcard");
-//
-//		// validate user data
-//		boolean valid = Validator.validateCheckOutForm(request, name, email, phone,
-//						address, cityRegion, ccNumber);
-//
-//		if (valid) {
-//			return saveOrder(request, name, email, phone, address, cityRegion,
-//							ccNumber);
-//		} else {
-//			request.setAttribute("validationErrorFlag", true);
-//			return false;
-//		}
-//	}
-
-	private String saveFeedback(ContactForm contactForm) {
-		MsgFeedback feedback = new MsgFeedback(contactForm.getName(), contactForm.getEmail(), contactForm.getMsg());
-		Optional<MsgSubject> subject = msgSubjectRepository.findById(contactForm.getSubjectId());
-
-		if (subject.isPresent()) {
-			feedback.setSubject(subject.get());
-			MsgFeedback msgFeedback = msgFeedbackRepository.save(feedback);
-			return (msgFeedback == null) ? "contact" : "redirect:/index";
-
-		} else {
-			return "contact";
+	private boolean purchase(ShoppingCart cart, CheckoutForm checkoutForm) {
+		if (cart == null) {
+			return false;
 		}
-	}
 
-	private void updateCart(CartForm cartForm, ShoppingCart cart)  {
-		Integer productId = cartForm.getProductId();
-		Short quantity = cartForm.getQuantity();
-		
-		Optional<Product> product = productRepository.findById(productId);
-		
-		if (product.isPresent()) {
-			cart.update(product.get(), quantity);
-		}
-	}
-	
-//	private boolean saveOrder(HttpServletRequest request, String... order) {
-//		HttpSession session = request.getSession();
-//		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-//
+		return true;
 //		// see method call for order element types
 //		int orderId = orderManager.placeOrder(cart, surcharge, order[0], order[1],
 //						order[2], order[3], order[4], order[5]);
@@ -253,30 +218,29 @@ public class WebController implements WebMvcConfigurer {
 //			request.setAttribute("orderFailureFlag", true);
 //			return false;
 //		}
-//	}
 
+	}
 
-//	private String setLanguage(HttpServletRequest request) {
-//		// get language choice
-//		String language = request.getParameter("language");
-//		// place in request scope
-//		request.setAttribute("language", language);
-//
-//		HttpSession session = request.getSession();
-//		String userView = (String) session.getAttribute("view");
-//		String userPath;
-//
-//		if ((userView != null) && (!userView.equals("/index"))) {
-//			// index.jsp exists outside 'view' folder so must be forwarded separately
-//			userPath = userView;
-//		} else {
-//			// if previous view is index or cannot be determined, send user to
-//			// welcome page
-//			userPath = "/index";
-//		}
-//
-//		return userPath.substring(1);
-//	}
+	private String saveFeedback(ContactForm contactForm) {
+		MsgFeedback feedback = new MsgFeedback(contactForm.getName(), contactForm.getEmail(), contactForm.getMsg());
+		Optional<MsgSubject> subject = msgSubjectRepository.findById(contactForm.getSubjectId());
 
+		if (subject.isPresent()) {
+			feedback.setSubject(subject.get());
+			MsgFeedback msgFeedback = msgFeedbackRepository.save(feedback);
+			return (msgFeedback == null) ? "contact" : "redirect:/index";
+
+		} else {
+			return "contact";
+		}
+	}
+
+	private void updateCart(ShoppingCart cart, Integer productId, Short quantity) {
+		Optional<Product> product = productRepository.findById(productId);
+
+		if (product.isPresent()) {
+			cart.update(product.get(), quantity);
+		}
+	}
 
 }
