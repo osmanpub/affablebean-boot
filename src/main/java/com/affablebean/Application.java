@@ -1,8 +1,17 @@
 package com.affablebean;
 
+import java.util.EnumSet;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionTrackingMode;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -13,7 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @EnableJpaAuditing
 @Slf4j
-public class Application {
+public class Application extends SpringBootServletInitializer {
+
+	private static final int SESSION_TIMEOUT = 15;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -48,4 +59,21 @@ public class Application {
 		};
 	}
 
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		
+		servletContext.addListener(new HttpSessionListener() {
+			@Override
+			public void sessionCreated(HttpSessionEvent event) {
+				event.getSession().setMaxInactiveInterval(SESSION_TIMEOUT);
+			}
+
+			@Override
+			public void sessionDestroyed(HttpSessionEvent event) {
+			}			
+		});
+		
+		servletContext.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
+	}
 }
