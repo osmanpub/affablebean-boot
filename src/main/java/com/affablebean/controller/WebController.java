@@ -22,7 +22,7 @@ import com.affablebean.domain.Category;
 import com.affablebean.domain.MsgFeedback;
 import com.affablebean.domain.MsgSubject;
 import com.affablebean.domain.Product;
-import com.affablebean.forms.ContactForm;
+import com.affablebean.form.ContactForm;
 import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.repository.MsgSubjectRepository;
@@ -56,7 +56,8 @@ public class WebController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/index").setViewName("index");
+		registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/privacy").setViewName("privacy");
 	}
 
 	@PostMapping({ "/addToCart" })
@@ -98,11 +99,6 @@ public class WebController implements WebMvcConfigurer {
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("imgPath", imgPath);
 		return "index";
-	}
-
-	@GetMapping({ "/privacy" })
-	public String privacy() {
-		return "privacy";
 	}
 
 	@ModelAttribute("cart")
