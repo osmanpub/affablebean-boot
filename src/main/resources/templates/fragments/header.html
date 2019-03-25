@@ -79,8 +79,8 @@
 						<span th:text="${cart.numberOfItems} + ' ' + #{items}" class="horizontalMargin" >
 						</span> 														
 
-						<th:block th:if="${not #strings.contains(#request.servletPath,'cart')}">
-							<a th:href="@{/viewCart}" class="bubble">
+						<th:block th:if="${not #strings.contains(#request.servletPath,'viewCart')}">
+							<a th:href="@{/viewCart(clear=false)}" class="bubble">
 								<span th:text="#{cart}"></span>
 							</a>
 						</th:block>

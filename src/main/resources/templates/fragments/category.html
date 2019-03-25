@@ -94,7 +94,7 @@
 					</td>	
 	
 					<td>
-				       <form method="POST" th:action="@{/addToCart(id=${product.id})}">
+				       <form method="POST" th:action="@{/addToCart(id=${product.id}, catId=${selectedCategory.id})}">
 							<button type="submit" class="btn btn-primary btn-sm">
 								<span th:text="#{addToCart}"></span>
 							</button>							

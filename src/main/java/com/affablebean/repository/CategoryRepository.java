@@ -14,5 +14,5 @@ public interface CategoryRepository extends JpaRepository<Category, Short> {
 
 	@Query("SELECT c FROM Category c")
 	List<Category> findAllOrderByName(Sort sort);
-	
+
 }

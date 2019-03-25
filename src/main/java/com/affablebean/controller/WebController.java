@@ -63,10 +63,16 @@ public class WebController implements WebMvcConfigurer {
 
 	@PostMapping({ "/addToCart" })
 	public String addToCart(@ModelAttribute("cart") ShoppingCart cart,
-			@RequestParam(name = "id", required = true) Integer id) {
+			@RequestParam(name = "id", required = true) Integer id,
+			@RequestParam(name = "catId", required = true) Short categoryId) {
 
 		addToShoppingCart(cart, id);
-		return "redirect:/category";
+		return "redirect:/category?id=" + categoryId;
+	}
+
+	@GetMapping({ "/cart" })
+	public String cart() {
+		return "cart";
 	}
 
 	@GetMapping({ "/category" })
@@ -112,7 +118,7 @@ public class WebController implements WebMvcConfigurer {
 	public String privacy() {
 		return "privacy";
 	}
-	
+
 	@PostMapping({ "/purchase" })
 	public String purchase(@ModelAttribute("cart") ShoppingCart cart, @Valid CheckoutForm checkoutForm,
 			BindingResult bindingResult) {
@@ -126,8 +132,10 @@ public class WebController implements WebMvcConfigurer {
 
 	@PostMapping({ "/updateCart" })
 	public String updateCart(@ModelAttribute("cart") ShoppingCart cart,
-			@RequestParam(name = "id", required = true) Integer id) {
-//		updateCart(cart, id);
+			@RequestParam(name = "id", required = true) Integer id,
+			@RequestParam(name = "qty", required = true) Short qty) {
+		
+		updateShoppingCart(cart, id, qty);
 		return "redirect:/cart";
 	}
 
@@ -135,6 +143,7 @@ public class WebController implements WebMvcConfigurer {
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {
 
+		model.addAttribute("prodPath", prodPath);
 		checkCart(cart, clear);
 		return "cart";
 	}
@@ -239,7 +248,11 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
-	private void updateCart(ShoppingCart cart, Integer productId, Short quantity) {
+	private void updateShoppingCart(ShoppingCart cart, Integer productId, Short quantity) {
+		if (quantity == null) {
+			return;
+		}
+		
 		Optional<Product> product = productRepository.findById(productId);
 
 		if (product.isPresent()) {
