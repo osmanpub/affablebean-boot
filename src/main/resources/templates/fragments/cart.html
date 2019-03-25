@@ -18,12 +18,8 @@
 	<div th:fragment="frag_cart">
 		<div id="singleColumn">
 		
-			<div th:if="${cart.numberOfItems lt 1}}">
+			<div th:if="${cart.numberOfItems == 0}}">
 				<span th:text="#{yourCartEmpty}"></span>				
-			</div>
-						
-			<div th:if="${cart.numberOfItems === 1}}">
-				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{item}"></span>				
 			</div>
 						
 			<div th:if="${cart.numberOfItems gt 1}}">
@@ -32,118 +28,90 @@
 		
 			<div id="actionBar">
 		
-<!-- 				<%-- clear cart widget --%> -->
-			<div th:if="${cart.numberOfItems === 1}}">
-				<span th:text="#{yourCartContains} ${cart.numberOfItems} #{item}"></span>				
-			</div>
-				<c:if test="${!empty cart && cart.numberOfItems > 0}">
-					<c:url var="url" value="viewCart">
-						<c:param name="clear" value="true"/>
-					</c:url>
+				<div th:if="${cart.numberOfItems gt 0}}">
+					<a href="@{/viewCart(clear=true)}" class="bubble hMargin">
+						<span th:text="#{clearCart}"></span>
+					</a>
+				</div>
 		
-					<a href="${url}" class="bubble hMargin">
-						<fmt:message key="clearCart"/></a>
-					</c:if>
+				<a href="@{/index}" class="bubble hMargin">
+					<span th:text="#{continueShopping}"></span>
+				</a>
 		
-<!-- 				<%-- continue shopping widget --%> -->
-				<c:set var="value">
-					<c:choose>
-<!-- 						<%-- if 'selectedCategory' session object exists, send user to  -->
-<!-- 								previously viewed category --%> -->
-						<c:when test="${!empty selectedCategory}">
-							category
-						</c:when>
-<!-- 						<%-- otherwise send user to welcome page --%> -->
-						<c:otherwise>
-							index.jsp
-						</c:otherwise>
-					</c:choose>
-				</c:set>
-		
-				<c:url var="url" value="${value}"/>
-				<a href="${url}" class="bubble hMargin">
-					<fmt:message key="continueShopping"/></a>
-		
-<!-- 				<%-- checkout widget --%> -->
-				<c:if test="${!empty cart && cart.numberOfItems != 0}">
-					<a href="<c:url value='checkout'/>" class="bubble hMargin">
-						<fmt:message key="proceedCheckout"/></a>
-					</c:if>
+				<div th:if="${cart.numberOfItems gt 0}}">
+					<a href="@{/checkout}" class="bubble hMargin">
+						<span th:utext="#{proceedCheckout}"></span>
+					</a>
+				</div>
 			</div>
 		
-			<c:if test="${!empty cart && cart.numberOfItems != 0}">
+			<th:block th:if test="cart.numberOfItems gt 0}">
 		
-				<h4 id="subtotal"><fmt:message key="subtotal"/>:
-					<fmt:formatNumber type="currency" currencySymbol="&euro; " 
-														value="${cart.subtotal}"/>
+				<h4 id="subtotal">
+					<span th:text="#{subtotal}"></span>
+					<span th:text="${#numbers.formatDecimal(cart.subtotal, 0, 'COMMA', 2, 'POINT')} + ' ' + #{unit}"></span>										
 				</h4>
 		
-				<table id="cartTable">
+				<table id="cartTable" th:each="cartItem iterStat : ${cart.items}">
 		
-					<tr class="header">
-						<th th:text="#{product}"></th>
-						<th th:text="#{name}"></th>
-						<th th:text="#{price}"></th>
-						<th th:text="#{quantity}"></th>
+<!-- 					<tr class="header"> -->
+<!-- 						<th th:text="#{product}"></th> -->
+<!-- 						<th th:text="#{name}"></th> -->
+<!-- 						<th th:text="#{price}"></th> -->
+<!-- 						<th th:text="#{quantity}"></th> -->
+<!-- 					</tr> -->
+		
+						<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'">
+		
+						<td>
+							<img src="${initParam.productImagePath}${product.name}.png"
+									 alt="<fmt:message key="${cartItem.product.name}"/>">
+						</td>
+	
+						<td th:utext="#{product.name}"></td>
+	
+						<td> 
+							&euro; 
+							<span th:text="${#numbers.formatDecimal(cartItem.total, 0, 'COMMA', 2, 'POINT')}">
+								10.00
+							</span>
+							<br>
+							<span class="smallText" 
+								th:text="${#numbers.formatDecimal(cartItem.product.price, 0, 'COMMA', 2, 'POINT')} + ' ' + #{unit}">
+								10.00
+							</span>
+						</td>			
+	
+						<td>
+							<form class="form-horizontal" role="form" 
+										action="/updateCart(id=${cartItem.product.id})" method="post">
+	
+								<input type="hidden" name="productId" value="${cartItem.product.id}">
+	
+								<div class="form-group">
+									<div class="col-sm-10">
+										<input type="number" class="form-control"
+													 maxlength="2"
+													 size="2"
+													 th:value="${cartItem.quantity}"
+													 name="quantity"
+													 style="margin:5px">
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary btn-sm">
+											<span th:text="#{update}"></span>
+										</button>										
+									</div>
+								</div>
+							</form>						
+						</td>
 					</tr>
 		
-					<c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
-		
-						<c:set var="product" value="${cartItem.product}"/>
-		
-						<tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
-		
-							<td>
-								<img src="${initParam.productImagePath}${product.name}.png"
-										 alt="<fmt:message key="${product.name}"/>">
-							</td>
-		
-							<td th:utext="#{product.name}"></td>
-		
-							<td>
-								<fmt:formatNumber type="currency" currencySymbol="&euro; " 
-																	value="${cartItem.total}"/>
-								<br>
-								<span class="smallText">(
-									<fmt:formatNumber type="currency" currencySymbol="&euro; " 
-																		value="${product.price}"/>
-									/ <fmt:message key="unit"/> )
-								</span>
-							</td>
-		
-							<td>
-								<form class="form-horizontal" role="form" 
-											action="<c:url value='updateCart'/>" method="post">
-		
-									<input type="hidden" name="productId" value="${product.id}">
-		
-									<div class="form-group">
-										<div class="col-sm-10">
-											<input type="number" class="form-control"
-														 maxlength="2"
-														 size="2"
-														 value="${cartItem.quantity}"
-														 name="quantity"
-														 style="margin:5px">
-										</div>
-									</div>
-		
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10">
-											<button type="submit" class="btn btn-primary btn-sm">
-												<fmt:message key='update'/>
-											</button>										
-										</div>
-									</div>
-								</form>						
-							</td>
-						</tr>
-		
-					</c:forEach>
-		
-				</table>
-		
-			</c:if>
+				</table>		
+			</th:block>
 		</div>
 	</div>
 

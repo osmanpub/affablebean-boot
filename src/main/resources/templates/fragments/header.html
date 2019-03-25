@@ -63,28 +63,16 @@
 					</div>
 	
 					<!-- 				<%-- checkout widget --%> -->
-					<div class="headerWidget">
-	
-						<!-- 					<c:if -->
-						<!-- 						test="${!empty cart && cart.numberOfItems != 0 && -->
-	
-						<!-- 													!fn:contains(pageContext.request.servletPath,'/checkout') && -->
-						<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/checkout' && -->
-	
-						<!-- 													!fn:contains(pageContext.request.servletPath,'/cart') && -->
-						<!-- 													requestScope['javax.servlet.forward.servlet_path'] ne '/cart' && -->
-	
-						<!-- 													validationErrorFlag ne true && -->
-						<!-- 													orderFailureFlag ne true}"> -->
-	
-						<!-- 						<a href="<c:url value='checkout'/>" class="bubble"> <fmt:message -->
-						<!-- 								key="proceedCheckout" /> -->
-						<!-- 						</a> -->
-						<!-- 					</c:if> -->
+					<div class="headerWidget" th:if="${cart.numberOfItems} gt 0">
+						<th:block th:unless="${#strings.contains(#request.servletPath,'checkout')}">
+							<a th:href="@{/checkout}" class="bubble"> 
+								<span th:utext="#{proceedCheckout}"></span>
+							</a>
+						</th:block>					
 					</div>
 	
 					<!-- 				<%-- shopping cart widget --%> -->
-					<div class="headerWidget" id="viewCart" th:if="${cart.numberOfItems} > 0">
+					<div class="headerWidget" id="viewCart" th:if="${cart.numberOfItems} gt 0">
 						<img src="../static/img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
 							alt="shopping cart icon">
 						
