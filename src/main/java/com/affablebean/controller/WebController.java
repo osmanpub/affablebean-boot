@@ -57,9 +57,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/index").setViewName("index");
 		registry.addViewController("/login").setViewName("login");
-		registry.addViewController("/privacy").setViewName("privacy");
 	}
 
 	@PostMapping({ "/addToCart" })
@@ -109,6 +107,11 @@ public class WebController implements WebMvcConfigurer {
 		return "index";
 	}
 
+	@GetMapping({ "/privacy" })
+	public String privacy() {
+		return "privacy";
+	}
+	
 	@PostMapping({ "/purchase" })
 	public String purchase(@ModelAttribute("cart") ShoppingCart cart, @Valid CheckoutForm checkoutForm,
 			BindingResult bindingResult) {
@@ -117,8 +120,7 @@ public class WebController implements WebMvcConfigurer {
 			return "checkout";
 		}
 
-		boolean valid = purchase(cart, checkoutForm);
-		return valid ? "redirect:/confirmation" : "checkout";
+		return purchase(cart, checkoutForm) ? "redirect:/confirmation" : "checkout";
 	}
 
 	@PostMapping({ "/updateCart" })
@@ -133,7 +135,6 @@ public class WebController implements WebMvcConfigurer {
 			@RequestParam(name = "clear", required = true) Boolean clear) {
 
 		checkCart(cart, clear);
-		model.addAttribute("cart", cart);
 		return "cart";
 	}
 

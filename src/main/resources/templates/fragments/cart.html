@@ -12,19 +12,10 @@
 	href="../../static/css/affablebean.css"
 	th:href="@{/css/affablebean.css}" />
 
-<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
-
 </head>
 
 <body>
 	<div th:fragment="frag_cart">
-<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
-<!-- 		     This is used by the language mechanism in the Controller so that -->
-<!-- 		     users view the same page when switching between English and Czech. --%> -->
-<!-- 		<c:set var="view" value="/cart" scope="session"/> -->
-		
-<!-- 		<%-- HTML markup starts below --%> -->
-		
 		<div id="singleColumn">
 		
 			<div th:if="${cart.numberOfItems lt 1}}">
@@ -155,11 +146,6 @@
 			</c:if>
 		</div>
 	</div>
-
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>

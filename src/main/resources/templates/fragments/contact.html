@@ -34,7 +34,8 @@
 				<p th:utext="#{co8}"></p>
 			</div>
 		
-	        <form class="form-horizontal" action="#" th:action="@{/feedback}" th:object="${contactForm}" method="post">
+	        <form class="form-horizontal" action="#" th:action="@{/feedback}" th:object="${contactForm}" 
+	        	method="post"  id="feedbackForm">
 				<div class="form-group">
 					<label for="subject_sel" class="col-sm-2 control-label">
 						<span th:text="#{co3}"></span>					
@@ -62,7 +63,7 @@
 									 maxlength="45" 
 									 placeholder="At least 5 chars and no more than 45 chars"									 
 									 size="31"
-									 value="${param.name}">
+									 value="">
 	                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
 	                    	Name Error
 	                   	</div>																		 
@@ -79,7 +80,7 @@
 									 maxlength="45" 
 									 placeholder="At least 8 chars one of which must be '@' and no more than 45 chars"
 									 size="31"
-									 value="${param.email}">
+									 value="">
 	                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
 	                    	Email Error
 	                   	</div>																		 									 
@@ -142,11 +143,6 @@
 			});
 		</script>		
 	</div>
-
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>

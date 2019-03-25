@@ -12,16 +12,10 @@
 	href="../../static/css/affablebean.css"
 	th:href="@{/css/affablebean.css}" />
 
-<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
-
 </head>
 
 <body>
 	<div th:fragment="frag_category">
-<!-- 		<c:set var="view" value="/category" scope="session" /> -->
-		
-<!-- 		<%-- HTML markup starts below --%> -->
-		
 		<div id="categoryLeftColumn">	
 			<span th:each="category : ${categories}">
 				<span th:if="${category.name == selectedCategory.name}">
@@ -121,44 +115,7 @@
 	</div>
 
 	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
-
-	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('a.categoryButton').hover(function() {
-				$(this).animate({
-					backgroundColor : '#b2d2d2'
-				});
-			}, function() {
-				$(this).animate({
-					backgroundColor : '#d3ede8'
-				});
-			});
-
-			$('div.categoryBox').hover(function() {
-				var span = this.getElementsByTagName('span');
-				$(span[0]).animate({
-					opacity : 0.3
-				});
-				$(span[1]).animate({
-					color : 'white'
-				});
-			}, function() {
-				var span = this.getElementsByTagName('span');
-				$(span[0]).animate({
-					opacity : 0.7
-				});
-				$(span[1]).animate({
-					color : '#444'
-				});
-			});
-		});
-	</script>
 
 </body>
 </html>
