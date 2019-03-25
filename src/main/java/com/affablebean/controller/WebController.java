@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,7 +71,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@GetMapping({ "/category" })
 	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") Short id) {
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findAllOrderByName(Sort.by("name")));
 		model.addAttribute("catProms", promotionRepository.findCategories());
 		model.addAttribute("prodPath", prodPath);
 		model.addAttribute("prodProms", promotionRepository.findProducts());
@@ -87,7 +88,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@GetMapping({ "/contact" })
 	public String contact(ContactForm contactForm, Model model) {
-		model.addAttribute("subjects", msgSubjectRepository.findAll());
+		model.addAttribute("subjects", msgSubjectRepository.findAllOrderByName(Sort.by("name")));
 		return "contact";
 	}
 
@@ -102,7 +103,7 @@ public class WebController implements WebMvcConfigurer {
 
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
-		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findAllOrderByName(Sort.by("name")));
 		model.addAttribute("imgPath", imgPath);
 		return "index";
 	}

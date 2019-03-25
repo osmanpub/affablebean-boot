@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../static/css/affablebean.css" th:href="@{/css/affablebean.css}" />
 
-<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
-
 </head>
 
 <body>
@@ -21,36 +19,32 @@
 		<div id="footer">
 			<br>
 
-			<!-- 	<c:if test="${!empty sale}"> -->
-			<!-- 		<c:choose> -->
+<!-- 				<c:if test="${!empty sale}"> -->
+<!-- 					<c:choose> -->
 
-			<!-- 			<c:when test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
-			<!-- 				<hr id="footerDivider"> -->
-			<!-- 				<p id="footerText" class="reallySmallText"> -->
-			<!-- 				</c:when> -->
+<!-- 						<c:when test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
+<!-- 							<hr id="footerDivider"> -->
+<!-- 							<p id="footerText" class="reallySmallText"> -->
+<!-- 							</c:when> -->
 
-			<!-- 				<c:otherwise> -->
-			<!-- 				<hr id="footerDivider1"> -->
-			<!-- 				<p id="footerText1" class="reallySmallText"> -->
-			<!-- 				</c:otherwise> -->
+<!-- 							<c:otherwise> -->
+<!-- 							<hr id="footerDivider1"> -->
+<!-- 							<p id="footerText1" class="reallySmallText"> -->
+<!-- 							</c:otherwise> -->
 
-			<!-- 			</c:choose> -->
-			<!-- 		</c:if> -->
+<!-- 						</c:choose> -->
+<!-- 					</c:if> -->
 
-			<!-- 		<button class="btn btn-link"  -->
-			<!-- 						onclick="location.href = '<c:url value='privacy'/>'"> -->
-			<!-- 			<fmt:message key="privacy" /> -->
-			<!-- 		</button> -->
+			<hr id="footerDivider1">
+			<p id="footerText1" class="reallySmallText">
 
 			<button class="btn btn-link" onclick="location.href = '/privacy'">
-				Privacy</button>
-
-			<!-- 		<button class="btn btn-link" onclick="location.href = '<c:url value='contact'/>'"> -->
-			<!-- 			<fmt:message key="contact" /> -->
-			<!-- 		</button> -->
+				Privacy
+			</button>
 
 			<button class="btn btn-link" onclick="location.href = '/contact'">
-				Contact</button>
+				Contact
+			</button>
 
 			&nbsp;&copy;&nbsp;2019 the affable bean company
 		</div>

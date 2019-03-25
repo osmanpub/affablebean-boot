@@ -12,19 +12,10 @@
 	href="../../static/css/affablebean.css"
 	th:href="@{/css/affablebean.css}" />
 
-<!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
-
 </head>
 
 <body>
 	<div th:fragment="frag_index">
-		<!-- 		<%-- Set session-scoped variable to track the view user is coming from. -->
-		<!-- 		     This is used by the language mechanism in the Controller so that -->
-		<!-- 		     users view the same page when switching between English and Czech. --%> -->
-		<!-- 		<c:set var='view' value='/index' scope='session' /> -->
-
-		<!-- 		<%-- HTML markup starts below --%> -->
-
 		<div id="indexLeftColumn">
 			<div id="welcomeText">
 				<p th:text="#{greeting}" style="font-size: larger" />
@@ -33,16 +24,16 @@
 		</div>
 
 		<div id="indexRightColumn">
-			<span th:each="category : ${categories}"> <span
-				class="categoryBox"> <a
-					th:href="@{/category(id=${category.id})}"> <span
-						class="categoryLabel"></span> <span class="categoryLabelText"
-						th:text="#{${category.name}}"></span> <img
-						th:src="@{__${imgPath}__/__${category.name}__.jpg}"
-						th:alt="#{${category.name}}" class="categoryImage">
-				</a>
-			</span>
-			</span>
+			<th:block th:each="category : ${categories}"> 
+				<span class="categoryBox"> 
+					<a th:href="@{/category(id=${category.id})}"> 
+						<span class="categoryLabel"></span> 
+						<span class="categoryLabelText" th:text="#{${category.name}}"></span> 
+						<img th:src="@{__${imgPath}__/__${category.name}__.jpg}"
+							th:alt="#{${category.name}}" class="categoryImage">
+					</a>
+				</span>
+			</th:block>
 		</div>
 	</div>
 

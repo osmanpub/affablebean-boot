@@ -17,7 +17,7 @@
 <body>
 	<div th:fragment="frag_category">
 		<div id="categoryLeftColumn">	
-			<span th:each="category : ${categories}">
+			<th:block th:each="category : ${categories}">
 				<span th:if="${category.name == selectedCategory.name}">
 					<span class="categoryButton" id="selectedCategory">
 						<span class="categoryText" th:text="#{${category.name}}">								
@@ -33,19 +33,19 @@
 						</a>
 					</span>
 				</span>
-			</span>
+			</th:block>
 		</div>
 		
 		<div id="categoryRightColumn">
 		
 			<p id="categoryTitle" th:utext="${selectedCategory.name}"></p>
 		
-			<span th:each="promo : ${catProms}">
+			<th:block th:each="promo : ${catProms}">
 				<span th:if="${promo.categoryId == selectedCategory.id}">
 					<span class="saleCat" th:text="#{pro__${promo.description}__}">
 					</span>
 				</span>			
-			</span>
+			</th:block>
 		
 			<table id="productTable" th:each="product, iterStat : ${categoryProducts}">
 		
@@ -68,12 +68,12 @@
 <!-- 						<c:set var="new_price" value="${new_price / (1 - sale.discount/100)}"/> -->
 <!-- 					</c:if> -->
 	
-<!-- 						<span th:each="promo : ${catProms}"> -->
+<!-- 						<th:block th:each="promo : ${catProms}"> -->
 <!-- 							<span th:if="${promo.categoryId == selectedCategory.id}"> -->
 <!-- 								<c:set var="new_price" value="${new_price / (1 - promo.discount/100)}"/> -->
 <!-- 								</span> -->
 <!-- 							</span>			 -->
-<!-- 						</span> -->
+<!-- 						</th:block> -->
 							
 <!-- 					<c:if test="${!empty sale || !empty catProms}"> -->
 <!-- 						<td> -->
@@ -101,12 +101,12 @@
 					</td>
 	
 					<td>
-						<span th:each="promo : ${prodProms}">
+						<th:block th:each="promo : ${prodProms}">
 							<span th:if="${promo.productId == product.id}">
 								<span class = "productOffer" th:utext="${promo.description}">
 								</span>						
 							</span>			
-						</span>
+						</th:block>
 					</td>
 				</tr>
 	

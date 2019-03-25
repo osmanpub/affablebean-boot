@@ -16,6 +16,6 @@ public interface MsgSubjectRepository extends JpaRepository<MsgSubject, Integer>
 	List<MsgSubject> findByName(String name);
 
 	@Query("SELECT s FROM MsgSubject s")
-	List<MsgSubject> findByLastnameOrderByFirstnameAsc(Sort sort);
+	List<MsgSubject> findAllOrderByName(Sort sort);
 
 }
