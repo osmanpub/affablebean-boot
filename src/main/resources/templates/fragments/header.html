@@ -84,15 +84,18 @@
 					</div>
 	
 					<!-- 				<%-- shopping cart widget --%> -->
-					<div class="headerWidget" id="viewCart">
-						<a th:href="@{/viewCart}">
-							<img src="../static/img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
-								alt="shopping cart icon">
-						</a>
+					<div class="headerWidget" id="viewCart" th:if="${cart.numberOfItems} > 0">
+						<img src="../static/img/cart.gif" th:src="@{/img/cart.gif}" id="cart"
+							alt="shopping cart icon">
 						
-						<span th:text="${cart.numberOfItems}" class="horizontalMargin" >
+						<span th:text="${cart.numberOfItems} + ' ' + #{items}" class="horizontalMargin" >
 						</span> 														
 
+						<th:block th:if="${not #strings.contains(#request.servletPath,'cart')}">
+							<a th:href="@{/viewCart}" class="bubble">
+								<span th:text="#{cart}"></span>
+							</a>
+						</th:block>
 					</div>
 				</div>
 	
@@ -104,25 +107,22 @@
 					<img src="../static/img/logoText.png"
 						th:src="@{/img/logoText.png}" id="logoText" alt="the affable bean">
 	
-				<!-- 			<c:if test="${!empty sale}"> -->
-				<!-- 				<img class="sale" src="/AffableBean/img/sales.jpg" id="saleText" -->
-				<!-- 					alt="sale now on!"> -->
-				<!-- 				<br> -->
-				<!-- 				<br> -->
-	
-				<!-- 				<c:choose> -->
-				<!-- 					<c:when -->
-				<!-- 						test="${fn:contains(pageContext.request.servletPath,'/index')}"> -->
-				<!-- 						<span class="saleText"> -->
-				<!-- 					</c:when> -->
-				<!-- 					<c:otherwise> -->
-				<!-- 						<span class="saleText1"> -->
-				<!-- 					</c:otherwise> -->
-				<!-- 				</c:choose> -->
-				<!-- 				<fmt:message key="pro${sale.description}" /> -->
-				<!-- 				</span> -->
-				<!-- 			</c:if> -->
-	
+					<th:block th:if="${not #lists.isEmpty(sale)}">
+						<img class="sale" th:src="@{img/sales.jpg}" id="saleText" alt="sale now on!">
+							<br><br>
+
+						<th:block th:if="${#strings.contains(#request.servletPath,'index')}">
+							<span class="saleText">
+<!-- 							<span th:utext="#{pro__${sale.description}__}"></span> -->							
+							</span>
+						</th:block>
+
+						<th:block th:unless="${#strings.contains(#request.servletPath,'index')}">
+							<span class="saleText1">
+<!-- 							<span th:utext="#{pro__${sale.description}__}"></span> -->														
+							</span>
+						</th:block>
+					</th:block>
 			</div>
 		</div>
 	</div>
