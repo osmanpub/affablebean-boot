@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ordered_product")
@@ -25,7 +25,7 @@ public class OrderedProduct implements Serializable {
 
 	@Basic(optional = false)
 	@Column(name = "quantity")
-	@NotBlank
+	@NotNull
 	private Short quantity;
 
 	@JoinColumn(name = "customer_order_id", referencedColumnName = "id", insertable = false, updatable = false)

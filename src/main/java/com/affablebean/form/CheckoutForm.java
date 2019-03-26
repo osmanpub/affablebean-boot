@@ -25,11 +25,11 @@ public class CheckoutForm {
 
 	@NotNull
 	@Size(min = 1, max = 2)
-	private String cityRegion;
+	private String cityRegion = "NY"; // hard coded for now :(
 
 	@NotNull
 	@Size(min = 16, max = 19)
-	private String ccNumber;
+	private String creditCard;
 
 	public String getEmail() {
 		return email;
@@ -71,18 +71,18 @@ public class CheckoutForm {
 		this.cityRegion = cityRegion;
 	}
 
-	public String getCcNumber() {
-		return ccNumber;
+	public String getCreditCard() {
+		return creditCard;
 	}
 
-	public void setCcNumber(String ccNumber) {
-		this.ccNumber = ccNumber;
+	public void setCreditCard(String creditCard) {
+		this.creditCard = creditCard;
 	}
 
 	@Override
 	public String toString() {
 		return "CheckoutForm [email=" + email + ", name=" + name + ", phone=" + phone + ", address=" + address
-				+ ", cityRegion=" + cityRegion + ", ccNumber=" + ccNumber + "]";
+				+ ", cityRegion=" + cityRegion + ", creditcard=" + creditCard + "]";
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.affablebean.controller;
 
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -30,10 +31,14 @@ import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.repository.MsgSubjectRepository;
 import com.affablebean.repository.ProductRepository;
 import com.affablebean.repository.PromotionRepository;
+import com.affablebean.service.OrderManager;
 
 @Controller
 @SessionAttributes("cart")
 public class WebController implements WebMvcConfigurer {
+
+	@Value("${deliverySurcharge:1.00}")
+	private String deliverySurcharge;
 
 	@Value("${categoryImagePath:img/categories}")
 	private String imgPath;
@@ -55,6 +60,9 @@ public class WebController implements WebMvcConfigurer {
 
 	@Resource
 	private PromotionRepository promotionRepository;
+
+	@Resource
+	private OrderManager orderManager;
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -85,8 +93,14 @@ public class WebController implements WebMvcConfigurer {
 	}
 
 	@GetMapping({ "/checkout" })
-	public String checkout(CheckoutForm checkoutForm) {
+	public String checkout(CheckoutForm checkoutForm, Model model) {
+		model.addAttribute("deliverySurcharge", deliverySurcharge);
 		return "checkout";
+	}
+
+	@GetMapping({ "/confirmation" })
+	public String confirmation() {
+		return "confirmation";
 	}
 
 	@GetMapping({ "/contact" })
@@ -117,21 +131,21 @@ public class WebController implements WebMvcConfigurer {
 	}
 
 	@PostMapping({ "/purchase" })
-	public String purchase(@ModelAttribute("cart") ShoppingCart cart, @Valid CheckoutForm checkoutForm,
-			BindingResult bindingResult) {
+	public String purchase(@ModelAttribute("cart") ShoppingCart cart, Model model, 
+			@Valid CheckoutForm checkoutForm, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "checkout";
 		}
 
-		return purchase(cart, checkoutForm) ? "redirect:/confirmation" : "checkout";
+		return purchase(cart, checkoutForm, model) ? "redirect:/confirmation" : "checkout";
 	}
 
 	@PostMapping({ "/updateCart" })
 	public String updateCart(@ModelAttribute("cart") ShoppingCart cart,
 			@RequestParam(name = "id", required = true) Integer id,
 			@RequestParam(name = "qty", required = true) Short qty) {
-		
+
 		updateShoppingCart(cart, id, qty);
 		return "redirect:/cart";
 	}
@@ -178,57 +192,26 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
-	private boolean purchase(ShoppingCart cart, CheckoutForm checkoutForm) {
+	private boolean purchase(ShoppingCart cart, CheckoutForm checkoutForm, Model model) {
 		if (cart == null) {
 			return false;
 		}
 
-		return true;
-//		// see method call for order element types
-//		int orderId = orderManager.placeOrder(cart, surcharge, order[0], order[1],
-//						order[2], order[3], order[4], order[5]);
-//
-//		// if order processed successfully send user to confirmation page
-//		if (orderId != 0) {
-//			// in case language was set using toggle, get language choice before 
-//			// destroying session
-//			Locale locale = (Locale) session.getAttribute(
-//							"javax.servlet.jsp.jstl.fmt.locale.session");
-//			String language = "";
-//
-//			if (locale != null) {
-//				language = (String) locale.getLanguage();
-//			}
-//
-//			// dissociate shopping cart from session
-//			cart = null;
-//
-//			// end session
-//			session.invalidate();
-//
-//			// if user changed language using the toggle, reset the language attribute 
-//			// otherwise language will be switched on confirmation page!			
-//			if (!language.isEmpty()) {
-//				request.setAttribute("language", language);
-//			}
-//
-//			// get order details
-//			Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
-//
-//			// place order details in request scope
-//			request.setAttribute("customer", orderMap.get("customer"));
-//			request.setAttribute("products", orderMap.get("products"));
-//			request.setAttribute("orderRecord", orderMap.get("orderRecord"));
-//			request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
-//
-//			return true;
-//
-//			// otherwise, send back to checkout page and display error
-//		} else {
-//			request.setAttribute("orderFailureFlag", true);
-//			return false;
-//		}
+		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
 
+		if (orderId == 0) {
+			return false;
+		}
+
+		cart.clear();
+		Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
+
+		model.addAttribute("customer", orderMap.get("customer"));
+		model.addAttribute("products", orderMap.get("products"));
+		model.addAttribute("orderRecord", orderMap.get("orderRecord"));
+		model.addAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
+		return true;
 	}
 
 	private String saveFeedback(ContactForm contactForm) {
@@ -249,7 +232,7 @@ public class WebController implements WebMvcConfigurer {
 		if (quantity == null) {
 			return;
 		}
-		
+
 		Optional<Product> product = productRepository.findById(productId);
 
 		if (product.isPresent()) {

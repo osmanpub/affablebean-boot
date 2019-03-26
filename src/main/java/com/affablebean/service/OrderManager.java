@@ -6,6 +6,7 @@ import com.affablebean.domain.CustomerOrder;
 import com.affablebean.domain.OrderedProduct;
 import com.affablebean.domain.OrderedProductPK;
 import com.affablebean.domain.Product;
+import com.affablebean.form.CheckoutForm;
 import com.affablebean.repository.CustomerOrderRepository;
 import com.affablebean.repository.CustomerRepository;
 import com.affablebean.repository.OrderedProductRepository;
@@ -42,9 +43,9 @@ public class OrderManager {
 	private static final Random random = new Random();
 
 	@Transactional
-	public int placeOrder(ShoppingCart cart, String surcharge, String... order) {
+	public int placeOrder(ShoppingCart cart, String surcharge, CheckoutForm checkoutForm) {
 
-		Customer customer = addCustomer(order);
+		Customer customer = addCustomer(checkoutForm);
 		CustomerOrder co = addOrder(customer, cart, surcharge);
 
 		addOrderedItems(co, cart);
@@ -87,16 +88,16 @@ public class OrderManager {
 		return orderMap;
 	}
 
-	private Customer addCustomer(String... cust) {
+	private Customer addCustomer(CheckoutForm checkoutForm) {
 
 		Customer customer = new Customer();
 
-		customer.setName(cust[0]);
-		customer.setEmail(cust[1]);
-		customer.setPhone(cust[2]);
-		customer.setAddress(cust[3]);
-		customer.setCityRegion(cust[4]);
-		customer.setCcNumber(cust[5]);
+		customer.setName(checkoutForm.getName());
+		customer.setEmail(checkoutForm.getEmail());
+		customer.setPhone(checkoutForm.getPhone());
+		customer.setAddress(checkoutForm.getAddress());
+		customer.setCityRegion(checkoutForm.getCityRegion());
+		customer.setCcNumber(checkoutForm.getCreditCard());
 
 		customerRepository.save(customer);
 		return customer;

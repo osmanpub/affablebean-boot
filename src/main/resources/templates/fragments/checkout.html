@@ -34,6 +34,9 @@
 									 placeholder="At least 8 chars and no more than 45 chars"									 
 									 size="31"
 									 value="">
+	                    <div th:if="${#fields.hasErrors('name')}" th:errors="name">
+	                    	Name Error
+                    	</div>																		 
 					</div>
 				</div>
 		
@@ -47,6 +50,9 @@
 									 placeholder="At least 8 chars one of which must be '@' and no more than 45 chars"							 
 									 size="31"
 									 value="">
+	                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+	                    	Email Error
+                    	</div>																		 
 					</div>
 				</div>
 		
@@ -60,6 +66,9 @@
 									 placeholder="At least 8 chars and no more than 30 chars"									 
 									 size="31"
 									 value="">
+	                    <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+	                    	Phone Error
+                    	</div>																		 
 					</div>
 				</div>
 		
@@ -73,6 +82,9 @@
 									 placeholder="At least 8 chars and no more than 45 chars"									 
 									 size="31"
 									 value="">
+	                    <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
+	                    	Address Error
+                    	</div>																		 
 					</div>
 				</div>
 		
@@ -86,6 +98,9 @@
 									 placeholder="At least 8 chars and no more than 19 chars"									 
 									 size="31"
 									 value="">
+	                    <div th:if="${#fields.hasErrors('creditCard')}" th:errors="*{creditCard}">
+	                    	Credit card
+                    	</div>																		 									 
 					</div>
 				</div>
 		
@@ -106,7 +121,7 @@
 						</span>					
 					
 						&euro; 
-						<span th:text="${#numbers.formatDecimal(surcharge, 0, 'COMMA', 2, 'POINT')}">
+						<span th:text="${#numbers.formatDecimal(deliverySurcharge, 0, 'COMMA', 2, 'POINT')}">
 							10.00
 						</span>
 						
@@ -126,17 +141,18 @@
 		
 					<tr>
 						<td th:text="#{surcharge} + ':'"></td>
-						<td class="checkoutPriceColumn" th:text="#{phone}">
+						<td class="checkoutPriceColumn">
 							&euro; 
-							<span th:text="${#numbers.formatDecimal(surcharge, 0, 'COMMA', 2, 'POINT')}"></span>						
+							<span th:text="${#numbers.formatDecimal(deliverySurcharge, 0, 'COMMA', 2, 'POINT')}"></span>						
 						</td>
 					</tr>
 		
 					<tr>
 						<td class="total" th:text="#{total} + ':'"></td>
-						<td class="total checkoutPriceColumn" th:text="#{phone}">
+						<td class="total checkoutPriceColumn">
 							&euro; 
-							<span th:text="${#numbers.formatDecimal((cart.subtotal + surcharge), 0, 'COMMA', 2, 'POINT')}"></span>						
+							<span th:with="total=${cart.subtotal} + ${deliverySurcharge}" 
+								th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}"></span>						
 						</td>
 					</tr>
 				</table>
