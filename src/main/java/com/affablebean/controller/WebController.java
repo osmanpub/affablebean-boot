@@ -78,10 +78,7 @@ public class WebController implements WebMvcConfigurer {
 	@GetMapping({ "/category" })
 	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") Short id) {
 		model.addAttribute("categories", categoryRepository.findAllOrderByName(Sort.by("name")));
-		model.addAttribute("catProms", promotionRepository.findCategories());
 		model.addAttribute("prodPath", prodPath);
-		model.addAttribute("prodProms", promotionRepository.findProducts());
-		model.addAttribute("sale", promotionRepository.findSale(true));
 
 		getCategoryProducts(model, id);
 		return "category";
