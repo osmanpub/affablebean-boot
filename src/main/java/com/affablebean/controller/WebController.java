@@ -99,7 +99,8 @@ public class WebController implements WebMvcConfigurer {
 	}
 
 	@GetMapping({ "/confirmation" })
-	public String confirmation() {
+	public String confirmation(Model model) {
+		model.addAttribute("deliverySurcharge", deliverySurcharge);
 		return "confirmation";
 	}
 
