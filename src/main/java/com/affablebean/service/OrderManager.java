@@ -80,7 +80,7 @@ public class OrderManager {
 		// add each item to orderMap
 		Map<String, Object> orderMap = new HashMap<>();
 
-		orderMap.put("orderRecord", order);
+		orderMap.put("orderRecord", order.get());
 		orderMap.put("customer", customer);
 		orderMap.put("orderedProducts", orderedProducts);
 		orderMap.put("products", products);

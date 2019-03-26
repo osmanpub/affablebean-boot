@@ -24,7 +24,7 @@
 				<span th:text="#{confirmationNumberMessage}"></span>
 				<strong th:text="${orderRecord.confirmationNumber}"></strong>
 				<br>
-				<span th:text="#{contactMessage}"></span>
+				<span th:utext="#{contactMessage}"></span>
 				<br><br>
 				<span th:text="#{thankYouMessage}"></span>
 			</p>
@@ -44,7 +44,7 @@
 		
 					<th:block th:each="orderedProduct, iterStat : ${orderedProducts}">
 						<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'">
-							<td th:text="${products[iter.index].name}">
+							<td th:text="${products[iterStat.index].name}">
 							</td>
 							
 							<td class="quantityColumn" th:text="${orderedProduct.quantity}">
@@ -52,7 +52,7 @@
 							
 							<td class="confirmationPriceColumn">
 								&euro; 
-								<span th:with="subtotal=${products[iter.index].price} * ${orderedProduct.quantity}" 
+								<span th:with="subtotal=${products[iterStat.index].price} * ${orderedProduct.quantity}" 
 									th:text="${#numbers.formatDecimal(subtotal, 0, 'COMMA', 2, 'POINT')}">
 									10.00
 								</span>

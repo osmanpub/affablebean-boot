@@ -1,5 +1,6 @@
 package com.affablebean.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ import com.affablebean.repository.PromotionRepository;
 import com.affablebean.service.OrderManager;
 
 @Controller
-@SessionAttributes("cart")
+@SessionAttributes({ "cart", "orderMap" })
 public class WebController implements WebMvcConfigurer {
 
 	@Value("${deliverySurcharge:1.00}")
@@ -86,21 +87,22 @@ public class WebController implements WebMvcConfigurer {
 	@GetMapping({ "/category" })
 	public String category(Model model, @RequestParam(name = "id", required = true, defaultValue = "1") Short id) {
 		model.addAttribute("categories", categoryRepository.findAllOrderByName(Sort.by("name")));
-		model.addAttribute("prodPath", prodPath);
-
 		getCategoryProducts(model, id);
 		return "category";
 	}
 
 	@GetMapping({ "/checkout" })
 	public String checkout(CheckoutForm checkoutForm, Model model) {
-		model.addAttribute("deliverySurcharge", deliverySurcharge);
 		return "checkout";
 	}
 
 	@GetMapping({ "/confirmation" })
-	public String confirmation(Model model) {
-		model.addAttribute("deliverySurcharge", deliverySurcharge);
+	public String confirmation(@ModelAttribute("orderMap") Map<String, Object> orderMap, Model model) {
+		model.addAttribute("customer", orderMap.get("customer"));
+		model.addAttribute("products", orderMap.get("products"));
+		model.addAttribute("orderRecord", orderMap.get("orderRecord"));
+		model.addAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
 		return "confirmation";
 	}
 
@@ -122,7 +124,6 @@ public class WebController implements WebMvcConfigurer {
 	@GetMapping({ "/", "/index" })
 	public String index(Model model) {
 		model.addAttribute("categories", categoryRepository.findAllOrderByName(Sort.by("name")));
-		model.addAttribute("imgPath", imgPath);
 		return "index";
 	}
 
@@ -132,14 +133,31 @@ public class WebController implements WebMvcConfigurer {
 	}
 
 	@PostMapping({ "/purchase" })
-	public String purchase(@ModelAttribute("cart") ShoppingCart cart, Model model, 
-			@Valid CheckoutForm checkoutForm, BindingResult bindingResult) {
+	public String purchase(@ModelAttribute("cart") ShoppingCart cart,
+			@ModelAttribute("orderMap") Map<String, Object> orderMap, Model model, @Valid CheckoutForm checkoutForm,
+			BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "checkout";
 		}
 
-		return purchase(cart, checkoutForm, model) ? "redirect:/confirmation" : "checkout";
+		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
+
+		if (orderId == 0) {
+			return "checkout";
+		}
+
+		cart.clear();
+		orderMap.clear();
+		
+		Map<String, Object> om =  orderManager.getOrderDetails(orderId);
+		
+		orderMap.put("orderRecord", om.get("orderRecord"));
+		orderMap.put("customer", om.get("customer"));
+		orderMap.put("orderedProducts", om.get("orderedProducts"));
+		orderMap.put("products", om.get("products"));
+
+		return "redirect:/confirmation";
 	}
 
 	@PostMapping({ "/updateCart" })
@@ -155,14 +173,25 @@ public class WebController implements WebMvcConfigurer {
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {
 
-		model.addAttribute("prodPath", prodPath);
 		checkCart(cart, clear);
 		return "cart";
+	}
+
+	@ModelAttribute
+	public void addAttributes(Model model) {
+		model.addAttribute("imgPath", imgPath);
+		model.addAttribute("prodPath", prodPath);
+		model.addAttribute("deliverySurcharge", deliverySurcharge);
 	}
 
 	@ModelAttribute("cart")
 	public ShoppingCart getCart() {
 		return new ShoppingCart();
+	}
+
+	@ModelAttribute("orderMap")
+	public Map<String, Object> getOrderMap() {
+		return new HashMap<String, Object>();
 	}
 
 	private void addToShoppingCart(ShoppingCart cart, Integer productId) {
@@ -191,28 +220,6 @@ public class WebController implements WebMvcConfigurer {
 				model.addAttribute("categoryProducts", category.getProductCollection());
 			}
 		}
-	}
-
-	private boolean purchase(ShoppingCart cart, CheckoutForm checkoutForm, Model model) {
-		if (cart == null) {
-			return false;
-		}
-
-		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
-
-		if (orderId == 0) {
-			return false;
-		}
-
-		cart.clear();
-		Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
-
-		model.addAttribute("customer", orderMap.get("customer"));
-		model.addAttribute("products", orderMap.get("products"));
-		model.addAttribute("orderRecord", orderMap.get("orderRecord"));
-		model.addAttribute("orderedProducts", orderMap.get("orderedProducts"));
-
-		return true;
 	}
 
 	private String saveFeedback(ContactForm contactForm) {
