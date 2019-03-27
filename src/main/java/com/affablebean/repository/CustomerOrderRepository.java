@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.affablebean.domain.Customer;
 import com.affablebean.domain.CustomerOrder;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -15,9 +16,9 @@ import com.affablebean.domain.CustomerOrder;
 
 public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, Integer> {
 
-	List<CustomerOrder> findByCustomer(String customer);
-
 	List<CustomerOrder> findByAmount(BigDecimal amount);
+
+	List<CustomerOrder> findByCustomer(Customer customer);
 
 	List<CustomerOrder> findByDateCreated(Date date);
 

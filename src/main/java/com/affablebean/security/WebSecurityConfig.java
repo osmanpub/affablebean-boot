@@ -19,8 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").permitAll().and().logout().permitAll();
 
-	   http.csrf().disable(); // allow $.post from updateCart script
-		   
+		http.csrf().disable(); // allow $.post from updateCart script
+
 		SessionManagementConfigurer<HttpSecurity> sessionManagement = http.sessionManagement();
 
 		sessionManagement.invalidSessionUrl("/index.html").maximumSessions(2);

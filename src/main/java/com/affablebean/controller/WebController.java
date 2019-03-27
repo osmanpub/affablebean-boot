@@ -149,9 +149,9 @@ public class WebController implements WebMvcConfigurer {
 
 		cart.clear();
 		orderMap.clear();
-		
-		Map<String, Object> om =  orderManager.getOrderDetails(orderId);
-		
+
+		Map<String, Object> om = orderManager.getOrderDetails(orderId);
+
 		orderMap.put("orderRecord", om.get("orderRecord"));
 		orderMap.put("customer", om.get("customer"));
 		orderMap.put("orderedProducts", om.get("orderedProducts"));

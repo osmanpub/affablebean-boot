@@ -2,7 +2,9 @@ package com.affablebean.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.affablebean.domain.Customer;
 
@@ -22,5 +24,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	List<Customer> findByCityRegion(String cityRegion);
 
 	List<Customer> findByCcNumber(String ccNumber);
+
+	@Query("SELECT c FROM Customer c")
+	List<Customer> findAllOrderByName(Sort sort);
 
 }
