@@ -14,11 +14,6 @@
 </head>
 
 <body>
-	<div id="main">
-		<div th:replace="fragments/header.html :: frag_header"></div>
-		<div th:replace="fragments/index.html :: frag_index"></div>
-	</div>
-
         <div id="main">
             <div id="header">
                 <div id="widgetBar"></div>
@@ -42,9 +37,7 @@
 				<p><a th:href="@{/viewCustomers}">log out</a></p>
 			</div>
 			
-			<%-- customerList is requested --%>
-			<c:if test="${!empty customerList}">
-			
+			<th:block th:if="${customerList} != null}">						
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">
@@ -58,27 +51,22 @@
 						<td>phone</td>
 					</tr>
 			
-					<c:forEach var="customer" items="${customerList}" varStatus="iter">
+					<th:block th:each="customer, iterStat : ${customerList}">
+						<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'" 
+							th:onclick="document.location.href='customerRecord?id=__${customer.id}__'">
 			
-						<tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
-								onclick="document.location.href = 'customerRecord?${customer.id}'">
+<!-- 							<%-- Below anchor tags are provided in case JavaScript is disabled --%> -->
+							<td><a th:href="@{/customerRecord(id=${customer.id})}" class="noDecoration"><span th:text="${customer.id}"></span></a></td>
+							<td><a th:href="@{/customerRecord(id=${customer.id})}" class="noDecoration"><span th:text="${customer.name}"></span></a></td>
+							<td><a th:href="@{/customerRecord(id=${customer.id})}" class="noDecoration"><span th:text="${customer.email}"></span></a></td>
+							<td><a th:href="@{/customerRecord(id=${customer.id})}" class="noDecoration"><span th:text="${customer.phone}"></span></a></td>
+						</tr>			
+					</th:block>
+								
+				</table>			
+			</th:block>
 			
-							<%-- Below anchor tags are provided in case JavaScript is disabled --%>
-							<td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.id}</a></td>
-							<td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.name}</a></td>
-							<td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.email}</a></td>
-							<td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.phone}</a></td>
-						</tr>
-			
-					</c:forEach>
-			
-				</table>
-			
-			</c:if>
-			
-			<%-- orderList is requested --%>
-			<c:if test="${!empty orderList}">
-			
+			<th:block th:if="${orderList} != null}">						
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">
@@ -92,35 +80,33 @@
 						<td>date created</td>
 					</tr>
 			
-					<c:forEach var="order" items="${orderList}" varStatus="iter">
+					<th:block th:each="order, iterStat : ${orderList}">
+						<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'" 
+							th:onclick="document.location.href='orderRecord?id=__${order.id}__'">
 			
-						<tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
-								onclick="document.location.href = 'orderRecord?${order.id}'">
+<!-- 							<%-- Below anchor tags are provided in case JavaScript is disabled --%> -->
+							<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration"><span th:text="${order.id}"></span></a></td>
+							<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration"><span th:text="${order.confirmationNumber}"></span></a></td>
+							<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration">
+									&euro; 
+									<span th:text="${#numbers.formatDecimal(order.amount, 0, 'COMMA', 2, 'POINT')}">
+										10.00
+									</span>
+								</a>
+							</td>
+							<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration">
+									<span th:text="${#dates.format(order.dateCreated, 'MM/dd/yyyy HH:mm')}">
+										10.00
+									</span>
+								</a>
+							</td>
+						</tr>			
+					</th:block>
 			
-							<%-- Below anchor tags are provided in case JavaScript is disabled --%>
-							<td><a href="orderRecord?${order.id}" class="noDecoration">${order.id}</a></td>
-							<td><a href="orderRecord?${order.id}" class="noDecoration">${order.confirmationNumber}</a></td>
-							<td><a href="orderRecord?${order.id}" class="noDecoration">
-									<fmt:formatNumber type="currency"
-																		currencySymbol="&euro; "
-																		value="${order.amount}"/></a></td>
+				</table>			
+			</th:block>
 			
-							<td><a href="orderRecord?${order.id}" class="noDecoration">
-									<fmt:formatDate value="${order.dateCreated}"
-																	type="both"
-																	dateStyle="short"
-																	timeStyle="short"/></a></td>
-						</tr>
-			
-					</c:forEach>
-			
-				</table>
-			
-			</c:if>
-			
-			<%-- feedbackList is requested --%>
-			<c:if test="${!empty feedbackList}">
-			
+			<th:block th:if="${feedbackList} != null}">						
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">
@@ -134,27 +120,29 @@
 						<td>message</td>
 					</tr>
 			
-					<c:forEach var="msg" items="${feedbackList}" varStatus="iter">
-			
-						<tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
-								onclick="document.location.href = 'feedbackRecord?${msg.id}'">
-			
-							<%-- Below anchor tags are provided in case JavaScript is disabled --%>
-							<td><a href="feedbackRecord?${msg.id}" class="noDecoration">${msg.subjectId.name}</a></td>
-							<td><a href="feedbackRecord?${msg.id}" class="noDecoration">${msg.name}</a></td>
-							<td><a href="feedbackRecord?${msg.id}" class="noDecoration">${msg.email}</a></td>
-							<td><a href="feedbackRecord?${msg.id}" class="noDecoration">${msg.msg}</a></td>
+					<th:block th:each="msg, iterStat : ${feedbackList}">
+						<tr class="tableRow" th:onclick="document.location.href='orderRecord?id=__${order.id}__'">
+							<td colspan="2">
+	<!-- 							<%-- Anchor tag is provided in case JavaScript is disabled --%> -->
+								<a th:href="@{orderRecord(id=${order.id})}" class="noDecoration">
+									<strong>view order summary &#x279f;</strong></a></td>
 						</tr>
+								
+						<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'" 
+							th:onclick="document.location.href='feedbackRecord?id=__${msg.id}__'">
 			
-					</c:forEach>
+<!-- 							<%-- Below anchor tags are provided in case JavaScript is disabled --%> -->
+							<td><a th:href="@{/feedbackRecord(id=${msg.id})}" class="noDecoration"><span th:text="${msg.subject.name}"></span></a></td>
+							<td><a th:href="@{/feedbackRecord(id=${msg.id})}" class="noDecoration"><span th:text="${msg.name}"></span></a></td>
+							<td><a th:href="@{/feedbackRecord(id=${msg.id})}" class="noDecoration"><span th:text="${msg.email}"></span></a></td>
+							<td><a th:href="@{/feedbackRecord(id=${msg.id})}" class="noDecoration"><span th:text="${msg.msg}"></span></a></td>
+						</tr>			
+					</th:block>
 			
-				</table>
+				</table>			
+			</th:block>
 			
-			</c:if>
-			
-			<%-- customerRecord is requested --%>
-			<c:if test="${!empty customerRecord}">
-			
+			<th:block th:if="${customerRecord} != null}">			
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">
@@ -162,48 +150,52 @@
 					</tr>
 					<tr>
 						<td style="width: 290px"><strong>customer id:</strong></td>
-						<td>${customerRecord.id}</td>
+						<td th:text="${customerRecord.id}">
+						</td>
 					</tr>
 					<tr>
-						<td><strong>name:</strong></td>
-						<td>${customerRecord.name}</td>
+						<td><strong th:text="#{name} + ':'"></strong></td>
+						<td th:text="${customerRecord.name}">
+						</td>					
 					</tr>
 					<tr>
-						<td><strong>email:</strong></td>
-						<td>${customerRecord.email}</td>
+						<td><strong th:text="#{email} + ':'"></strong></td>
+						<td th:text="${customerRecord.email}">
+						</td>					
 					</tr>
 					<tr>
-						<td><strong>phone:</strong></td>
-						<td>${customerRecord.phone}</td>
+						<td><strong th:text="#{phone} + ':'"></strong></td>
+						<td th:text="${customerRecord.phone}">
+						</td>					
 					</tr>
 					<tr>
-						<td><strong>address:</strong></td>
-						<td>${customerRecord.address}</td>
+						<td><strong th:text="#{address} + ':'"></strong></td>
+						<td th:text="${customerRecord.address}">
+						</td>					
 					</tr>
 					<tr>
 						<td><strong>city region:</strong></td>
-						<td>${customerRecord.cityRegion}</td>
+						<td th:text="${customerRecord.cityRegion}">
+						</td>					
 					</tr>
 					<tr>
-						<td><strong>credit card number:</strong></td>
-						<td>${customerRecord.ccNumber}</td>
+						<td><strong th:text="#{creditCard} + ':'"></strong></td>
+						<td th:text="${customerRecord.ccNumber}">
+						</td>					
 					</tr>
 			
 					<tr><td colspan="2" style="padding: 0 20px"><hr></td></tr>
 			
-					<tr class="tableRow"
-							onclick="document.location.href = 'orderRecord?${order.id}'">
+					<tr class="tableRow" th:onclick="document.location.href='orderRecord?id=__${order.id}__'">
 						<td colspan="2">
-							<%-- Anchor tag is provided in case JavaScript is disabled --%>
-							<a href="orderRecord?${order.id}" class="noDecoration">
+<!-- 							<%-- Anchor tag is provided in case JavaScript is disabled --%> -->
+							<a th:href="@{orderRecord(id=${order.id})}" class="noDecoration">
 								<strong>view order summary &#x279f;</strong></a></td>
 					</tr>
-				</table>
+				</table>			
+			</th:block>
 			
-			</c:if>
-			
-			<th:block th:if="${not feedbackRecord} == null}">
-			
+			<th:block th:if="${feedbackRecord} != null}">			
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">
@@ -238,8 +230,7 @@
 				</table>
 			</th:block>
 			
-			<th:block th:if="${not orderRecord == null}">
-			
+			<th:block th:if="${orderRecord != null}">			
 				<table id="adminTable" class="detailsTable">
 			
 					<tr class="header">

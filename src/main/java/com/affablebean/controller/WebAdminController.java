@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,7 +21,6 @@ import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.service.OrderManager;
 
 @Controller
-@SessionAttributes({ "cart", "orderMap" })
 public class WebAdminController implements WebMvcConfigurer {
 
 	@Resource
@@ -39,6 +37,7 @@ public class WebAdminController implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/admin").setViewName("admin");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/logout").setViewName("logout");
 	}
