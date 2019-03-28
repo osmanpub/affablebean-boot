@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,6 +25,9 @@ import com.affablebean.service.OrderManager;
 @Controller
 public class WebAdminController implements WebMvcConfigurer {
 
+	@Value("${deliverySurcharge:1.00}")
+	private String deliverySurcharge;
+	
 	@Resource
 	private CustomerRepository customerRepository;
 
@@ -39,7 +44,42 @@ public class WebAdminController implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/admin").setViewName("admin");
 		registry.addViewController("/login").setViewName("login");
-		registry.addViewController("/logout").setViewName("logout");
+	}
+
+	@GetMapping({ "/customerRecord" })
+	public String customerRecord(Model model, @RequestParam(name = "id", required = true) Integer customerId) {
+		Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+
+		if (optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get();
+			model.addAttribute("customerRecord", customer);
+			model.addAttribute("orders", customerOrderRepository.findByCustomer(customer));
+		}
+
+		return "admin";
+	}
+
+	@GetMapping({ "/feedbackRecord" })
+	public String feedbackRecord(Model model, @RequestParam(name = "id", required = true) Integer msgFeedbackId) {
+		Optional<MsgFeedback> msgFeedback = msgFeedbackRepository.findById(msgFeedbackId);
+
+		if (msgFeedback.isPresent()) {
+			model.addAttribute("feedbackRecord", msgFeedback.get());
+		}
+
+		return "admin";
+	}
+
+	@GetMapping({ "/orderRecord" })
+	public String orderRecord(Model model, @RequestParam(name = "id", required = true) Integer orderId) {
+		Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
+
+		model.addAttribute("customer", orderMap.get("customer"));
+		model.addAttribute("products", orderMap.get("products"));
+		model.addAttribute("orderRecord", orderMap.get("orderRecord"));
+		model.addAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
+		return "admin";
 	}
 
 	@GetMapping({ "/viewCustomers" })
@@ -60,43 +100,9 @@ public class WebAdminController implements WebMvcConfigurer {
 		return "admin";
 	}
 
-	@GetMapping({ "/customerRecord" })
-	public String customerRecord(Model model,
-			@RequestParam(name = "id", required = true, defaultValue = "1") Integer customerId) {
-		Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-
-		if (optionalCustomer.isPresent()) {
-			Customer customer = optionalCustomer.get();
-			model.addAttribute("customerRecord", customer);
-			model.addAttribute("orders", customerOrderRepository.findByCustomer(customer));
-		}
-
-		return "admin";
+	@ModelAttribute
+	public void addAttributes(Model model) {
+		model.addAttribute("deliverySurcharge", deliverySurcharge);
 	}
-
-	@GetMapping({ "/feedbackRecord" })
-	public String feedbackRecord(Model model,
-			@RequestParam(name = "id", required = true, defaultValue = "1") Integer msgFeedbackId) {
-		Optional<MsgFeedback> msgFeedback = msgFeedbackRepository.findById(msgFeedbackId);
-
-		if (msgFeedback.isPresent()) {
-			model.addAttribute("feedbackRecord", msgFeedback.get());
-		}
-
-		return "admin";
-	}
-
-	@GetMapping({ "/orderRecord" })
-	public String orderRecord(Model model,
-			@RequestParam(name = "id", required = true, defaultValue = "1") Integer orderId) {
-		Map<String, Object> orderMap = orderManager.getOrderDetails(orderId);
-
-		model.addAttribute("customer", orderMap.get("customer"));
-		model.addAttribute("products", orderMap.get("products"));
-		model.addAttribute("orderRecord", orderMap.get("orderRecord"));
-		model.addAttribute("orderedProducts", orderMap.get("orderedProducts"));
-
-		return "admin";
-	}
-
+	
 }

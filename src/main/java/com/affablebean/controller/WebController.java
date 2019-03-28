@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.affablebean.cart.ShoppingCart;
@@ -64,11 +63,6 @@ public class WebController implements WebMvcConfigurer {
 
 	@Resource
 	private OrderManager orderManager;
-
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/login").setViewName("login");
-	}
 
 	@PostMapping({ "/addToCart" })
 	public String addToCart(@ModelAttribute("cart") ShoppingCart cart,

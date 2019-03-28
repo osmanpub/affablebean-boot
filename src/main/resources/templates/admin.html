@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Affablebean</title>
+<title>Affablebean administration</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" type="text/css"
@@ -17,6 +17,7 @@
         <div id="main">
             <div id="header">
                 <div id="widgetBar"></div>
+		        <h1 th:inline="text">[[${#httpServletRequest.remoteUser}]] logged in</h1>
 
                 <a th:href="@{/index}"> <img src="../img/logo.png" alt="Affable Bean logo" id="adminLogo">
                 </a>
@@ -33,7 +34,7 @@
 			
 				<p><a th:href="@{/viewFeedback}">view all feedback</a></p>
 			
-				<p><a th:href="@{/viewCustomers}">log out</a></p>
+				<p><a th:href="@{/logout}">log out</a></p>
 			</div>
 			
 			<th:block th:if="${customerList} != null">						
@@ -246,23 +247,23 @@
 			
 								<tr><td colspan="3" style="padding: 0px 20px"><hr></td></tr>
 			
-								<th:block th:each="orderedProduct, iterStat : ${orderedProducts}">								
-									<tr>
+								<th:block th:each="product, iterStat : ${orderedProducts}">								
+									<tr th:with="price=${products[iterStat.index].price}">
 										<td th:text="#{${products[iterStat.index].name}}">
 										</td>
 										
-										<td th:text="${orderedProduct.quantity}">
+										<td th:text="${product.quantity}">
 										</td>
 										
 										<td class="confirmationPriceColumn">
 											&euro; 
-											<span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">
+											<span th:text="${#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}">
 												10.00
 											</span>
 										</td>										
-										<td class="confirmationPriceColumn" th:text="${orderedProduct.quantity}">
+										<td class="confirmationPriceColumn" th:text="${product.quantity}">
 											&euro; 
-											<span th:with="total=${products[iterStat.index].price} * ${orderedProduct.quantity}" 
+											<span th:with="total=price * ${product.quantity}" 
 												th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}"></span>						
 										</td>
 									</tr>
@@ -290,7 +291,7 @@
 			
 					<tr><td colspan="3" style="padding: 0px 20px"><hr></td></tr>
 			
-					<tr class="tableRow" th:onclick="document.location.href='customerRecord?id=__${customer.id}__'">
+					<tr class="tableRow">
 						<td colspan="2">
 <!-- 							<%-- Anchor tag is provided in case JavaScript is disabled --%> -->
 							<a th:href="@{customerRecord(id=${customer.id})}" class="noDecoration">

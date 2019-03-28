@@ -16,9 +16,21 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll().and().logout().permitAll();
-
+        http
+        .authorizeRequests()
+            .antMatchers("/", "/index", "/addToCart", "/cart", "/category", "/checkout", "/confirmation", "/contact", 
+            		"/feedback", "/privacy", "/purchase", "/updateCart", "/viewCart").permitAll()
+            .antMatchers("/css/**", "/img/**").permitAll()
+//            .antMatchers("/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+        .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+        .logout()
+            .permitAll();
+		
 		http.csrf().disable(); // allow $.post from updateCart script
 
 		SessionManagementConfigurer<HttpSecurity> sessionManagement = http.sessionManagement();
@@ -32,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
-		UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").roles("USER")
+		UserDetails user = User.withDefaultPasswordEncoder().username("admin").password("letmein").roles("USER")
 				.build();
 
 		return new InMemoryUserDetailsManager(user);
