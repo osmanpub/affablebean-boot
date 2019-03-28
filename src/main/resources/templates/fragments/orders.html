@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Affablebean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../static/css/affablebean.css"
+	th:href="@{/css/affablebean.css}" />
+
+</head>
+
+<body>
+	<div th:fragment="frag_orders(orders)">
+		<th:block th:each="order, iterStat : ${orders}">
+			<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'">
+	
+	<!-- 							<%-- Below anchor tags are provided in case JavaScript is disabled --%> -->
+				<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration"><span th:text="${order.id}"></span></a></td>
+				<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration"><span th:text="${order.confirmationNumber}"></span></a></td>
+				<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration">
+						&euro; 
+						<span th:text="${#numbers.formatDecimal(order.amount, 0, 'COMMA', 2, 'POINT')}">
+							10.00
+						</span>
+					</a>
+				</td>
+				<td><a th:href="@{/orderRecord(id=${order.id})}" class="noDecoration">
+						<span th:text="${#dates.format(order.dateCreated, 'MM/dd/yyyy HH:mm')}">
+							10.00
+						</span>
+					</a>
+				</td>
+			</tr>
+		</th:block>			
+	</div>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

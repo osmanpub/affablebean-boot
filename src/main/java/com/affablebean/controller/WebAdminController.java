@@ -56,7 +56,7 @@ public class WebAdminController implements WebMvcConfigurer {
 
 	@GetMapping({ "/viewOrders" })
 	public String viewOrders(Model model) {
-		model.addAttribute("viewOrders", customerOrderRepository.findAll());
+		model.addAttribute("orderList", customerOrderRepository.findAll());
 		return "admin";
 	}
 
@@ -68,7 +68,7 @@ public class WebAdminController implements WebMvcConfigurer {
 		if (optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			model.addAttribute("customerRecord", customer);
-			model.addAttribute("order", customerOrderRepository.findByCustomer(customer));
+			model.addAttribute("orders", customerOrderRepository.findByCustomer(customer));
 		}
 
 		return "admin";
