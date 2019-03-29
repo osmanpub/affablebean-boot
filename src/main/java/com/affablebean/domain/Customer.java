@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,6 +42,7 @@ public class Customer implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "cc_number")
 	@NotBlank
+    @Digits(fraction = 0, integer = 19)	
 	private String ccNumber;
 
 	@Basic(optional = false)
@@ -49,6 +52,7 @@ public class Customer implements Serializable {
 
 	@Basic(optional = false)
 	@Column(name = "email")
+	@Email
 	@NotBlank
 	private String email;
 
