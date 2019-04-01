@@ -8,6 +8,7 @@ import com.affablebean.repository.MsgFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MsgFeedbackController {
 
 	@Autowired

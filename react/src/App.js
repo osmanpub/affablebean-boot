@@ -282,25 +282,51 @@ const root = "/api";
 // 	}
 // }
 
-class App extends Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { categories: [] };
+  }
+
+  componentDidMount() {
+    client({ method: "GET", path: "localhost:8080/api/categories" }).done(
+      response => {
+        this.setState({ categories: response.entity._embedded.categories });
+      }
+    );
+  }
+
+  render() {
+    return <CategoryList categories={this.state.categories} />;
+  }
+}
+
+class CategoryList extends React.Component {
+  render() {
+    const categories = this.props.categories.map(category => (
+      <Category key={category._links.self.href} category={category} />
+    ));
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+          </tr>
+          {categories}
+        </tbody>
+      </table>
+    );
+  }
+}
+
+class Category extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <tr>
+        <td>{this.props.category.id}</td>
+        <td>{this.props.category.name}</td>
+      </tr>
     );
   }
 }

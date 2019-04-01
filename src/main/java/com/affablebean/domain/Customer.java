@@ -42,7 +42,7 @@ public class Customer implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "cc_number")
 	@NotBlank
-    @Digits(fraction = 0, integer = 19)	
+	@Digits(fraction = 0, integer = 19)
 	private String ccNumber;
 
 	@Basic(optional = false)

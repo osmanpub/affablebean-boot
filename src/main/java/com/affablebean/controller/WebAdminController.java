@@ -27,7 +27,7 @@ public class WebAdminController implements WebMvcConfigurer {
 
 	@Value("${deliverySurcharge:1.00}")
 	private String deliverySurcharge;
-	
+
 	@Resource
 	private CustomerRepository customerRepository;
 
@@ -104,5 +104,5 @@ public class WebAdminController implements WebMvcConfigurer {
 	public void addAttributes(Model model) {
 		model.addAttribute("deliverySurcharge", deliverySurcharge);
 	}
-	
+
 }
