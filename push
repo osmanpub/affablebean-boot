@@ -1,5 +1,6 @@
 #!/bin/bash
-# sh prettify
+sh prettify
 git add -A .
 git commit -m "$*"
 git push
+
