@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -19,8 +20,9 @@ import com.affablebean.repository.CategoryRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SpringBootApplication
+@EnableCaching
 @EnableJpaAuditing
+@SpringBootApplication
 @Slf4j
 public class Application extends SpringBootServletInitializer {
 
