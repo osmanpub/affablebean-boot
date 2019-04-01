@@ -1,4 +1,4 @@
-package com.affablebean.security;
+package com.affablebean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
