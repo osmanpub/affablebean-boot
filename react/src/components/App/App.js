@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { client, getPath } from "./utils.js";
+import { client, getPath } from "../../utils.js";
 
 function App() {
   const [categories, setCategories] = useState(0);
