@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import client from "./client";
-import follow from "./follow"; // function to hop multiple links by "rel"
+import { Client } from "node-rest-client";
 
-const root = "/api";
+const root = "http://localhost:8080/api/";
+const client = new Client();
 
 // class App extends React.Component {
 
@@ -282,18 +280,22 @@ const root = "/api";
 // 	}
 // }
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { categories: [] };
   }
 
   componentDidMount() {
-    client({ method: "GET", path: "localhost:8080/api/categories" }).done(
-      response => {
-        this.setState({ categories: response.entity._embedded.categories });
-      }
-    );
+    const _this_ = this;
+
+    client
+      .get(root + "categories", function(data, response) {
+        _this_.setState({ categories: data._embedded.categoryList });
+      })
+      .on("error", function(err) {
+        console.log("something went wrong on the request", err.request.options);
+      });
   }
 
   render() {
@@ -301,7 +303,7 @@ class App extends React.Component {
   }
 }
 
-class CategoryList extends React.Component {
+class CategoryList extends Component {
   render() {
     const categories = this.props.categories.map(category => (
       <Category key={category._links.self.href} category={category} />
@@ -320,7 +322,7 @@ class CategoryList extends React.Component {
   }
 }
 
-class Category extends React.Component {
+class Category extends Component {
   render() {
     return (
       <tr>

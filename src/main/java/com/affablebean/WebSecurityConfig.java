@@ -16,12 +16,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/", "/index", "/addToCart", "/cart", "/category", "/categories", "/checkout",
-						"/confirmation", "/contact", "/customers", "customerOrders", "/feedback", "/feedbacks",
-						"/privacy", "/products", "/purchase", "/subjects", "/updateCart", "/viewCart")
-				.permitAll().antMatchers("/css/**", "/img/**").permitAll().antMatchers("/**").permitAll().anyRequest()
-				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+		http.authorizeRequests().antMatchers("/", "/index").permitAll()
+				.antMatchers("/addToCart", "/cart", "/category", "/checkout", "/confirmation", "/contact",
+						"customerOrders", "/feedback", "/privacy", "/purchase", "/updateCart", "/viewCart")
+				.permitAll().antMatchers("/api/**", "/css/**", "/img/**").permitAll().anyRequest().authenticated().and()
+				.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 
 		http.csrf().disable(); // allow $.post from updateCart script
 

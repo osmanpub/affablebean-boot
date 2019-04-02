@@ -20,8 +20,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RestController
 public class MsgFeedbackController {
 
 	@Autowired
