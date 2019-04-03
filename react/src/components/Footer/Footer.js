@@ -1,18 +1,16 @@
 import React from "react";
-import { FooterDivider, FooterWrapper } from "./Footer.styles";
+import { FooterDivider, FooterText, FooterWrapper } from "./Footer.styles";
 
 export function Footer(props) {
   return (
     <FooterWrapper>
-      <div>
-        <br />
-        <FooterDivider />
-        <p>
-          <button>Privacy</button>
-          <button>Contact</button>
-          &nbsp;&copy;&nbsp;2019 the affable bean company
-        </p>
-      </div>
+      <br />
+      <FooterDivider />
+      <FooterText className="reallySmallText">
+        <button className="btn btn-link">Privacy</button>
+        <button className="btn btn-link">Contact</button>
+        &nbsp;&copy;&nbsp;2019 the affable bean company
+      </FooterText>
     </FooterWrapper>
   );
 }

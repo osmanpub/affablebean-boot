@@ -1,4 +1,4 @@
-import { client, getPath } from "../utils.js";
+import { client, getPath } from "../utils";
 import { requestCategories, receiveCategories } from "../actions";
 
 export const fetchCategories = () => dispatch => {

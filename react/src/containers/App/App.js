@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
+import { fetchCategories } from "../../rest/categories";
 import Footer from "../../components/Footer";
-import { fetchCategories } from "../../rest/categories.js";
+import Header from "../../components/Header";
 
 export class App extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ export class App extends Component {
 
     return (
       <div>
+        <Header />
         <Categories categories={categories} />
         <Footer />
       </div>

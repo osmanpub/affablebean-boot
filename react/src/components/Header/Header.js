@@ -1,15 +1,16 @@
 import React from "react";
+import { HeaderMain, HeaderWrapper, WidgetBar } from "./Header.styles";
 
 export function Header(props) {
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-        </tr>
-        {categories}
-      </tbody>
-    </table>
+    <HeaderWrapper>
+      <HeaderMain>
+        <WidgetBar />
+        <a href="/index">
+          <img src="static/img/logo.png" alt="Affable Bean logo" />
+        </a>
+        <img src="static/img/logoText.png" alt="the affable bean" />
+      </HeaderMain>
+    </HeaderWrapper>
   );
 }

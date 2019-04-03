@@ -12,19 +12,8 @@ export const FooterDivider = styled.hr`
   width: 600px;
 `;
 
-// #footerText {
-// 	margin-left: 300px;
-// 	margin-top: 5px;
-// 	width: 600px;
-// }
-
-// #footerText1 {
-// 	margin-left: 110px;
-// 	margin-top: 5px;
-// 	width: 600px;
-// }
-
-// #footerDivider1 {
-// 	margin-left: 110px;
-// 	width: 600px;
-// }
+export const FooterText = styled.span`
+  margin-left: 110px;
+  margin-top: 5px;
+  width: 600px;
+`;
