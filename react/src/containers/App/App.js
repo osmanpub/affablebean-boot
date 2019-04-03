@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
+import Footer from "../../components/Footer";
 import { fetchCategories } from "../../rest/categories.js";
 
 export class App extends Component {
@@ -11,7 +12,13 @@ export class App extends Component {
 
   render() {
     const categories = this.props.categories.items;
-    return <Categories categories={categories} />;
+
+    return (
+      <div>
+        <Categories categories={categories} />
+        <Footer />
+      </div>
+    );
   }
 }
 

@@ -1,51 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { client, getPath } from "../../utils.js";
+import React from "react";
+import { FooterDivider, FooterWrapper } from "./Footer.styles";
 
-function App() {
-  const [categories, setCategories] = useState(0);
-
-  useEffect(() => {
-    client
-      .get(getPath("categories"), function(data) {
-        setCategories(data._embedded.categoryList);
-      })
-      .on("error", function(err) {
-        console.log("something went wrong on the request", err.request.options);
-      });
-  });
-
-  return <CategoryList categories={categories} />;
-}
-
-function CategoryList(props) {
-  if (!props || !Array.isArray(props.categories)) {
-    return null;
-  }
-
-  const categories = props.categories.map(category => (
-    <Category key={category._links.self.href} category={category} />
-  ));
-
+export function Footer(props) {
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-        </tr>
-        {categories}
-      </tbody>
-    </table>
+    <FooterWrapper>
+      <div>
+        <br />
+        <FooterDivider />
+        <p>
+          <button>Privacy</button>
+          <button>Contact</button>
+          &nbsp;&copy;&nbsp;2019 the affable bean company
+        </p>
+      </div>
+    </FooterWrapper>
   );
 }
-
-function Category(props) {
-  return (
-    <tr>
-      <td>{props.category.id}</td>
-      <td>{props.category.name}</td>
-    </tr>
-  );
-}
-
-export default App;

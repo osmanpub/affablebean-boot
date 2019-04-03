@@ -42,3 +42,18 @@ label.error {
 	line-height: 20px;
 	font-style: italic;
 }
+
+.lightBlue { background-color: #edf8f7 }
+
+.white { background-color: #fff }
+
+.bubble {
+	font-weight: bold;
+	background-color: #f5eabe;
+	padding: 5px;
+	color: inherit;
+	display: inline;
+	border-radius: 4px;
+}
+
+.smallText { font-size: small }
