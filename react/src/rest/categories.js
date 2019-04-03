@@ -1,5 +1,5 @@
-import { requestCategories, receiveCategories } from "../actions";
 import { client, getPath } from "../utils.js";
+import { requestCategories, receiveCategories } from "../actions";
 
 export const fetchCategories = () => dispatch => {
   dispatch(requestCategories());

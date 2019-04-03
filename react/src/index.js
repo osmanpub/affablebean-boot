@@ -10,8 +10,6 @@ const store = configureStore({
   reducer
 });
 
-export default store;
-
 render(
   <Provider store={store}>
     <App />
