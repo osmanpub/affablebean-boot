@@ -22,18 +22,6 @@ export const WidgetBar = styled.div`
 // 	margin-top: -20px;
 // }
 
-// #logoText {
-// 	float: left;
-// 	margin: 20px 0 0 70px;
-// 	/* font styles apply to text within img alt attribute */
-// 	font-family: 'American Typewriter', Courier, monospace;
-// 	font-size: 50px;
-// 	color: #333;
-// }
-
-// #widgetBar {
-// }
-
 // #cart {
 // 	position: absolute;
 // 	margin: 5px 0 0 2px;
