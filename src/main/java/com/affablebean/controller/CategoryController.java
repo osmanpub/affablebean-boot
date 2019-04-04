@@ -6,6 +6,7 @@ import com.affablebean.exception.CategoryNotFoundException;
 import com.affablebean.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -32,8 +36,8 @@ public class CategoryController {
 
 	@GetMapping("/categories")
 	public Resources<Resource<Category>> all() {
-
-		List<Resource<Category>> categories = repository.findAll().stream().map(assembler::toResource)
+		List<Resource<Category>> categories = repository.findAllOrderByName(Sort.by("name")).stream()
+				.map(assembler::toResource)
 				.collect(Collectors.toList());
 
 		return new Resources<>(categories, linkTo(methodOn(CategoryController.class).all()).withSelfRel());
@@ -78,4 +82,26 @@ public class CategoryController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@GetMapping("/category/{id}")
+	public Resource<Object> categoryProducts(@PathVariable Short id) {
+		List<Category> categories = repository.findAllOrderByName(Sort.by("name"));
+		Map<String, Object> payload = new HashMap<>();	
+		
+		payload.put("categories", categories);
+		
+		if (id != null) {
+			Optional<Category> selectedCategory = repository.findById(id);
+
+			if (selectedCategory.isPresent()) {
+				Category category = selectedCategory.get();
+				payload.put("category", category);
+				payload.put("products", category.getProductCollection());
+			}
+		}
+		
+		return new Resource<>(payload,
+				linkTo(methodOn(CategoryController.class).categoryProducts(id)).withSelfRel(),
+				linkTo(methodOn(CategoryController.class).all()).withRel("categories"));
+	}
+	
 }
