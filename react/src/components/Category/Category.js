@@ -1,21 +1,21 @@
 import React from "react";
+import "./Category.css";
 
 export function Category(props) {
+  const category = props.category;
+  const name = category.name;
+
   return (
-    <span>
-      {props.category.id}
-      &nbsp;
-      {props.category.name}
-      <br />
+    <span className="categoryBox">
+      <a href={"/category?id=" + category.id}>
+        <span className="categoryLabel" />
+        <span className="categoryLabelText">{name}</span>
+        <img
+          src={"/static/img/categories/" + name + ".jpg"}
+          alt={name}
+          className="categoryImage"
+        />
+      </a>
     </span>
   );
 }
-
-// 		<span class="categoryBox">
-// 			<a th:href="@{/category(id=${category.id})}">
-// 				<span class="categoryLabel"></span>
-// 				<span class="categoryLabelText" th:text="#{${category.name}}"></span>
-// 				<img th:src="@{__${imgPath}__/__${category.name}__.jpg}"
-// 					th:alt="#{${category.name}}" class="categoryImage">
-// 			</a>
-// 		</span>
