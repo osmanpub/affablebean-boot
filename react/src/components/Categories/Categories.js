@@ -1,5 +1,11 @@
 import React from "react";
 import Category from "../Category";
+import {
+  CategoriesGreeting,
+  CategoriesLeft,
+  CategoriesRight,
+  CategoriesWelcome
+} from "./Categories.styles";
 
 export function Categories(props) {
   if (props == null || props.categories.length === 0) {
@@ -11,14 +17,21 @@ export function Categories(props) {
   ));
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-        </tr>
-        {categories}
-      </tbody>
-    </table>
+    <div>
+      <CategoriesLeft>
+        <CategoriesWelcome>
+          <CategoriesGreeting>
+            Welcome to the online home of the Affable Bean Green Grocer.
+          </CategoriesGreeting>
+          <p>
+            Our unique home delivery service brings you fresh organic produce,
+            dairy, meats, breads and other delicious and healthy items direct to
+            your doorstep.
+          </p>
+        </CategoriesWelcome>
+      </CategoriesLeft>
+
+      <CategoriesRight>{categories}</CategoriesRight>
+    </div>
   );
 }
