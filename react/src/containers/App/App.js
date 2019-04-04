@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import { fetchCategories } from "../../rest/categories";
@@ -13,13 +14,15 @@ export class App extends Component {
 
   render() {
     const categories = this.props.categories.items;
+    const match = this.props.match;
 
     return (
-      <div>
+      <Router>
         <Header />
-        <Categories categories={categories} />
+        {!match && <Categories categories={categories} />}
         <Footer />
-      </div>
+        <Route path="/category/:id" component={App} />
+      </Router>
     );
   }
 }

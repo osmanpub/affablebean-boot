@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Category.css";
 
 export function Category(props) {
@@ -7,7 +8,7 @@ export function Category(props) {
 
   return (
     <span className="categoryBox">
-      <a href={"/category?id=" + category.id}>
+      <Link to={"/category/" + category.id}>
         <span className="categoryLabel" />
         <span className="categoryLabelText">{name}</span>
         <img
@@ -15,7 +16,7 @@ export function Category(props) {
           alt={name}
           className="categoryImage"
         />
-      </a>
+      </Link>
     </span>
   );
 }
