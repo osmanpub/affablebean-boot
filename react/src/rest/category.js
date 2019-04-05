@@ -20,9 +20,9 @@ const fetchCategory = id => dispatch => {
 };
 
 const shouldFetchCategory = state => {
-  const category = state.category.items;
+  const category = state.category;
 
-  if (!category || category.length === 0) {
+  if (!category || !category.hasOwnProperty("id")) {
     return true;
   }
 

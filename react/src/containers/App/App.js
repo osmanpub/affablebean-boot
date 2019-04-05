@@ -1,29 +1,43 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Category from "../../containers/Category";
+import { fetchCategoryIfNeeded } from "../../rest/category";
 import { fetchCategoriesIfNeeded } from "../../rest/categories";
 
 export class App extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCategoriesIfNeeded());
+    const { dispatch, match } = this.props;
+    const { params } = match;
+    const url = match.url;
+
+    if (url.startsWith("/category")) {
+      dispatch(fetchCategoryIfNeeded(params.id));
+    } else {
+      dispatch(fetchCategoriesIfNeeded());
+    }
   }
 
   // 3 renders on start is too much - investigate
   render() {
     const { categories, match } = this.props;
+    const details = () => {
+      const url = match.url;
+
+      if (url.startsWith("/category")) {
+        return "hello";
+      }
+
+      return <Categories categories={categories.items} />;
+    };
 
     return (
-      <Router>
+      <div>
         <Header />
-        {!match && <Categories categories={categories.items} />}
+        {details()}
         <Footer />
-        <Route path="/category/:id" component={Category} />
-      </Router>
+      </div>
     );
   }
 }
