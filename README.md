@@ -1,4 +1,4 @@
-# AffableBean rebooted
+# Affablebean rebooted
 
 This update is a Spring Boot version of the [Affable bean tutorial](https://github.com/osmanpub/affablebean) from 5 years ago.
 
@@ -22,4 +22,6 @@ See the [MySQL README](./mysql/README.md) on how to create and configure the dat
 Once you've set up the database:
 
 1. Run the project from the command line using `sh server` or from Eclipse as a Spring boot app.
-2. Navigate to `http://localhost:8080` in a browser to view the web application.
+2. Navigate to `http://localhost:8080` in a browser to view the web application. 
+
+![Home page](/home.jpg "Affablebean")
