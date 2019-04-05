@@ -23,5 +23,6 @@ Once you've set up the database:
 
 1. Run the project from the command line using `sh server` or from Eclipse as a Spring boot app.
 2. Navigate to `http://localhost:8080` in a browser to view the web application. 
-
+ 
+ 
 ![Home page](/home.jpg "Affablebean")
