@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
-import { fetchCategories } from "../../rest/categories";
+import { fetchCategoriesIfNeeded } from "../../rest/categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
 export class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchCategories());
+    dispatch(fetchCategoriesIfNeeded());
   }
 
   render() {

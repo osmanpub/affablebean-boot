@@ -84,7 +84,9 @@ public class CategoryController {
 
 	@GetMapping("/category/{id}")
 	public Resource<Object> categoryProducts(@PathVariable Short id) {
-		List<Category> categories = repository.findAllOrderByName(Sort.by("name"));
+		List<Resource<Category>> categories = repository.findAllOrderByName(Sort.by("name")).stream()
+				.map(assembler::toResource)
+				.collect(Collectors.toList());
 		Map<String, Object> payload = new HashMap<>();	
 		
 		payload.put("categories", categories);
