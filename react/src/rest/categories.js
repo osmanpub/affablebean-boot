@@ -22,7 +22,7 @@ const fetchCategories = () => dispatch => {
 const shouldFetchCategories = state => {
   const categories = state.categories.items;
 
-  if (!categories) {
+  if (!categories || categories.length === 0) {
     return true;
   }
 
