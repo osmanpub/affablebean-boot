@@ -9,8 +9,6 @@ The AffableBean application requires access to a MySQL database.
 
  2.	Install [Java 8 runtime](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) on your system if it isn't already installed. 
 
- 	If you're a developer you can install the [SDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) instead.
- 		
  3. Run these commands from the **affable-boot** project folder to build and populate the database. 
     Open a terminal, change to the project folder and start mysql:
 	
@@ -30,8 +28,4 @@ The AffableBean application requires access to a MySQL database.
 	mysql> `grant all on affablebean.* to 'springuser'@'%';`
 
  5. Quit the program by typing `quit` to return to the command shell.
- 
- 6. Test the installation by running `sh server` to start the server and type in `http://localhost:8080` in a browser to view the home page.
- 
- 	If everything is OK you should see the front page listing the product categories, along with sample photos. 	
  	
