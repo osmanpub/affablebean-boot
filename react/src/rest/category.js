@@ -1,14 +1,34 @@
 import { client, getPath } from "../utils";
 import { requestCategory, receiveCategory } from "../actions";
 
-export const fetchCategory = id => dispatch => {
+export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
+  if (shouldFetchCategory(getState())) {
+    return dispatch(fetchCategory(id));
+  }
+};
+
+const fetchCategory = id => dispatch => {
   dispatch(requestCategory());
 
   return client
-    .get(getPath("category"), function(data) {
-      dispatch(receiveCategory(data._embedded.categoryList));
+    .get(getPath("category/" + id), function(data) {
+      dispatch(receiveCategory(data.content));
     })
     .on("error", function(err) {
       console.log("something went wrong on the request", err.request.options);
     });
+};
+
+const shouldFetchCategory = state => {
+  const category = state.category.items;
+
+  if (!category || category.length === 0) {
+    return true;
+  }
+
+  if (category.isFetching) {
+    return false;
+  }
+
+  return category.didInvalidate;
 };

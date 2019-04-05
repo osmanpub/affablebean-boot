@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
-import { fetchCategoriesIfNeeded } from "../../rest/categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import Category from "../../containers/Category";
+import { fetchCategoriesIfNeeded } from "../../rest/categories";
 
 export class App extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ export class App extends Component {
         <Header />
         {!match && <Categories categories={categories.items} />}
         <Footer />
-        <Route path="/category/:id" component={App} />
+        <Route path="/category/:id" component={Category} />
       </Router>
     );
   }

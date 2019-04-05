@@ -1,7 +1,9 @@
 package com.affablebean.controller;
 
 import com.affablebean.assembler.CategoryResourceAssembler;
+import com.affablebean.assembler.ProductResourceAssembler;
 import com.affablebean.domain.Category;
+import com.affablebean.domain.Product;
 import com.affablebean.exception.CategoryNotFoundException;
 import com.affablebean.repository.CategoryRepository;
 
@@ -34,6 +36,9 @@ public class CategoryController {
 	@Autowired
 	private CategoryResourceAssembler assembler;
 
+	@Autowired
+	private ProductResourceAssembler productAssembler;
+	
 	@GetMapping("/categories")
 	public Resources<Resource<Category>> all() {
 		List<Resource<Category>> categories = repository.findAllOrderByName(Sort.by("name")).stream()
@@ -96,8 +101,15 @@ public class CategoryController {
 
 			if (selectedCategory.isPresent()) {
 				Category category = selectedCategory.get();
-				payload.put("category", category);
-				payload.put("products", category.getProductCollection());
+				payload.put("category", assembler.toResource(category));
+				
+				List<Resource<Product>> products = category.getProductCollection().stream()
+						.map(productAssembler::toResource)
+						.collect(Collectors.toList());
+
+				payload.put("products", 
+						new Resources<>(products, linkTo(methodOn(ProductController.class).all())
+								.withRel("categoryProducts")));
 			}
 		}
 		

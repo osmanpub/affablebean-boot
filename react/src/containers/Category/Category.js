@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Categories from "../../components/Categories";
 import { fetchCategoryIfNeeded } from "../../rest/category";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
-export class Products extends Component {
+export class Category extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;    
-    dispatch(fetchCategoryIfNeeded());
+    const { dispatch, match } = this.props;
+    const { params } = match;
+    dispatch(fetchCategoryIfNeeded(params.id));
   }
 
   // 3 renders on start is too much - investigate
   render() {
-    const { categories, match }= this.props;
+    const { categories, match } = this.props;
 
     return (
-        <Header />
-        {!match && <Categories categories={categories.items} />}
-        <Footer />
+      // <Header />
+      <Footer />
     );
   }
 }
@@ -31,4 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Category);

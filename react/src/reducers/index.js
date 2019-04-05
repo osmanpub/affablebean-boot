@@ -3,15 +3,19 @@ import { createReducer } from "redux-starter-kit";
 
 const category = createReducer(
   {
+    categories: [],
+    category: {},
     isFetching: false,
     didInvalidate: false,
-    items: []
+    products: []
   },
   {
     RECEIVE_CATEGORY: (state, action) => {
+      state.categories = action.payload.categories;
+      state.category = action.payload.category;
       state.didInvalidate = false;
       state.isFetching = false;
-      state.items = action.payload;
+      state.products = action.payload.category;
     },
     REQUEST_CATEGORY: (state, action) => {
       state.didInvalidate = false;
