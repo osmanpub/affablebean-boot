@@ -1,4 +1,4 @@
-# AffableBean Rebooted
+# AffableBean rebooted
 
 This update is a Spring Boot version of the [Affable bean tutorial](https://github.com/osmanpub/affablebean) from 5 years ago.
 
