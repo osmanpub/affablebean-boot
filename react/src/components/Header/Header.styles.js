@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.div`
 export const HeaderMain = styled.div`
   width: 1080px;
   height: 250px;
-  background: url(static/img/stalk.png) no-repeat 28px 28px;
+  background: url(/static/img/stalk.png) no-repeat 28px 28px;
 `;
 
 export const WidgetBar = styled.div`

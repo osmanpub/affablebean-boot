@@ -1,7 +1,38 @@
 import styled from "styled-components";
 
-export const CategoriesGreeting = styled.p`
-  font-size larger;
+export const CategoryTitle = styled.p`
+  margin-left: 700px;
+  margin-top: -40px;
+  /*right: 200px;*/
+  font-size: x-large;
+  /*position: absolute;*/
+  background-color: #f5eabe;
+  /*padding: 7px;*/
+  /*border-radius: 4px;*/
+`;
+
+export const ProductsLeft = styled.div`
+  width: 185px;
+  float: left;
+  margin-top: 25px;
+  padding-left: 15px;
+`;
+
+export const ProductsRight = styled.div`
+  margin-top: 10px;
+  width: 650px;
+  float: left;
+`;
+
+export const SelectedCategory = styled.span`
+  margin: 15px 22px;
+  padding: 13px;
+  display: block;
+  border-radius: 4px;
+
+  background-color: #b2d2d2;
+  margin-left: 10px;
+  width: 139px;
 `;
 
 // #productTable {
@@ -15,33 +46,3 @@ export const CategoriesGreeting = styled.p`
 // #productTable tr { height: 90px }
 
 // #productTable td { width: 145px }
-
-// #categoryLeftColumn {
-// 	width: 185px;
-// 	float: left;
-// 	margin-top: 25px;
-// 	padding-left: 15px;
-// }
-
-// #categoryRightColumn {
-// 	margin-top: 10px;
-// 	width: 650px;
-// 	float: left;
-// }
-
-// #selectedCategory {
-// 	background-color: #b2d2d2;
-// 	margin-left: 10px;
-// 	width: 139px;
-// }
-
-// #categoryTitle {
-// 	margin-left: 700px;
-// 	margin-top: -40px;
-// 	/*right: 200px;*/
-// 	font-size: x-large;
-// 	/*position: absolute;*/
-// 	background-color: #f5eabe;
-// 	/*padding: 7px;*/
-// 	/*border-radius: 4px;*/
-// }

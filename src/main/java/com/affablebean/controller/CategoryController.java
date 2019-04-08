@@ -101,7 +101,7 @@ public class CategoryController {
 
 			if (selectedCategory.isPresent()) {
 				Category category = selectedCategory.get();
-				payload.put("selectedCategory", assembler.toResource(category));
+				payload.put("category", assembler.toResource(category));
 				
 				List<Resource<Product>> products = category.getProductCollection().stream()
 						.map(productAssembler::toResource)

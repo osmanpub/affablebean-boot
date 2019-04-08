@@ -7,9 +7,9 @@ export function Header(props) {
       <HeaderMain>
         <WidgetBar />
         <a href="/index">
-          <img src="static/img/logo.png" alt="Affable Bean logo" />
+          <img src="/static/img/logo.png" alt="Affable Bean logo" />
         </a>
-        <img src="static/img/logoText.png" alt="the affable bean" />
+        <img src="/static/img/logoText.png" alt="the affable bean" />
       </HeaderMain>
     </HeaderWrapper>
   );

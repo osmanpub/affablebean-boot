@@ -29,8 +29,8 @@ export class App extends Component {
         const { category } = this.props;
         return (
           <Products
-            selectedCategory={category.selectedCategory}
             categories={category.categories}
+            category={category.category}
             products={category.products}
           />
         );
