@@ -29,17 +29,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('a.categoryButton').hover(function() {
-				$(this).animate({
-					backgroundColor : '#b2d2d2'
-				});
-			}, function() {
-				$(this).animate({
-					backgroundColor : '#d3ede8'
-				});
-			});
-
-			$('div.categoryBox').hover(function() {
+			$('span.categoryBox').hover(function() {
 				var span = this.getElementsByTagName('span');
 				$(span[0]).animate({
 					opacity : 0.3

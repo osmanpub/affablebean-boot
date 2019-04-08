@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import Products from "../../components/Products";
 import { fetchCategoryIfNeeded } from "../../rest/category";
 import { fetchCategoriesIfNeeded } from "../../rest/categories";
 
@@ -19,16 +20,23 @@ export class App extends Component {
     }
   }
 
-  // 3 renders on start is too much - investigate
   render() {
-    const { categories, match } = this.props;
+    const { match } = this.props;
     const details = () => {
       const url = match.url;
 
       if (url.startsWith("/category")) {
-        return "hello";
+        const { category } = this.props;
+        return (
+          <Products
+            selectedCategory={category.selectedCategory}
+            categories={category.categories}
+            products={category.products}
+          />
+        );
       }
 
+      const { categories } = this.props;
       return <Categories categories={categories.items} />;
     };
 
@@ -43,9 +51,10 @@ export class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { categories } = state;
+  const { category, categories } = state;
 
   return {
+    category,
     categories
   };
 };

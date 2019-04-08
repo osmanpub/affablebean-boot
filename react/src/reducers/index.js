@@ -12,10 +12,10 @@ const category = createReducer(
   {
     RECEIVE_CATEGORY: (state, action) => {
       state.categories = action.payload.categories;
-      state.category = action.payload.category;
       state.didInvalidate = false;
       state.isFetching = false;
       state.products = action.payload.category;
+      state.selectedCategory = action.payload.selectedCategory;
     }
   }
 );
