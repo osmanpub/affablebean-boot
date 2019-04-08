@@ -16,10 +16,6 @@ const category = createReducer(
       state.didInvalidate = false;
       state.isFetching = false;
       state.products = action.payload.category;
-    },
-    REQUEST_CATEGORY: (state, action) => {
-      state.didInvalidate = false;
-      state.isFetching = true;
     }
   }
 );
@@ -35,10 +31,6 @@ const categories = createReducer(
       state.didInvalidate = false;
       state.isFetching = false;
       state.items = action.payload;
-    },
-    REQUEST_CATEGORIES: (state, action) => {
-      state.didInvalidate = false;
-      state.isFetching = true;
     }
   }
 );

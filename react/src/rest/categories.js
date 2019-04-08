@@ -1,5 +1,5 @@
 import { client, getPath } from "../utils";
-import { requestCategories, receiveCategories } from "../actions";
+import { receiveCategories } from "../actions";
 
 export const fetchCategoriesIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchCategories(getState())) {
@@ -8,8 +8,6 @@ export const fetchCategoriesIfNeeded = () => (dispatch, getState) => {
 };
 
 const fetchCategories = () => dispatch => {
-  dispatch(requestCategories());
-
   return client
     .get(getPath("categories"), function(data) {
       dispatch(receiveCategories(data._embedded.categoryList));

@@ -1,5 +1,8 @@
 # Affablebean rebooted
 
+![Shopping cart](/cart.jpg "Affablebean") 
+
+
 This update is a Spring Boot version of the [Affable bean tutorial](https://github.com/osmanpub/affablebean) from 5 years ago.
 
 It uses the Java 8 SDK and the Spring Framework, edited on an Eclipse IDE.
@@ -26,3 +29,8 @@ Once you've set up the database:
  
  
 ![Home page](/home.jpg "Affablebean")
+
+## React app
+
+See the [React README](./react/README.md) on running the react app
+

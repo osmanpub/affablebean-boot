@@ -1,5 +1,5 @@
 import { client, getPath } from "../utils";
-import { requestCategory, receiveCategory } from "../actions";
+import { receiveCategory } from "../actions";
 
 export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
   if (shouldFetchCategory(getState())) {
@@ -8,8 +8,6 @@ export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
 };
 
 const fetchCategory = id => dispatch => {
-  dispatch(requestCategory());
-
   return client
     .get(getPath("category/" + id), function(data) {
       dispatch(receiveCategory(data.content));
