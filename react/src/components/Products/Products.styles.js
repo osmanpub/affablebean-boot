@@ -24,6 +24,14 @@ export const ProductsRight = styled.div`
   float: left;
 `;
 
+export const ProductsTable = styled.table`
+  width: 600px;
+
+  /* styles to collaborate with rounded categoryLabel */
+  position: relative;
+  z-index: 1;
+`;
+
 export const SelectedCategory = styled.span`
   margin: 15px 22px;
   padding: 13px;
@@ -34,14 +42,6 @@ export const SelectedCategory = styled.span`
   margin-left: 10px;
   width: 139px;
 `;
-
-// #productTable {
-// 	width: 600px;
-
-// 	/* styles to collaborate with rounded categoryLabel */
-// 	position: relative;
-// 	z-index: 1;
-// }
 
 // #productTable tr { height: 90px }
 
