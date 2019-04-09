@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { HeaderMain, HeaderWrapper, WidgetBar } from "./Header.styles";
 
 export function Header(props) {
@@ -6,10 +7,9 @@ export function Header(props) {
     <HeaderWrapper>
       <HeaderMain>
         <WidgetBar />
-        <a href="/index">
+        <Link to={"/"}>
           <img src="/static/img/logo.png" alt="Affable Bean logo" />
-        </a>
-        <img src="/static/img/logoText.png" alt="the affable bean" />
+        </Link>
       </HeaderMain>
     </HeaderWrapper>
   );

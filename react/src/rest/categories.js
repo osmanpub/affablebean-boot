@@ -20,7 +20,7 @@ const fetchCategories = () => dispatch => {
 const shouldFetchCategories = state => {
   const categories = state.categories.items;
 
-  if (!categories || categories.length === 0) {
+  if (categories.length === 0) {
     return true;
   }
 

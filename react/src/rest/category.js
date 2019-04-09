@@ -2,7 +2,7 @@ import { client, getPath } from "../utils";
 import { receiveCategory } from "../actions";
 
 export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
-  if (shouldFetchCategory(getState())) {
+  if (shouldFetchCategory(id, getState())) {
     return dispatch(fetchCategory(id));
   }
 };
@@ -17,10 +17,10 @@ const fetchCategory = id => dispatch => {
     });
 };
 
-const shouldFetchCategory = state => {
+const shouldFetchCategory = (id, state) => {
   const category = state.category;
 
-  if (!category || !category.hasOwnProperty("id")) {
+  if (category.categories.length === 0 || Number(id) !== category.category.id) {
     return true;
   }
 

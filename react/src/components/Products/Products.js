@@ -30,11 +30,11 @@ export function Products(props) {
       );
     } else {
       return (
-        <span className="categoryButton" key={key}>
-          <Link to={"/category/" + category.id}>
+        <Link key={key} to={"/category2/" + category.id}>
+          <span className="categoryButton">
             <span className="categoryText">{name}</span>
-          </Link>
-        </span>
+          </span>
+        </Link>
       );
     }
   });

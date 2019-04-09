@@ -13,7 +13,7 @@ export class App extends Component {
     const { params } = match;
     const url = match.url;
 
-    if (url.startsWith("/category")) {
+    if (url.includes("/category")) {
       dispatch(fetchCategoryIfNeeded(params.id));
     } else {
       dispatch(fetchCategoriesIfNeeded());
@@ -25,7 +25,7 @@ export class App extends Component {
     const details = () => {
       const url = match.url;
 
-      if (url.startsWith("/category")) {
+      if (url.includes("/category")) {
         const { category } = this.props;
         return (
           <Products
