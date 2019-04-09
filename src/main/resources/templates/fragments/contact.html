@@ -26,7 +26,7 @@
 			</div>
 		
 	        <form class="form-horizontal" action="#" th:action="@{/feedback}" th:object="${contactForm}" 
-	        	method="post" >
+	        	method="post" id="contactForm">
 	        	
 				<div class="form-group">
 					<label for="subject_sel" class="col-sm-2 control-label" th:text="#{co3}">
@@ -113,23 +113,6 @@
 		
 			</div>
 		</div>	
-				
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#feedbackForm").validate({
-					rules: {
-						name: "required",
-						email: {
-							required: true,
-							email: true
-						},
-						msg: {
-							required: true
-						}
-					}
-				});
-			});
-		</script>		
 	</div>
 
 	<script type="text/javascript"

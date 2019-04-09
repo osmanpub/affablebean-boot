@@ -78,8 +78,6 @@
 							</td>			
 		
 							<td>
-								<input type="hidden" th:id="'productId' + ${product.id}" th:value="${product.id}">
-	
 								<div class="form-group">
 									<div class="col-sm-10">
 										<input type="number" class="form-control"
@@ -104,18 +102,6 @@
 				</table>		
 			</th:block>
 		</div>
-		
-		<script type="text/javascript">
-			function updateCart(id) {
-		      $.post("/updateCart", {
-		          id: $("#productId" + id).val(),
-		          qty: $("#qty" + id).val()
-		          
-		        }).done(function() {
-		        	location.reload();
-		        });
-			}
-		</script>			
 	</div>
 
 	<script type="text/javascript"

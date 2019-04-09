@@ -11,9 +11,6 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/affablebean.css" th:href="@{/css/affablebean.css}" />
 
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -25,10 +22,30 @@
 	<div th:replace="fragments/footer.html :: frag_footer"></div>
 
 	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#contactForm").validate({
+				rules: {
+					name: "required",
+					email: {
+						required: true,
+						email: true
+					},
+					msg: {
+						required: true
+					}
+				}
+			});
+		});
+	</script>
+		
 </body>
 </html>

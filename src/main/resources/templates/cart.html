@@ -27,5 +27,17 @@
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+	<script type="text/javascript">
+		function updateCart(id) {
+	      $.post("/updateCart", {
+	          id: id,
+	          qty: $("#qty" + id).val()
+	          
+	        }).done(function() {
+	        	location.reload();
+	        });
+		}
+	</script>
+	
 </body>
 </html>

@@ -22,7 +22,7 @@
 			<br>
 			
 	        <form class="form-horizontal" action="#" th:action="@{/purchase}" th:object="${checkoutForm}" 
-	        	method="post">
+	        	method="post" id="checkoutForm">
 			
 				<div class="form-group">
 					<label for="name" class="col-sm-2 control-label" th:text="#{customerName}">
@@ -158,44 +158,6 @@
 				</table>
 			</div>
 		</div>
-		
-		<script type="text/javascript">		
- 			$(document).ready(function() {
- 				$("#checkoutForm").validate({
- 					rules: {
- 						name: {
- 							minlength: 8,
- 							maxlength: 45,
- 							required: true
- 						},
- 						email: {
- 							email: true,
- 							minlength: 8,
- 							maxlength: 45,
- 							required: true
- 						},
- 						phone: {
- 							minlength: 8,
- 							maxlength: 30,
- 							required: true,
- 							number: true
- 						},
- 						address: {
- 							minlength: 8,
- 							maxlength: 45,
- 							required: true
- 						},
- 						creditcard: {
- 							creditcard: true,
- 							minlength: 8,
- 							maxlength: 19,
- 							required: true
- 						}
- 					}
- 				});
- 			});
- 		</script> 
- 				
 	</div>
 
 	<script type="text/javascript"

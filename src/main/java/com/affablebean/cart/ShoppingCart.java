@@ -2,6 +2,7 @@ package com.affablebean.cart;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.stream.Collectors;
 
 import com.affablebean.domain.Product;
 
@@ -20,18 +21,16 @@ public final class ShoppingCart {
 	 * @see ShoppingCartItem
 	 */
 	public void addItem(Product product) {
-		boolean newItem = true;
+		List<ShoppingCartItem> foundItems = items.stream()
+				.filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
+				.collect(Collectors.toList());
 
-		for (ShoppingCartItem scItem : items) {
-			if (Objects.equals(scItem.getProduct().getId(), product.getId())) {
-				newItem = false;
-				scItem.incrementQuantity();
-				break;
-			}
-		}
-
-		if (newItem) {
+		if (foundItems.isEmpty()) {
 			items.add(new ShoppingCartItem(product));
+
+		} else {
+			ShoppingCartItem item = foundItems.get(0);
+			item.incrementQuantity();
 		}
 	}
 
@@ -52,23 +51,19 @@ public final class ShoppingCart {
 			return;
 		}
 
-		ShoppingCartItem item = null;
+		List<ShoppingCartItem> foundItems = items.stream()
+				.filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
+				.collect(Collectors.toList());
 
-		for (ShoppingCartItem scItem : items) {
-			if (Objects.equals(scItem.getProduct().getId(), product.getId())) {
-				if (quantity != 0) {
-					scItem.setQuantity(quantity);
+		if (!foundItems.isEmpty()) {
+			ShoppingCartItem item = foundItems.get(0);
 
-				} else {
-					item = scItem;
-				}
+			if (quantity > 0) {
+				item.setQuantity(quantity);
 
-				break;
+			} else {
+				items.remove(item);
 			}
-		}
-
-		if (item != null) {
-			items.remove(item);
 		}
 	}
 

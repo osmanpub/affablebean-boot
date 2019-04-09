@@ -38,12 +38,11 @@ public class CategoryController {
 
 	@Autowired
 	private ProductResourceAssembler productAssembler;
-	
+
 	@GetMapping("/categories")
 	public Resources<Resource<Category>> all() {
 		List<Resource<Category>> categories = repository.findAllOrderByName(Sort.by("name")).stream()
-				.map(assembler::toResource)
-				.collect(Collectors.toList());
+				.map(assembler::toResource).collect(Collectors.toList());
 
 		return new Resources<>(categories, linkTo(methodOn(CategoryController.class).all()).withSelfRel());
 	}
@@ -90,32 +89,28 @@ public class CategoryController {
 	@GetMapping("/category/{id}")
 	public Resource<Object> categoryProducts(@PathVariable Short id) {
 		List<Resource<Category>> categories = repository.findAllOrderByName(Sort.by("name")).stream()
-				.map(assembler::toResource)
-				.collect(Collectors.toList());
-		Map<String, Object> payload = new HashMap<>();	
-		
+				.map(assembler::toResource).collect(Collectors.toList());
+		Map<String, Object> payload = new HashMap<>();
+
 		payload.put("categories", categories);
-		
+
 		if (id != null) {
 			Optional<Category> selectedCategory = repository.findById(id);
 
 			if (selectedCategory.isPresent()) {
 				Category category = selectedCategory.get();
 				payload.put("category", assembler.toResource(category));
-				
-				List<Resource<Product>> products = category.getProductCollection().stream()
-						.map(productAssembler::toResource)
-						.collect(Collectors.toList());
 
-				payload.put("products", 
-						new Resources<>(products, linkTo(methodOn(ProductController.class).all())
-								.withRel("categoryProducts")));
+				List<Resource<Product>> products = category.getProductCollection().stream()
+						.map(productAssembler::toResource).collect(Collectors.toList());
+
+				payload.put("products", new Resources<>(products,
+						linkTo(methodOn(ProductController.class).all()).withRel("categoryProducts")));
 			}
 		}
-		
-		return new Resource<>(payload,
-				linkTo(methodOn(CategoryController.class).categoryProducts(id)).withSelfRel(),
+
+		return new Resource<>(payload, linkTo(methodOn(CategoryController.class).categoryProducts(id)).withSelfRel(),
 				linkTo(methodOn(CategoryController.class).all()).withRel("categories"));
 	}
-	
+
 }
