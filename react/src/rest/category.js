@@ -18,7 +18,7 @@ const fetchCategory = id => dispatch => {
 };
 
 const shouldFetchCategory = (id, state) => {
-  const category = state.category;
+  const { category } = state;
 
   if (category.categories.length === 0 || Number(id) !== category.category.id) {
     return true;

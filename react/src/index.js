@@ -16,7 +16,6 @@ render(
     <Router>
       <Route path="/" exact component={App} />
       <Route path="/category/:id" component={App} />
-      <Route path="/category2/:id" component={App} />
     </Router>
   </Provider>,
   document.getElementById("root")
