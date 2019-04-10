@@ -36,19 +36,10 @@
 			</th:block>
 		</div>
 		
-		<div id="categoryRightColumn">
-		
+		<div id="categoryRightColumn">		
 			<p id="categoryTitle" th:utext="${selectedCategory.name}"></p>
 		
-			<th:block th:each="promo : ${catProms}">
-				<span th:if="${promo.categoryId == selectedCategory.id}">
-					<span class="saleCat" th:text="#{pro__${promo.description}__}">
-					</span>
-				</span>			
-			</th:block>
-		
-			<table id="productTable" th:each="product, iterStat : ${categoryProducts}">
-		
+			<table id="productTable" th:each="product, iterStat : ${categoryProducts}">		
 				<tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'" th:with="new_price=${product.price}">
 					<td>
 						<img th:src="@{__${prodPath}__/__${product.name}__.png}"

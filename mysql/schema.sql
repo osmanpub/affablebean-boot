@@ -143,25 +143,6 @@ ENGINE = InnoDB
 COMMENT = 'feedback form messages';
 
 
--- -----------------------------------------------------
--- Table `affablebean`.`promotions`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `affablebean`.`promotion` ;
-
-CREATE  TABLE IF NOT EXISTS `affablebean`.`promotion` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `discount` INT UNSIGNED NOT NULL ,
-  `sale` BOOLEAN ,
-  `category_id` INT UNSIGNED ,
-  `product_id` INT UNSIGNED ,
-  `qty` INT UNSIGNED ,
-  `sold` DECIMAL(5,2) ,
-  `description` VARCHAR(255) ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-COMMENT = 'store promotions';
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

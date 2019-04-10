@@ -56,15 +56,6 @@ INSERT INTO `msg_feedback` (`name`, email, msg, subject_id) VALUES ('jane hippie
 INSERT INTO `msg_feedback` (`name`, email, msg, subject_id) VALUES ('gordon gekko', 'lunch.4.wimps@money-never-sleeps.com', 'i want to asset strip your business you punks! capitalism beats socialism if you rig the game for the rich!						', 2);
 
 
---
--- Sample data for table `promotion`
---
-INSERT INTO `promotion` (`name`, discount, sale, category_id, product_id, qty, sold, description) VALUES ('10% OFF SALE', 10, 1, null, null, null, null, '10% OFF ALL ITEMS!! HURRY!! OFFER MUST END SOON!!');
-INSERT INTO `promotion` (`name`, discount, sale, category_id, product_id, qty, sold, description) VALUES ('5% EXTRA OFF ALL DRINKS', 5, null, 6, null, null, null, '5% EXTRA OFF ALL DRINKS');
-INSERT INTO `promotion` (`name`, discount, sale, category_id, product_id, qty, sold, description) VALUES ('20% OFF OATS', 20, null, null, 17, 2, null, "20% EXTRA OFF WHEN YOU BUY 2 OR MORE OAT PRODUCTS! (not implemented)");
-INSERT INTO `promotion` (`name`, discount, sale, category_id, product_id, qty, sold, description) VALUES ('20% OFF OATS', 20, null, null, 18, 2, null, "20% EXTRA OFF WHEN YOU BUY 2 OR MORE OAT PRODUCTS! (not implemented)");
-
-
 -- (without description)
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('milk', 1.70, 1);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('cheese', 2.39, 1);

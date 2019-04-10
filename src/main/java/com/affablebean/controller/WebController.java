@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -30,7 +31,6 @@ import com.affablebean.repository.CategoryRepository;
 import com.affablebean.repository.MsgFeedbackRepository;
 import com.affablebean.repository.MsgSubjectRepository;
 import com.affablebean.repository.ProductRepository;
-import com.affablebean.repository.PromotionRepository;
 import com.affablebean.service.OrderManager;
 
 @Controller
@@ -59,9 +59,6 @@ public class WebController implements WebMvcConfigurer {
 	private ProductRepository productRepository;
 
 	@Resource
-	private PromotionRepository promotionRepository;
-
-	@Resource
 	private OrderManager orderManager;
 
 	@PostMapping({ "/addToCart" })
@@ -73,6 +70,15 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/category?id=" + categoryId;
 	}
 
+	@PostMapping({ "/addToCart2" })
+	@ResponseBody
+	public ShoppingCart addToCart2(@ModelAttribute("cart") ShoppingCart cart,
+			@RequestParam(name = "id", required = true) Integer id) {
+
+		addToShoppingCart(cart, id);
+		return cart;
+	}
+	
 	@GetMapping({ "/cart" })
 	public String cart() {
 		return "cart";
