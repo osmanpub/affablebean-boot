@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,8 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/index").permitAll()
-				.antMatchers("/addToCart", "/cart", "/category", "/checkout", "/confirmation", "/contact",
-						"customerOrders", "/feedback", "/privacy", "/purchase", "/updateCart", "/viewCart")
+				.antMatchers("/addToCart", "/addToCart2", "/cart", "/category", "/checkout", "/confirmation",
+						"/contact", "customerOrders", "/feedback", "/privacy", "/purchase", "/updateCart", "/viewCart")
 				.permitAll().antMatchers("/api/**", "/css/**", "/img/**").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 
@@ -35,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		SessionManagementConfigurer<HttpSecurity> sessionManagement = http.sessionManagement();
 
 		sessionManagement.invalidSessionUrl("/index.html").maximumSessions(2);
-
+		sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 		sessionManagement.sessionFixation().migrateSession();
 	}
 

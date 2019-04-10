@@ -31,7 +31,7 @@ export class App extends Component {
   }
 
   render() {
-    const { match } = this.props;
+    const { cart, categories, dispatch, match } = this.props;
     const details = () => {
       const url = match.url;
 
@@ -41,18 +41,18 @@ export class App extends Component {
           <Products
             categories={category.categories}
             category={category.category}
+            dispatch={dispatch}
             products={category.products}
           />
         );
       }
 
-      const { categories } = this.props;
       return <Categories categories={categories.items} />;
     };
 
     return (
       <div>
-        <Header />
+        <Header cart={cart} />
         {details()}
         <Footer />
       </div>
@@ -61,9 +61,10 @@ export class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { category, categories } = state;
+  const { cart, category, categories } = state;
 
   return {
+    cart,
     category,
     categories
   };

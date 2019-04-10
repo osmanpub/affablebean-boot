@@ -1,7 +1,7 @@
 import { getPath } from "../utils";
 import { addToCart } from "../actions";
 
-export const addToCart = id => dispatch => {
+export const addProductToCart = id => dispatch => {
   return fetch(getPath("addToCart2?id=" + id), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin

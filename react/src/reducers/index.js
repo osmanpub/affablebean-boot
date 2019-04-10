@@ -1,6 +1,17 @@
 import { combineReducers } from "redux";
 import { createReducer } from "redux-starter-kit";
 
+const addToCart = createReducer(
+  {
+    cart: {}
+  },
+  {
+    ADD_TO_CART: (state, action) => {
+      state.cart = action.payload.cart;
+    }
+  }
+);
+
 const category = createReducer(
   {
     categories: [],
@@ -36,6 +47,7 @@ const categories = createReducer(
 );
 
 const rootReducer = combineReducers({
+  addToCart,
   category,
   categories
 });

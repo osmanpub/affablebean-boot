@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,7 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/category?id=" + categoryId;
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 	@PostMapping({ "/addToCart2" })
 	@ResponseBody
 	public ShoppingCart addToCart2(@ModelAttribute("cart") ShoppingCart cart,
@@ -78,7 +80,7 @@ public class WebController implements WebMvcConfigurer {
 		addToShoppingCart(cart, id);
 		return cart;
 	}
-	
+
 	@GetMapping({ "/cart" })
 	public String cart() {
 		return "cart";

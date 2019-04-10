@@ -1,4 +1,4 @@
-import { client, getPath } from "../utils";
+import { client, getRestPath } from "../utils";
 import { receiveCategory } from "../actions";
 
 export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
@@ -9,7 +9,7 @@ export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
 
 const fetchCategory = id => dispatch => {
   return client
-    .get(getPath("category/" + id), function(data) {
+    .get(getRestPath("category/" + id), function(data) {
       dispatch(receiveCategory(data.content));
     })
     .on("error", function(err) {

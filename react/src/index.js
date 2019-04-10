@@ -12,12 +12,14 @@ const store = configureStore({
 });
 
 render(
+  // <React.StrictMode>
   <Provider store={store}>
     <Router>
       <Route path="/" exact component={App} />
       <Route path="/category/:id" component={App} />
     </Router>
   </Provider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

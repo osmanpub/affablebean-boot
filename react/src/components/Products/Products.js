@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Products.css";
+import { addProductToCart } from "../../rest/cart";
 import {
   CategoryTitle,
   ProductsLeft,
@@ -17,7 +18,7 @@ export class Products extends Component {
 
   addToCart(productId) {
     const { dispatch } = this.props;
-    // dispatch(fetchCategoryIfNeeded(id));
+    dispatch(addProductToCart(productId));
   }
 
   render() {
