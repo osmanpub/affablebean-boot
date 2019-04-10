@@ -3,11 +3,20 @@ import { createReducer } from "redux-starter-kit";
 
 const addToCart = createReducer(
   {
-    cart: {}
+    cart: {
+      items: [],
+      numberOfItems: 0,
+      subtotal: 0
+    }
   },
   {
     ADD_TO_CART: (state, action) => {
-      state.cart = action.payload.cart;
+      const { cart } = state;
+      const newCart = action.payload.cart;
+
+      cart.subtotal += newCart.subtotal;
+      cart.numberOfItems += newCart.numberOfItems;
+      cart.items = cart.items.concat(newCart.items[0]);
     }
   }
 );

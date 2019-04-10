@@ -16,9 +16,9 @@ export class Products extends Component {
     this.addToCart = this.addToCart.bind(this);
   }
 
-  addToCart(productId) {
+  addToCart(id) {
     const { dispatch } = this.props;
-    dispatch(addProductToCart(productId));
+    dispatch(addProductToCart(id));
   }
 
   render() {
