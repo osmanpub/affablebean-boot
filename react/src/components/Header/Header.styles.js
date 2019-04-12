@@ -10,6 +10,8 @@ export const HeaderMain = styled.div`
   background: url(/static/img/stalk.png) no-repeat 28px 28px;
 `;
 
-export const HomeLogo = styled.div`
+export const Logo = styled.div`
   float: left;
+  margin-left: 30px;
+  margin-top: -20px;
 `;

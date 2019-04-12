@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { fetchCategoriesIfNeeded } from "../../rest/categories";
 
-export class App extends Component {
+export class Home extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCategoriesIfNeeded());
@@ -38,4 +38,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Home);

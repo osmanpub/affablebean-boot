@@ -4,7 +4,7 @@ import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import reducer from "./reducers";
-import App from "./containers/App";
+import Home from "./containers/Home";
 import CategoryProducts from "./containers/CategoryProducts";
 import * as serviceWorker from "./serviceWorker";
 
@@ -16,7 +16,7 @@ render(
   // <React.StrictMode>
   <Provider store={store}>
     <Router>
-      <Route path="/" exact component={App} />
+      <Route path="/" exact component={Home} />
       <Route path="/category/:id" component={CategoryProducts} />
     </Router>
   </Provider>,
