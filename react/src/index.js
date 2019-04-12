@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import reducer from "./reducers";
 import App from "./containers/App";
+import CategoryProducts from "./containers/CategoryProducts";
 import * as serviceWorker from "./serviceWorker";
 
 const store = configureStore({
@@ -16,7 +17,7 @@ render(
   <Provider store={store}>
     <Router>
       <Route path="/" exact component={App} />
-      <Route path="/category/:id" component={App} />
+      <Route path="/category/:id" component={CategoryProducts} />
     </Router>
   </Provider>,
   // </React.StrictMode>,
