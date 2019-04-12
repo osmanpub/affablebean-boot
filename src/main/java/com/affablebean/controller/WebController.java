@@ -74,9 +74,8 @@ public class WebController implements WebMvcConfigurer {
 	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 	@PostMapping({ "/addToCart2" })
 	@ResponseBody
-	public ShoppingCart addToCart2(@ModelAttribute("cart") ShoppingCart cart,
-			@RequestParam(name = "id", required = true) Integer id) {
-
+	public ShoppingCart addToCart2(@RequestParam(name = "id", required = true) Integer id) {
+		ShoppingCart cart = new ShoppingCart();
 		addToShoppingCart(cart, id);
 		return cart;
 	}

@@ -4,7 +4,7 @@ import { createReducer } from "redux-starter-kit";
 const addToCart = createReducer(
   {
     cart: {
-      items: [],
+      items: "",
       numberOfItems: 0,
       subtotal: 0
     }
@@ -12,11 +12,14 @@ const addToCart = createReducer(
   {
     ADD_TO_CART: (state, action) => {
       const { cart } = state;
+      let { items } = cart;
       const newCart = action.payload.cart;
 
       cart.subtotal += newCart.subtotal;
       cart.numberOfItems += newCart.numberOfItems;
-      cart.items = cart.items.concat(newCart.items[0]);
+
+      const item = JSON.stringify(newCart.items[0]) + "\n";
+      cart.items = items + item;
     }
   }
 );
