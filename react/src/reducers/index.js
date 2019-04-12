@@ -24,6 +24,14 @@ function cart(
       };
     }
 
+    case "CLEAR_CART": {
+      return {
+        items: [],
+        numberOfItems: 0,
+        subtotal: 0
+      };
+    }
+
     case "UPDATE_CART": {
       const cart = action.payload.cart;
       const item = cart.items[0];

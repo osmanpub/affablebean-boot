@@ -72,6 +72,10 @@ label.error {
   border-radius: 4px;
 }
 
+.hMargin {
+  margin: 0 30px;
+}
+
 .smallText {
   font-size: small;
 }

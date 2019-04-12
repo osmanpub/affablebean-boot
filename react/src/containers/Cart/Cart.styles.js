@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-export const EmptyCart = styled.div`
-  display: ${cart => (cart.numberOfItems === 0 ? "block" : "none")};
+export const ActionBar = styled.div`
+  margin: 30px;
+  width: 750px;
+  text-align: center;
 `;

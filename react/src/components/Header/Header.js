@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HeaderMain, HeaderWrapper, Logo } from "./Header.styles";
 import WidgetBar from "../WidgetBar";
-import "./Header.css";
 
 export function Header(props) {
   const { cart } = props;
