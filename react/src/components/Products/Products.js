@@ -85,7 +85,7 @@ export class Products extends Component {
                 className="btn btn-primary btn-sm"
                 onClick={this.addToCart.bind(this, product.id)}
               >
-                <span>add</span>
+                add
               </button>
             </td>
 

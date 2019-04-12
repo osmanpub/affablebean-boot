@@ -17,7 +17,7 @@ export function Header(props) {
           </Link>
         </Logo>
         <img
-          className="logoText"
+          id="logoText"
           src="/static/img/logoText.png"
           alt="the affable bean"
         />

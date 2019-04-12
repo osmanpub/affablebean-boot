@@ -16,13 +16,13 @@
 
 <body>
 	<div th:fragment="frag_cart">
-		<div id="singleColumn">
+		<div class="singleColumn">
 		
 			<div th:if="${cart.numberOfItems} == 0">
 				<span th:text="#{yourCartEmpty}"></span>				
 			</div>
 						
-			<div th:if="${cart.numberOfItems} gt 1">
+			<div th:if="${cart.numberOfItems} gt 0">
 				<span th:text="#{yourCartContains} + ' ' + ${cart.numberOfItems} + ' ' + #{items}"></span>				
 			</div>
 		
