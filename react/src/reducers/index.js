@@ -1,28 +1,29 @@
 import { combineReducers } from "redux";
 import { createReducer } from "redux-starter-kit";
 
-const addToCart = createReducer(
-  {
-    cart: {
-      items: "",
-      numberOfItems: 0,
-      subtotal: 0
-    }
+function cart(
+  state = {
+    items: [],
+    numberOfItems: 0,
+    subtotal: 0
   },
-  {
-    ADD_TO_CART: (state, action) => {
-      const { cart } = state;
-      let { items } = cart;
-      const newCart = action.payload.cart;
+  action
+) {
+  switch (action.type) {
+    case "ADD_TO_CART": {
+      const cart = action.payload.cart;
 
-      cart.subtotal += newCart.subtotal;
-      cart.numberOfItems += newCart.numberOfItems;
-
-      const item = JSON.stringify(newCart.items[0]) + "\n";
-      cart.items = items + item;
+      return {
+        items: state.items.concat(JSON.parse(JSON.stringify(cart.items[0]))),
+        numberOfItems: state.numberOfItems + cart.numberOfItems,
+        subtotal: state.subtotal + cart.subtotal
+      };
     }
+
+    default:
+      return state;
   }
-);
+}
 
 const category = createReducer(
   {
@@ -59,7 +60,7 @@ const categories = createReducer(
 );
 
 const rootReducer = combineReducers({
-  addToCart,
+  cart,
   category,
   categories
 });

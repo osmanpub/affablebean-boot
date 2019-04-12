@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HeaderMain, HeaderWrapper, WidgetBar } from "./Header.styles";
+import { HeaderMain, HeaderWrapper } from "./Header.styles";
+import WidgetBar from "../WidgetBar";
 
 export function Header(props) {
   return (
