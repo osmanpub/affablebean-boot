@@ -170,6 +170,17 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/cart";
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@PostMapping({ "/updateCart2" })
+	@ResponseBody
+	public ShoppingCart updateCart2(@RequestParam(name = "id", required = true) Integer id,
+			@RequestParam(name = "qty", required = true) Short qty) {
+
+		ShoppingCart cart = new ShoppingCart();
+		updateShoppingCart(cart, id, qty);
+		return cart;
+	}
+
 	@GetMapping({ "/viewCart" })
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {

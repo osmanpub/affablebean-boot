@@ -23,7 +23,7 @@ export function WidgetBar(props) {
           {cart && cart.numberOfItems + " items"}
         </span>
 
-        <Link className="bubble" to={"/viewCart?clear=false"}>
+        <Link className="bubble" to={"/viewCart/:false"}>
           view cart
         </Link>
       </ViewCart>

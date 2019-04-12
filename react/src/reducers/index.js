@@ -9,15 +9,32 @@ function cart(
   },
   action
 ) {
+  function getCartItem(cart) {
+    return JSON.parse(JSON.stringify(cart.items[0]));
+  }
+
   switch (action.type) {
     case "ADD_TO_CART": {
       const cart = action.payload.cart;
 
       return {
-        items: state.items.concat(JSON.parse(JSON.stringify(cart.items[0]))),
+        items: state.items.concat(getCartItem(cart)),
         numberOfItems: state.numberOfItems + cart.numberOfItems,
         subtotal: state.subtotal + cart.subtotal
       };
+    }
+
+    case "UPDATE_CART": {
+      const cart = action.payload.cart;
+      const item = cart.items[0];
+
+      return state.map((product, index) => {
+        if (product.index === item.index) {
+          return getCartItem(cart);
+        }
+
+        return [product];
+      });
     }
 
     default:
