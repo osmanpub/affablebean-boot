@@ -6,12 +6,12 @@ export const WidgetBarWrapper = styled.div`
   float: right;
 `;
 
-export const HeaderWidget = styled.div`
-  width: 250px;
-  margin: 20px 0;
-  font-size: small;
-  float: right;
-  line-height: 25px;
+export const Checkout = styled.div`
+  display: ${cart => (cart.numberOfItems > 0 ? "block" : "none")};
+`;
+
+export const ViewCart = styled.div`
+  display: ${cart => (cart.numberOfItems > 0 ? "block" : "none")};
 `;
 
 // #logo {
@@ -23,11 +23,6 @@ export const HeaderWidget = styled.div`
 // #cart {
 // 	position: absolute;
 // 	margin: 5px 0 0 2px;
-// }
-
-// .horizontalMargin {
-// 	margin-left: 28px;
-// 	margin-right: 5px
 // }
 
 // #viewCart {

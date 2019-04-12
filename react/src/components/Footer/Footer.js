@@ -6,7 +6,7 @@ export function Footer(props) {
     <FooterWrapper>
       <br />
       <FooterDivider />
-      <FooterText className="reallySmallText">
+      <FooterText>
         <button className="btn btn-link">Privacy</button>
         <button className="btn btn-link">Contact</button>
         &nbsp;&copy;&nbsp;2019 the affable bean company

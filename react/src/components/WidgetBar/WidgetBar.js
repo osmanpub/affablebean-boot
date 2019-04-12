@@ -1,17 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HeaderWidget, WidgetBarWrapper } from "./WidgetBar.styles";
+import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
+import "./WidgetBar.css";
 
 export function WidgetBar(props) {
+  const cart = props.cart;
+
   return (
     <WidgetBarWrapper>
-      <HeaderWidget>
+      <Checkout className="headerWidget" {...cart}>
         <div>
           <Link className="bubble" to={"/checkout"}>
-            proceed to checkout &#x279f
+            proceed to checkout &#x279f;
           </Link>
         </div>
-      </HeaderWidget>
+      </Checkout>
+
+      <ViewCart className="headerWidget" {...cart}>
+        <span className="horizontalMargin">
+          <img src="/static/img/cart.gif" alt="shopping cart icon" />
+          &nbsp;
+          {cart && cart.numberOfItems + " items"}
+        </span>
+
+        <Link className="bubble" to={"/viewCart?clear=false"}>
+          view cart
+        </Link>
+      </ViewCart>
     </WidgetBarWrapper>
   );
 }

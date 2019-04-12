@@ -1,62 +1,81 @@
-
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	width: 1080px;
-	text-align: center;
-	margin: 20px auto;
-	color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 1080px;
+  text-align: center;
+  margin: 20px auto;
+  color: #444;
 }
 
 hr {
-	border: 0;
-	background-color: #333;
-	height: 1px;
+  border: 0;
+  background-color: #333;
+  height: 1px;
 }
 
 table {
-	margin: 0 20px;
-	border-spacing: 0;
-	text-align: center;
-	border: solid 1px #f5eabe;
+  margin: 0 20px;
+  border-spacing: 0;
+  text-align: center;
+  border: solid 1px #f5eabe;
 }
 
 a {
-	color: inherit;
-	text-decoration: underline;
+  color: inherit;
+  text-decoration: underline;
 }
 
-a:hover { text-decoration: none }
+a:hover {
+  text-decoration: none;
+}
 
-a:visited { color: inherit }
+a:visited {
+  color: inherit;
+}
 
-img { border: none }
+img {
+  border: none;
+}
 
-input, select { margin: 5px }
+input,
+select {
+  margin: 5px;
+}
 
-li { margin: 10px 0 }
+li {
+  margin: 10px 0;
+}
 
-label { line-height: 30px }
+label {
+  line-height: 30px;
+}
 
 label.error {
-	font-size: smaller;
-	line-height: 20px;
-	font-style: italic;
+  font-size: smaller;
+  line-height: 20px;
+  font-style: italic;
 }
 
-.lightBlue { background-color: #edf8f7 }
+.lightBlue {
+  background-color: #edf8f7;
+}
 
-.white { background-color: #fff }
+.white {
+  background-color: #fff;
+}
 
 .bubble {
-	font-weight: bold;
-	background-color: #f5eabe;
-	padding: 5px;
-	color: inherit;
-	display: inline;
-	border-radius: 4px;
+  font-weight: bold;
+  background-color: #f5eabe;
+  padding: 5px;
+  color: inherit;
+  display: inline;
+  border-radius: 4px;
 }
 
-.smallText { font-size: small; }
+.smallText {
+  font-size: small;
+}
 
-.reallySmallText { font-size: xx-small; }
-
+.reallySmallText {
+  font-size: xx-small;
+}

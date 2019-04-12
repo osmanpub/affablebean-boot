@@ -9,3 +9,7 @@ export const HeaderMain = styled.div`
   height: 250px;
   background: url(/static/img/stalk.png) no-repeat 28px 28px;
 `;
+
+export const HomeLogo = styled.div`
+  float: left;
+`;
