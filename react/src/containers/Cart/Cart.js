@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { updateProductInCart } from "../../rest/cart";
-import { ActionBar } from "./Cart.styles";
+import { updateProductInCart } from "../../net/cart";
+import {
+  ActionBar,
+  CartHdr,
+  CartTable,
+  ShoppingCart,
+  Subtotal
+} from "./Cart.styles";
 import { clearCart } from "../../actions";
 
 export class Cart extends Component {
@@ -31,6 +38,10 @@ export class Cart extends Component {
     const { cart } = this.props;
     const { numberOfItems } = cart;
 
+    const items = cart.items.map(item => (
+      <CartItem key={item.product.id} item={item} />
+    ));
+
     return (
       <div>
         <Header cart={cart} />
@@ -46,12 +57,23 @@ export class Cart extends Component {
               continue shopping
             </Link>
           </ActionBar>
-          {/* <button
-            className="btn btn-primary btn-sm"
-            onClick={this.updateCart.bind(this, product.id, 1)}
-          >
-            update
-          </button> */}
+          <ShoppingCart {...cart}>
+            <Subtotal>
+              subtotal &euro;
+              {cart.subtotal}
+            </Subtotal>
+            <CartTable>
+              <tbody>
+                <CartHdr>
+                  <th>product</th>
+                  <th>name</th>
+                  <th>price</th>
+                  <th>quantity</th>
+                </CartHdr>
+                {items}
+              </tbody>
+            </CartTable>
+          </ShoppingCart>
         </div>
         <Footer />
       </div>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Products from "../../components/Products";
-import { fetchCategoryIfNeeded } from "../../rest/category";
+import { fetchCategoryIfNeeded } from "../../net/category";
 
 export class CategoryProducts extends Component {
   componentDidMount() {

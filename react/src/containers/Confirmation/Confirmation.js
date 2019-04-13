@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { fetchCategoriesIfNeeded } from "../../rest/categories";
+import { fetchCategoriesIfNeeded } from "../../net/categories";
 
 export class Confirmation extends Component {
   componentDidMount() {
