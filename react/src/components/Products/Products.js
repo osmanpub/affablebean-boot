@@ -42,7 +42,7 @@ export class Products extends Component {
         );
       } else {
         return (
-          <Link key={key} to={"/category/" + category.id}>
+          <Link key={key} to={`/category/${category.id}`}>
             <span className="categoryButton">
               <span className="categoryText">{name}</span>
             </span>
@@ -54,21 +54,16 @@ export class Products extends Component {
     const products = this.props.products._embedded.productList.map(
       (product, index) => {
         const name = product.name;
+        const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
         return (
-          <tr
-            key={product._links.self.href}
-            className="{index % 2 === 0 ? 'white' : 'lightBlue'}"
-          >
+          <tr key={product._links.self.href} className={`${rowCol}`}>
             <td>
-              <img
-                src={"/static/img/products/" + name + ".png"}
-                alt="{product.name}"
-              />
+              <img src={`/static/img/products/${name}.png`} alt="{name}" />
             </td>
 
             <td>
-              <span>{name}</span>
+              {name}
               <br />
               <span className="smallText">{product.description}</span>
             </td>
@@ -82,7 +77,7 @@ export class Products extends Component {
 
             <td>
               <button
-                className="btn btn-primary btn-sm"
+                className="`btn btn-primary btn-sm`"
                 onClick={this.addToCart.bind(this, product.id)}
               >
                 add

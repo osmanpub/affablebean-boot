@@ -1,63 +1,65 @@
-import React from "react";
+import React, { Component } from "react";
+import { updateProductInCart } from "../../net/cart";
+import { CartTableTd } from "./CartItem.styles";
 
-export function CartItem(props) {
-  const { item } = props;
-  const { product } = item;
-  const name = product.name;
+export class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { qty: 0 };
+    this.updateCart = this.updateCart.bind(this);
+  }
 
-  return (
-    <React.Fragment>
-      <tr>
-        <td>
-          <img
-            src={"/static/img/products/" + name + ".png"}
-            alt="{product.name}"
-          />
-        </td>
-      </tr>
-    </React.Fragment>
-  );
-}
+  updateCart(id, qty) {
+    const { dispatch } = this.props;
+    dispatch(updateProductInCart(id, qty));
+  }
 
-{
-  /* <tr th:class="${iterStat.odd} ? 'white' : 'lightBlue'">		
-<td>
-  <img th:src="@{__${prodPath}__/__${product.name}__.png}"
-       th:alt="#{${product.name}}">
-</td>
+  render() {
+    const { index, item } = this.props;
+    const { product } = item;
+    const name = product.name;
+    const rowCol = index % 2 === 0 ? "white" : "lightBlue";
+    const inputStyle = {
+      margin: "5px",
+      textAlign: "center"
+    };
 
-<td th:utext="#{${product.name}}"></td>
-
-<td> 
-  &euro; 
-  <span th:text="${#numbers.formatDecimal(cartItem.total, 0, 'COMMA', 2, 'POINT')}">
-    10.00
-  </span>
-  <br>
-  <span class="smallText" 
-    th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')} + ' ' + #{unit}">
-    10.00
-  </span>
-</td>			
-
-<td>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="number" class="form-control"
-             th:id="'qty' + ${product.id}" 
-             maxlength="2" size="2"
-             th:value="${cartItem.quantity}"
-             style="margin:5px; text-align: center;">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary btn-sm" th:onclick="'updateCart(' + ${product.id} + ')'">
-        <span th:text="#{update}"></span>
-      </button>										
-    </div>
-  </div>
-</td>
-</tr> */
+    return (
+      <React.Fragment>
+        <tr className={`${rowCol}`}>
+          <CartTableTd>
+            <img src={`/static/img/products/${name}.png`} alt="{name}" />
+          </CartTableTd>
+          <CartTableTd>{name}</CartTableTd>
+          <CartTableTd>
+            &euro;
+            {item.total}
+            <br />
+            {product.price}
+          </CartTableTd>
+          <CartTableTd>&nbsp;&nbsp;</CartTableTd>
+          <CartTableTd>
+            <div className="form-group">
+              <div className="col-sm-10">
+                <input
+                  type="number"
+                  className="form-control"
+                  maxLength="2"
+                  size="2"
+                  style={inputStyle}
+                  value="{this.state.qty}"
+                />
+              </div>
+            </div>
+            <button
+              className="`btn btn-primary btn-sm`"
+              onClick={this.updateCart.bind(this, product.id, 0)}
+            >
+              update
+            </button>
+          </CartTableTd>
+        </tr>
+      </React.Fragment>
+    );
+  }
 }

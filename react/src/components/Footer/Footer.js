@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FooterDivider, FooterText, FooterWrapper } from "./Footer.styles";
 
 export function Footer(props) {
@@ -7,8 +8,12 @@ export function Footer(props) {
       <br />
       <FooterDivider />
       <FooterText>
-        <button className="btn btn-link">Privacy</button>
-        <button className="btn btn-link">Contact</button>
+        <Link to={"/privacy"}>
+          <button className={`btn btn-link`}>Privacy</button>
+        </Link>
+        <Link to={"/contact"}>
+          <button className={`btn btn-link`}>Contact</button>
+        </Link>
         &nbsp;&copy;&nbsp;2019 the affable bean company
       </FooterText>
     </FooterWrapper>

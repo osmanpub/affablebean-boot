@@ -8,11 +8,11 @@ export function Category(props) {
 
   return (
     <span className="categoryBox">
-      <Link to={"/category/" + category.id}>
+      <Link to={`/category/${category.id}`}>
         <span className="categoryLabel" />
         <span className="categoryLabelText">{name}</span>
         <img
-          src={"/static/img/categories/" + name + ".jpg"}
+          src={`/static/img/categories/${name}.jpg`}
           alt={name}
           className="categoryImage"
         />

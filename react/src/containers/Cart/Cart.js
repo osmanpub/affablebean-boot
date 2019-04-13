@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { updateProductInCart } from "../../net/cart";
 import {
   ActionBar,
   CartHdr,
@@ -15,11 +14,6 @@ import {
 import { clearCart } from "../../actions";
 
 export class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.updateCart = this.updateCart.bind(this);
-  }
-
   componentDidUpdate(prevProps) {
     const { cart, dispatch, match } = this.props;
     const { params } = match;
@@ -29,17 +23,12 @@ export class Cart extends Component {
     }
   }
 
-  updateCart(id, qty) {
-    const { dispatch } = this.props;
-    dispatch(updateProductInCart(id, qty));
-  }
-
   render() {
     const { cart } = this.props;
     const { numberOfItems } = cart;
 
-    const items = cart.items.map(item => (
-      <CartItem key={item.product.id} item={item} />
+    const items = cart.items.map((item, index) => (
+      <CartItem key={item.product.id} item={item} index={index} />
     ));
 
     return (
