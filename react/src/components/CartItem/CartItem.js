@@ -5,13 +5,27 @@ import { CartTableTd } from "./CartItem.styles";
 export class CartItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { qty: 0 };
-    this.updateCart = this.updateCart.bind(this);
+
+    const { item } = this.props;
+    const { product } = item;
+
+    this.state = {
+      id: product.id,
+      qty: item.quantity
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updateCart(id, qty) {
+  handleChange(event) {
+    this.setState({ qty: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(updateProductInCart(id, qty));
+    dispatch(updateProductInCart(this.state.id, Number(this.state.qty)));
   }
 
   render() {
@@ -37,26 +51,21 @@ export class CartItem extends Component {
             <br />
             {product.price}
           </CartTableTd>
-          <CartTableTd>&nbsp;&nbsp;</CartTableTd>
           <CartTableTd>
-            <div className="form-group">
-              <div className="col-sm-10">
-                <input
-                  type="number"
-                  className="form-control"
-                  maxLength="2"
-                  size="2"
-                  style={inputStyle}
-                  value="{this.state.qty}"
-                />
-              </div>
-            </div>
-            <button
-              className="`btn btn-primary btn-sm`"
-              onClick={this.updateCart.bind(this, product.id, 0)}
-            >
-              update
-            </button>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                className="form-control"
+                maxLength="2"
+                onChange={this.handleChange}
+                size="2"
+                style={inputStyle}
+                type="number"
+                value={this.state.qty}
+              />
+              <button className="`btn btn-primary btn-sm`" type="submit">
+                update
+              </button>
+            </form>
           </CartTableTd>
         </tr>
       </React.Fragment>

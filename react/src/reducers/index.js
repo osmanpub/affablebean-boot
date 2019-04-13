@@ -35,13 +35,16 @@ function cart(
     case "UPDATE_CART": {
       const cart = action.payload.cart;
       const item = cart.items[0];
+      const { product } = item;
 
-      return state.map((product, index) => {
-        if (product.index === item.index) {
+      return state.items.map((item, index) => {
+        const itemProduct = item.product;
+
+        if (product.id === itemProduct.id) {
           return getCartItem(cart);
         }
 
-        return [product];
+        return [item];
       });
     }
 

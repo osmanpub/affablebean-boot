@@ -176,9 +176,7 @@ public class WebController implements WebMvcConfigurer {
 	public ShoppingCart updateCart2(@RequestParam(name = "id", required = true) Integer id,
 			@RequestParam(name = "qty", required = true) Short qty) {
 
-		ShoppingCart cart = new ShoppingCart();
-		updateShoppingCart(cart, id, qty);
-		return cart;
+		return updateShoppingCart(id, qty);
 	}
 
 	@GetMapping({ "/viewCart" })
@@ -260,4 +258,21 @@ public class WebController implements WebMvcConfigurer {
 		}
 	}
 
+	private ShoppingCart updateShoppingCart(Integer productId, Short quantity) {
+		ShoppingCart cart = new ShoppingCart();
+
+		if (quantity == null) {
+			return cart;
+		}
+
+		Optional<Product> optProduct = productRepository.findById(productId);
+
+		if (optProduct.isPresent()) {
+			Product product = optProduct.get();
+			cart.addItem(product);
+			cart.update(product, quantity);
+		}
+
+		return cart;
+	}
 }

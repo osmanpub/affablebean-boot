@@ -24,11 +24,16 @@ export class Cart extends Component {
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart, dispatch } = this.props;
     const { numberOfItems } = cart;
 
     const items = cart.items.map((item, index) => (
-      <CartItem key={item.product.id} item={item} index={index} />
+      <CartItem
+        key={item.product.id}
+        dispatch={dispatch}
+        index={index}
+        item={item}
+      />
     ));
 
     return (
