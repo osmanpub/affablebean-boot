@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./Category.css";
 
 export function Category(props) {
-  const category = props.category;
-  const name = category.name;
+  const { category } = props;
+  const { name } = category;
 
   return (
     <span className="categoryBox">

@@ -51,9 +51,9 @@ function cart(
         const removedItem = state.items.filter(
           item => item.product.id === id
         )[0];
+
         numberOfItemsChange = removedItem.quantity * -1;
         subtotalChange = removedItem.total * -1;
-
         items = state.items.filter(item => item.product.id !== id);
       } else {
         items = state.items.map(item => {

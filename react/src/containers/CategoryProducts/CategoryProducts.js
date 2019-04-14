@@ -24,7 +24,7 @@ export class CategoryProducts extends Component {
   }
 
   render() {
-    const { cart, category, dispatch } = this.props;
+    const { cart, category, dispatch, match } = this.props;
 
     if (!category.category.hasOwnProperty("id")) {
       return null;
@@ -32,7 +32,7 @@ export class CategoryProducts extends Component {
 
     return (
       <div>
-        <Header cart={cart} />
+        <Header cart={cart} url={match.url} />
         <Products
           categories={category.categories}
           category={category.category}

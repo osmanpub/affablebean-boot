@@ -24,7 +24,7 @@ export class Cart extends Component {
   }
 
   render() {
-    const { cart, dispatch } = this.props;
+    const { cart, dispatch, match } = this.props;
     const { numberOfItems } = cart;
 
     const items = cart.items.map((item, index) => (
@@ -36,17 +36,24 @@ export class Cart extends Component {
       />
     ));
 
+    const clearCart =
+      numberOfItems === 0 ? (
+        ""
+      ) : (
+        <Link className={`bubble hMargin`} to={"/viewCart/true"}>
+          clear cart
+        </Link>
+      );
+
     return (
       <div>
-        <Header cart={cart} />
+        <Header cart={cart} url={match.url} />
         <div className="singleColumn">
           {numberOfItems === 0
             ? "Your shopping cart is empty"
             : "Your shopping cart contains " + numberOfItems + " items"}
           <ActionBar>
-            <Link className={`bubble hMargin`} to={"/viewCart/true"}>
-              clear cart
-            </Link>
+            {clearCart}
             <Link className={`bubble hMargin`} to={"/"}>
               continue shopping
             </Link>

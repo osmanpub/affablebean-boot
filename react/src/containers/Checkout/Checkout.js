@@ -12,7 +12,7 @@ export class Checkout extends Component {
   }
 
   render() {
-    const { cart, categories } = this.props;
+    const { cart, categories, match } = this.props;
     const { items } = categories;
 
     if (items.length === 0) {
@@ -21,7 +21,7 @@ export class Checkout extends Component {
 
     return (
       <div>
-        <Header cart={cart} />
+        <Header cart={cart} url={match.url} />
         <Categories categories={items} />
         <Footer />
       </div>

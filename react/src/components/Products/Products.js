@@ -22,7 +22,7 @@ export class Products extends Component {
   }
 
   render() {
-    const categories = this.props.categories;
+    const { categories } = this.props;
 
     if (categories.length === 0) {
       return null;

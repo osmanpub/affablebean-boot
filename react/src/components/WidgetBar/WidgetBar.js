@@ -4,7 +4,14 @@ import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
 import "./WidgetBar.css";
 
 export function WidgetBar(props) {
-  const cart = props.cart;
+  const { cart, url } = props;
+  const viewCart = url.startsWith("/viewCart") ? (
+    ""
+  ) : (
+    <Link className="bubble" to={"/viewCart/false"}>
+      view cart
+    </Link>
+  );
 
   return (
     <WidgetBarWrapper>
@@ -22,10 +29,7 @@ export function WidgetBar(props) {
           &nbsp;
           {cart && cart.numberOfItems + " items"}
         </span>
-
-        <Link className="bubble" to={"/viewCart/false"}>
-          view cart
-        </Link>
+        {viewCart}
       </ViewCart>
     </WidgetBarWrapper>
   );
