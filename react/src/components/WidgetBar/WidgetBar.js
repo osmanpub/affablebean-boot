@@ -12,16 +12,19 @@ export function WidgetBar(props) {
       view cart
     </Link>
   );
+  const checkout = url.startsWith("/checkout") ? (
+    ""
+  ) : (
+    <Checkout className="headerWidget" {...cart}>
+      <Link className="bubble" to={"/checkout"}>
+        proceed to checkout &#x279f;
+      </Link>
+    </Checkout>
+  );
 
   return (
     <WidgetBarWrapper>
-      <Checkout className="headerWidget" {...cart}>
-        <div>
-          <Link className="bubble" to={"/checkout"}>
-            proceed to checkout &#x279f;
-          </Link>
-        </div>
-      </Checkout>
+      {checkout}
 
       <ViewCart className="headerWidget" {...cart}>
         <span className="horizontalMargin">
