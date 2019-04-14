@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { fetchCategoriesIfNeeded } from "../../net/categories";
+import { purchaseOrder } from "../../net/checkout";
 import {
   InfoBox,
   PriceBox,
@@ -37,7 +37,13 @@ export class Checkout extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { dispatch, cart } = this.props;
-    // dispatch(updateProductInCart(product.id, Number(this.state.qty)));
+
+    dispatch(
+      purchaseOrder({
+        cart: cart,
+        form: this.state
+      })
+    );
   }
 
   render() {

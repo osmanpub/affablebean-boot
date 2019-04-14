@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -159,6 +160,19 @@ public class WebController implements WebMvcConfigurer {
 		orderMap.put("products", om.get("products"));
 
 		return "redirect:/confirmation";
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@PostMapping({ "/purchase2" })
+	@ResponseBody
+	public Map<String, Object> purchase(@RequestBody ShoppingCart cart, @RequestBody CheckoutForm checkoutForm) {
+		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
+
+		if (orderId == 0) {
+			return null;
+		}
+
+		return orderManager.getOrderDetails(orderId);
 	}
 
 	@PostMapping({ "/updateCart" })
