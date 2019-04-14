@@ -9,14 +9,40 @@ import {
   PriceBoxTd,
   PriceBoxSubTotalTd
 } from "./Checkout.styles";
+import "./Checkout.css";
+
 export class Checkout extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCategoriesIfNeeded());
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      creditcard: ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    const input = event.target;
+    this.setState({
+      [input.name]: input.value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const { dispatch, cart } = this.props;
+    // dispatch(updateProductInCart(product.id, Number(this.state.qty)));
   }
 
   render() {
     const { cart, match } = this.props;
+    const surcharge = 3;
 
     return (
       <div>
@@ -30,7 +56,7 @@ export class Checkout extends Component {
           <br />
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label for="name" className={`col-sm-2 control-label`}>
+              <label htmlFor="name" className={`col-sm-2 control-label`}>
                 name
               </label>
               <div className="col-sm-10">
@@ -38,15 +64,16 @@ export class Checkout extends Component {
                   type="text"
                   className="form-control"
                   name="name"
-                  maxlength="45"
+                  maxLength="45"
                   placeholder="At least 8 chars and no more than 45 chars"
                   size="31"
-                  value=""
+                  onChange={this.handleChange}
+                  value={this.state.name}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label for="email" className={`col-sm-2 control-label`}>
+              <label htmlFor="email" className={`col-sm-2 control-label`}>
                 email
               </label>
               <div className="col-sm-10">
@@ -54,15 +81,16 @@ export class Checkout extends Component {
                   type="email"
                   className="form-control"
                   name="email"
-                  maxlength="45"
+                  maxLength="45"
                   placeholder="At least 8 chars and no more than 45 chars"
                   size="31"
-                  value=""
+                  onChange={this.handleChange}
+                  value={this.state.email}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label for="phone" className={`col-sm-2 control-label`}>
+              <label htmlFor="phone" className={`col-sm-2 control-label`}>
                 phone
               </label>
               <div className="col-sm-10">
@@ -70,15 +98,16 @@ export class Checkout extends Component {
                   type="text"
                   className="form-control"
                   name="phone"
-                  maxlength="45"
+                  maxLength="45"
                   placeholder="At least 8 chars and no more than 30 chars"
                   size="31"
-                  value=""
+                  onChange={this.handleChange}
+                  value={this.state.phone}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label for="address" className={`col-sm-2 control-label`}>
+              <label htmlFor="address" className={`col-sm-2 control-label`}>
                 address
               </label>
               <div className="col-sm-10">
@@ -86,15 +115,16 @@ export class Checkout extends Component {
                   type="text"
                   className="form-control"
                   name="address"
-                  maxlength="45"
+                  maxLength="45"
                   placeholder="At least 8 chars and no more than 45 chars"
                   size="31"
-                  value=""
+                  onChange={this.handleChange}
+                  value={this.state.address}
                 />
               </div>
             </div>
             <div className="form-group">
-              <label for="creditcard" className={`col-sm-2 control-label`}>
+              <label htmlFor="creditcard" className={`col-sm-2 control-label`}>
                 credit card
               </label>
               <div className="col-sm-10">
@@ -102,10 +132,11 @@ export class Checkout extends Component {
                   type="text"
                   className="form-control"
                   name="creditcard"
-                  maxlength="45"
+                  maxLength="45"
                   placeholder="At least 16 chars and no more than 19 chars"
                   size="31"
-                  value=""
+                  onChange={this.handleChange}
+                  value={this.state.creditcard}
                 />
               </div>
             </div>
@@ -121,22 +152,33 @@ export class Checkout extends Component {
             <ul>
               <li>Next-day delivery is guaranteed</li>
               <li>
-                A &euro; 3.00 delivery surcharge is applied to all purchase
-                orders
+                A &euro; {surcharge.toFixed(2)} delivery surcharge is applied to
+                all purchase orders
               </li>
             </ul>
+            <PriceBox>
+              <tbody>
+                <tr>
+                  <PriceBoxTd>subtotal:</PriceBoxTd>
+                  <PriceBoxSubTotalTd className="checkoutPriceColumn">
+                    &euro; {cart.subtotal.toFixed(2)}
+                  </PriceBoxSubTotalTd>
+                </tr>
+                <tr>
+                  <PriceBoxTd>surcharge:</PriceBoxTd>
+                  <PriceBoxSubTotalTd className="checkoutPriceColumn">
+                    &euro; {surcharge.toFixed(2)}
+                  </PriceBoxSubTotalTd>
+                </tr>
+                <tr>
+                  <PriceBoxTd>total:</PriceBoxTd>
+                  <PriceBoxSubTotalTd className="checkoutPriceColumn">
+                    &euro; {(cart.subtotal + surcharge).toFixed(2)}
+                  </PriceBoxSubTotalTd>
+                </tr>
+              </tbody>
+            </PriceBox>
           </InfoBox>
-          <PriceBox>
-            <tbody>
-              <tr>
-                <PriceBoxTd>subtotal:</PriceBoxTd>
-                <PriceBoxSubTotalTd className="checkoutPriceColumn">
-                  &euro;
-                  {cart.subtotal.toFixed(2)}
-                </PriceBoxSubTotalTd>
-              </tr>
-            </tbody>
-          </PriceBox>
         </div>
         <Footer />
       </div>
@@ -153,34 +195,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Checkout);
-
-// 	<div id="infoBox">
-
-// 		<table id="priceBox">
-// 			<tr>
-// 				<td th:text="#{subtotal} + ':'"></td>
-// 				<td class="checkoutPriceColumn">
-// 					&euro;
-// 					<span th:text="${#numbers.formatDecimal(cart.subtotal, 0, 'COMMA', 2, 'POINT')}"></span>
-// 				</td>
-// 			</tr>
-
-// 			<tr>
-// 				<td th:text="#{surcharge} + ':'"></td>
-// 				<td class="checkoutPriceColumn">
-// 					&euro;
-// 					<span th:text="${#numbers.formatDecimal(deliverySurcharge, 0, 'COMMA', 2, 'POINT')}"></span>
-// 				</td>
-// 			</tr>
-
-// 			<tr>
-// 				<td class="total" th:text="#{total} + ':'"></td>
-// 				<td class="total checkoutPriceColumn">
-// 					&euro;
-// 					<span th:with="total=${cart.subtotal} + ${deliverySurcharge}"
-// 						th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}"></span>
-// 				</td>
-// 			</tr>
-// 		</table>
-// 	</div>
-// </div>

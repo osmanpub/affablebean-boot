@@ -16,13 +16,13 @@ export class CartItem extends Component {
   }
 
   handleChange(event) {
-    const inputQty = event.target;
-    let qty = Number(inputQty.value);
+    const input = event.target;
+    let qty = Number(input.value);
 
     if (qty >= 0 && qty <= 10) {
       this.setState({ qty: qty });
     } else {
-      inputQty.value = this.state.qty;
+      input.value = this.state.qty;
     }
   }
 
