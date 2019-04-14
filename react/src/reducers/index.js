@@ -34,18 +34,26 @@ function cart(
 
     case "UPDATE_CART": {
       const cart = action.payload.cart;
-      const item = cart.items[0];
-      const { product } = item;
+      const updatedItem = cart.items[0];
 
-      return state.items.map((item, index) => {
-        const itemProduct = item.product;
+      let numberOfItemsChange = 0;
+      let subtotalChange = 0;
 
-        if (product.id === itemProduct.id) {
+      const items = state.items.map(item => {
+        if (item.product.id === updatedItem.product.id) {
+          numberOfItemsChange = updatedItem.quantity - item.quantity;
+          subtotalChange = updatedItem.total - item.total;
           return getCartItem(cart);
         }
 
-        return [item];
+        return item;
       });
+
+      return {
+        items: items,
+        numberOfItems: state.numberOfItems + numberOfItemsChange,
+        subtotal: state.subtotal + subtotalChange
+      };
     }
 
     default:

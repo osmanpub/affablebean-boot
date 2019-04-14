@@ -25,16 +25,16 @@ public final class ShoppingCartItem {
 		this.quantity.set(quantity);
 	}
 
+	public double getTotal() {
+		return quantity.doubleValue() * product.getPrice().doubleValue();
+	}
+
 	public void incrementQuantity() {
 		quantity.incrementAndGet();
 	}
 
 	public void decrementQuantity() {
 		quantity.decrementAndGet();
-	}
-
-	public double getTotal() {
-		return quantity.doubleValue() * product.getPrice().doubleValue();
 	}
 
 }

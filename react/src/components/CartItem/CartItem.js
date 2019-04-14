@@ -5,12 +5,9 @@ import { CartTableTd } from "./CartItem.styles";
 export class CartItem extends Component {
   constructor(props) {
     super(props);
-
     const { item } = this.props;
-    const { product } = item;
 
     this.state = {
-      id: product.id,
       qty: item.quantity
     };
 
@@ -24,8 +21,9 @@ export class CartItem extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(updateProductInCart(this.state.id, Number(this.state.qty)));
+    const { dispatch, item } = this.props;
+    const { product } = item;
+    dispatch(updateProductInCart(product.id, Number(this.state.qty)));
   }
 
   render() {
