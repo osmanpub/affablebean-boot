@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
-
+import {
+  InfoBox,
+  PriceBox,
+  PriceBoxTd,
+  PriceBoxSubTotalTd
+} from "./Checkout.styles";
 export class Checkout extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -41,6 +46,70 @@ export class Checkout extends Component {
               </div>
             </div>
             <div className="form-group">
+              <label for="email" className={`col-sm-2 control-label`}>
+                email
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  maxlength="45"
+                  placeholder="At least 8 chars and no more than 45 chars"
+                  size="31"
+                  value=""
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label for="phone" className={`col-sm-2 control-label`}>
+                phone
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="phone"
+                  maxlength="45"
+                  placeholder="At least 8 chars and no more than 30 chars"
+                  size="31"
+                  value=""
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label for="address" className={`col-sm-2 control-label`}>
+                address
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="address"
+                  maxlength="45"
+                  placeholder="At least 8 chars and no more than 45 chars"
+                  size="31"
+                  value=""
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label for="creditcard" className={`col-sm-2 control-label`}>
+                credit card
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="creditcard"
+                  maxlength="45"
+                  placeholder="At least 16 chars and no more than 19 chars"
+                  size="31"
+                  value=""
+                />
+              </div>
+            </div>
+            <div className="form-group">
               <div className={`col-sm-offset-2 col-sm-10`}>
                 <button type="submit" className={`btn btn-primary`}>
                   submit purchase
@@ -48,6 +117,26 @@ export class Checkout extends Component {
               </div>
             </div>
           </form>
+          <InfoBox>
+            <ul>
+              <li>Next-day delivery is guaranteed</li>
+              <li>
+                A &euro; 3.00 delivery surcharge is applied to all purchase
+                orders
+              </li>
+            </ul>
+          </InfoBox>
+          <PriceBox>
+            <tbody>
+              <tr>
+                <PriceBoxTd>subtotal:</PriceBoxTd>
+                <PriceBoxSubTotalTd className="checkoutPriceColumn">
+                  &euro;
+                  {cart.subtotal.toFixed(2)}
+                </PriceBoxSubTotalTd>
+              </tr>
+            </tbody>
+          </PriceBox>
         </div>
         <Footer />
       </div>
@@ -65,103 +154,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Checkout);
 
-// <div class="singleColumn">
-// 	<h2 th:text="#{checkout}"></h2>
-// 	<p th:text="#{checkoutText}"></p>
-// 	<br>
-
-//       <form class="form-horizontal" action="#" th:action="@{/purchase}" th:object="${checkoutForm}"
-//       	method="post" id="checkoutForm">
-
-// 		<div class="form-group">
-// 			<label for="email" class="col-sm-2 control-label" th:text="#{email}">
-// 			</label>
-
-// 			<div class="col-sm-10">
-// 				<input type="email" class="form-control" name="email" th:field="*{email}"
-// 							 maxlength="45"
-// 							 placeholder="At least 8 chars one of which must be '@' and no more than 45 chars"
-// 							 size="31"
-// 							 value="">
-//                   <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-//                   	Email Error
-//                 	</div>
-// 			</div>
-// 		</div>
-
-// 		<div class="form-group">
-// 			<label for="phone" class="col-sm-2 control-label" th:text="#{phone}">
-// 			</label>
-
-// 			<div class="col-sm-10">
-// 				<input type="text" class="form-control" name="phone" th:field="*{phone}"
-// 							 maxlength="16"
-// 							 placeholder="At least 8 chars and no more than 30 chars"
-// 							 size="31"
-// 							 value="">
-//                   <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
-//                   	Phone Error
-//                 	</div>
-// 			</div>
-// 		</div>
-
-// 		<div class="form-group">
-// 			<label for="address" class="col-sm-2 control-label" th:text="#{address}">
-// 			</label>
-
-// 			<div class="col-sm-10">
-// 				<input type="text" class="form-control" name="address" th:field="*{address}"
-// 							 maxlength="45"
-// 							 placeholder="At least 8 chars and no more than 45 chars"
-// 							 size="31"
-// 							 value="">
-//                   <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
-//                   	Address Error
-//                 	</div>
-// 			</div>
-// 		</div>
-
-// 		<div class="form-group">
-// 			<label for="creditcard" class="col-sm-2 control-label" th:text="#{creditCard}">
-// 			</label>
-
-// 			<div class="col-sm-10">
-// 				<input type="text" class="form-control" name="creditcard" th:field="*{creditCard}"
-// 							 maxlength="19"
-// 							 placeholder="At least 8 chars and no more than 19 chars"
-// 							 size="31"
-// 							 value="">
-//                   <div th:if="${#fields.hasErrors('creditCard')}" th:errors="*{creditCard}">
-//                   	Credit card
-//                 	</div>
-// 			</div>
-// 		</div>
-
-// 		<div class="form-group">
-// 			<div class="col-sm-offset-2 col-sm-10">
-// 				<button type="submit" class="btn btn-primary">
-// 					<span th:text="#{submit}"></span>
-// 				</button>
-// 			</div>
-// 		</div>
-// 	</form>
-
 // 	<div id="infoBox">
-// 		<ul>
-// 			<li th:text="#{nextDayGuarantee}"></li>
-// 			<li th:text="#{phone}">
-// 				<span th:text="#{deliveryFee1}">
-// 				</span>
-
-// 				&euro;
-// 				<span th:text="${#numbers.formatDecimal(deliverySurcharge, 0, 'COMMA', 2, 'POINT')}">
-// 					10.00
-// 				</span>
-
-// 				<span th:text="#{deliveryFee2}">
-// 				</span>
-// 			</li>
-// 		</ul>
 
 // 		<table id="priceBox">
 // 			<tr>

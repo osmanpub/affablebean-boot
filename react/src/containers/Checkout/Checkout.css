@@ -13,27 +13,6 @@
   margin: 5px;
 }
 
-.inputField {
-  width: 190px;
-}
-
-#infoBox {
-  margin-left: 150px;
-  /*padding: 10px 25px 0 460px*/
-}
-
-#priceBox {
-  padding: 10px;
-  border: 1px solid #c3e3e0;
-  background-color: #c3e3e0;
-  border-radius: 4px;
-}
-
-#priceBox td {
-  text-align: right;
-  padding: 5px;
-}
-
 .checkoutPriceColumn {
   width: 80px;
   font-weight: bold;
