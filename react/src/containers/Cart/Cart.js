@@ -54,7 +54,7 @@ export class Cart extends Component {
           <ShoppingCart {...cart}>
             <Subtotal>
               subtotal &euro;
-              {cart.subtotal}
+              {cart.subtotal.toFixed(2)}
             </Subtotal>
             <CartTable>
               <tbody>

@@ -15,7 +15,7 @@ function cart(
 
   switch (action.type) {
     case "ADD_TO_CART": {
-      const cart = action.payload.cart;
+      const { cart } = action.payload;
 
       return {
         items: state.items.concat(getCartItem(cart)),
@@ -33,21 +33,39 @@ function cart(
     }
 
     case "UPDATE_CART": {
-      const cart = action.payload.cart;
+      const { qty } = action.payload;
+
+      if (qty < 0) {
+        return state;
+      }
+
+      const { cart, id } = action.payload;
       const updatedItem = cart.items[0];
 
       let numberOfItemsChange = 0;
       let subtotalChange = 0;
 
-      const items = state.items.map(item => {
-        if (item.product.id === updatedItem.product.id) {
-          numberOfItemsChange = updatedItem.quantity - item.quantity;
-          subtotalChange = updatedItem.total - item.total;
-          return getCartItem(cart);
-        }
+      let items = [];
 
-        return item;
-      });
+      if (qty === 0) {
+        const removedItem = state.items.filter(
+          item => item.product.id === id
+        )[0];
+        numberOfItemsChange = removedItem.quantity * -1;
+        subtotalChange = removedItem.total * -1;
+
+        items = state.items.filter(item => item.product.id !== id);
+      } else {
+        items = state.items.map(item => {
+          if (item.product.id === id) {
+            numberOfItemsChange = updatedItem.quantity - item.quantity;
+            subtotalChange = updatedItem.total - item.total;
+            return getCartItem(cart);
+          }
+
+          return item;
+        });
+      }
 
       return {
         items: items,

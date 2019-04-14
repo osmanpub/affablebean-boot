@@ -70,7 +70,7 @@ export class Products extends Component {
 
             <td>
               &euro;&nbsp;
-              {product.price}
+              {product.price.toFixed(2)}
             </td>
 
             <td>&nbsp;&nbsp;</td>

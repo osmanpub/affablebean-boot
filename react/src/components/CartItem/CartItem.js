@@ -16,7 +16,14 @@ export class CartItem extends Component {
   }
 
   handleChange(event) {
-    this.setState({ qty: event.target.value });
+    const inputQty = event.target;
+    let qty = Number(inputQty.value);
+
+    if (qty >= 0 && qty <= 10) {
+      this.setState({ qty: qty });
+    } else {
+      inputQty.value = this.state.qty;
+    }
   }
 
   handleSubmit(event) {
@@ -45,7 +52,7 @@ export class CartItem extends Component {
           <CartTableTd>{name}</CartTableTd>
           <CartTableTd>
             &euro;
-            {item.total}
+            {item.total.toFixed(2)}
             <br />
             {product.price}
           </CartTableTd>
