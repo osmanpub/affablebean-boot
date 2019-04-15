@@ -113,10 +113,22 @@ const categories = createReducer(
   }
 );
 
+const purchase = createReducer(
+  {
+    order: {}
+  },
+  {
+    ORDER_PURCHASE: (state, action) => {
+      state.order = action.payload;
+    }
+  }
+);
+
 const rootReducer = combineReducers({
   cart,
   category,
-  categories
+  categories,
+  purchase
 });
 
 export default rootReducer;

@@ -194,6 +194,10 @@ public class WebController implements WebMvcConfigurer {
 			}
 		});
 
+		if (cart.getNumberOfItems() == 0) {
+			return null;
+		}
+		
 		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
 
 		if (orderId == 0) {

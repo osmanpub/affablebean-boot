@@ -1,5 +1,5 @@
 import { getPath } from "../utils";
-import { clearCart } from "../actions";
+import { clearCart, orderPurchase } from "../actions";
 
 export const purchaseOrder = data => dispatch => {
   return fetch(getPath("purchase2"), {
@@ -15,5 +15,12 @@ export const purchaseOrder = data => dispatch => {
     // referrer: "no-referrer", // no-referrer, *client
   })
     .then(response => response.json())
-    .then(json => dispatch(clearCart()));
+    .then(json => {
+      dispatch(clearCart());
+      dispatch(
+        orderPurchase({
+          order: json
+        })
+      );
+    });
 };
