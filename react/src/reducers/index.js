@@ -119,7 +119,7 @@ const purchase = createReducer(
   },
   {
     ORDER_PURCHASE: (state, action) => {
-      state.order = action.payload;
+      state.order = { ...action.payload.order };
     }
   }
 );
