@@ -34,13 +34,13 @@ public class Application extends SpringBootServletInitializer {
 
 	@Bean
 	public CommandLineRunner demo(CategoryRepository repository) {
-		return (args) -> {
+		return args -> {
 			// fetch all categories
 			log.info("Categories found with findAll():");
 			log.info("-------------------------------");
-			repository.findAll().forEach(category -> {
-				log.info(category.toString());
-			});
+			repository.findAll().forEach(category -> 
+				log.info(category.toString())
+			);
 			log.info("");
 
 			// fetch an individual category by ID
@@ -54,9 +54,9 @@ public class Application extends SpringBootServletInitializer {
 			// fetch category by name
 			log.info("Category found with findByName('bakery'):");
 			log.info("--------------------------------------------");
-			repository.findByName("bakery").forEach(category -> {
-				log.info(category.toString());
-			});
+			repository.findByName("bakery").forEach(category -> 
+				log.info(category.toString())
+			);
 			log.info("");
 		};
 	}

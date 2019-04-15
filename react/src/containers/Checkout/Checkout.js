@@ -16,11 +16,11 @@ export class Checkout extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      email: "",
-      phone: "",
       address: "",
-      creditcard: ""
+      creditcard: "",
+      email: "",
+      name1: "",
+      phone: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -69,7 +69,7 @@ export class Checkout extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="name1"
                   maxLength="45"
                   placeholder="At least 8 chars and no more than 45 chars"
                   size="31"

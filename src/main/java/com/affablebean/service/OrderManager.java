@@ -119,8 +119,6 @@ public class OrderManager {
 	}
 
 	private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
-//		em.flush();
-
 		// iterate through shopping cart and create OrderedProducts
 		int orderId = order.getId();
 
