@@ -165,14 +165,15 @@ public class WebController implements WebMvcConfigurer {
 	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 	@PostMapping({ "/purchase2" })
 	@ResponseBody
-	public Map<String, Object> purchase(@RequestBody ShoppingCart cart, @RequestBody CheckoutForm checkoutForm) {
-		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
-
-		if (orderId == 0) {
-			return null;
-		}
-
-		return orderManager.getOrderDetails(orderId);
+	public Map<String, Object> purchase(@RequestBody Map<String, Map<String, Object>> payload) {
+		return null;
+//		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
+//
+//		if (orderId == 0) {
+//			return null;
+//		}
+//
+//		return orderManager.getOrderDetails(orderId);
 	}
 
 	@PostMapping({ "/updateCart" })
