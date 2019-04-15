@@ -118,6 +118,9 @@ const purchase = createReducer(
     order: {}
   },
   {
+    CLEAR_PURCHASE: (state, action) => {
+      state.order = {};
+    },
     ORDER_PURCHASE: (state, action) => {
       state.order = { ...action.payload.order };
     }

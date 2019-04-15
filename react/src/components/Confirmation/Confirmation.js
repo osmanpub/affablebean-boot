@@ -13,8 +13,8 @@ import {
 } from "./Confirmation.styles";
 import "./Confirmation.css";
 
-export function Confirmation() {
-  const { customer, orderedProducts, orderRecord, products } = this.props.order;
+export function Confirmation(props) {
+  const { customer, orderedProducts, orderRecord, products } = props.order;
 
   const orderedProductsList = orderedProducts.map((product, index) => {
     const rowCol = index % 2 === 0 ? "white" : "lightBlue";
@@ -22,7 +22,7 @@ export function Confirmation() {
     const subtotal = (products[index].price * qty).toFixed(2);
 
     return (
-      <tr className={`${rowCol}`}>
+      <tr className={`${rowCol}`} key={products[index].id}>
         <td>{products[index].name}</td>
         <td className="quantityColumn">{qty}</td>
         <td className="confirmationPriceColumn">&euro; {subtotal}</td>
@@ -48,9 +48,8 @@ export function Confirmation() {
         Please keep a note of your confirmation number:
         <strong>{orderRecord.confirmationNumber}</strong>
         <br />
-        If you have a query concerning your order, feel free to
+        If you have a query concerning your order, feel free to&nbsp;
         <Link to="/contact">contact us</Link>
-        <a href="/contact">contact us</a>.
         <br />
         <br />
         Thank you for shopping at the Affable Bean Green Grocer!
@@ -81,7 +80,9 @@ export function Confirmation() {
               </DeliverySurchargeCellRight>
             </tr>
             <tr className="lightBlue">
-              <TotalCellLeft colSpan={2}>total:</TotalCellLeft>
+              <TotalCellLeft colSpan={2}>
+                <strong>total:</strong>
+              </TotalCellLeft>
               <TotalCellRight>
                 &euro; {orderRecord.amount.toFixed(2)}
               </TotalCellRight>
