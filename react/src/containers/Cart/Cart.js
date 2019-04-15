@@ -4,13 +4,7 @@ import { connect } from "react-redux";
 import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import {
-  ActionBar,
-  CartHdr,
-  CartTable,
-  ShoppingCart,
-  Subtotal
-} from "./Cart.styles";
+import { ActionBar, CartTable, ShoppingCart, Subtotal } from "./Cart.styles";
 import { clearCart } from "../../actions";
 
 export class Cart extends Component {
@@ -65,12 +59,12 @@ export class Cart extends Component {
             </Subtotal>
             <CartTable>
               <tbody>
-                <CartHdr>
+                <tr className="header">
                   <th>product</th>
                   <th>name</th>
                   <th>price</th>
                   <th>quantity</th>
-                </CartHdr>
+                </tr>
                 {items}
               </tbody>
             </CartTable>

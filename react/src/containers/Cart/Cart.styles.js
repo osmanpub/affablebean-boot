@@ -10,11 +10,6 @@ export const CartTable = styled.table`
   width: 750px;
 `;
 
-export const CartHdr = styled.tr`
-  background-color: #c3e3e0;
-  height: 30px;
-`;
-
 export const CartTableTd = styled.td`
   width: 145px;
   height: 90px;

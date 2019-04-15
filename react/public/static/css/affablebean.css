@@ -88,3 +88,26 @@ label.error {
   margin: 20px 30px;
   text-align: left;
 }
+
+.detailsTable {
+  text-align: left;
+}
+
+.detailsTable th {
+  padding: 5px 10px;
+}
+
+.detailsTable td {
+  padding: 5px 10px 5px 20px;
+  font-family: "Courier New", courier, monospace;
+}
+
+.header {
+  background-color: #c3e3e0;
+  height: 30px;
+}
+
+.tableHeading {
+  font-weight: bold;
+  background-color: #edf8f7;
+}
