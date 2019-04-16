@@ -127,11 +127,27 @@ const purchase = createReducer(
   }
 );
 
+const subjects = createReducer(
+  {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  },
+  {
+    RECEIVE_SUBJECTS: (state, action) => {
+      state.didInvalidate = false;
+      state.isFetching = false;
+      state.items = action.payload;
+    }
+  }
+);
+
 const rootReducer = combineReducers({
   cart,
   category,
   categories,
-  purchase
+  purchase,
+  subjects
 });
 
 export default rootReducer;

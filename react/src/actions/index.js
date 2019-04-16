@@ -10,6 +10,8 @@ export const receiveCategory = createAction("RECEIVE_CATEGORY");
 
 export const receiveCategories = createAction("RECEIVE_CATEGORIES");
 
+export const receiveSubjects = createAction("RECEIVE_SUBJECTS");
+
 export const clearPurchase = createAction("CLEAR_PURCHASE");
 
 export const orderPurchase = createAction("ORDER_PURCHASE");

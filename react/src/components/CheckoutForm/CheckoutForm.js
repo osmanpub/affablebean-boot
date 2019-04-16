@@ -21,23 +21,23 @@ export class CheckoutForm extends Component {
       phone: ""
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.nameErrorRef = React.createRef();
-    this.nameInputRef = React.createRef();
-
-    this.emailErrorRef = React.createRef();
-    this.emailInputRef = React.createRef();
-
-    this.phoneErrorRef = React.createRef();
-    this.phoneInputRef = React.createRef();
-
     this.addressErrorRef = React.createRef();
     this.addressInputRef = React.createRef();
 
     this.ccErrorRef = React.createRef();
     this.ccInputRef = React.createRef();
+
+    this.emailErrorRef = React.createRef();
+    this.emailInputRef = React.createRef();
+
+    this.nameErrorRef = React.createRef();
+    this.nameInputRef = React.createRef();
+
+    this.phoneErrorRef = React.createRef();
+    this.phoneInputRef = React.createRef();
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -52,7 +52,11 @@ export class CheckoutForm extends Component {
     const { dispatch, cart } = this.props;
     let validForm = true;
 
-    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
+    if (!validateField(this.addressInputRef, this.addressErrorRef, 8, 45)) {
+      validForm = false;
+    }
+
+    if (!validateField(this.ccInputRef, this.ccErrorRef, 16, 19)) {
       validForm = false;
     }
 
@@ -60,15 +64,11 @@ export class CheckoutForm extends Component {
       validForm = false;
     }
 
+    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
+      validForm = false;
+    }
+
     if (!validateField(this.phoneInputRef, this.phoneErrorRef, 8, 30)) {
-      validForm = false;
-    }
-
-    if (!validateField(this.addressInputRef, this.addressErrorRef, 8, 45)) {
-      validForm = false;
-    }
-
-    if (!validateField(this.ccInputRef, this.ccErrorRef, 16, 19)) {
       validForm = false;
     }
 

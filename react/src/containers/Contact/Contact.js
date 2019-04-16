@@ -1,28 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Categories from "../../components/Categories";
+import ContactForm from "../../components/ContactForm";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { fetchCategoriesIfNeeded } from "../../net/categories";
+import { fetchSubjectsIfNeeded } from "../../net/subjects";
 
 export class Contact extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(fetchCategoriesIfNeeded());
+    dispatch(fetchSubjectsIfNeeded());
   }
 
   render() {
-    const { cart, categories, match } = this.props;
-    const { items } = categories;
-
-    if (items.length === 0) {
-      return null;
-    }
+    const { match, subjects } = this.props;
 
     return (
       <div>
         <Header cart={cart} url={match.url} />
-        <Categories categories={items} />
+        <ContactForm subjects={subjects} />
         <Footer />
       </div>
     );
@@ -30,11 +25,11 @@ export class Contact extends Component {
 }
 
 const mapStateToProps = state => {
-  const { cart, categories } = state;
+  const { cart, subjects } = state;
 
   return {
     cart,
-    categories
+    subjects
   };
 };
 

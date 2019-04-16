@@ -1,3 +1,3 @@
-import Confirmation from "./Contact";
+import Contact from "./Contact";
 
-export default Confirmation;
+export default Contact;

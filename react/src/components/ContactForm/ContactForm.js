@@ -1,43 +1,36 @@
 import React, { Component } from "react";
-import { purchaseOrder } from "../../net/checkout";
+import { sendFeedback } from "../../net/contact";
 import {
   InfoBox,
   PriceBox,
   PriceBoxTd,
   PriceBoxSubTotalTd
-} from "./CheckoutForm.styles";
-import "./CheckoutForm.css";
+} from "./ContactForm.styles";
+import "./ContactForm.css";
 import { validateField } from "../../utils";
 
-export class CheckoutForm extends Component {
+export class ContactForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      address: "",
-      creditcard: "",
       email: "",
+      mag: "",
       name1: "",
-      phone: ""
+      subjectId: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.nameErrorRef = React.createRef();
-    this.nameInputRef = React.createRef();
 
     this.emailErrorRef = React.createRef();
     this.emailInputRef = React.createRef();
 
-    this.phoneErrorRef = React.createRef();
-    this.phoneInputRef = React.createRef();
+    this.msgErrorRef = React.createRef();
+    this.msgInputRef = React.createRef();
 
-    this.addressErrorRef = React.createRef();
-    this.addressInputRef = React.createRef();
+    this.nameErrorRef = React.createRef();
+    this.nameInputRef = React.createRef();
 
-    this.ccErrorRef = React.createRef();
-    this.ccInputRef = React.createRef();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -52,70 +45,59 @@ export class CheckoutForm extends Component {
     const { dispatch, cart } = this.props;
     let validForm = true;
 
-    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
-      validForm = false;
-    }
-
     if (!validateField(this.emailInputRef, this.emailErrorRef, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.phoneInputRef, this.phoneErrorRef, 8, 30)) {
+    if (!validateField(this.msgInputRef, this.msgErrorRef, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.addressInputRef, this.addressErrorRef, 8, 45)) {
-      validForm = false;
-    }
-
-    if (!validateField(this.ccInputRef, this.ccErrorRef, 16, 19)) {
+    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
       validForm = false;
     }
 
     if (validForm) {
-      dispatch(
-        purchaseOrder({
-          cart: cart,
-          form: this.state
-        })
-      );
+      // dispatch(
+      //   purchaseOrder({
+      //     cart: cart,
+      //     form: this.state
+      //   })
+      // );
     }
   }
 
   render() {
-    const { cart } = this.props;
-    const surcharge = 3;
+    const { cart, subjects } = this.props;
+    const subjectsList = subjects.map(subject => (
+      <select name="subject_sel" className="form-control">
+        {/* <option th:each="subject : ${subjects}" th:value="${subject.id}" 
+        th:text="#{co__${subject.name}__}">
+      </option> */}
+      </select>
+    ));
 
     return (
       <div>
         <div className="singleColumn">
-          <h2>checkout</h2>
-          <p>
-            In order to purchase the items in your shopping cart, please provide
-            us with the following information:
-          </p>
-          <br />
+          <div>
+            <h2>Contact Us Form</h2>
+            <p>
+              You can use this form for any comments or questions about our
+              company or brands.
+              <br />
+              For general enquiries please call toll free on 1-800-BEANS-R-US
+            </p>
+          </div>
+          <div>
+            <p>(* Asterisks indicate required field)</p>
+          </div>
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name" className={`col-sm-2 control-label`}>
-                name
+              <label htmlFor="subject_sel" className={`col-sm-2 control-label`}>
+                subject
               </label>
-              <div className="col-sm-10">
-                <input
-                  ref={this.nameInputRef}
-                  type="text"
-                  className="form-control"
-                  name="name1"
-                  maxLength="45"
-                  placeholder="At least 8 chars and no more than 45 chars"
-                  size="31"
-                  onChange={this.handleChange}
-                  value={this.state.name}
-                />
-              </div>
-              <div className="formError" ref={this.nameErrorRef}>
-                Name shoud be at least 8 chars and no more than 45 chars
-              </div>
+              <div className="col-sm-10">{subjectsList}</div>
             </div>
             <div className="form-group">
               <label htmlFor="email" className={`col-sm-2 control-label`}>
