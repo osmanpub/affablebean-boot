@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FooterDivider, FooterText, FooterWrapper } from "./Footer.styles";
+import { FooterText, FooterWrapper } from "./Footer.styles";
 
 export function Footer(props) {
   return (
     <FooterWrapper>
       <br />
-      <FooterDivider />
       <FooterText>
         <Link to={"/privacy"}>
           <button className={`btn btn-link`}>Privacy</button>

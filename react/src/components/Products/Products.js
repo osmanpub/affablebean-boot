@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import { addProductToCart } from "../../net/cart";
+import { clearPurchase } from "../../actions";
 import {
   CategoryTitle,
   ProductsLeft,
@@ -18,6 +19,7 @@ export class Products extends Component {
 
   addToCart(id) {
     const { dispatch } = this.props;
+    dispatch(clearPurchase());
     dispatch(addProductToCart(id));
   }
 
