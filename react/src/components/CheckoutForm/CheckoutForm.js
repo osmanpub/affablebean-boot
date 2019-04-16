@@ -7,6 +7,7 @@ import {
   PriceBoxSubTotalTd
 } from "./CheckoutForm.styles";
 import "./CheckoutForm.css";
+import { validateField } from "../../utils";
 
 export class CheckoutForm extends Component {
   constructor(props) {
@@ -22,6 +23,21 @@ export class CheckoutForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.nameErrorRef = React.createRef();
+    this.nameInputRef = React.createRef();
+
+    this.emailErrorRef = React.createRef();
+    this.emailInputRef = React.createRef();
+
+    this.phoneErrorRef = React.createRef();
+    this.phoneInputRef = React.createRef();
+
+    this.addressErrorRef = React.createRef();
+    this.addressInputRef = React.createRef();
+
+    this.ccErrorRef = React.createRef();
+    this.ccInputRef = React.createRef();
   }
 
   handleChange(event) {
@@ -34,13 +50,36 @@ export class CheckoutForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { dispatch, cart } = this.props;
+    let validForm = true;
 
-    dispatch(
-      purchaseOrder({
-        cart: cart,
-        form: this.state
-      })
-    );
+    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
+      validForm = false;
+    }
+
+    if (!validateField(this.emailInputRef, this.emailErrorRef, 8, 45)) {
+      validForm = false;
+    }
+
+    if (!validateField(this.phoneInputRef, this.phoneErrorRef, 8, 30)) {
+      validForm = false;
+    }
+
+    if (!validateField(this.addressInputRef, this.addressErrorRef, 8, 45)) {
+      validForm = false;
+    }
+
+    if (!validateField(this.ccInputRef, this.ccErrorRef, 16, 19)) {
+      validForm = false;
+    }
+
+    if (validForm) {
+      dispatch(
+        purchaseOrder({
+          cart: cart,
+          form: this.state
+        })
+      );
+    }
   }
 
   render() {
@@ -63,6 +102,7 @@ export class CheckoutForm extends Component {
               </label>
               <div className="col-sm-10">
                 <input
+                  ref={this.nameInputRef}
                   type="text"
                   className="form-control"
                   name="name1"
@@ -73,6 +113,9 @@ export class CheckoutForm extends Component {
                   value={this.state.name}
                 />
               </div>
+              <div className="formError" ref={this.nameErrorRef}>
+                Name shoud be at least 8 chars and no more than 45 chars
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="email" className={`col-sm-2 control-label`}>
@@ -80,6 +123,7 @@ export class CheckoutForm extends Component {
               </label>
               <div className="col-sm-10">
                 <input
+                  ref={this.emailInputRef}
                   type="email"
                   className="form-control"
                   name="email"
@@ -90,6 +134,9 @@ export class CheckoutForm extends Component {
                   value={this.state.email}
                 />
               </div>
+              <div className="formError" ref={this.emailErrorRef}>
+                Email shoud be at least 8 chars and no more than 45 chars
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="phone" className={`col-sm-2 control-label`}>
@@ -97,6 +144,7 @@ export class CheckoutForm extends Component {
               </label>
               <div className="col-sm-10">
                 <input
+                  ref={this.phoneInputRef}
                   type="text"
                   className="form-control"
                   name="phone"
@@ -107,6 +155,9 @@ export class CheckoutForm extends Component {
                   value={this.state.phone}
                 />
               </div>
+              <div className="formError" ref={this.phoneErrorRef}>
+                Phone shoud be at least 8 chars and no more than 30 chars
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="address" className={`col-sm-2 control-label`}>
@@ -114,6 +165,7 @@ export class CheckoutForm extends Component {
               </label>
               <div className="col-sm-10">
                 <input
+                  ref={this.addressInputRef}
                   type="text"
                   className="form-control"
                   name="address"
@@ -124,6 +176,9 @@ export class CheckoutForm extends Component {
                   value={this.state.address}
                 />
               </div>
+              <div className="formError" ref={this.addressErrorRef}>
+                Address shoud be at least 8 chars and no more than 45 chars
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="creditcard" className={`col-sm-2 control-label`}>
@@ -131,6 +186,7 @@ export class CheckoutForm extends Component {
               </label>
               <div className="col-sm-10">
                 <input
+                  ref={this.ccInputRef}
                   type="text"
                   className="form-control"
                   name="creditcard"
@@ -140,6 +196,10 @@ export class CheckoutForm extends Component {
                   onChange={this.handleChange}
                   value={this.state.creditcard}
                 />
+              </div>
+              <div className="formError" ref={this.ccErrorRef}>
+                Credit card number shoud be at least 16 chars and no more than
+                19 chars
               </div>
             </div>
             <div className="form-group">

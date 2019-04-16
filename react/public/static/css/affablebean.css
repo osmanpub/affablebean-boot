@@ -111,3 +111,9 @@ label.error {
   font-weight: bold;
   background-color: #edf8f7;
 }
+
+.formError {
+  color: red;
+  display: none;
+  font-weight: bold;
+}
