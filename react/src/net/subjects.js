@@ -10,7 +10,7 @@ export const fetchSubjectsIfNeeded = () => (dispatch, getState) => {
 const fetchSubjects = () => dispatch => {
   return client
     .get(getRestPath("subjects"), function(data) {
-      dispatch(receiveSubjects(data._embedded.subjectsList));
+      dispatch(receiveSubjects(data._embedded.msgSubjectList));
     })
     .on("error", function(err) {
       console.log("something went wrong on the request", err.request.options);

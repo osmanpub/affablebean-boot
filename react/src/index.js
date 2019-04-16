@@ -23,7 +23,7 @@ render(
       <Route path="/" exact component={Home} />
       <Route path="/category/:id" component={CategoryProducts} />
       <Route path="/checkout" component={Checkout} />
-      <Route path="/feedback" component={Contact} />
+      <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/viewCart/:clear" component={Cart} />
     </Router>

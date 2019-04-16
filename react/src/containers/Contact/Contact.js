@@ -12,7 +12,12 @@ export class Contact extends Component {
   }
 
   render() {
-    const { match, subjects } = this.props;
+    const { cart, match, subjects } = this.props;
+    const { items } = subjects;
+
+    if (items.length === 0) {
+      return null;
+    }
 
     return (
       <div>
