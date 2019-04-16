@@ -1,7 +1,7 @@
 import { getPath } from "../utils";
 
-export const sendFeedback = data => dispatch => {
-  return fetch(getPath("contact2"), {
+export const sendFeedback = data => {
+  fetch(getPath("contact2"), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

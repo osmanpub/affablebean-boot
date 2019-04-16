@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { sendFeedback } from "../../net/contact";
-import {} from "./ContactForm.styles";
-import "./ContactForm.css";
 import { validateField } from "../../utils";
 
 export class ContactForm extends Component {
@@ -24,6 +23,9 @@ export class ContactForm extends Component {
     this.nameErrorRef = React.createRef();
     this.nameInputRef = React.createRef();
 
+    this.subjectErrorRef = React.createRef();
+    this.subjectInputRef = React.createRef();
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -37,14 +39,13 @@ export class ContactForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
     let validForm = true;
 
     if (!validateField(this.emailInputRef, this.emailErrorRef, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.msgInputRef, this.msgErrorRef, 8, 45)) {
+    if (!validateField(this.msgInputRef, this.msgErrorRef, 8, 256)) {
       validForm = false;
     }
 
@@ -52,24 +53,31 @@ export class ContactForm extends Component {
       validForm = false;
     }
 
+    if (!validateField(this.subjectInputRef, this.subjectErrorRef, 1, 1)) {
+      validForm = false;
+    }
+
     if (validForm) {
-      // dispatch(
-      //   purchaseOrder({
-      //     cart: cart,
-      //     form: this.state
-      //   })
-      // );
+      sendFeedback({
+        email: this.emailInputRef.current.value,
+        msg: this.msgInputRef.current.value,
+        name: this.nameInputRef.current.value,
+        subjectId: this.subjectInputRef.current.value
+      });
+
+      this.emailInputRef.current.value = "";
+      this.msgInputRef.current.value = "";
+      this.nameInputRef.current.value = "";
+      this.subjectInputRef.current.value = "";
     }
   }
 
   render() {
     const { subjects } = this.props;
-    const subjectsList = subjects.map(subject => (
-      <select name="subject_sel" className="form-control">
-        {/* <option th:each="subject : ${subjects}" th:value="${subject.id}" 
-        th:text="#{co__${subject.name}__}">
-      </option> */}
-      </select>
+    const subjectsList = subjects.items.map(subject => (
+      <option key={subject._links.self.href} value={subject.id}>
+        {subject.name}
+      </option>
     ));
 
     return (
@@ -91,7 +99,79 @@ export class ContactForm extends Component {
             <label htmlFor="subject_sel" className={`col-sm-2 control-label`}>
               subject
             </label>
-            <div className="col-sm-10">{subjectsList}</div>
+            <div className="col-sm-10">
+              <select
+                ref={this.subjectInputRef}
+                name="subject_sel"
+                className="form-control"
+              >
+                {subjectsList}
+              </select>
+              <div className="formError" ref={this.subjectErrorRef}>
+                Select a subject
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="name" className={`col-sm-2 control-label`}>
+              name
+            </label>
+            <div className="col-sm-10">
+              <input
+                ref={this.nameInputRef}
+                type="text"
+                className="form-control"
+                name="name1"
+                maxLength="45"
+                placeholder="At least 8 chars and no more than 45 chars"
+                size="31"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
+            </div>
+            <div className="formError" ref={this.nameErrorRef}>
+              Name shoud be at least 8 chars and no more than 45 chars
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="email" className={`col-sm-2 control-label`}>
+              email
+            </label>
+            <div className="col-sm-10">
+              <input
+                ref={this.emailInputRef}
+                type="email"
+                className="form-control"
+                name="email"
+                maxLength="45"
+                placeholder="At least 8 chars and no more than 45 chars"
+                size="31"
+                onChange={this.handleChange}
+                value={this.state.email}
+              />
+            </div>
+            <div className="formError" ref={this.emailErrorRef}>
+              Email shoud be at least 8 chars and no more than 45 chars
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="msg" className={`col-sm-2 control-label`}>
+              message
+            </label>
+            <div className="col-sm-10">
+              <textarea
+                ref={this.msgInputRef}
+                className="form-control"
+                name="msg"
+                cols="25"
+                rows="5"
+                onChange={this.handleChange}
+                value={this.state.msgl}
+              />
+            </div>
+            <div className="formError" ref={this.msgErrorRef}>
+              Message shoud be at least 8 chars and no more than 256 chars
+            </div>
           </div>
           <div className="form-group">
             <div className={`col-sm-offset-2 col-sm-10`}>
@@ -101,6 +181,25 @@ export class ContactForm extends Component {
             </div>
           </div>
         </form>
+        <div>
+          <br />
+          <h3>Privacy</h3>
+          <p>
+            This website is owned and controlled by:
+            <br />
+            <br /> The Affable Bean Company Limited <br />
+            Registered office: AffableBean House, Roast Drive, <br /> Pothead,
+            POT123, BeanieLand
+          </p>
+          <p>(hereinafter referred to as "AffableBean")</p>
+
+          <p>
+            AffableBean is responsible for the processing of any information
+            collected by or on behalf of AffableBean on or via this website. All
+            such information will be processed in accordance with our&nbsp;
+            <Link to="/privacy">privacy policy</Link>.
+          </p>
+        </div>
       </div>
     );
   }
