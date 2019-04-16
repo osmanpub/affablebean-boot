@@ -27,8 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/index").permitAll()
 				.antMatchers("/addToCart", "/addToCart2", "/cart", "/category", "/checkout", "/confirmation",
-						"/contact", "customerOrders", "/feedback", "/privacy", "/purchase", "/purchase2", "/updateCart",
-						"/updateCart2", "/viewCart")
+						"/contact", "/contact2", "customerOrders", "/feedback", "/privacy", "/purchase", "/purchase2", 
+						"/updateCart", "/updateCart2", "/viewCart")
 				.permitAll().antMatchers("/api/**", "/css/**", "/img/**").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 

@@ -115,6 +115,50 @@ public class WebController implements WebMvcConfigurer {
 		return "contact";
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@PostMapping({ "/contact2" })
+	@ResponseBody
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> contact(@RequestBody Map<String, Map<String, Object>> payload) {
+		Map<String, Object> formPayload = payload.get("form");
+		CheckoutForm checkoutForm = new CheckoutForm();
+
+		checkoutForm.setAddress((String) formPayload.get("address"));
+		checkoutForm.setCreditCard((String) formPayload.get("creditcard"));
+		checkoutForm.setEmail((String) formPayload.get("email"));
+		checkoutForm.setName((String) formPayload.get("name1"));
+		checkoutForm.setPhone((String) formPayload.get("phone"));
+
+		Map<String, Object> cartPayload = payload.get("cart");
+		List<Object> items = (List<Object>) cartPayload.get("items");
+		ShoppingCart cart = new ShoppingCart();
+
+		items.stream().forEach(item -> {
+			Map<String, Object> itemPayload = (Map<String, Object>) item;
+			Map<String, Object> productPayload = (Map<String, Object>) itemPayload.get("product");
+
+			Optional<Product> optProduct = productRepository.findById((Integer) productPayload.get("id"));
+
+			if (optProduct.isPresent()) {
+				Product product = optProduct.get();
+				cart.addItem(product);
+				cart.update(product, ((Integer) itemPayload.get("quantity")).shortValue());
+			}
+		});
+
+		if (cart.getNumberOfItems() == 0) {
+			return null;
+		}
+		
+		int orderId = orderManager.placeOrder(cart, deliverySurcharge, checkoutForm);
+
+		if (orderId == 0) {
+			return null;
+		}
+
+		return orderManager.getOrderDetails(orderId);
+	}
+	
 	@PostMapping({ "/feedback" })
 	public String feedback(@Valid ContactForm contactForm, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
