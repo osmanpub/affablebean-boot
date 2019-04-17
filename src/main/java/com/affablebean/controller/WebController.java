@@ -118,16 +118,8 @@ public class WebController implements WebMvcConfigurer {
 	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 	@PostMapping({ "/contact2" })
 	@ResponseBody
-	public boolean contact(@RequestBody Map<String, Object> payload) {
-		ContactForm contactForm = new ContactForm();
-
-		contactForm.setEmail((String) payload.get("email"));
-		contactForm.setMsg((String) payload.get("msg"));
-		contactForm.setName((String) payload.get("name"));
-		contactForm.setSubjectId(Integer.parseInt(((String) payload.get("subjectId"))));
-
-		saveFeedback(contactForm);
-		return true;
+	public String contact(@RequestBody ContactForm contactForm) {
+		return saveFeedback(contactForm);
 	}
 
 	@PostMapping({ "/feedback" })
