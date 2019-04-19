@@ -61,7 +61,8 @@ public class OrderManager {
 		}
 
 		// get customer
-		Customer customer = order.get().getCustomer();
+		CustomerOrder customerOrder = order.get();
+		Customer customer = customerOrder.getCustomer();
 
 		// get all ordered products
 		List<OrderedProduct> orderedProducts = orderedProductRepository.findByOrderId(orderId);
@@ -80,7 +81,7 @@ public class OrderManager {
 		// add each item to orderMap
 		Map<String, Object> orderMap = new HashMap<>();
 
-		orderMap.put("orderRecord", order.get());
+		orderMap.put("orderRecord", customerOrder);
 		orderMap.put("customer", customer);
 		orderMap.put("orderedProducts", orderedProducts);
 		orderMap.put("products", products);

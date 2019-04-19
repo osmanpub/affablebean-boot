@@ -1,0 +1,26 @@
+.categoryButton {
+  margin: 15px 22px;
+  padding: 13px;
+  display: block;
+  background-color: #d3ede8;
+  border-radius: 4px;
+}
+
+.categoryText {
+  line-height: 25px;
+  font-size: x-large;
+}
+
+/* <script type="text/javascript">
+$(document).ready(function() {
+	$('a.categoryButton').hover(function() {
+		$(this).animate({
+			backgroundColor : '#b2d2d2'
+		});
+	}, function() {
+		$(this).animate({
+			backgroundColor : '#d3ede8'
+		});
+	});
+});
+</script> */
