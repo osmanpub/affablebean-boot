@@ -7,7 +7,7 @@ The AffableBean application requires access to a MySQL database.
  	
  	Make a note of your username and password during installation.
 
- 2.	Install [Java 8 runtime](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) on your system if it isn't already installed. 
+ 2.	Install [Java 8 runtime](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) on your system if it isn't already installed. Or if you're a Java developer, you can stick with a JDK 8+ installation instead.
 
  3. Run these commands from the **affable-boot** project folder to build and populate the database. 
     Open a terminal, change to the project folder and start mysql:
@@ -21,6 +21,8 @@ The AffableBean application requires access to a MySQL database.
 
 	mysql> `source ./mysql/data.sql;`
         
+	(Ignore script errors for now)
+	
  4. Set up the following user so the server application can access the database:
           
 	mysql> `create user 'springuser'@'%' identified by 'ThePassword';`
