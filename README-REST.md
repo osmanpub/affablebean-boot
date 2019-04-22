@@ -55,7 +55,7 @@ Since it has an id of 7, we can query it by:
 {"id":7,"name":"Frozen foods","_links":{"self":{"href":"http://localhost:8080/api/categories/7"},"categories":{"href":"http://localhost:8080/api/categories"}}}
 `
 
-Finally let's delete the new category.
+Finally, let's delete the new category.
 
 `curl -X DELETE localhost:8080/api/categories/7`
 
