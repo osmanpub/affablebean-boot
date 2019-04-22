@@ -32,28 +32,24 @@ Once you've set up the database:
 
 ## RESTful API services
 
-You can query the API from the command line, or in a browser. For most endpoints, you have GET, PATCH, PUT, POST and DELETE operations. You can query the following topics: `categories`, `customers`, `feedbacks`, `products` and `subjects`. None of these endpoints are secured - you wouldn't want customer details made public in production for example.
+See the [README-REST](./README-REST.md) on how these services are implemented.
 
-Let's put one endpoint through it's paces, and see what it can do. Open up a terminal, and run the server. In another terminal type the following command: 
-
-`curl -v localhost:8080/api/categories`
-
-`
-{"_embedded":{"categoryList":[{"id":3,"name":"bakery","_links":{"self":{"href":"http://localhost:8080/api/categori
-es/3"},"categories":{"href":"http://localhost:8080/api/categories"}}},{"id":5,"name":"cereals","_links":{"self":{"
-href":"http://localhost:8080/api/categories/5"},"categories":{"href":"http://localhost:8080/api/categories"}}},{"i
-d":1,"name":"dairy","_links":{"self":{"href":"http://localhost:8080/api/categories/1"},"categories":{"href":"http:
-//localhost:8080/api/categories"}}},{"id":6,"name":"drinks","_links":{"self":{"href":"http://localhost:8080/api/ca
-tegories/6"},"categories":{"href":"http://localhost:8080/api/categories"}}},{"id":4,"name":"fruit & veg","_links":
-{"self":{"href":"http://localhost:8080/api/categories/4"},"categories":{"href":"http://localhost:8080/api/categori
-es"}}},{"id":2,"name":"meats","_links":{"self":{"href":"http://localhost:8080/api/categories/2"},"categories":{"hr
-ef":"http://localhost:8080/api/categories"}}}]},"_links":{"self":{"href":"http://localhost:8080/api/categories"}* 
-`
-
-Some of these end points are used by the react apps.
+Some of these services are used by the react apps.
 
 
-## React app
+## React apps
 
-See the [React README](./react/README.md) on running the react app
+See the [React README](./react/README.md) on running the JS app
 
+See the [React README](./react-ts/README.md) on running the Typescript app
+
+## Exercises
+
+Since it's a shopping cart app, you can look no further than [Amazon](https://amazon.com) for inspiration!
+Here's what I've come up with:
+
+1. Use the checkout page as a template for customer login, since many of the fields are already there. Allow them to sign up or [login](http://localhost:8080/login) and then redirect them back to the previous page.
+
+2. Use the [admin](http://localhost:8080/admin) page as a template for the customer's order page. Instead of displaying every customer and order, you would just fitler for the logged in user.
+
+3. Using these sample apps as starters, build me a site like Amazon for $1000, like [this guy](https://www.reddit.com/r/web_design/comments/18icho/i_want_to_build_a_website_like_amazon_but_better/).
