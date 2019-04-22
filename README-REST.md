@@ -8,6 +8,8 @@ Let's put one endpoint through it's paces, and see what happens. Open up a termi
 
 `curl -v localhost:8080/api/categories` (or `http://localhost:8080/api/categories` in a browser)
 
+You should get back: 
+
 `
 {"_embedded":{"categoryList":[{"id":3,"name":"bakery","_links":{"self":{"href":"http://localhost:8080/api/categori
 es/3"},"categories":{"href":"http://localhost:8080/api/categories"}}},{"id":5,"name":"cereals","_links":{"self":{"
@@ -27,11 +29,13 @@ We could view a single category as follows:
 
 `curl -v localhost:8080/api/categories/1`
 
+Giving a response like: 
+
 `
 {"id":1,"name":"dairy","_links":{"self":{"href":"http://localhost:8080/api/categories/1"},"categories":{"href":"http://localhost:8080/api/categories"}}}
 `
 
-Here it's much easier to see the self and all links. Now let's add a category called "frozen foods":
+Here it's much easier to see the *self* and *all* links. Now let's add a category called *frozen foods*:
 
 `curl -X POST localhost:8080/api/categories -H 'Content-type:application/json' -d '{"name": "Frozen foods"}'`
 
