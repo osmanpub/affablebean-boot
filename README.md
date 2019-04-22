@@ -48,7 +48,7 @@ See the [React README](./react-ts/README.md) on running the Typescript app
 Since it's a shopping cart app, you can look no further than [Amazon](https://amazon.com) for inspiration!
 Here's what I've come up with:
 
-1. Use the checkout page as a template for customer login, since many of the fields are already there. Allow them to sign up or [login](http://localhost:8080/login) and then redirect them back to the previous page.
+1. Use the checkout page as a template for customer login, since many of the fields you'll need are already there. Allow them to sign up or [login](http://localhost:8080/login) and then redirect them back to the previous page.
 
 2. Use the [admin](http://localhost:8080/admin) page as a template for the customer's order page. Instead of displaying every customer and order, you would just fitler for the logged in user.
 
