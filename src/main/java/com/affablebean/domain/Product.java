@@ -63,7 +63,6 @@ public class Product implements Serializable {
 
 	@Basic(optional = false)
 	@Column(name = "price")
-	@NotBlank
 	private BigDecimal price;
 
 	@JoinColumn(name = "category_id", referencedColumnName = "id")

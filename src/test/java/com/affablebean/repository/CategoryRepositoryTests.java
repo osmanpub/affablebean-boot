@@ -27,30 +27,30 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.affablebean.domain.Customer;
+import com.affablebean.domain.Category;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class CustomerRepositoryTests {
+public class CategoryRepositoryTests {
 	@Autowired
 	private TestEntityManager entityManager;
 
-	@Autowired
-	private CustomerRepository customers;
+	@MockBean
+	private CategoryRepository categories;
 
 	@Test
 	public void testFindByName() {
-		Customer customer = new Customer("John Doe", "johndoe@gmail.com", "111-222-333", "Nowhere St, Planet Mars",
-				"NS", "1111222233334444");
-		entityManager.persist(customer);
+		Category category = new Category("Frozen foods");
+		entityManager.persist(category);
 
-		String name = customer.getName();
-		List<Customer> findByName = customers.findByName(name);
+		String name = category.getName();
+		List<Category> findByName = categories.findByName(name);
 
-		assertThat(findByName).extracting(Customer::getName).containsOnly(name);
+		assertThat(findByName).extracting(Category::getName).containsOnly(name);
 	}
 
 }

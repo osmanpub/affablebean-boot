@@ -29,28 +29,33 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.affablebean.domain.Customer;
+import com.affablebean.domain.MsgFeedback;
+import com.affablebean.domain.MsgSubject;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class CustomerRepositoryTests {
+public class MsgFeedbackRepositoryTests {
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
-	private CustomerRepository customers;
+	private MsgFeedbackRepository feedbacks;
 
 	@Test
 	public void testFindByName() {
-		Customer customer = new Customer("John Doe", "johndoe@gmail.com", "111-222-333", "Nowhere St, Planet Mars",
-				"NS", "1111222233334444");
-		entityManager.persist(customer);
+		MsgSubject subject = new MsgSubject();
+		subject.setName("Website");
+		entityManager.persist(subject);
 
-		String name = customer.getName();
-		List<Customer> findByName = customers.findByName(name);
+		MsgFeedback feedback = new MsgFeedback("joe bloggs", "joe.bloggs@gmail.com", "you suck!");
+		feedback.setSubject(subject);
+		entityManager.persist(feedback);
 
-		assertThat(findByName).extracting(Customer::getName).containsOnly(name);
+		String name = feedback.getName();
+		List<MsgFeedback> findByName = feedbacks.findByName(name);
+
+		assertThat(findByName).extracting(MsgFeedback::getName).containsOnly(name);
 	}
 
 }

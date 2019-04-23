@@ -18,6 +18,7 @@ package com.affablebean.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,28 +30,37 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.affablebean.domain.Customer;
+import com.affablebean.domain.Category;
+import com.affablebean.domain.Product;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class CustomerRepositoryTests {
+public class ProductRepositoryTests {
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
-	private CustomerRepository customers;
+	private ProductRepository products;
 
 	@Test
 	public void testFindByName() {
-		Customer customer = new Customer("John Doe", "johndoe@gmail.com", "111-222-333", "Nowhere St, Planet Mars",
-				"NS", "1111222233334444");
-		entityManager.persist(customer);
+		Category category = new Category("Frozen foods");
+		entityManager.persist(category);
 
-		String name = customer.getName();
-		List<Customer> findByName = customers.findByName(name);
+		Product product = new Product();
 
-		assertThat(findByName).extracting(Customer::getName).containsOnly(name);
+		product.setCategory(category);
+		product.setDescription("Frozen chicken 2kg");
+		product.setName("Frozen chicken");
+		product.setPrice(new BigDecimal(5));
+
+		entityManager.persist(product);
+
+		String name = product.getName();
+		List<Product> findByName = products.findByName(name);
+
+		assertThat(findByName).extracting(Product::getName).containsOnly(name);
 	}
 
 }
