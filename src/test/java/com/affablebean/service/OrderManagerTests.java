@@ -1,19 +1,3 @@
-/*
- * Copyright 2002-2016 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.affablebean.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,8 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.affablebean.cart.ShoppingCart;
 import com.affablebean.domain.Category;
+import com.affablebean.domain.Customer;
+import com.affablebean.domain.CustomerOrder;
 import com.affablebean.domain.Product;
 import com.affablebean.form.CheckoutForm;
+import com.affablebean.repository.CustomerOrderRepository;
+import com.affablebean.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -55,6 +43,12 @@ public class OrderManagerTests {
 
 	@Autowired
 	private OrderManager orderManager;
+
+	@Autowired
+	private CustomerRepository customers;
+
+	@Autowired
+	private CustomerOrderRepository customerOrders;
 
 	@Test
 	public void testFindByName() {
@@ -84,6 +78,17 @@ public class OrderManagerTests {
 		form.setPhone("12345678");
 
 		orderManager.placeOrder(sc, "1.50", form);
+		String name = "joe bloggs";
+
+		List<Customer> customerList = customers.findByName(name);
+		assertThat(customerList).extracting(Customer::getName).containsOnly(name);
+
+		Customer customer = customerList.get(0);
+		List<CustomerOrder> customerOrdersList = customerOrders.findByCustomer(customer);
+
+		// 2 chickens (2 x 5 = 10) + 1.50 surcharge = 11.50
+		assertThat(customerOrdersList).extracting(CustomerOrder::getAmount).containsExactly(new BigDecimal(11.5));
+
 	}
 
 }
