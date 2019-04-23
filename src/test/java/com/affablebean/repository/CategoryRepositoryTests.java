@@ -18,38 +18,36 @@ package com.affablebean.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.affablebean.domain.Category;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class CategoryRepositoryTests {
-	@Autowired
-	private TestEntityManager entityManager;
-
 	@MockBean
 	private CategoryRepository categories;
 
+	@Before
+	public void setUp() {
+		Category category = new Category("Frozen foods");
+		List<Category> categoryList = new ArrayList<>();
+		categoryList.add(category);
+
+		Mockito.when(categories.findByName(category.getName())).thenReturn(categoryList);
+	}
+
 	@Test
 	public void testFindByName() {
-		Category category = new Category("Frozen foods");
-		entityManager.persist(category);
-
-		String name = category.getName();
+		String name = "Frozen foods";
 		List<Category> findByName = categories.findByName(name);
-
 		assertThat(findByName).extracting(Category::getName).containsOnly(name);
 	}
 

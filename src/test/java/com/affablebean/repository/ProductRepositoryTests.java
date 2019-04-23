@@ -19,35 +19,27 @@ package com.affablebean.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.mockito.Mockito;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.affablebean.domain.Category;
 import com.affablebean.domain.Product;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class ProductRepositoryTests {
-	@Autowired
-	private TestEntityManager entityManager;
-
-	@Autowired
+	@MockBean
 	private ProductRepository products;
 
-	@Test
-	public void testFindByName() {
+	@Before
+	public void setUp() {
 		Category category = new Category("Frozen foods");
-		entityManager.persist(category);
-
 		Product product = new Product();
 
 		product.setCategory(category);
@@ -55,11 +47,16 @@ public class ProductRepositoryTests {
 		product.setName("Frozen chicken");
 		product.setPrice(new BigDecimal(5));
 
-		entityManager.persist(product);
+		List<Product> productList = new ArrayList<>();
+		productList.add(product);
 
-		String name = product.getName();
+		Mockito.when(products.findByName(product.getName())).thenReturn(productList);
+	}
+
+	@Test
+	public void testFindByName() {
+		String name = "Frozen chicken";
 		List<Product> findByName = products.findByName(name);
-
 		assertThat(findByName).extracting(Product::getName).containsOnly(name);
 	}
 
