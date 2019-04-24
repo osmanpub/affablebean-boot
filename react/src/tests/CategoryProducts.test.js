@@ -32,6 +32,12 @@ it("loads a category product details", () => {
     ReactDOM.render(home, container);
   });
 
+  // const button = container.querySelector('button');
+
+  // act(() => {
+  //   button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+  // });
+
   // const cat = container.querySelector('.categoryImage');
 
   // act(() => {

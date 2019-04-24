@@ -21,6 +21,7 @@ export class Home extends Component {
 
     return (
       <div>
+        <span id="hello">hello</span>
         <Header cart={cart} url={match.url} />
         <Categories categories={items} />
         <Footer />
