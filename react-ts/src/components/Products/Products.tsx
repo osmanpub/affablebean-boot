@@ -14,10 +14,6 @@ import { CategoryProductsProps } from "../../interfaces/props";
 import { Product } from "../../interfaces/categories";
 
 export class Products extends Component<CategoryProductsProps> {
-  constructor(props: CategoryProductsProps) {
-    super(props);
-  }
-
   addToCart = (id: number) => {
     const { dispatch } = this.props;
     dispatch(clearPurchase());

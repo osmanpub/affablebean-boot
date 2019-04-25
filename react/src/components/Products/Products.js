@@ -12,10 +12,6 @@ import {
 } from "./Products.styles";
 
 export class Products extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   addToCart = id => {
     const { dispatch } = this.props;
     dispatch(clearPurchase());

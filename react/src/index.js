@@ -1,16 +1,17 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { render } from "react-dom";
 import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reducer from "./reducers";
-import Cart from "./containers/Cart";
-import CategoryProducts from "./containers/CategoryProducts";
-import Checkout from "./containers/Checkout";
-import Contact from "./containers/Contact";
-import Home from "./containers/Home";
-import Privacy from "./containers/Privacy";
 import * as serviceWorker from "./serviceWorker";
+
+const Cart = lazy(() => import("./containers/Cart"));
+const CategoryProducts = lazy(() => import("./containers/CategoryProducts"));
+const Checkout = lazy(() => import("./containers/Checkout"));
+const Contact = lazy(() => import("./containers/Contact"));
+const Home = lazy(() => import("./containers/Home"));
+const Privacy = lazy(() => import("./containers/Privacy"));
 
 const store = configureStore({
   reducer
@@ -20,12 +21,16 @@ render(
   // <React.StrictMode>
   <Provider store={store}>
     <Router>
-      <Route path="/" exact component={Home} />
-      <Route path="/category/:id" component={CategoryProducts} />
-      <Route path="/checkout" component={Checkout} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/privacy" component={Privacy} />
-      <Route path="/viewCart/:clear" component={Cart} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/category/:id" component={CategoryProducts} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/viewCart/:clear" component={Cart} />
+        </Switch>
+      </Suspense>
     </Router>
   </Provider>,
   // </React.StrictMode>,
