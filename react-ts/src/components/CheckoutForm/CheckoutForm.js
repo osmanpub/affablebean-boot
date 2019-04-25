@@ -35,19 +35,16 @@ export class CheckoutForm extends Component {
 
     this.phoneErrorRef = React.createRef();
     this.phoneInputRef = React.createRef();
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const input = event.target;
     this.setState({
       [input.name]: input.value
     });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     const { dispatch, cart } = this.props;
     let validForm = true;
@@ -80,7 +77,7 @@ export class CheckoutForm extends Component {
         })
       );
     }
-  }
+  };
 
   render() {
     const { cart } = this.props;

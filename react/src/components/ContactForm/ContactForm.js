@@ -25,19 +25,16 @@ export class ContactForm extends Component {
 
     this.subjectErrorRef = React.createRef();
     this.subjectInputRef = React.createRef();
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const input = event.target;
     this.setState({
       [input.name]: input.value
     });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     let validForm = true;
 
@@ -70,7 +67,7 @@ export class ContactForm extends Component {
       this.nameInputRef.current.value = "";
       this.subjectInputRef.current.value = "";
     }
-  }
+  };
 
   render() {
     const { subjects } = this.props;

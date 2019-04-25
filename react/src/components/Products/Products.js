@@ -14,14 +14,13 @@ import {
 export class Products extends Component {
   constructor(props) {
     super(props);
-    this.addToCart = this.addToCart.bind(this);
   }
 
-  addToCart(id) {
+  addToCart = id => {
     const { dispatch } = this.props;
     dispatch(clearPurchase());
     dispatch(addProductToCart(id));
-  }
+  };
 
   render() {
     const { categories } = this.props;

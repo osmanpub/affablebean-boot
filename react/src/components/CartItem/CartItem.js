@@ -10,12 +10,9 @@ export class CartItem extends Component {
     this.state = {
       qty: item.quantity
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const input = event.target;
     let qty = Number(input.value);
 
@@ -24,14 +21,14 @@ export class CartItem extends Component {
     } else {
       input.value = this.state.qty;
     }
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     const { dispatch, item } = this.props;
     const { product } = item;
     dispatch(updateProductInCart(product.id, Number(this.state.qty)));
-  }
+  };
 
   render() {
     const { index, item } = this.props;

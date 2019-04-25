@@ -13,12 +13,9 @@ export class CartItem extends Component<CartItemProps, CartItemState> {
     this.state = {
       qty: item.quantity
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event: any) {
+  handleChange = (event: any) => {
     const input = event.target;
     let qty = Number(input.value);
 
@@ -29,7 +26,7 @@ export class CartItem extends Component<CartItemProps, CartItemState> {
     }
   }
 
-  handleSubmit(event: any) {
+  handleSubmit = (event: any) => {
     event.preventDefault();
     const { dispatch, item } = this.props;
     const product: Product = item.product;
