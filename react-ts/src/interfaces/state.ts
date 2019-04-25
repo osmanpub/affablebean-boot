@@ -16,3 +16,8 @@ export interface ContactState {
   msg: string;
   subjectId: string;
 }
+
+export interface ErrorBoundaryState {
+  error: any;
+  errorInfo: any;
+}

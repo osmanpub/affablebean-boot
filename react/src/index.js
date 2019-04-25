@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reducer from "./reducers";
 import * as serviceWorker from "./serviceWorker";
-
+import ErrorBoundary from "./components/ErrorBoundary";
 const Cart = lazy(() => import("./containers/Cart"));
 const CategoryProducts = lazy(() => import("./containers/CategoryProducts"));
 const Checkout = lazy(() => import("./containers/Checkout"));
@@ -19,20 +19,22 @@ const store = configureStore({
 
 render(
   // <React.StrictMode>
-  <Provider store={store}>
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/category/:id" component={CategoryProducts} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/viewCart/:clear" component={Cart} />
-        </Switch>
-      </Suspense>
-    </Router>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/category/:id" component={CategoryProducts} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/privacy" component={Privacy} />
+            <Route path="/viewCart/:clear" component={Cart} />
+          </Switch>
+        </Suspense>
+      </Router>
+    </Provider>
+  </ErrorBoundary>,
   // </React.StrictMode>,
   document.getElementById("root")
 );

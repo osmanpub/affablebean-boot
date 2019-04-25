@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reducer from "./reducers";
 import * as serviceWorker from "./serviceWorker";
-
+import ErrorBoundary from "./components/ErrorBoundary";
 const Cart = lazy(() => import("./containers/Cart"));
 const CategoryProducts = lazy(() => import("./containers/CategoryProducts"));
 const Checkout = lazy(() => import("./containers/Checkout"));
@@ -19,6 +19,7 @@ const store = configureStore({
 
 render(
   // <React.StrictMode>
+  <ErrorBoundary>
   <Provider store={store}>
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
@@ -32,7 +33,8 @@ render(
         </Switch>
       </Suspense>
     </Router>
-  </Provider>,
+  </Provider>
+  </ErrorBoundary>,
   // </React.StrictMode>,
   document.getElementById("root")
 );
