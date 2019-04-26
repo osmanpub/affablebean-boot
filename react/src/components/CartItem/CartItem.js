@@ -65,7 +65,7 @@ export class CartItem extends Component {
                 type="number"
                 value={this.state.qty}
               />
-              <button className="`btn btn-primary btn-sm`" type="submit">
+              <button className="btn btn-primary btn-sm" type="submit">
                 update
               </button>
             </form>

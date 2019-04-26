@@ -76,7 +76,7 @@ export class Products extends Component<CategoryProductsProps> {
 
             <td>
               <button
-                className="`btn btn-primary btn-sm`"
+                className="btn btn-primary btn-sm"
                 onClick={this.addToCart.bind(this, product.id)}
               >
                 add

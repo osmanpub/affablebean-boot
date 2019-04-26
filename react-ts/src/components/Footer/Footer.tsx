@@ -9,10 +9,10 @@ export function Footer(props: Props | {}) {
       <br />
       <FooterText>
         <Link to={"/privacy"}>
-          <button className={`btn btn-link`}>Privacy</button>
+          <button className="btn btn-link">Privacy</button>
         </Link>
         <Link to={"/contact"}>
-          <button className={`btn btn-link`}>Contact</button>
+          <button className="btn btn-link">Contact</button>
         </Link>
         &nbsp;&copy;&nbsp;2019 the affable bean company
       </FooterText>

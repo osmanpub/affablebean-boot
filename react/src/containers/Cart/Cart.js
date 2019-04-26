@@ -35,7 +35,7 @@ export class Cart extends Component {
       numberOfItems === 0 ? (
         ""
       ) : (
-        <Link className={`bubble hMargin`} to={"/viewCart/true"}>
+        <Link className="bubble hMargin" to={"/viewCart/true"}>
           clear cart
         </Link>
       );
@@ -49,7 +49,7 @@ export class Cart extends Component {
             : "Your shopping cart contains " + numberOfItems + " items"}
           <ActionBar>
             {clearCart}
-            <Link className={`bubble hMargin`} to={"/"}>
+            <Link className="bubble hMargin" to={"/"}>
               continue shopping
             </Link>
           </ActionBar>
