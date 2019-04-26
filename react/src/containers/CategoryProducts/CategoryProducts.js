@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -55,3 +56,10 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(CategoryProducts);
+
+CategoryProducts.propTypes = {
+  cart: PropTypes.object,
+  category: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  url: PropTypes.string
+};

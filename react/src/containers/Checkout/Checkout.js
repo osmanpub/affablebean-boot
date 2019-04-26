@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CheckoutForm from "../../components/CheckoutForm";
 import Confirmation from "../../components/Confirmation";
@@ -35,3 +36,10 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Checkout);
+
+Checkout.propTypes = {
+  cart: PropTypes.object,
+  match: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  purchase: PropTypes.object.isRequired
+};

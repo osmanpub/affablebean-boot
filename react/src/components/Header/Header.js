@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { HeaderMain, HeaderWrapper, Logo } from "./Header.styles";
 import WidgetBar from "../WidgetBar";
@@ -25,3 +26,8 @@ export function Header(props) {
     </HeaderWrapper>
   );
 }
+
+Header.propTypes = {
+  cart: PropTypes.object,
+  url: PropTypes.string.isRequired
+};

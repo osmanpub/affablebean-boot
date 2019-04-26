@@ -24,14 +24,14 @@ export class CartItem extends Component<CartItemProps, CartItemState> {
     } else {
       input.value = this.state.qty;
     }
-  }
+  };
 
   handleSubmit = (event: any) => {
     event.preventDefault();
     const { dispatch, item } = this.props;
     const product: Product = item.product;
     dispatch(updateProductInCart(product.id, Number(this.state.qty)));
-  }
+  };
 
   render() {
     const { index, item } = this.props;

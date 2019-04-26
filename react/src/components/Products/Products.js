@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import { addProductToCart } from "../../net/cart";
@@ -100,3 +101,9 @@ export class Products extends Component {
     );
   }
 }
+
+Products.propTypes = {
+  category: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+};

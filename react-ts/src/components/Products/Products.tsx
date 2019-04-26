@@ -18,7 +18,7 @@ export class Products extends Component<CategoryProductsProps> {
     const { dispatch } = this.props;
     dispatch(clearPurchase());
     dispatch(addProductToCart(id.toString()));
-  }
+  };
 
   render() {
     const { categories } = this.props;

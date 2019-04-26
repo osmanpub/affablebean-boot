@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ContactForm from "../../components/ContactForm";
 import Footer from "../../components/Footer";
@@ -39,3 +40,10 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Contact);
+
+Contact.propTypes = {
+  cart: PropTypes.object,
+  match: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  subjects: PropTypes.object.isRequired
+};

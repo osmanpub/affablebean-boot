@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
@@ -275,3 +276,8 @@ export function Privacy(props) {
     </div>
   );
 }
+
+Privacy.propTypes = {
+  cart: PropTypes.object,
+  match: PropTypes.object.isRequired
+};

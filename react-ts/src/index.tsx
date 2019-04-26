@@ -18,24 +18,24 @@ const store = configureStore({
 });
 
 render(
-  // <React.StrictMode>
-  <ErrorBoundary>
-  <Provider store={store}>
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/category/:id" component={CategoryProducts} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/viewCart/:clear" component={Cart} />
-        </Switch>
-      </Suspense>
-    </Router>
-  </Provider>
-  </ErrorBoundary>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/category/:id" component={CategoryProducts} />
+              <Route path="/checkout" component={Checkout} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/viewCart/:clear" component={Cart} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </Provider>
+    </ErrorBoundary>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

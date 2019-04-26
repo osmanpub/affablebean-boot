@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
 import "./WidgetBar.css";
@@ -37,3 +38,8 @@ export function WidgetBar(props) {
     </WidgetBarWrapper>
   );
 }
+
+WidgetBar.propTypes = {
+  cart: PropTypes.object,
+  url: PropTypes.string.isRequired
+};

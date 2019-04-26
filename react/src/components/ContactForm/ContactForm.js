@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { sendFeedback } from "../../net/contact";
 import { validateField } from "../../utils";
@@ -201,3 +202,7 @@ export class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  subjects: PropTypes.object.isRequired
+};

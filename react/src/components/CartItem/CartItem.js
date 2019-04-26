@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { updateProductInCart } from "../../net/cart";
 import { CartTableTd } from "./CartItem.styles";
 
@@ -74,3 +75,9 @@ export class CartItem extends Component {
     );
   }
 }
+
+CartItem.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  item: PropTypes.object.isRequired
+};

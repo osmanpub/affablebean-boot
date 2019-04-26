@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
@@ -39,3 +40,9 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Home);
+
+Home.propTypes = {
+  cart: PropTypes.object,
+  categories: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+};

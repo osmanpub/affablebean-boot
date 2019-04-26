@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Category from "../Category";
 import {
   CategoriesGreeting,
@@ -35,3 +36,7 @@ export function Categories(props) {
     </div>
   );
 }
+
+Categories.propTypes = {
+  categories: PropTypes.array.isRequired
+};

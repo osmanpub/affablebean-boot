@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { purchaseOrder } from "../../net/checkout";
 import {
   InfoBox,
@@ -241,3 +242,7 @@ export class CheckoutForm extends Component {
     );
   }
 }
+
+CheckoutForm.propTypes = {
+  cart: PropTypes.object.isRequired
+};
