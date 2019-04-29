@@ -66,4 +66,11 @@ it("loads all products for dairy category", () => {
 
   const cart = document.querySelector("span.horizontalMargin");
   expect(cart.textContent).toContain("1 items");
+
+  // view cart
+  const viewCart = document.querySelectorAll("a.bubble")[1];
+
+  act(() => {
+    add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
 });

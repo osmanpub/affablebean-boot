@@ -8,6 +8,7 @@ import CategoryProducts from ".";
 import Home from "../Home";
 import reducer from "../../reducers";
 
+jest.mock("../../net/cart");
 jest.mock("../../net/category");
 jest.mock("../../net/categories");
 
@@ -63,5 +64,11 @@ it("loads all products for dairy category", () => {
     act(() => {
       add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+  }
+
+  const cart = document.querySelector("span.horizontalMargin");
+
+  if (cart) {
+    expect(cart.textContent).toContain("1 items");
   }
 });
