@@ -34,6 +34,12 @@ beforeAll(() => {
 
     ReactDOM.render(home, container);
   });
+
+  const category = container.querySelector(".categoryImage"); // dairy
+
+  act(() => {
+    category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
 });
 
 afterAll(() => {
@@ -41,13 +47,7 @@ afterAll(() => {
   container = null;
 });
 
-it("loads all products for dairy category", () => {
-  const category = container.querySelector(".categoryImage"); // dairy
-
-  act(() => {
-    category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  });
-
+it("check dairy category products", () => {
   const categories = container.querySelectorAll("span.categoryText");
   expect(categories.length).toBe(6);
 
@@ -56,19 +56,24 @@ it("loads all products for dairy category", () => {
 
   rows = container.querySelectorAll("tr.lightBlue");
   expect(rows.length).toBe(2);
+});
 
-  // add milk to cart
-  const add = document.querySelector("tr .btn-sm");
+it("add milk to cart", () => {
+  const add = document.querySelector("tr button");
 
-  if (add) {
-    act(() => {
-      add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
+  if (!add) {
+    return;
   }
+
+  act(() => {
+    add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
 
   const cart = document.querySelector("span.horizontalMargin");
 
-  if (cart) {
-    expect(cart.textContent).toContain("1 items");
+  if (!cart) {
+    return;
   }
+
+  expect(cart.textContent).toContain("1 items");
 });

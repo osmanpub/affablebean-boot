@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
-import CategoryProducts from ".";
+import Cart from ".";
+import CategoryProducts from "../CategoryProducts";
 import Home from "../Home";
 import reducer from "../../reducers";
 
@@ -28,34 +29,19 @@ beforeAll(() => {
         <Router>
           <Route path="/" exact component={Home} />
           <Route path="/category/:id" component={CategoryProducts} />
+          <Route path="/viewCart/:clear" component={Cart} />
         </Router>
       </Provider>
     );
 
     ReactDOM.render(home, container);
   });
-});
 
-afterAll(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it("loads all products for dairy category", () => {
   const category = container.querySelector(".categoryImage"); // dairy
 
   act(() => {
     category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
-
-  const categories = container.querySelectorAll("span.categoryText");
-  expect(categories.length).toBe(6);
-
-  let rows = container.querySelectorAll("tr.white");
-  expect(rows.length).toBe(2);
-
-  rows = container.querySelectorAll("tr.lightBlue");
-  expect(rows.length).toBe(2);
 
   // add milk to cart
   const add = document.querySelector("tr button");
@@ -67,10 +53,28 @@ it("loads all products for dairy category", () => {
   const cart = document.querySelector("span.horizontalMargin");
   expect(cart.textContent).toContain("1 items");
 
-  // view cart
   const viewCart = document.querySelectorAll("a.bubble")[1];
 
   act(() => {
-    add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    viewCart.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
+});
+
+afterAll(() => {
+  document.body.removeChild(container);
+  container = null;
+});
+
+it("update milk quantity", () => {
+  const input = container.querySelector("tr input");
+
+  // act(() => {
+  //   input.dispatchEvent(new KeyEvent("keyUp", { which: 50, bubbles: true }));
+  // });
+
+  const update = container.querySelector("tr button");
+
+  // act(() => {
+  //   update.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  // });
 });
