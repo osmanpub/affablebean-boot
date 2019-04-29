@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
 import Home from "../containers/Home";
 import reducer from "../reducers";
+
+jest.mock("../net/categories");
 
 let container;
 
@@ -26,23 +29,20 @@ it("loads a category product details", () => {
 
     const home = (
       <Provider store={store}>
-        <Home />
+        <Router>
+          <Route path="/" exact component={Home} />
+        </Router>
       </Provider>
     );
+
     ReactDOM.render(home, container);
   });
 
-  // const button = container.querySelector('button');
+  const cat = container.querySelector(".categoryImage");
 
-  // act(() => {
-  //   button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-  // });
-
-  // const cat = container.querySelector('.categoryImage');
-
-  // act(() => {
-  //   cat.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-  // });
+  act(() => {
+    cat.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
 
   // const label = container.querySelector('p');
   // expect(label.textContent).toBe('You clicked 0 times');

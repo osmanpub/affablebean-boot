@@ -15,6 +15,7 @@ export class Home extends Component {
   render() {
     const { cart, categories, match } = this.props;
     const { items } = categories;
+    const url = match ? match.url : "";
 
     if (items.length === 0) {
       return null;
@@ -22,7 +23,7 @@ export class Home extends Component {
 
     return (
       <div>
-        <Header cart={cart} url={match.url} />
+        <Header cart={cart} url={url} />
         <Categories categories={items} />
         <Footer />
       </div>
@@ -44,5 +45,5 @@ export default connect(mapStateToProps)(Home);
 Home.propTypes = {
   cart: PropTypes.object,
   categories: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object
 };
