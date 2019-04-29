@@ -39,6 +39,7 @@ afterAll(() => {
 
 it("loads home page correctly", () => {
   const greeting = document.querySelector("p");
+
   expect(greeting.textContent).toBe(
     "Welcome to the online home of the Affable Bean Green Grocer."
   );

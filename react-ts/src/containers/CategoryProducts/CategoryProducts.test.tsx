@@ -11,7 +11,7 @@ import reducer from "../../reducers";
 jest.mock("../../net/category");
 jest.mock("../../net/categories");
 
-let container;
+let container: any;
 
 beforeAll(() => {
   container = document.createElement("div");
@@ -59,7 +59,9 @@ it("loads all products for dairy category", () => {
   // add milk to cart
   const add = document.querySelector("tr .btn-sm");
 
-  act(() => {
-    add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  });
+  if (add) {
+    act(() => {
+      add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+  }
 });
