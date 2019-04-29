@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
-import Home from ".";
+import CategoryProducts from ".";
+import Home from "../Home";
 import reducer from "../../reducers";
 
+jest.mock("../../net/category");
 jest.mock("../../net/categories");
 
 let container;
@@ -24,6 +26,7 @@ beforeAll(() => {
       <Provider store={store}>
         <Router>
           <Route path="/" exact component={Home} />
+          <Route path="/category/:id" component={CategoryProducts} />
         </Router>
       </Provider>
     );
@@ -37,18 +40,13 @@ afterAll(() => {
   container = null;
 });
 
-it("loads home page correctly", () => {
-  const greeting = document.querySelector("p");
-  expect(greeting.textContent).toBe(
-    "Welcome to the online home of the Affable Bean Green Grocer."
-  );
+it("loads all products for dairy category", () => {
+  const category = container.querySelector(".categoryImage"); // dairy
 
-  const headerLogo = document.querySelector("#logoText");
-  expect(headerLogo.alt).toBe("the affable bean");
+  act(() => {
+    category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
 
-  const footerButtons = document.querySelectorAll(".btn-link");
-  expect(footerButtons.length).toBe(2);
-
-  const categories = container.querySelectorAll(".categoryBox");
+  const categories = container.querySelectorAll("span.categoryText");
   expect(categories.length).toBe(6);
 });

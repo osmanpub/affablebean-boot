@@ -11,17 +11,10 @@ jest.mock("../../net/categories");
 
 let container: any;
 
-beforeEach(() => {
+beforeAll(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
-});
 
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
-it("loads a category product details", () => {
   act(() => {
     const store = configureStore({
       reducer
@@ -37,10 +30,14 @@ it("loads a category product details", () => {
 
     ReactDOM.render(home, container);
   });
+});
 
-  const categories = container.querySelectorAll(".categoryBox");
-  expect(categories.length).toBe(6);
+afterAll(() => {
+  document.body.removeChild(container);
+  container = null;
+});
 
+it("loads home page correctly", () => {
   const greeting = document.querySelector("p");
 
   if (greeting) {
@@ -58,9 +55,6 @@ it("loads a category product details", () => {
   const footerButtons = document.querySelectorAll(".btn-link");
   expect(footerButtons.length).toBe(2);
 
-  const category = container.querySelector(".categoryImage");
-
-  act(() => {
-    category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  });
+  const categories = container.querySelectorAll(".categoryBox");
+  expect(categories.length).toBe(6);
 });
