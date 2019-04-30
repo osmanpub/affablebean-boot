@@ -18,7 +18,6 @@ it("loads dairy products", () => {
 
 it("add milk to cart", () => {
   mouseClick(container.querySelector("tr button")); // add button
-
   const cart = container.querySelector("span.horizontalMargin");
   expect(cart.textContent).toContain("1 items");
 });

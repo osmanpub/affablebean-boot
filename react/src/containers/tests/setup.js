@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactTestUtils from "react-dom/test-utils";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 import { configureStore } from "redux-starter-kit";
@@ -10,9 +11,10 @@ import Checkout from "../Checkout";
 import Home from "../Home";
 import reducer from "../../reducers";
 
-jest.mock("../../net/categories");
 jest.mock("../../net/cart");
 jest.mock("../../net/category");
+jest.mock("../../net/categories");
+jest.mock("../../net/checkout");
 
 export let container;
 
@@ -42,6 +44,11 @@ export const setupAll = callback =>
 
     callback && callback();
   });
+
+export const changeValue = (widget, value) => {
+  widget.value = value;
+  ReactTestUtils.Simulate.change(widget);
+};
 
 export const mouseClick = widget =>
   act(() => {
