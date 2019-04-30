@@ -1,38 +1,26 @@
 import { combineReducers } from "redux";
 import { createReducer } from "redux-starter-kit";
 
-function cart(
-  state = {
+const cart = createReducer(
+  {
     items: [],
     numberOfItems: 0,
     subtotal: 0
   },
-  action
-) {
-  function getCartItem(cart) {
-    return JSON.parse(JSON.stringify(cart.items[0]));
-  }
-
-  switch (action.type) {
-    case "ADD_TO_CART": {
+  {
+    ADD_TO_CART: (state, action) => {
       const { cart } = action.payload;
 
-      return {
-        items: state.items.concat(getCartItem(cart)),
-        numberOfItems: state.numberOfItems + cart.numberOfItems,
-        subtotal: state.subtotal + cart.subtotal
-      };
-    }
-
-    case "CLEAR_CART": {
-      return {
-        items: [],
-        numberOfItems: 0,
-        subtotal: 0
-      };
-    }
-
-    case "UPDATE_CART": {
+      state.items = state.items.concat(getCartItem(cart));
+      state.numberOfItems += cart.numberOfItems;
+      state.subtotal += cart.subtotal;
+    },
+    CLEAR_CART: (state, action) => {
+      state.items = [];
+      state.numberOfItems = 0;
+      state.subtotal = 0;
+    },
+    UPDATE_CART: (state, action) => {
       const { qty } = action.payload;
 
       if (qty < 0) {
@@ -67,16 +55,15 @@ function cart(
         });
       }
 
-      return {
-        items: items,
-        numberOfItems: state.numberOfItems + numberOfItemsChange,
-        subtotal: state.subtotal + subtotalChange
-      };
+      state.items = items;
+      state.numberOfItems += numberOfItemsChange;
+      state.subtotal += subtotalChange;
     }
-
-    default:
-      return state;
   }
+);
+
+function getCartItem(cart) {
+  return JSON.parse(JSON.stringify(cart.items[0]));
 }
 
 const category = createReducer(

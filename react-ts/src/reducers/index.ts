@@ -1,40 +1,27 @@
 import { combineReducers } from "redux";
 import { createReducer } from "redux-starter-kit";
-import { Action } from "../interfaces/action";
 import { Cart, CartItem } from "../interfaces/cart";
 
-function cart(
-  state: Cart = {
+const cart = createReducer(
+  {
     items: [],
     numberOfItems: 0,
     subtotal: 0
   },
-  action: Action
-): Cart {
-  function getCartItem(cart: Cart) {
-    return JSON.parse(JSON.stringify(cart.items[0]));
-  }
-
-  switch (action.type) {
-    case "ADD_TO_CART": {
+  {
+    ADD_TO_CART: (state, action) => {
       const { cart } = action.payload;
 
-      return {
-        items: state.items.concat(getCartItem(cart)),
-        numberOfItems: state.numberOfItems + cart.numberOfItems,
-        subtotal: state.subtotal + cart.subtotal
-      };
-    }
-
-    case "CLEAR_CART": {
-      return {
-        items: [],
-        numberOfItems: 0,
-        subtotal: 0
-      };
-    }
-
-    case "UPDATE_CART": {
+      state.items = state.items.concat(getCartItem(cart));
+      state.numberOfItems += cart.numberOfItems;
+      state.subtotal += cart.subtotal;
+    },
+    CLEAR_CART: (state, action) => {
+      state.items = [];
+      state.numberOfItems = 0;
+      state.subtotal = 0;
+    },
+    UPDATE_CART: (state, action) => {
       const { qty } = action.payload;
 
       if (qty < 0) {
@@ -42,12 +29,12 @@ function cart(
       }
 
       const { cart, id } = action.payload;
-      const updatedItem: CartItem = cart.items[0];
+      const updatedItem = cart.items[0];
 
       let numberOfItemsChange = 0;
       let subtotalChange = 0;
 
-      let items = [];
+      let items: any = [];
 
       if (qty === 0) {
         const removedItem: CartItem = state.items.filter(
@@ -69,16 +56,15 @@ function cart(
         });
       }
 
-      return {
-        items: items,
-        numberOfItems: state.numberOfItems + numberOfItemsChange,
-        subtotal: state.subtotal + subtotalChange
-      };
+      state.items = items;
+      state.numberOfItems += numberOfItemsChange;
+      state.subtotal += subtotalChange;
     }
-
-    default:
-      return state;
   }
+);
+
+function getCartItem(cart: Cart) {
+  return JSON.parse(JSON.stringify(cart.items[0]));
 }
 
 const category = createReducer(
