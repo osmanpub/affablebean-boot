@@ -12,6 +12,7 @@ it("load home page", () => {
   const headerLogo = container.querySelector("#logoText");
   expect(headerLogo.alt).toBe("the affable bean");
 
+  // privacy and contact buttons
   const footerButtons = container.querySelectorAll(".btn-link");
   expect(footerButtons.length).toBe(2);
 

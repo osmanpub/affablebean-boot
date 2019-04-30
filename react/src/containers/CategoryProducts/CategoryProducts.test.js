@@ -1,18 +1,14 @@
-import { act } from "react-dom/test-utils";
-import { container, setupAll } from "../tests/setup";
+import { container, mouseClick, setupAll } from "../tests/setup";
 
 setupAll(() => {
-  const category = container.querySelector(".categoryImage"); // dairy
-
-  act(() => {
-    category.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  });
+  mouseClick(container.querySelector(".categoryImage")); // dairy category
 });
 
 it("loads dairy products", () => {
   const categories = container.querySelectorAll("span.categoryText");
   expect(categories.length).toBe(6);
 
+  // four products in total
   let rows = container.querySelectorAll("tr.white");
   expect(rows.length).toBe(2);
 
@@ -21,11 +17,7 @@ it("loads dairy products", () => {
 });
 
 it("add milk to cart", () => {
-  const add = container.querySelector("tr button");
-
-  act(() => {
-    add.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  });
+  mouseClick(container.querySelector("tr button")); // add button
 
   const cart = container.querySelector("span.horizontalMargin");
   expect(cart.textContent).toContain("1 items");

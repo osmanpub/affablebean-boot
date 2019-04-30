@@ -43,6 +43,11 @@ export const setupAll = callback =>
     callback && callback();
   });
 
+export const mouseClick = widget =>
+  act(() => {
+    widget.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+
 afterAll(() => {
   document.body.removeChild(container);
   container = null;
