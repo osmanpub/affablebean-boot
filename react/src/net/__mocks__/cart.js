@@ -26,26 +26,30 @@ export const addProductToCart = id => dispatch => {
   );
 };
 
-// export const updateProductInCart = (id, qty) => dispatch => {
-//   return fetch(getPath("updateCart2?id=" + id + "&qty=" + qty), {
-//     method: "POST", // *GET, POST, PUT, DELETE, etc.
-//     mode: "cors", // no-cors, cors, *same-origin
-//     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-//     // credentials: "same-origin", // include, *same-origin, omit
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//     // redirect: "follow", // manual, *follow, error
-//     // referrer: "no-referrer", // no-referrer, *client
-//   })
-//     .then(response => response.json())
-//     .then(json =>
-//       dispatch(
-//         updateCart({
-//           cart: json,
-//           id: id,
-//           qty: qty
-//         })
-//       )
-//     );
-// };
+const updateCart = createAction("UPDATE_CART");
+
+export const updateProductInCart = (id, qty) => dispatch => {
+  dispatch(
+    updateCart({
+      cart: {
+        items: [
+          {
+            product: {
+              id: 1,
+              description: "semi skimmed (1L)",
+              name: "milk",
+              price: 1.7,
+              category: { id: 1, name: "dairy" }
+            },
+            quantity: 2,
+            total: 3.4
+          }
+        ],
+        numberOfItems: 2,
+        subtotal: 3.4
+      },
+      id: 1,
+      qty: 2
+    })
+  );
+};
