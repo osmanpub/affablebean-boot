@@ -1,4 +1,3 @@
-import RestClient from "react-native-rest-client";
 import { getRestPath } from "../utils";
 import { receiveCategories } from "../actions";
 
@@ -9,11 +8,19 @@ export const fetchCategoriesIfNeeded = () => (dispatch, getState) => {
 };
 
 const fetchCategories = () => dispatch => {
-  const categories = api.getCategories();
-
-  if (categories) {
-    // dispatch(receiveCategories(categories));
-  }
+  fetch(getRestPath("categories"), {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json"
+    }
+    // redirect: "follow", // manual, *follow, error
+    // referrer: "no-referrer", // no-referrer, *client
+  })
+    .then(response => response.json())
+    .then(json => dispatch(receiveCategories(json._embedded.categoryList)));
 };
 
 const shouldFetchCategories = state => {
@@ -29,17 +36,3 @@ const shouldFetchCategories = state => {
 
   return categories.didInvalidate;
 };
-
-class CategoriesApi extends RestClient {
-  constructor() {
-    super("http://localhost:8080/api/");
-  }
-
-  getCategories() {
-    return this.GET("categories").then(
-      response => response._embedded.categoryList
-    );
-  }
-}
-
-const api = new CategoriesApi();
