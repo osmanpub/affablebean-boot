@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 // import Categories from "../../components/Categories";
 // import Footer from "../../components/Footer";
 // import Header from "../../components/Header";
-// import { fetchCategoriesIfNeeded } from "../../net/categories";
+import { fetchCategoriesIfNeeded } from "../../net/categories";
 import { Text, View } from "react-native";
 
-export class Home extends Component {
+class Home extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    // dispatch(fetchCategoriesIfNeeded());
+    dispatch(fetchCategoriesIfNeeded());
   }
 
   render() {
@@ -39,7 +39,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export const ConnectedHome = connect(mapStateToProps)(Home);
 
 // Home.propTypes = {
 //   cart: PropTypes.object,

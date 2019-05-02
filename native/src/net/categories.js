@@ -11,8 +11,8 @@ export const fetchCategoriesIfNeeded = () => (dispatch, getState) => {
 const fetchCategories = () => dispatch => {
   const categories = api.getCategories();
 
-  if (categores) {
-    dispatch(receiveCategories(categories));
+  if (categories) {
+    // dispatch(receiveCategories(categories));
   }
 };
 
