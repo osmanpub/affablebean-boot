@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { ScrollView } from "react-native";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -22,11 +23,11 @@ class Home extends Component {
     }
 
     return (
-      <>
+      <ScrollView>
         <Header cart={cart} url={url} />
         <Categories categories={items} />
         <Footer />
-      </>
+      </ScrollView>
     );
   }
 }
