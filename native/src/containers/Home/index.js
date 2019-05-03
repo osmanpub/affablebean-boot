@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 // import Categories from "../../components/Categories";
-// import Footer from "../../components/Footer";
+import Footer from "../../components/Footer";
 // import Header from "../../components/Header";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
-import { Text, View } from "react-native";
 
 class Home extends Component {
   componentDidMount() {
@@ -14,18 +13,18 @@ class Home extends Component {
   }
 
   render() {
-    // const { cart, categories, match } = this.props;
-    // const { items } = categories;
-    // const url = match ? match.url : "";
+    const { cart, categories, match } = this.props;
+    const { items } = categories;
+    const url = match ? match.url : "";
 
-    // if (items.length === 0) {
-    //   return null;
-    // }
+    if (items.length === 0) {
+      return null;
+    }
 
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello, world!</Text>
-      </View>
+      // <Header cart={cart} url={url} />
+      // <Categories categories={items} />
+      <Footer />
     );
   }
 }
@@ -41,8 +40,8 @@ const mapStateToProps = state => {
 
 export const ConnectedHome = connect(mapStateToProps)(Home);
 
-// Home.propTypes = {
-//   cart: PropTypes.object,
-//   categories: PropTypes.object.isRequired,
-//   match: PropTypes.object
-// };
+Home.propTypes = {
+  cart: PropTypes.object,
+  categories: PropTypes.object.isRequired,
+  match: PropTypes.object
+};

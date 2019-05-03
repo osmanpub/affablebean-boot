@@ -11,11 +11,9 @@ export default class AffablebeanApp extends Component {
     });
 
     return (
-      <React.StrictMode>
-        <Provider store={store}>
-          <ConnectedHome />
-        </Provider>
-      </React.StrictMode>
+      <Provider store={store}>
+        <ConnectedHome />
+      </Provider>
     );
   }
 }
