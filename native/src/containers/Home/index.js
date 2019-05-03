@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import Categories from "../../components/Categories";
+import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
-// import Header from "../../components/Header";
+import Header from "../../components/Header";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
 
 class Home extends Component {
@@ -22,9 +22,11 @@ class Home extends Component {
     }
 
     return (
-      // <Header cart={cart} url={url} />
-      // <Categories categories={items} />
-      <Footer />
+      <>
+        <Header cart={cart} url={url} />
+        <Categories categories={items} />
+        <Footer />
+      </>
     );
   }
 }

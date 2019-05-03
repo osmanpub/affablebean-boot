@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
-const styles = StyleSheet.create({
-  Button: {
-    color: "red"
-  }
-});
-
 export default function Footer(props) {
+  const styles = StyleSheet.create({
+    Button: {
+      color: "red"
+    }
+  });
+
   function onPressContact() {}
 
   function onPressPrivacy() {}
@@ -40,6 +40,7 @@ export default function Footer(props) {
           title="Contact us"
         />
       </View>
+      <View style={{ flex: 0.04 }} />
       <Text>&copy; 2019 the affable bean company</Text>
     </View>
   );
