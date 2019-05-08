@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import PropTypes from "prop-types";
 import Category from "../Category";
 
@@ -8,10 +8,6 @@ export default function Categories(props) {
     return null;
   }
 
-  const categories = props.categories.map(category => (
-    <Category key={category._links.self.href} category={category} />
-  ));
-
   return (
     <View
       style={{
@@ -19,7 +15,11 @@ export default function Categories(props) {
         flex: 1
       }}
     >
-      {categories}
+      <FlatList
+        data={props.categories}
+        keyExtractor={(item, index) => item._links.self.href}
+        renderItem={({ item }) => <Category category={item} />}
+      />
     </View>
   );
 }
