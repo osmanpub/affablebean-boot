@@ -45,7 +45,9 @@ export default function Category(props) {
     default:
   }
 
-  function selectCategory() {}
+  function selectCategory() {
+    props.setCategoryProduct(id);
+  }
 
   return (
     <View style={styles.category}>

@@ -18,7 +18,12 @@ export default function Categories(props) {
       <FlatList
         data={props.categories}
         keyExtractor={(item, index) => item._links.self.href}
-        renderItem={({ item }) => <Category category={item} />}
+        renderItem={({ item }) => (
+          <Category
+            category={item}
+            setCategoryProduct={props.setCategoryProduct}
+          />
+        )}
       />
     </View>
   );

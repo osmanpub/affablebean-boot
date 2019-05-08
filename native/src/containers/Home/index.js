@@ -8,7 +8,7 @@ import { fetchCategoriesIfNeeded } from "../../net/categories";
 
 class Home extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, screen } = this.props;
     dispatch(fetchCategoriesIfNeeded());
   }
 
@@ -24,7 +24,10 @@ class Home extends Component {
     return (
       <ScrollView>
         <Header cart={cart} url={url} />
-        <Categories categories={items} />
+        <Categories
+          categories={items}
+          setCategoryProduct={this.props.setCategoryProduct}
+        />
       </ScrollView>
     );
   }

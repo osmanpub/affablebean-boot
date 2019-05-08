@@ -1,4 +1,4 @@
-import { client, getRestPath } from "../utils";
+import { getRestPath } from "../utils";
 import { receiveCategory } from "../actions";
 
 export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
@@ -8,13 +8,19 @@ export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
 };
 
 const fetchCategory = id => dispatch => {
-  return client
-    .get(getRestPath("category/" + id), function(data) {
-      dispatch(receiveCategory(data.content));
-    })
-    .on("error", function(err) {
-      console.log("something went wrong on the request", err.request.options);
-    });
+  fetch(getRestPath("category/" + id), {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json"
+    }
+    // redirect: "follow", // manual, *follow, error
+    // referrer: "no-referrer", // no-referrer, *client
+  })
+    .then(response => response.json())
+    .then(json => dispatch(receiveCategory(json.content)));
 };
 
 const shouldFetchCategory = (id, state) => {
