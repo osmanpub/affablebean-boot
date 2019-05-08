@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Category(props) {
   const { category } = props;
-  const { name } = category;
+  const { id, name } = category;
 
   const styles = StyleSheet.create({
+    category: {
+      alignItems: "center"
+    },
     categoryImage: {
       padding: 1
     }
@@ -42,11 +45,16 @@ export default function Category(props) {
     default:
   }
 
+  function selectCategory() {}
+
   return (
-    <View>
+    <View style={styles.category}>
       <Text>{name}</Text>
-      <View style={{ flex: 0.04 }} />
-      <Image source={icon} style={styles.categoryImage} />
+      <TouchableOpacity activeOpacity={0.5} onPress={selectCategory}>
+        <Image source={icon} style={styles.categoryImage} />
+      </TouchableOpacity>
+      <Text />
+      <Text />
     </View>
   );
 }
