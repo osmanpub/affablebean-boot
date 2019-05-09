@@ -42,7 +42,3 @@ export const SelectedCategory = styled.span`
   margin-left: 10px;
   width: 139px;
 `;
-
-// #productTable tr { height: 90px }
-
-// #productTable td { width: 145px }

@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from "react-native";
 
 export default function Category(props) {
   const { category, setCategoryProduct } = props;
@@ -10,9 +16,6 @@ export default function Category(props) {
     category: {
       alignItems: "center",
       paddingBottom: 24
-    },
-    categoryImage: {
-      padding: 1
     }
   });
 
@@ -53,9 +56,9 @@ export default function Category(props) {
   return (
     <View style={styles.category}>
       <Text>{name}</Text>
-      <TouchableOpacity onPress={selectCategory}>
-        <Image source={icon} style={styles.categoryImage} />
-      </TouchableOpacity>
+      <TouchableHighlight onPress={selectCategory}>
+        <Image source={icon} />
+      </TouchableHighlight>
     </View>
   );
 }

@@ -1,5 +1,11 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from "react-native";
 import PropTypes from "prop-types";
 
 export default function Header(props) {
@@ -9,12 +15,18 @@ export default function Header(props) {
     logo: {
       resizeMode: "contain",
       width: 320
+    },
+    viewCart: {
+      color: "blue",
+      fontWeight: "bold"
     }
   });
 
   function goHome() {
     setScreen("Home");
   }
+
+  function viewCartScreen() {}
 
   return (
     <View
@@ -23,9 +35,15 @@ export default function Header(props) {
         background: "#f7f7e9"
       }}
     >
-      <TouchableOpacity onPress={goHome}>
+      {cart && cart.numberOfItems > 0 && (
+        <TouchableHighlight onPress={viewCartScreen}>
+          <Text style={styles.viewCart}>view cart</Text>
+        </TouchableHighlight>
+      )}
+
+      <TouchableHighlight onPress={goHome}>
         <Image source={require("./logo.jpg")} style={styles.logo} />
-      </TouchableOpacity>
+      </TouchableHighlight>
     </View>
   );
 }

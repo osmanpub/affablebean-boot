@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Image, Text, View } from "react-native";
 import { addProductToCart } from "../../net/cart";
 import { clearPurchase } from "../../actions";
 
@@ -124,12 +124,6 @@ export default class Products extends Component {
       return null;
     }
 
-    const styles = StyleSheet.create({
-      productImage: {
-        padding: 1
-      }
-    });
-
     return (
       <View
         style={{
@@ -149,17 +143,17 @@ export default class Products extends Component {
                     paddingBottom: 24
                   }}
                 >
-                  <Image
-                    source={this.getProductIcon(item.name)}
-                    style={styles.productImage}
-                  />
+                  <Image source={this.getProductIcon(item.name)} />
                   <View style={{ paddingLeft: 24 }} />
                   <View style={{ alignItems: "flex-start" }}>
                     <Text>{item.name}</Text>
                     <Text style={{ paddingBottom: 8 }}>
                       &euro; {item.price.toFixed(2)}
                     </Text>
-                    <Button onPress={this.addToCart} title="add" />
+                    <Button
+                      onPress={() => this.addToCart(item.id)}
+                      title="add"
+                    />
                   </View>
                 </View>
               </View>
