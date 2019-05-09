@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Category(props) {
-  const { category } = props;
+  const { category, setCategoryProduct } = props;
   const { id, name } = category;
 
   const styles = StyleSheet.create({
@@ -46,7 +46,7 @@ export default function Category(props) {
   }
 
   function selectCategory() {
-    props.setCategoryProduct(id);
+    setCategoryProduct(id);
   }
 
   return (

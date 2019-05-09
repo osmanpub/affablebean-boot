@@ -21,7 +21,7 @@ class CategoryProducts extends Component {
   }
 
   render() {
-    const { cart, category } = this.props;
+    const { cart, category, getScreen, setScreen } = this.props;
 
     if (!category.category.hasOwnProperty("id")) {
       return null;
@@ -29,7 +29,7 @@ class CategoryProducts extends Component {
 
     return (
       <ScrollView>
-        <Header cart={cart} url="" />
+        <Header cart={cart} getScreen={getScreen} setScreen={setScreen} />
         <Products
           categories={category.categories}
           category={category.category}
@@ -58,5 +58,7 @@ CategoryProducts.propTypes = {
   cart: PropTypes.object,
   category: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  url: PropTypes.string
+  getScreen: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  setScreen: PropTypes.func.isRequired
 };

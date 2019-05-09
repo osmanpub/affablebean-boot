@@ -90,5 +90,6 @@ export default connect(mapStateToProps)(Cart);
 Cart.propTypes = {
   cart: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   url: PropTypes.string
 };

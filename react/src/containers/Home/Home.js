@@ -45,5 +45,6 @@ export default connect(mapStateToProps)(Home);
 Home.propTypes = {
   cart: PropTypes.object,
   categories: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   match: PropTypes.object
 };

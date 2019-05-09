@@ -61,5 +61,6 @@ CategoryProducts.propTypes = {
   cart: PropTypes.object,
   category: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   url: PropTypes.string
 };

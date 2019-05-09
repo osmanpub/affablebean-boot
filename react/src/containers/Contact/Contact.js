@@ -43,7 +43,7 @@ export default connect(mapStateToProps)(Contact);
 
 Contact.propTypes = {
   cart: PropTypes.object,
-  match: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   subjects: PropTypes.object.isRequired
 };

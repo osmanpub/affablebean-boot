@@ -15,6 +15,10 @@ export default class AffablebeanApp extends Component {
     this.state = { categoryId: 0, screen: "Home" };
   }
 
+  getScreen = () => {
+    return this.state.screen;
+  };
+
   setCategoryProduct = categoryId => {
     this.setState({ categoryId: categoryId, screen: "CategoryProducts" });
   };
@@ -24,19 +28,27 @@ export default class AffablebeanApp extends Component {
   };
 
   render() {
-    let screen = <ConnectedHome setCategoryProduct={this.setCategoryProduct} />;
+    let screen;
 
     switch (this.state.screen) {
       case "CategoryProducts":
         screen = (
           <ConnectedCategoryProducts
-            setScreen={this.setScreen}
+            getScreen={this.getScreen}
             id={this.state.categoryId}
+            setScreen={this.setScreen}
           />
         );
         break;
 
       default:
+        screen = (
+          <ConnectedHome
+            getScreen={this.getScreen}
+            setCategoryProduct={this.setCategoryProduct}
+            setScreen={this.setScreen}
+          />
+        );
     }
 
     return <Provider store={store}>{screen}</Provider>;

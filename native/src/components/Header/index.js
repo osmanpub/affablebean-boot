@@ -1,16 +1,20 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import PropTypes from "prop-types";
 
 export default function Header(props) {
-  const { cart, url } = props;
+  const { cart, getScreen, setScreen } = props;
 
   const styles = StyleSheet.create({
     logo: {
       resizeMode: "contain",
-      width: "100%"
+      width: 320
     }
   });
+
+  function goHome() {
+    setScreen("Home");
+  }
 
   return (
     <View
@@ -20,12 +24,15 @@ export default function Header(props) {
         flex: 1
       }}
     >
-      <Image source={require("./logo.jpg")} style={styles.logo} />
+      <TouchableOpacity activeOpacity={0.5} onPress={goHome}>
+        <Image source={require("./logo.jpg")} style={styles.logo} />
+      </TouchableOpacity>
     </View>
   );
 }
 
 Header.propTypes = {
   cart: PropTypes.object,
-  url: PropTypes.string.isRequired
+  getScreen: PropTypes.func.isRequired,
+  setScreen: PropTypes.func.isRequired
 };

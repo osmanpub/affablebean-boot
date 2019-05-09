@@ -8,14 +8,19 @@ import { fetchCategoriesIfNeeded } from "../../net/categories";
 
 class Home extends Component {
   componentDidMount() {
-    const { dispatch, screen } = this.props;
+    const { dispatch } = this.props;
     dispatch(fetchCategoriesIfNeeded());
   }
 
   render() {
-    const { cart, categories, match } = this.props;
+    const {
+      cart,
+      categories,
+      getScreen,
+      setCategoryProduct,
+      setScreen
+    } = this.props;
     const { items } = categories;
-    const url = match ? match.url : "";
 
     if (items.length === 0) {
       return null;
@@ -23,10 +28,10 @@ class Home extends Component {
 
     return (
       <ScrollView>
-        <Header cart={cart} url={url} />
+        <Header cart={cart} getScreen={getScreen} setScreen={setScreen} />
         <Categories
           categories={items}
-          setCategoryProduct={this.props.setCategoryProduct}
+          setCategoryProduct={setCategoryProduct}
         />
       </ScrollView>
     );
@@ -47,5 +52,7 @@ export const ConnectedHome = connect(mapStateToProps)(Home);
 Home.propTypes = {
   cart: PropTypes.object,
   categories: PropTypes.object.isRequired,
-  match: PropTypes.object
+  getScreen: PropTypes.func.isRequired,
+  setCategoryProduct: PropTypes.func.isRequired,
+  setScreen: PropTypes.func.isRequired
 };
