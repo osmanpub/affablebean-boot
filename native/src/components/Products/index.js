@@ -15,12 +15,88 @@ export default class Products extends Component {
     var icon = "";
 
     switch (name) {
+      case "broccoli":
+        icon = require("./products/broccoli.png");
+        break;
+
+      case "butter":
+        icon = require("./products/butter.png");
+        break;
+
+      case "cheese":
+        icon = require("./products/cheese.png");
+        break;
+
+      case "chicken leg":
+        icon = require("./products/chicken-leg.png");
+        break;
+
       case "chocolate cookies":
         icon = require("./products/chocolate-cookies.png");
         break;
 
+      case "corn on the cob":
+        icon = require("./products/corn-on-the-cob.png");
+        break;
+
+      case "free range eggs":
+        icon = require("./products/free-range-eggs.png");
+        break;
+
+      case "granola":
+        icon = require("./products/granola.png");
+        break;
+
+      case "green tea":
+        icon = require("./products/green-tea.png");
+        break;
+
+      case "herbal tea":
+        icon = require("./products/herbal-tea.png");
+        break;
+
+      case "jumbo oats":
+        icon = require("./products/jumbo-oats.png");
+        break;
+
+      case "milk":
+        icon = require("./products/milk.png");
+        break;
+
+      case "organic meat patties":
+        icon = require("./products/organic-meat-patties.png");
+        break;
+
+      case "organic coffee":
+        icon = require("./products/organic-coffee.png");
+        break;
+
+      case "parma ham":
+        icon = require("./products/parma-ham.png");
+        break;
+
+      case "porridge oats":
+        icon = require("./products/porridge-oats.png");
+        break;
+
       case "pumpkin seed bun":
         icon = require("./products/pumpkin-seed-bun.png");
+        break;
+
+      case "red currants":
+        icon = require("./products/red-currants.png");
+        break;
+
+      case "rice flakes":
+        icon = require("./products/rice-flakes.png");
+        break;
+
+      case "sausages":
+        icon = require("./products/sausages.png");
+        break;
+
+      case "seedless watermelon":
+        icon = require("./products/seedless-watermelon.png");
         break;
 
       case "sesame seed bagel":
@@ -29,6 +105,10 @@ export default class Products extends Component {
 
       case "sunflower seed loaf":
         icon = require("./products/sunflower-seed-loaf.png");
+        break;
+
+      case "wholebean coffee":
+        icon = require("./products/wholebean-coffee.png");
         break;
 
       default:
@@ -68,10 +148,6 @@ export default class Products extends Component {
                   source={this.getProductIcon(item.name)}
                   style={styles.productImage}
                 />
-                <Text />
-                <Text />
-                <Text />
-                <Text />
                 <Text />
                 <Text />
               </View>
