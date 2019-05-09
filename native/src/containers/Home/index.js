@@ -52,6 +52,7 @@ export const ConnectedHome = connect(mapStateToProps)(Home);
 Home.propTypes = {
   cart: PropTypes.object,
   categories: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   getScreen: PropTypes.func.isRequired,
   setCategoryProduct: PropTypes.func.isRequired,
   setScreen: PropTypes.func.isRequired

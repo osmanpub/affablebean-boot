@@ -105,5 +105,6 @@ export class Products extends Component {
 Products.propTypes = {
   category: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  products: PropTypes.object.isRequired
 };

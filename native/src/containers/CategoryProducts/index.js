@@ -21,7 +21,7 @@ class CategoryProducts extends Component {
   }
 
   render() {
-    const { cart, category, getScreen, setScreen } = this.props;
+    const { cart, category, dispatch, getScreen, setScreen } = this.props;
 
     if (!category.category.hasOwnProperty("id")) {
       return null;
@@ -30,12 +30,12 @@ class CategoryProducts extends Component {
     return (
       <ScrollView>
         <Header cart={cart} getScreen={getScreen} setScreen={setScreen} />
-        <Products
+        {/* <Products
           categories={category.categories}
           category={category.category}
           dispatch={dispatch}
           products={category.products}
-        />
+        /> */}
       </ScrollView>
     );
   }
