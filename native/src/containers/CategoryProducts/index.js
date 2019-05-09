@@ -30,12 +30,12 @@ class CategoryProducts extends Component {
     return (
       <ScrollView>
         <Header cart={cart} getScreen={getScreen} setScreen={setScreen} />
-        {/* <Products
+        <Products
           categories={category.categories}
           category={category.category}
           dispatch={dispatch}
           products={category.products}
-        /> */}
+        />
       </ScrollView>
     );
   }

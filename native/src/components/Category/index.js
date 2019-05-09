@@ -52,7 +52,7 @@ export default function Category(props) {
   return (
     <View style={styles.category}>
       <Text>{name}</Text>
-      <TouchableOpacity activeOpacity={0.5} onPress={selectCategory}>
+      <TouchableOpacity onPress={selectCategory}>
         <Image source={icon} style={styles.categoryImage} />
       </TouchableOpacity>
       <Text />

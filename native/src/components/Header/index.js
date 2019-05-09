@@ -24,7 +24,7 @@ export default function Header(props) {
         flex: 1
       }}
     >
-      <TouchableOpacity activeOpacity={0.5} onPress={goHome}>
+      <TouchableOpacity onPress={goHome}>
         <Image source={require("./logo.jpg")} style={styles.logo} />
       </TouchableOpacity>
     </View>
