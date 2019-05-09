@@ -20,8 +20,7 @@ export default function Header(props) {
     <View
       style={{
         alignItems: "center",
-        background: "#f7f7e9",
-        flex: 1
+        background: "#f7f7e9"
       }}
     >
       <TouchableOpacity onPress={goHome}>

@@ -8,7 +8,8 @@ export default function Category(props) {
 
   const styles = StyleSheet.create({
     category: {
-      alignItems: "center"
+      alignItems: "center",
+      paddingBottom: 24
     },
     categoryImage: {
       padding: 1
@@ -55,8 +56,6 @@ export default function Category(props) {
       <TouchableOpacity onPress={selectCategory}>
         <Image source={icon} style={styles.categoryImage} />
       </TouchableOpacity>
-      <Text />
-      <Text />
     </View>
   );
 }

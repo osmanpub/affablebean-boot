@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { addProductToCart } from "../../net/cart";
 import { clearPurchase } from "../../actions";
 
@@ -133,8 +133,7 @@ export default class Products extends Component {
     return (
       <View
         style={{
-          alignItems: "center",
-          flex: 1
+          alignItems: "center"
         }}
       >
         <FlatList
@@ -143,13 +142,26 @@ export default class Products extends Component {
           renderItem={({ item }) => {
             return (
               <View>
-                <Text>{item.name}</Text>
-                <Image
-                  source={this.getProductIcon(item.name)}
-                  style={styles.productImage}
-                />
-                <Text />
-                <Text />
+                <View
+                  style={{
+                    alignItems: "center",
+                    flexDirection: "row",
+                    paddingBottom: 24
+                  }}
+                >
+                  <Image
+                    source={this.getProductIcon(item.name)}
+                    style={styles.productImage}
+                  />
+                  <View style={{ paddingLeft: 24 }} />
+                  <View style={{ alignItems: "flex-start" }}>
+                    <Text>{item.name}</Text>
+                    <Text style={{ paddingBottom: 8 }}>
+                      &euro; {item.price.toFixed(2)}
+                    </Text>
+                    <Button onPress={this.addToCart} title="add" />
+                  </View>
+                </View>
               </View>
             );
           }}

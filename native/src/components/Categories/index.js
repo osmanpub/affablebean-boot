@@ -11,8 +11,7 @@ export default function Categories(props) {
   return (
     <View
       style={{
-        alignItems: "center",
-        flex: 1
+        alignItems: "center"
       }}
     >
       <FlatList
