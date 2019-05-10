@@ -12,13 +12,27 @@ export default function Header(props) {
   const { cart, getScreen, setScreen } = props;
 
   const styles = StyleSheet.create({
+    checkout: {
+      borderColor: "blue",
+      borderRadius: 32,
+      borderWidth: 1,
+      color: "blue",
+      fontWeight: "bold",
+      padding: 8
+    },
     logo: {
-      resizeMode: "contain",
-      width: 320
+      margin: 16
     },
     viewCart: {
+      borderColor: "blue",
+      borderRadius: 32,
+      borderWidth: 1,
       color: "blue",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      marginBottom: 16,
+      marginLeft: 16,
+      marginRight: 16,
+      padding: 8
     }
   });
 
@@ -26,7 +40,9 @@ export default function Header(props) {
     setScreen("Home");
   }
 
-  function viewCartScreen() {}
+  function viewCart() {}
+
+  function viewCheckout() {}
 
   return (
     <View
@@ -35,15 +51,20 @@ export default function Header(props) {
         background: "#f7f7e9"
       }}
     >
-      {cart && cart.numberOfItems > 0 && (
-        <TouchableHighlight onPress={viewCartScreen}>
-          <Text style={styles.viewCart}>view cart</Text>
-        </TouchableHighlight>
-      )}
-
       <TouchableHighlight onPress={goHome}>
         <Image source={require("./logo.jpg")} style={styles.logo} />
       </TouchableHighlight>
+
+      {cart && cart.numberOfItems > 0 && (
+        <View style={{ flexDirection: "row" }}>
+          <TouchableHighlight onPress={viewCart}>
+            <Text style={styles.checkout}>view cart</Text>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={viewCheckout}>
+            <Text style={styles.viewCart}>checkout</Text>
+          </TouchableHighlight>
+        </View>
+      )}
     </View>
   );
 }
