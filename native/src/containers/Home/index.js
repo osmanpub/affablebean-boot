@@ -13,13 +13,7 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      cart,
-      categories,
-      currentScreen,
-      setCategoryProduct,
-      setScreen
-    } = this.props;
+    const { cart, categories, setCategoryProduct, setScreen } = this.props;
 
     const { items } = categories;
 

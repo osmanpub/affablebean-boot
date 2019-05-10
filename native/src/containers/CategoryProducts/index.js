@@ -21,7 +21,7 @@ class CategoryProducts extends Component {
   }
 
   render() {
-    const { cart, category, currentScreen, dispatch, setScreen } = this.props;
+    const { cart, category, dispatch, setScreen } = this.props;
 
     if (!category.category.hasOwnProperty("id")) {
       return null;

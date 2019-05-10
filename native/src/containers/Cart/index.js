@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import CartItem from "../../components/CartItem";
-// import Header from "../../components/Header";
+import { ScrollView, Text } from "react-native";
+import CartItem from "../../components/CartItem";
+import Header from "../../components/Header";
 // import { clearCart } from "../../actions";
 
 class Cart extends Component {
@@ -15,17 +16,17 @@ class Cart extends Component {
   }
 
   render() {
-    // const { cart, dispatch, match } = this.props;
-    // const { numberOfItems } = cart;
+    const { cart, dispatch, setScreen } = this.props;
+    const { numberOfItems } = cart;
 
-    // const items = cart.items.map((item, index) => (
-    //   <CartItem
-    //     key={item.product.id}
-    //     dispatch={dispatch}
-    //     index={index}
-    //     item={item}
-    //   />
-    // ));
+    const items = cart.items.map((item, index) => (
+      <CartItem
+        key={item.product.id}
+        dispatch={dispatch}
+        index={index}
+        item={item}
+      />
+    ));
 
     // const clearCart =
     //   numberOfItems === 0 ? (
@@ -36,7 +37,11 @@ class Cart extends Component {
     //     </Link>
     //   );
 
-    return null;
+    return (
+      <ScrollView>
+        <Header cart={cart} currentScreen="Cart" setScreen={setScreen} />
+      </ScrollView>
+    );
     // return (
     //   <div>
     //     <Header cart={cart} url={match.url} />

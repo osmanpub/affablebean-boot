@@ -36,27 +36,43 @@ export default function Header(props) {
     }
   });
 
+  let cartWidget = null;
+  let checkoutWidget = null;
+
+  if (cart && cart.numberOfItems > 0) {
+    if (currentScreen !== "Cart") {
+      cartWidget = (
+        <TouchableHighlight onPress={viewCart}>
+          <Text style={styles.checkout}>view cart</Text>
+        </TouchableHighlight>
+      );
+    }
+
+    if (currentScreen !== "Checkout") {
+      checkoutWidget = (
+        <TouchableHighlight onPress={viewCheckout}>
+          <Text style={styles.viewCart}>checkout</Text>
+        </TouchableHighlight>
+      );
+    }
+  }
+
   function goHome() {
     setScreen("Home");
   }
 
   function viewCart() {
-    if (currentScreen !== "Cart") {
-      setScreen("Cart");
-    }
+    setScreen("Cart");
   }
 
   function viewCheckout() {
-    if (currentScreen !== "Checkout") {
-      setScreen("Checkout");
-    }
+    setScreen("Checkout");
   }
 
   return (
     <View
       style={{
-        alignItems: "center",
-        background: "#f7f7e9"
+        alignItems: "center"
       }}
     >
       <TouchableHighlight onPress={goHome}>
@@ -65,12 +81,8 @@ export default function Header(props) {
 
       {cart && cart.numberOfItems > 0 && (
         <View style={{ flexDirection: "row" }}>
-          <TouchableHighlight onPress={viewCart}>
-            <Text style={styles.checkout}>view cart</Text>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={viewCheckout}>
-            <Text style={styles.viewCart}>checkout</Text>
-          </TouchableHighlight>
+          {cartWidget}
+          {checkoutWidget}
           <View style={{ flexDirection: "row", padding: 8 }}>
             <Image source={require("./cart.gif")} />
             <Text>&nbsp;{cart.numberOfItems}&nbsp;items</Text>
