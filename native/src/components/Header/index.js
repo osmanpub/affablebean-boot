@@ -9,7 +9,7 @@ import {
 import PropTypes from "prop-types";
 
 export default function Header(props) {
-  const { cart, getScreen, setScreen } = props;
+  const { cart, currentScreen, setScreen } = props;
 
   const styles = StyleSheet.create({
     checkout: {
@@ -40,9 +40,17 @@ export default function Header(props) {
     setScreen("Home");
   }
 
-  function viewCart() {}
+  function viewCart() {
+    if (currentScreen !== "Cart") {
+      setScreen("Cart");
+    }
+  }
 
-  function viewCheckout() {}
+  function viewCheckout() {
+    if (currentScreen !== "Checkout") {
+      setScreen("Checkout");
+    }
+  }
 
   return (
     <View
@@ -63,6 +71,10 @@ export default function Header(props) {
           <TouchableHighlight onPress={viewCheckout}>
             <Text style={styles.viewCart}>checkout</Text>
           </TouchableHighlight>
+          <View style={{ flexDirection: "row", padding: 8 }}>
+            <Image source={require("./cart.gif")} />
+            <Text>&nbsp;{cart.numberOfItems}&nbsp;items</Text>
+          </View>
         </View>
       )}
     </View>
@@ -71,6 +83,6 @@ export default function Header(props) {
 
 Header.propTypes = {
   cart: PropTypes.object,
-  getScreen: PropTypes.func.isRequired,
+  currentScreen: PropTypes.string.isRequired,
   setScreen: PropTypes.func.isRequired
 };

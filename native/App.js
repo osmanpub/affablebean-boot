@@ -3,6 +3,8 @@ import { Provider } from "react-redux";
 import { configureStore } from "redux-starter-kit";
 import reducer from "./src/reducers";
 import { ConnectedCategoryProducts } from "./src/containers/CategoryProducts";
+import { ConnectedCart } from "./src/containers/Cart";
+// import { ConnectedCheckout } from "./src/containers/Checkout";
 import { ConnectedHome } from "./src/containers/Home";
 
 const store = configureStore({
@@ -15,10 +17,6 @@ export default class AffablebeanApp extends Component {
     this.state = { categoryId: 0, screen: "Home" };
   }
 
-  getScreen = () => {
-    return this.state.screen;
-  };
-
   setCategoryProduct = categoryId => {
     this.setState({ categoryId: categoryId, screen: "CategoryProducts" });
   };
@@ -28,29 +26,39 @@ export default class AffablebeanApp extends Component {
   };
 
   render() {
-    let screen;
+    let nextScreen;
 
     switch (this.state.screen) {
+      case "Cart":
+        nextScreen = <ConnectedCart setScreen={this.setScreen} />;
+        break;
+
       case "CategoryProducts":
-        screen = (
+        nextScreen = (
           <ConnectedCategoryProducts
-            getScreen={this.getScreen}
             id={this.state.categoryId}
             setScreen={this.setScreen}
           />
         );
         break;
 
+      // case "Checkout":
+      //   nextScreen = (
+      //     <ConnectedCheckout
+      //       setScreen={this.setScreen}
+      //     />
+      //   );
+      //   break;
+
       default:
-        screen = (
+        nextScreen = (
           <ConnectedHome
-            getScreen={this.getScreen}
             setCategoryProduct={this.setCategoryProduct}
             setScreen={this.setScreen}
           />
         );
     }
 
-    return <Provider store={store}>{screen}</Provider>;
+    return <Provider store={store}>{nextScreen}</Provider>;
   }
 }

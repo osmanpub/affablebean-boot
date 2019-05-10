@@ -16,10 +16,11 @@ class Home extends Component {
     const {
       cart,
       categories,
-      getScreen,
+      currentScreen,
       setCategoryProduct,
       setScreen
     } = this.props;
+
     const { items } = categories;
 
     if (items.length === 0) {
@@ -28,7 +29,7 @@ class Home extends Component {
 
     return (
       <ScrollView>
-        <Header cart={cart} getScreen={getScreen} setScreen={setScreen} />
+        <Header cart={cart} currentScreen="Home" setScreen={setScreen} />
         <Categories
           categories={items}
           setCategoryProduct={setCategoryProduct}
@@ -53,7 +54,6 @@ Home.propTypes = {
   cart: PropTypes.object,
   categories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  getScreen: PropTypes.func.isRequired,
   setCategoryProduct: PropTypes.func.isRequired,
   setScreen: PropTypes.func.isRequired
 };
