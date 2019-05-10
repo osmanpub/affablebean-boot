@@ -43,6 +43,8 @@ See the [React README](./react/README.md) on running the JS app
 
 See the [React README](./react-ts/README.md) on running the Typescript app
 
+See the [React README](./native/README.md) on running the mobile app
+
 ## Exercises
 
 Since it's a shopping cart app, you can look no further than [Amazon](https://amazon.com) for inspiration!
