@@ -1,6 +1,6 @@
 # Affablebean React App
 
-![Redux](/react/native.jpg "Affablebean")
+![Native](/native/native.jpg "Affablebean")
 
 This project was bootstrapped with [Expo](https://expo.io/learn)
 
