@@ -4,7 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
   View
 } from "react-native";
 
@@ -23,27 +23,27 @@ export default function Category(props) {
 
   switch (name) {
     case "bakery":
-      icon = require("./categories/bakery.jpg");
+      icon = require("../../../assets/img/categories/bakery.jpg");
       break;
 
     case "cereals":
-      icon = require("./categories/cereals.jpg");
+      icon = require("../../../assets/img/categories/cereals.jpg");
       break;
 
     case "dairy":
-      icon = require("./categories/dairy.jpg");
+      icon = require("../../../assets/img/categories/dairy.jpg");
       break;
 
     case "drinks":
-      icon = require("./categories/drinks.jpg");
+      icon = require("../../../assets/img/categories/drinks.jpg");
       break;
 
     case "fruit & veg":
-      icon = require("./categories/fruitveg.jpg");
+      icon = require("../../../assets/img/categories/fruitveg.jpg");
       break;
 
     case "meats":
-      icon = require("./categories/meats.jpg");
+      icon = require("../../../assets/img/categories/meats.jpg");
       break;
 
     default:
@@ -56,9 +56,9 @@ export default function Category(props) {
   return (
     <View style={styles.category}>
       <Text>{name}</Text>
-      <TouchableHighlight onPress={selectCategory}>
+      <TouchableWithoutFeedback onPress={selectCategory}>
         <Image source={icon} />
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
     </View>
   );
 }

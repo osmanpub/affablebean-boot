@@ -20,7 +20,7 @@ export class CartItem extends Component<CartItemProps, CartItemState> {
     let qty = Number(input.value);
 
     if (qty >= 0 && qty <= 10) {
-      this.setState({ qty: qty });
+      this.setState({ qty });
     } else {
       input.value = this.state.qty;
     }

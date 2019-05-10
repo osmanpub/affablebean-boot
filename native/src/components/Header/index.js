@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   View
 } from "react-native";
 import PropTypes from "prop-types";
@@ -50,9 +51,9 @@ export default function Header(props) {
 
     if (currentScreen !== "Checkout") {
       checkoutWidget = (
-        <TouchableHighlight onPress={viewCheckout}>
+        <TouchableWithoutFeedback onPress={viewCheckout}>
           <Text style={styles.viewCart}>checkout</Text>
-        </TouchableHighlight>
+        </TouchableWithoutFeedback>
       );
     }
   }
@@ -75,9 +76,9 @@ export default function Header(props) {
         alignItems: "center"
       }}
     >
-      <TouchableHighlight onPress={goHome}>
+      <TouchableWithoutFeedback onPress={goHome}>
         <Image source={require("./logo.jpg")} style={styles.logo} />
-      </TouchableHighlight>
+      </TouchableWithoutFeedback>
 
       {cart && cart.numberOfItems > 0 && (
         <View style={{ flexDirection: "row" }}>
