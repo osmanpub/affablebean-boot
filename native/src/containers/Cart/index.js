@@ -10,7 +10,7 @@ class Cart extends Component {
     const { cart, dispatch, setScreen } = this.props;
 
     const cartItems = cart.items.map((item, index) => (
-      <CartItem key={item.product.id} dispatch={dispatch} item={item} />
+      <CartItem key={index} dispatch={dispatch} item={item} />
     ));
 
     return (

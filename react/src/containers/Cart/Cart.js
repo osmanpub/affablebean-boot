@@ -24,7 +24,7 @@ export class Cart extends Component {
 
     const items = cart.items.map((item, index) => (
       <CartItem
-        key={item.product.id}
+        key={item.index}
         dispatch={dispatch}
         index={index}
         item={item}

@@ -11,8 +11,6 @@ export default class CartItem extends Component {
     this.state = {
       qty: item.quantity
     };
-
-    this.qtyRef = React.createRef();
   }
 
   getProductIcon = name => {
@@ -122,18 +120,19 @@ export default class CartItem extends Component {
   };
 
   onChange = qty => {
-    qty = Number(qty);
-
-    if (qty >= 0 && qty <= 10) {
-      this.setState({ qty });
-    } else {
-      this.qtyRef.current.value = this.state.qty;
-    }
+    this.setState({ qty });
   };
 
   updateCart = id => {
-    const { dispatch } = this.props;
-    dispatch(updateProductInCart(id, Number(this.state.qty)));
+    let qty = Number(this.state.qty);
+
+    if (isNaN(qty) || qty < 0 || qty > 10) {
+      const { item } = this.props;
+      this.setState({ qty: item.quantity });
+    } else {
+      const { dispatch } = this.props;
+      dispatch(updateProductInCart(id, qty));
+    }
   };
 
   render() {
@@ -146,21 +145,28 @@ export default class CartItem extends Component {
         style={{
           alignItems: "center",
           flexDirection: "row",
-          paddingBottom: 24
+          paddingBottom: 24,
+          paddingLeft: 32
         }}
       >
         <Image source={this.getProductIcon(name)} />
         <View style={{ paddingLeft: 24 }} />
         <View style={{ flexDirection: "column" }}>
           <Text style={{ fontWeight: "bold" }}>{name}</Text>
-          <Text style={{ paddingBottom: 8 }}>
+          <Text style={{ fontWeight: "bold" }}>
             &euro; {item.total.toFixed(2)}
+          </Text>
+          <Text style={{ paddingBottom: 8 }}>
+            &euro; {product.price.toFixed(2)}
           </Text>
           <TextInput
             onChangeText={qty => this.onChange(qty)}
             placeholder="Enter quantity"
-            ref={this.qtyRef}
-            style={{ borderColor: "black", borderWidth: 1 }}
+            style={{
+              borderBottomColor: "black",
+              borderBottomWidth: 1,
+              marginBottom: 8
+            }}
             value={this.state.qty.toString()}
           />
           <Button onPress={() => this.updateCart(product.id)} title="update" />

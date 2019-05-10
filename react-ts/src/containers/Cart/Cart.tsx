@@ -24,12 +24,7 @@ export class Cart extends Component<Props> {
     const { numberOfItems } = cart;
 
     const items = cart.items.map((item: ICartItem, index) => (
-      <CartItem
-        key={item.product.id}
-        dispatch={dispatch}
-        index={index}
-        item={item}
-      />
+      <CartItem key={index} dispatch={dispatch} index={index} item={item} />
     ));
 
     const clearCart =
