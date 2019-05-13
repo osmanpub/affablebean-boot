@@ -23,7 +23,13 @@ export class Cart extends Component {
     const { numberOfItems } = cart;
 
     const items = cart.items.map((item, index) => (
-      <CartItem key={index} dispatch={dispatch} index={index} item={item} />
+      <CartItem
+        key={index}
+        cart={cart}
+        dispatch={dispatch}
+        index={index}
+        item={item}
+      />
     ));
 
     const clearCart =

@@ -24,6 +24,7 @@ export interface CategoriesProps {
 }
 
 export interface CategoryProductsProps {
+  cart: Cart;
   categories: Category[];
   category: Category;
   dispatch: Function;

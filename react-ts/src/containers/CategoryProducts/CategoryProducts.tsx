@@ -34,6 +34,7 @@ export class CategoryProducts extends Component<Props> {
       <div>
         <Header cart={cart} url={match.url} />
         <Products
+          cart={cart}
           categories={category.categories}
           category={category.category}
           dispatch={dispatch}
