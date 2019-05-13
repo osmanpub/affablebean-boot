@@ -40,8 +40,8 @@ export const updateProductInCart = (id, qty) => dispatch => {
       dispatch(
         updateCart({
           cart: json,
-          id: id,
-          qty: qty
+          id,
+          qty
         })
       )
     );

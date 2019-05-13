@@ -6,6 +6,7 @@ import { ConnectedCategoryProducts } from "./src/containers/CategoryProducts";
 import { ConnectedCart } from "./src/containers/Cart";
 // import { ConnectedCheckout } from "./src/containers/Checkout";
 import { ConnectedHome } from "./src/containers/Home";
+import ErrorBoundary from "./src/components/ErrorBoundary";
 
 const store = configureStore({
   reducer
@@ -59,6 +60,10 @@ export default class AffablebeanApp extends Component {
         );
     }
 
-    return <Provider store={store}>{nextScreen}</Provider>;
+    return (
+      <ErrorBoundary>
+        <Provider store={store}>{nextScreen}</Provider>
+      </ErrorBoundary>
+    );
   }
 }

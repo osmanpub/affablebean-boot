@@ -6,7 +6,7 @@ import { clearPurchase } from "../../actions";
 
 export default class Products extends Component {
   addToCart = id => {
-    const { dispatch } = this.props;
+    const { cart, dispatch } = this.props;
     dispatch(clearPurchase());
     dispatch(addProductToCart(id));
   };

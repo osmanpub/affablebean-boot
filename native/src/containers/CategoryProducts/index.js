@@ -35,6 +35,7 @@ class CategoryProducts extends Component {
           setScreen={setScreen}
         />
         <Products
+          cart={cart}
           categories={category.categories}
           category={category.category}
           dispatch={dispatch}
