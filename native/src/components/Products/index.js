@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, FlatList, Image, Text, View } from "react-native";
-import { addProductToCart } from "../../net/cart";
+import { addProductToCart, updateProductInCart } from "../../net/cart";
 import { clearPurchase } from "../../actions";
 
 export default class Products extends Component {
   addToCart = id => {
     const { cart, dispatch } = this.props;
+    const update = cart.items.filter(item => item.product.id === id);
+
     dispatch(clearPurchase());
-    dispatch(addProductToCart(id));
+    dispatch(
+      update.length > 0
+        ? updateProductInCart(id, update[0].quantity + 1)
+        : addProductToCart(id)
+    );
   };
 
   getProductIcon = name => {

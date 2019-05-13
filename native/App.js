@@ -4,7 +4,7 @@ import { configureStore } from "redux-starter-kit";
 import reducer from "./src/reducers";
 import { ConnectedCategoryProducts } from "./src/containers/CategoryProducts";
 import { ConnectedCart } from "./src/containers/Cart";
-// import { ConnectedCheckout } from "./src/containers/Checkout";
+import { ConnectedCheckout } from "./src/containers/Checkout";
 import { ConnectedHome } from "./src/containers/Home";
 import ErrorBoundary from "./src/components/ErrorBoundary";
 
@@ -43,13 +43,9 @@ export default class AffablebeanApp extends Component {
         );
         break;
 
-      // case "Checkout":
-      //   nextScreen = (
-      //     <ConnectedCheckout
-      //       setScreen={this.setScreen}
-      //     />
-      //   );
-      //   break;
+      case "Checkout":
+        nextScreen = <ConnectedCheckout setScreen={this.setScreen} />;
+        break;
 
       default:
         nextScreen = (

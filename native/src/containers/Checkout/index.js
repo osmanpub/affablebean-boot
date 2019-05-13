@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import CheckoutForm from "../../components/CheckoutForm";
 import Confirmation from "../../components/Confirmation";
 import Header from "../../components/Header";
+import { ScrollView } from "react-native";
 
 class Checkout extends Component {
   render() {
-    const { cart, match, purchase } = this.props;
+    const { cart, purchase, setScreen } = this.props;
     const { order } = purchase;
     const details = order.hasOwnProperty("customer") ? (
       <Confirmation order={order} />
@@ -16,11 +17,10 @@ class Checkout extends Component {
     );
 
     return (
-      <div>
-        <Header cart={cart} url={match.url} />
+      <ScrollView>
+        <Header cart={cart} currentScreen="Checkout" setScreen={setScreen} />
         {details}
-        <Footer />
-      </div>
+      </ScrollView>
     );
   }
 }
