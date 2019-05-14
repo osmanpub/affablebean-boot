@@ -8,13 +8,8 @@ export function getRestPath(path = "") {
   return root_api + path;
 }
 
-export function validateField(input, error, min, max) {
-  let { value } = input.current || "";
-  let { length } = value;
-  let valid = length >= min && length <= max;
-
-  error.current.style.display = valid ? "none" : "block";
-  return valid;
+export function validateField(value, min, max) {
+  return (valid = value >= min && value <= max);
 }
 
 const root = "http://" + MY_HOST + ":8080/";

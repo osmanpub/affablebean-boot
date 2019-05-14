@@ -13,7 +13,8 @@ export default class CheckoutForm extends Component {
       creditcard: "",
       email: "",
       name1: "",
-      phone: ""
+      phone: "",
+      validForm: true
     };
   }
 
@@ -27,23 +28,23 @@ export default class CheckoutForm extends Component {
     const { dispatch, cart } = this.props;
     let validForm = true;
 
-    if (!validateField(this.addressInputRef, this.addressErrorRef, 8, 45)) {
+    if (!validateField(this.state.address.length, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.ccInputRef, this.ccErrorRef, 16, 19)) {
+    if (!validateField(this.state.creditcard.length, 16, 19)) {
       validForm = false;
     }
 
-    if (!validateField(this.emailInputRef, this.emailErrorRef, 8, 45)) {
+    if (!validateField(this.state.email.length, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.nameInputRef, this.nameErrorRef, 8, 45)) {
+    if (!validateField(this.state.name1.length, 8, 45)) {
       validForm = false;
     }
 
-    if (!validateField(this.phoneInputRef, this.phoneErrorRef, 8, 30)) {
+    if (!validateField(this.state.phone.length, 8, 30)) {
       validForm = false;
     }
 
@@ -54,6 +55,8 @@ export default class CheckoutForm extends Component {
           form: this.state
         })
       );
+    } else {
+      this.setState({ validForm: false });
     }
   };
 
@@ -62,12 +65,20 @@ export default class CheckoutForm extends Component {
     const surcharge = 3;
 
     const styles = StyleSheet.create({
+      error: {
+        backgroundColor: "red",
+        color: "white",
+        fontWeight: "bold",
+        padding: 8
+      },
       textInput: {
         borderBottomColor: "black",
         borderBottomWidth: 1,
         padding: 8
       }
     });
+
+    const validForm = this.state.validForm;
 
     return (
       <View>
@@ -83,30 +94,55 @@ export default class CheckoutForm extends Component {
             style={styles.textInput}
             value={this.state.name1}
           />
+          {!validForm && (
+            <Text style={styles.error}>
+              Name should be between 8 and 45 characters
+            </Text>
+          )}
           <TextInput
             onChangeText={email => this.onChange("email", email)}
             placeholder="Enter your email address"
             style={styles.textInput}
             value={this.state.email}
           />
+          {!validForm && (
+            <Text style={styles.error}>
+              Email should be between 8 and 45 characters
+            </Text>
+          )}
           <TextInput
             onChangeText={phone => this.onChange("phone", phone)}
             placeholder="Enter your phone number"
             style={styles.textInput}
             value={this.state.phone}
           />
+          {!validForm && (
+            <Text style={styles.error}>
+              Phone number should be between 8 and 30 characters
+            </Text>
+          )}
           <TextInput
             onChangeText={address => this.onChange("address", address)}
             placeholder="Enter your home address"
             style={styles.textInput}
             value={this.state.address}
           />
+          {!validForm && (
+            <Text style={styles.error}>
+              Address should be between 8 and 45 characters
+            </Text>
+          )}
           <TextInput
             onChangeText={creditcard => this.onChange("creditcard", creditcard)}
             placeholder="Enter your credit card number"
             style={styles.textInput}
             value={this.state.creditcard}
           />
+          {!validForm && (
+            <Text style={styles.error}>
+              Credit card number should be between 16 and 19 characters
+            </Text>
+          )}
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={{ paddingTop: 16 }}>
@@ -118,6 +154,9 @@ export default class CheckoutForm extends Component {
           </Text>
           <Text style={{ marginTop: 8 }} />
           <Button onPress={this.purchaseItems} title="Purchase" />
+          {!validForm && (
+            <Text style={styles.error}>Check your form for errors!</Text>
+          )}
         </View>
       </View>
     );
