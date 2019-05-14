@@ -141,26 +141,21 @@ export default class Products extends Component {
           keyExtractor={(item, index) => item._links.self.href}
           renderItem={({ item }) => {
             return (
-              <View>
-                <View
-                  style={{
-                    alignItems: "center",
-                    flexDirection: "row",
-                    paddingBottom: 24
-                  }}
-                >
-                  <Image source={this.getProductIcon(item.name)} />
-                  <View style={{ paddingLeft: 24 }} />
-                  <View style={{ alignItems: "flex-start" }}>
-                    <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-                    <Text style={{ paddingBottom: 8 }}>
-                      &euro; {item.price.toFixed(2)}
-                    </Text>
-                    <Button
-                      onPress={() => this.addToCart(item.id)}
-                      title="add"
-                    />
-                  </View>
+              <View
+                style={{
+                  alignItems: "center",
+                  flexDirection: "row",
+                  paddingBottom: 24
+                }}
+              >
+                <Image source={this.getProductIcon(item.name)} />
+                <View style={{ paddingLeft: 24 }} />
+                <View style={{ alignItems: "flex-start" }}>
+                  <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+                  <Text style={{ paddingBottom: 8 }}>
+                    &euro; {item.price.toFixed(2)}
+                  </Text>
+                  <Button onPress={() => this.addToCart(item.id)} title="add" />
                 </View>
               </View>
             );
