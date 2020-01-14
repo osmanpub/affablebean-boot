@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
@@ -14,17 +13,16 @@ export class Home extends Component {
 
   render() {
     const { cart, categories, match } = this.props;
-    const { items } = categories;
     const url = match ? match.url : "";
 
-    if (items.length === 0) {
+    if (categories.length === 0) {
       return null;
     }
 
     return (
       <div>
         <Header cart={cart} url={url} />
-        <Categories categories={items} />
+        <Categories categories={categories} />
         <Footer />
       </div>
     );
@@ -33,14 +31,7 @@ export class Home extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart,
-  categories: state.categories
+  categories: state.categories.items
 });
 
 export default connect(mapStateToProps)(Home);
-
-Home.propTypes = {
-  cart: PropTypes.object,
-  categories: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  match: PropTypes.object
-};

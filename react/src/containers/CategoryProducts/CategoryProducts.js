@@ -47,14 +47,10 @@ export class CategoryProducts extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { cart, category } = state;
-
-  return {
-    cart,
-    category
-  };
-};
+const mapStateToProps = state => ({
+  cart: state.cart,
+  category: state.category
+});
 
 export default connect(mapStateToProps)(CategoryProducts);
 

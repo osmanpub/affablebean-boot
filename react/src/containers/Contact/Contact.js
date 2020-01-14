@@ -30,14 +30,10 @@ export class Contact extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { cart, subjects } = state;
-
-  return {
-    cart,
-    subjects
-  };
-};
+const mapStateToProps = state => ({
+  cart: state.cart,
+  subjects: state.subjects
+});
 
 export default connect(mapStateToProps)(Contact);
 

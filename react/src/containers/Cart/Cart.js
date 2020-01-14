@@ -78,13 +78,9 @@ export class Cart extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { cart } = state;
-
-  return {
-    cart
-  };
-};
+const mapStateToProps = state => ({
+  cart: state.cart
+});
 
 export default connect(mapStateToProps)(Cart);
 
