@@ -1,5 +1,5 @@
 import { client, getRestPath } from "../utils";
-import { receiveCategories } from "../actions";
+import { receiveCategories } from "../redux/categories";
 
 export const fetchCategoriesIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchCategories(getState())) {

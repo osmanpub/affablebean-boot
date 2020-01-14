@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import { addProductToCart, updateProductInCart } from "../../net/cart";
-import { clearPurchase } from "../../actions";
+import { clearPurchase } from "../../redux/purchase";
 import {
   CategoryTitle,
   ProductsLeft,

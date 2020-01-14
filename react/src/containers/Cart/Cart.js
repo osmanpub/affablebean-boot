@@ -6,7 +6,7 @@ import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { ActionBar, CartTable, ShoppingCart, Subtotal } from "./Cart.styles";
-import { clearCart } from "../../actions";
+import { clearCart } from "../../redux/cart";
 
 export class Cart extends Component {
   componentDidUpdate(prevProps) {

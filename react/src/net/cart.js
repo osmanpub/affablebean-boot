@@ -1,5 +1,5 @@
 import { getPath } from "../utils";
-import { addToCart, updateCart } from "../actions";
+import { addToCart, updateCart } from "../redux/cart";
 
 export const addProductToCart = id => dispatch => {
   return fetch(getPath("addToCart2?id=" + id), {

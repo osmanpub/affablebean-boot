@@ -1,5 +1,5 @@
 import { client, getRestPath } from "../utils";
-import { receiveSubjects } from "../actions";
+import { receiveSubjects } from "../redux/subjects";
 
 export const fetchSubjectsIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchSubjects(getState())) {

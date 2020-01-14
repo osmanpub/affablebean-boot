@@ -31,14 +31,10 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { cart, categories } = state;
-
-  return {
-    cart,
-    categories
-  };
-};
+const mapStateToProps = state => ({
+  cart: state.cart,
+  categories: state.categories
+});
 
 export default connect(mapStateToProps)(Home);
 

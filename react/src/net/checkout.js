@@ -1,5 +1,6 @@
 import { getPath } from "../utils";
-import { clearCart, orderPurchase } from "../actions";
+import { clearCart } from "../redux/cart";
+import { orderPurchase } from "../redux/purchase";
 
 export const purchaseOrder = data => dispatch => {
   return fetch(getPath("purchase2"), {

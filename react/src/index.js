@@ -1,11 +1,11 @@
-import React, { Suspense, lazy } from "react";
+import { configureStore } from "@reduxjs/toolkit";
+import React, { lazy, Suspense } from "react";
 import { render } from "react-dom";
-import { configureStore } from "redux-starter-kit";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import reducer from "./reducers";
-import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./components/ErrorBoundary";
+import rootReducer from "./redux";
+import * as serviceWorker from "./serviceWorker";
 const Cart = lazy(() => import("./containers/Cart"));
 const CategoryProducts = lazy(() => import("./containers/CategoryProducts"));
 const Checkout = lazy(() => import("./containers/Checkout"));
@@ -14,7 +14,7 @@ const Home = lazy(() => import("./containers/Home"));
 const Privacy = lazy(() => import("./containers/Privacy"));
 
 const store = configureStore({
-  reducer
+  reducer: rootReducer
 });
 
 render(
