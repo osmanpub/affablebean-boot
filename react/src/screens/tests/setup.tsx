@@ -1,24 +1,23 @@
+import { configureStore } from "@reduxjs/toolkit";
 import React from "react";
 import ReactDOM from "react-dom";
-import ReactTestUtils from "react-dom/test-utils";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { act } from "react-dom/test-utils";
-import { configureStore } from "redux-starter-kit";
+import ReactTestUtils, { act } from "react-dom/test-utils";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import reducer from "../../redux";
 import Cart from "../Cart";
 import CategoryProducts from "../CategoryProducts";
 import Checkout from "../Checkout";
 import Home from "../Home";
-import reducer from "../../reducers";
 
 jest.mock("../../net/cart");
 jest.mock("../../net/category");
 jest.mock("../../net/categories");
 jest.mock("../../net/checkout");
 
-export let container;
+export let container: any;
 
-export const setupAll = callback =>
+export const setupAll = (callback?: Function) =>
   beforeAll(() => {
     container = document.createElement("div");
     document.body.appendChild(container);
@@ -45,12 +44,12 @@ export const setupAll = callback =>
     callback && callback();
   });
 
-export const changeValue = (widget, value) => {
+export const changeValue = (widget: any, value: any) => {
   widget.value = value;
   ReactTestUtils.Simulate.change(widget);
 };
 
-export const mouseClick = widget =>
+export const mouseClick = (widget: any) =>
   act(() => {
     widget.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });

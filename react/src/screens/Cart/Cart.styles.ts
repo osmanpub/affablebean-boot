@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Cart } from "../../interfaces/cart";
 
 export const ActionBar = styled.div`
   margin: 30px;
@@ -16,7 +17,7 @@ export const CartTableTd = styled.td`
 `;
 
 export const ShoppingCart = styled.div`
-  display: ${cart => (cart.numberOfItems > 0 ? "block" : "none")};
+  display: ${(cart: Cart) => (cart.numberOfItems > 0 ? "block" : "none")};
 `;
 
 export const Subtotal = styled.h4`

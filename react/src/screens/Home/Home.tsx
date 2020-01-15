@@ -3,19 +3,26 @@ import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { Props } from "../../interfaces/props";
+import { Cart } from "../../interfaces/cart";
+import { Categories as CategoriesState } from "../../interfaces/categories";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
 import { RootState } from "../../redux";
 
-export function Home(props: Props) {
-  useEffect(() => {
-    const { dispatch } = props;
-    dispatch(fetchCategoriesIfNeeded());
-  }, []);
+type Props = {
+  cart: Cart;
+  categories: CategoriesState;
+  dispatch: Function;
+  match: any;
+};
 
-  const { cart, categories, match } = props;
+export function Home(props: Props) {
+  const { cart, categories, dispatch, match } = props;
   const { items } = categories;
   const url = match ? match.url : "";
+
+  useEffect(() => {
+    dispatch(fetchCategoriesIfNeeded());
+  }, [dispatch]);
 
   if (items.length === 0) {
     return null;
