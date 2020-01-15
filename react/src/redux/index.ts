@@ -1,4 +1,8 @@
 import { combineReducers } from "redux";
+import { Cart } from "../interfaces/cart";
+import { Categories, Category } from "../interfaces/categories";
+import { Purchase } from "../interfaces/purchase";
+import { Subjects } from "../interfaces/subjects";
 import cartReducer from "./cart";
 import categoriesReducer from "./categories";
 import categoryReducer from "./category";
@@ -12,3 +16,11 @@ export default combineReducers({
   purchase: purchaseReducer,
   subjects: subjectsReducer
 });
+
+export interface RootState {
+  cart: Cart;
+  category: Category;
+  categories: Categories;
+  purchase: Purchase;
+  subjects: Subjects;
+}

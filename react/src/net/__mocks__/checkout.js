@@ -1,4 +1,4 @@
-import { createAction } from "redux-starter-kit";
+import { createAction } from "../../screens/tests/node_modules/redux-starter-kit";
 
 const clearCart = createAction("CLEAR_CART");
 const orderPurchase = createAction("ORDER_PURCHASE");

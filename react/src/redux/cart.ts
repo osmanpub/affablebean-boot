@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Cart, CartItem } from "../interfaces/cart";
 
-export const initialState = {
+export const initialState: Cart = {
   items: [],
   numberOfItems: 0,
   subtotal: 0
@@ -32,18 +33,18 @@ const cart = createSlice({
       let numberOfItemsChange = 0;
       let subtotalChange = 0;
 
-      let items = [];
+      let items: CartItem[] = [];
 
       if (qty === 0) {
-        const removedItem = state.items.filter(
-          item => item.product.id === id
+        const removedItem: CartItem = state.items.filter(
+          (item: CartItem) => item.product.id === id
         )[0];
 
         numberOfItemsChange = removedItem.quantity * -1;
         subtotalChange = removedItem.total * -1;
-        items = state.items.filter(item => item.product.id !== id);
+        items = state.items.filter((item: CartItem) => item.product.id !== id);
       } else {
-        items = state.items.map(item => {
+        items = state.items.map((item: CartItem) => {
           if (item.product.id === id) {
             numberOfItemsChange = updatedItem.quantity - item.quantity;
             subtotalChange = updatedItem.total - item.total;
@@ -61,7 +62,7 @@ const cart = createSlice({
   }
 });
 
-function getCartItem(cart) {
+function getCartItem(cart: Cart) {
   return JSON.parse(JSON.stringify(cart.items[0]));
 }
 

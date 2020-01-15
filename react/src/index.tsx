@@ -6,12 +6,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import rootReducer from "./redux";
 import * as serviceWorker from "./serviceWorker";
-const Cart = lazy(() => import("./containers/Cart"));
-const CategoryProducts = lazy(() => import("./containers/CategoryProducts"));
-const Checkout = lazy(() => import("./containers/Checkout"));
-const Contact = lazy(() => import("./containers/Contact"));
-const Home = lazy(() => import("./containers/Home"));
-const Privacy = lazy(() => import("./containers/Privacy"));
+const Cart = lazy(() => import("./screens/Cart"));
+const CategoryProducts = lazy(() => import("./screens/CategoryProducts"));
+const Checkout = lazy(() => import("./screens/Checkout"));
+const Contact = lazy(() => import("./screens/Contact"));
+const Home = lazy(() => import("./screens/Home"));
+const Privacy = lazy(() => import("./screens/Privacy"));
 
 const store = configureStore({
   reducer: rootReducer

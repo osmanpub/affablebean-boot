@@ -1,4 +1,4 @@
-import { createAction } from "redux-starter-kit";
+import { createAction } from "../../screens/tests/node_modules/redux-starter-kit";
 
 export const fetchCategoryIfNeeded = id => (dispatch, getState) => {
   if (shouldFetchCategory(id, getState())) {
