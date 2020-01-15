@@ -1,23 +1,26 @@
 import { client, getRestPath } from "../utils";
 import { receiveSubjects } from "../redux/subjects";
 
-export const fetchSubjectsIfNeeded = () => (dispatch, getState) => {
+export const fetchSubjectsIfNeeded = () => (
+  dispatch: Function,
+  getState: Function
+) => {
   if (shouldFetchSubjects(getState())) {
     return dispatch(fetchSubjects());
   }
 };
 
-const fetchSubjects = () => dispatch => {
+const fetchSubjects = () => (dispatch: Function) => {
   return client
-    .get(getRestPath("subjects"), function(data) {
+    .get(getRestPath("subjects"), function(data: any) {
       dispatch(receiveSubjects(data._embedded.msgSubjectList));
     })
-    .on("error", function(err) {
+    .on("error", function(err: any) {
       console.log("something went wrong on the request", err.request.options);
     });
 };
 
-const shouldFetchSubjects = state => {
+const shouldFetchSubjects = (state: any) => {
   const subjects = state.subjects.items;
 
   if (subjects.length === 0) {

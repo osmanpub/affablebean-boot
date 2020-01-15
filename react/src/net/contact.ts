@@ -1,6 +1,6 @@
 import { getPath } from "../utils";
 
-export const sendFeedback = data => {
+export const sendFeedback = (data: any) => {
   fetch(getPath("contact2"), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin

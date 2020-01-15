@@ -1,7 +1,7 @@
 import { getPath } from "../utils";
 import { addToCart, updateCart } from "../redux/cart";
 
-export const addProductToCart = id => dispatch => {
+export const addProductToCart = (id: string) => (dispatch: Function) => {
   return fetch(getPath("addToCart2?id=" + id), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin
@@ -23,7 +23,9 @@ export const addProductToCart = id => dispatch => {
     );
 };
 
-export const updateProductInCart = (id, qty) => dispatch => {
+export const updateProductInCart = (id: number, qty: number) => (
+  dispatch: Function
+) => {
   return fetch(getPath("updateCart2?id=" + id + "&qty=" + qty), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin

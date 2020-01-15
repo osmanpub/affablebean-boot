@@ -2,7 +2,7 @@ import { getPath } from "../utils";
 import { clearCart } from "../redux/cart";
 import { orderPurchase } from "../redux/purchase";
 
-export const purchaseOrder = data => dispatch => {
+export const purchaseOrder = (data: any) => (dispatch: Function) => {
   return fetch(getPath("purchase2"), {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin
@@ -17,7 +17,7 @@ export const purchaseOrder = data => dispatch => {
   })
     .then(response => response.json())
     .then(json => {
-      dispatch(clearCart());
+      dispatch(clearCart({}));
       dispatch(
         orderPurchase({
           order: json
