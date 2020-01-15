@@ -1,17 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { HeaderMain, HeaderWrapper, Logo } from "./Header.styles";
 import WidgetBar from "../WidgetBar";
 import "./Header.css";
+import { HeaderMain, HeaderWrapper, Logo } from "./Header.styles";
 
 export function Header(props) {
-  const { cart, url } = props;
+  const { url } = props;
 
   return (
     <HeaderWrapper>
       <HeaderMain>
-        <WidgetBar cart={cart} url={url} />
+        <WidgetBar url={url} />
         <Logo>
           <Link to={"/"}>
             <img src="/static/img/logo.png" alt="Affable Bean logo" />
@@ -26,8 +25,3 @@ export function Header(props) {
     </HeaderWrapper>
   );
 }
-
-Header.propTypes = {
-  cart: PropTypes.object,
-  url: PropTypes.string.isRequired
-};

@@ -1,10 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
+import { Cart } from "../../interfaces/cart";
+import { RootState } from "../../redux";
 import "./WidgetBar.css";
+import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
 
-export function WidgetBar(props) {
+type Props = {
+  cart: Cart;
+  url: string;
+};
+
+export function WidgetBar(props: Props) {
   const { cart, url } = props;
   const viewCart = url.startsWith("/viewCart") ? (
     ""
@@ -39,7 +46,8 @@ export function WidgetBar(props) {
   );
 }
 
-WidgetBar.propTypes = {
-  cart: PropTypes.object,
-  url: PropTypes.string.isRequired
-};
+const mapStateToProps = (state: RootState) => ({
+  cart: state.cart
+});
+
+export default connect(mapStateToProps)(WidgetBar);
