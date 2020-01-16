@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FooterText, FooterWrapper } from "./Footer.styles";
 
-export function Footer(props) {
+export default function Footer() {
   return (
     <FooterWrapper>
       <br />

@@ -4,11 +4,11 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
 export function Privacy(props) {
-  const { cart, match } = props;
+  const { url } = props;
 
   return (
     <div>
-      <Header cart={cart} url={match.url} />
+      <Header url={url} />
       <div className="singleColumn">
         <p>
           AffableBean Co knows that you care how information about you is used
@@ -276,8 +276,3 @@ export function Privacy(props) {
     </div>
   );
 }
-
-Privacy.propTypes = {
-  cart: PropTypes.object,
-  match: PropTypes.object.isRequired
-};

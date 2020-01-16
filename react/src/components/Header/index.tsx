@@ -4,7 +4,11 @@ import WidgetBar from "../WidgetBar";
 import "./Header.css";
 import { HeaderMain, HeaderWrapper, Logo } from "./Header.styles";
 
-export function Header(props) {
+type Props = {
+  url: string;
+};
+
+export default function Header(props: Props) {
   const { url } = props;
 
   return (

@@ -30,7 +30,7 @@ export function Home(props: Props) {
 
   return (
     <div>
-      <Header cart={cart} url={url} />
+      <Header url={url} />
       <Categories categories={items} />
       <Footer />
     </div>

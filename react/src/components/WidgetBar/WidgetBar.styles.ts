@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Cart } from "../../interfaces/cart";
 
 export const WidgetBarWrapper = styled.div`
   height: 50px;
@@ -8,9 +7,9 @@ export const WidgetBarWrapper = styled.div`
 `;
 
 export const Checkout = styled.div`
-  display: ${(cart: Cart) => (cart.numberOfItems > 0 ? "block" : "none")};
+  display: ${(cart: any) => (cart.numberOfItems > 0 ? "block" : "none")};
 `;
 
 export const ViewCart = styled.div`
-  display: ${(cart: Cart) => (cart.numberOfItems > 0 ? "block" : "none")};
+  display: ${(cart: any) => (cart.numberOfItems > 0 ? "block" : "none")};
 `;

@@ -49,7 +49,7 @@ export function Cart(props: Props) {
 
   return (
     <div>
-      <Header cart={cart} url={match.url} />
+      <Header url={match.url} />
       <div className="singleColumn">
         {numberOfItems === 0
           ? "Your shopping cart is empty"

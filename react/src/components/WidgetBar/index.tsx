@@ -7,7 +7,7 @@ import "./WidgetBar.css";
 import { Checkout, ViewCart, WidgetBarWrapper } from "./WidgetBar.styles";
 
 type Props = {
-  cart: Cart;
+  cart?: Cart;
   url: string;
 };
 

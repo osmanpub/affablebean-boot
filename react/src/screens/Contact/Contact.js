@@ -22,7 +22,7 @@ export class Contact extends Component {
 
     return (
       <div>
-        <Header cart={cart} url={match.url} />
+        <Header url={match.url} />
         <ContactForm subjects={subjects} />
         <Footer />
       </div>

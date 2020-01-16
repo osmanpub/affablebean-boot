@@ -30,9 +30,8 @@ export function CategoryProducts(props: Props) {
 
   return (
     <div>
-      <Header cart={cart} url={match.url} />
+      <Header url={match.url} />
       <Products
-        cart={cart}
         categories={category.categories}
         category={category.category}
         dispatch={dispatch}
