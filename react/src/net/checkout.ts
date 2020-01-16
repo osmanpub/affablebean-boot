@@ -1,12 +1,12 @@
-import { getPath } from "../utils";
+import { getPath } from "../helpers/utils";
 import { clearCart } from "../redux/cart";
 import { orderPurchase } from "../redux/purchase";
 
-export const purchaseOrder = (data: any) => (dispatch: Function) => {
-  return fetch(getPath("purchase2"), {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, cors, *same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+export const purchaseOrder = (data: any) => async (dispatch: Function) => {
+  const response = await fetch(getPath("purchase2"), {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
     // credentials: "same-origin", // include, *same-origin, omit
     headers: {
       "Content-Type": "application/json"
@@ -14,14 +14,12 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
     body: JSON.stringify(data) // body data type must match "Content-Type" header
     // redirect: "follow", // manual, *follow, error
     // referrer: "no-referrer", // no-referrer, *client
-  })
-    .then(response => response.json())
-    .then(json => {
-      dispatch(clearCart({}));
-      dispatch(
-        orderPurchase({
-          order: json
-        })
-      );
-    });
+  });
+  const json = await response.json();
+  dispatch(clearCart({}));
+  dispatch(
+    orderPurchase({
+      order: json
+    })
+  );
 };

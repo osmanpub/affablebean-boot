@@ -1,17 +1,18 @@
 import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { Match } from "../../interfaces/router";
 
 type Props = {
-  url: string;
+  match: Match;
 };
 
 export default function Privacy(props: Props) {
-  const { url } = props;
+  const { match } = props;
 
   return (
     <div>
-      <Header url={url} />
+      <Header url={match.url} />
       <div className="singleColumn">
         <p>
           AffableBean Co knows that you care how information about you is used

@@ -1,4 +1,4 @@
-import { client, getRestPath } from "../utils";
+import { client, getRestPath } from "../helpers/utils";
 import { receiveCategory } from "../redux/category";
 import { RootState } from "../redux";
 

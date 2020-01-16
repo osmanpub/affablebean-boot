@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import ContactForm from "../../components/ContactForm";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { Match } from "../../interfaces/router";
 import { fetchSubjectsIfNeeded } from "../../net/subjects";
+import { RootState } from "../../redux";
 
 type Props = {
   dispatch: Function;
-  match: any;
+  match: Match;
   subjects: any;
 };
 
@@ -34,7 +36,7 @@ function Contact(props: Props) {
   );
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   subjects: state.subjects
 });
 

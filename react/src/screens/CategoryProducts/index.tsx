@@ -4,13 +4,14 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Products from "../../components/Products";
 import { CategoryProducts as CategoryProductsState } from "../../interfaces/categories";
+import { Match } from "../../interfaces/router";
 import { fetchCategoryIfNeeded } from "../../net/category";
 
 type Props = {
   category: CategoryProductsState;
   clearCart: Function;
   dispatch: Function;
-  match: any;
+  match: Match;
 };
 
 function CategoryProducts(props: Props) {

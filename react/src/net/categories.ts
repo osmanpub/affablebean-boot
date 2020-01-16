@@ -1,6 +1,6 @@
-import { client, getRestPath } from "../utils";
+import { client, getRestPath } from "../helpers/utils";
+import { RootState } from "../redux";
 import { receiveCategories } from "../redux/categories";
-import { Categories } from "../interfaces/categories";
 
 export const fetchCategoriesIfNeeded = () => (
   dispatch: Function,
@@ -21,10 +21,11 @@ const fetchCategories = () => (dispatch: Function) => {
     });
 };
 
-const shouldFetchCategories = (state: any) => {
-  const categories: Categories = state.categories;
+const shouldFetchCategories = (state: RootState) => {
+  const { categories } = state;
+  const { items } = categories;
 
-  if (categories.items.length === 0) {
+  if (items.length === 0) {
     return true;
   }
 

@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Subjects } from "../../interfaces/subjects";
+import { Subjects, SubjectState } from "../../interfaces/subjects";
 import { sendFeedback } from "../../net/contact";
-import { validateField } from "../../utils";
+import { validateField } from "../../helpers/utils";
 import { RootState } from "../../redux";
 
 type Props = {
@@ -81,7 +81,7 @@ function ContactForm(props: Props) {
     }
   };
 
-  const subjectsList = subjects.items.map((subject: any) => (
+  const subjectsList = subjects.items.map((subject: SubjectState) => (
     <option key={subject._links.self.href} value={subject.id}>
       {subject.name}
     </option>

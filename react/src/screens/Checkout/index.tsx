@@ -5,10 +5,11 @@ import Confirmation from "../../components/Confirmation";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Purchase } from "../../interfaces/purchase";
+import { Match } from "../../interfaces/router";
 import { RootState } from "../../redux";
 
 type Props = {
-  match: any;
+  match: Match;
   purchase: Purchase;
 };
 

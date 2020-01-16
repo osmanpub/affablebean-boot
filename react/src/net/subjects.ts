@@ -1,4 +1,5 @@
-import { client, getRestPath } from "../utils";
+import { client, getRestPath } from "../helpers/utils";
+import { RootState } from "../redux";
 import { receiveSubjects } from "../redux/subjects";
 
 export const fetchSubjectsIfNeeded = () => (
@@ -20,10 +21,11 @@ const fetchSubjects = () => (dispatch: Function) => {
     });
 };
 
-const shouldFetchSubjects = (state: any) => {
-  const subjects = state.subjects.items;
+const shouldFetchSubjects = (state: RootState) => {
+  const { subjects } = state;
+  const { items } = subjects;
 
-  if (subjects.length === 0) {
+  if (items.length === 0) {
     return true;
   }
 

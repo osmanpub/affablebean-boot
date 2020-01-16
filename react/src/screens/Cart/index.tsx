@@ -5,6 +5,7 @@ import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Cart as CartState } from "../../interfaces/cart";
+import { Match } from "../../interfaces/router";
 import { RootState } from "../../redux";
 import { clearCart } from "../../redux/cart";
 import { ActionBar, CartTable, ShoppingCart, Subtotal } from "./Cart.styles";
@@ -13,7 +14,7 @@ type Props = {
   cart: CartState;
   clearCart: Function;
   dispatch: Function;
-  match: any;
+  match: Match;
 };
 
 function Cart(props: Props) {

@@ -4,13 +4,14 @@ import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Categories as CategoriesState } from "../../interfaces/categories";
+import { Match } from "../../interfaces/router";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
 import { RootState } from "../../redux";
 
 type Props = {
   categories: CategoriesState;
   dispatch: Function;
-  match: any;
+  match: Match;
 };
 
 function Home(props: Props) {

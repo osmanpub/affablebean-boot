@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Cart } from "../../interfaces/cart";
 import { purchaseOrder } from "../../net/checkout";
 import { RootState } from "../../redux";
-import { validateField } from "../../utils";
+import { validateField } from "../../helpers/utils";
 import "./CheckoutForm.css";
 import {
   InfoBox,

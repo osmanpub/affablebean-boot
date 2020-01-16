@@ -1,4 +1,4 @@
-import { getPath } from "../utils";
+import { getPath } from "../helpers/utils";
 
 export const sendFeedback = (data: any) => {
   fetch(getPath("contact2"), {
