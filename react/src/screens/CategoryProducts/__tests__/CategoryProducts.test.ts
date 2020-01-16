@@ -1,4 +1,4 @@
-import { container, mouseClick, setupAll } from "../tests/setup";
+import { container, mouseClick, setupAll } from "../../__tests__/setup";
 
 setupAll(() => {
   mouseClick(container.querySelector(".categoryImage")); // dairy category
