@@ -1,17 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Category } from "../interfaces/categories";
+import { Categories } from "../interfaces/categories";
 
-export type CategoryState = Category & { _links: any };
-
-export interface CategoriesState {
-  isFetching: boolean;
-  didInvalidate: boolean;
-  items: Array<CategoryState>;
-}
-
-export const initialState: CategoriesState = {
-  isFetching: false,
+export const initialState: Categories = {
   didInvalidate: false,
+  isFetching: false,
   items: []
 };
 

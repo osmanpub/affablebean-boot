@@ -33,7 +33,7 @@ const cart = createSlice({
       let numberOfItemsChange = 0;
       let subtotalChange = 0;
 
-      let items: CartItem[] = [];
+      let items: Array<CartItem> = [];
 
       if (qty === 0) {
         const removedItem: CartItem = state.items.filter(

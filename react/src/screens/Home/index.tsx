@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { Categories as CategoriesState } from "../../interfaces/categories";
 import { fetchCategoriesIfNeeded } from "../../net/categories";
 import { RootState } from "../../redux";
-import { CategoriesState } from "../../redux/categories";
 
 type Props = {
   categories: CategoriesState;
@@ -29,7 +29,7 @@ function Home(props: Props) {
   return (
     <div>
       <Header url={url} />
-      <Categories categories={items} />
+      <Categories />
       <Footer />
     </div>
   );

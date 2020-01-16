@@ -1,7 +1,7 @@
 import { Product } from "./categories";
 
 export interface Cart {
-  items: CartItem[];
+  items: Array<CartItem>;
   numberOfItems: number;
   subtotal: number;
 }

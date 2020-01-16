@@ -3,18 +3,12 @@ export interface Category {
   name: string;
 }
 
-export interface CategoryProducts {
-  categories: Category[];
-  category: Category;
-  isFetching: boolean;
-  didInvalidate: boolean;
-  products: Product[];
-}
+export type CategoryState = Category & { _links: any };
 
 export interface Categories {
   isFetching: boolean;
   didInvalidate: boolean;
-  items: Category[];
+  items: Array<CategoryState>;
 }
 
 export interface Product {
@@ -22,4 +16,14 @@ export interface Product {
   id: number;
   name: string;
   price: number;
+}
+
+export type ProductState = Product & Category & { _links: any };
+
+export interface CategoryProducts {
+  categories: Array<CategoryState>;
+  category: CategoryState;
+  didInvalidate: boolean;
+  isFetching: boolean;
+  products: Array<ProductState>;
 }

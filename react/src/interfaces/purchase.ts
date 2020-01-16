@@ -9,9 +9,9 @@ export interface Customer {
 }
 export interface Order {
   customer: Customer;
-  orderedProducts: OrderedProduct[];
+  orderedProducts: Array<OrderedProduct>;
   orderRecord: OrderRecord;
-  products: Product[];
+  products: Array<Product>;
 }
 
 export interface Purchase {

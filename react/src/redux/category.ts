@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CategoryProducts } from "../interfaces/categories";
 
-export const initialState = {
+export const initialState: CategoryProducts = {
   categories: [],
-  category: {},
-  isFetching: false,
+  category: { id: -1, name: "", _links: {} },
   didInvalidate: false,
+  isFetching: false,
   products: []
 };
 
@@ -18,7 +19,7 @@ const category = createSlice({
       state.category = category;
       state.didInvalidate = false;
       state.isFetching = false;
-      state.products = products;
+      state.products = products._embedded.productList;
     }
   }
 });

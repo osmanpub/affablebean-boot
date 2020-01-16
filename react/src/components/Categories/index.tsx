@@ -1,5 +1,10 @@
 import React from "react";
-import { CategoryState } from "../../redux/categories";
+import { connect } from "react-redux";
+import {
+  Categories as CategoriesState,
+  CategoryState
+} from "../../interfaces/categories";
+import { RootState } from "../../redux";
 import Category from "../Category";
 import {
   CategoriesGreeting,
@@ -9,17 +14,18 @@ import {
 } from "./Categories.styles";
 
 type Props = {
-  categories: Array<CategoryState>;
+  categories: CategoriesState;
 };
 
-export default function Categories(props: Props) {
+function Categories(props: Props) {
   const { categories } = props;
+  const { items } = categories;
 
-  if (!categories || categories.length === 0) {
+  if (items.length === 0) {
     return null;
   }
 
-  const categoriesList = categories.map((category: CategoryState) => (
+  const categoriesList = items.map((category: CategoryState) => (
     <Category key={category._links.self.href} category={category} />
   ));
 
@@ -42,3 +48,9 @@ export default function Categories(props: Props) {
     </div>
   );
 }
+
+const mapStateToProps = (state: RootState) => ({
+  categories: state.categories
+});
+
+export default connect(mapStateToProps)(Categories);

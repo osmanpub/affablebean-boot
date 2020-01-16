@@ -1,5 +1,6 @@
 import { client, getRestPath } from "../utils";
 import { receiveCategory } from "../redux/category";
+import { RootState } from "../redux";
 
 export const fetchCategoryIfNeeded = (id: number) => (
   dispatch: Function,
@@ -20,7 +21,7 @@ const fetchCategory = (id: number) => (dispatch: Function) => {
     });
 };
 
-const shouldFetchCategory = (id: number, state: any) => {
+const shouldFetchCategory = (id: number, state: RootState) => {
   const { category } = state;
 
   if (category.categories.length === 0 || Number(id) !== category.category.id) {

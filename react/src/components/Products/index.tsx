@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Cart } from "../../interfaces/cart";
-import { Category } from "../../interfaces/categories";
+import {
+  Category,
+  CategoryState,
+  ProductState
+} from "../../interfaces/categories";
 import { addProductToCart, updateProductInCart } from "../../net/cart";
 import { RootState } from "../../redux";
 import { clearPurchase } from "../../redux/purchase";
@@ -17,15 +21,15 @@ import {
 
 type Props = {
   cart: Cart;
-  categories: Category[];
+  categories: Array<CategoryState>;
   category: Category;
   clearPurchase: Function;
   dispatch: Function;
-  products: any;
+  products: Array<ProductState>;
 };
 
 export function Products(props: Props) {
-  const { cart, categories, clearPurchase } = props;
+  const { cart, categories, clearPurchase, products } = props;
 
   const addToCart = (id: number) => {
     const { dispatch } = props;
@@ -45,7 +49,7 @@ export function Products(props: Props) {
 
   const selectedCategory = props.category;
 
-  const sidePanel = categories.map((category: any) => {
+  const sidePanel = categories.map((category: CategoryState) => {
     const key = category._links.self.href;
     const name = category.name;
 
@@ -66,44 +70,42 @@ export function Products(props: Props) {
     }
   });
 
-  const products = props.products._embedded.productList.map(
-    (product: any, index: number) => {
-      const name = product.name;
-      const rowCol = index % 2 === 0 ? "white" : "lightBlue";
+  const productsList = products.map((product: ProductState, index: number) => {
+    const name = product.name;
+    const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
-      return (
-        <tr key={product._links.self.href} className={`${rowCol}`}>
-          <td>
-            <img src={`/static/img/products/${name}.png`} alt="{name}" />
-          </td>
+    return (
+      <tr key={product._links.self.href} className={`${rowCol}`}>
+        <td>
+          <img src={`/static/img/products/${name}.png`} alt="{name}" />
+        </td>
 
-          <td>
-            {name}
-            <br />
-            <span className="smallText">{product.description}</span>
-          </td>
+        <td>
+          {name}
+          <br />
+          <span className="smallText">{product.description}</span>
+        </td>
 
-          <td>
-            &euro;&nbsp;
-            {product.price.toFixed(2)}
-          </td>
+        <td>
+          &euro;&nbsp;
+          {product.price.toFixed(2)}
+        </td>
 
-          <td>&nbsp;&nbsp;</td>
+        <td>&nbsp;&nbsp;</td>
 
-          <td>
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => addToCart(product.id)}
-            >
-              add
-            </button>
-          </td>
+        <td>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => addToCart(product.id)}
+          >
+            add
+          </button>
+        </td>
 
-          <td>&nbsp;&nbsp;</td>
-        </tr>
-      );
-    }
-  );
+        <td>&nbsp;&nbsp;</td>
+      </tr>
+    );
+  });
 
   return (
     <div>
@@ -111,7 +113,7 @@ export function Products(props: Props) {
       <ProductsRight>
         <CategoryTitle>{selectedCategory.name}</CategoryTitle>
         <ProductsTable>
-          <tbody>{products}</tbody>
+          <tbody>{productsList}</tbody>
         </ProductsTable>
       </ProductsRight>
     </div>
