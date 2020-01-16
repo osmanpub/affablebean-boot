@@ -31,7 +31,9 @@ function ContactForm(props: Props) {
   const subjectErrorRef = useRef(null);
   const subjectInputRef = useRef(null);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>
+  ) => {
     const input = event.target;
     setState({ ...state, [input.name]: input.value });
   };

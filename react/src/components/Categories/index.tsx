@@ -1,4 +1,5 @@
 import React from "react";
+import { CategoryState } from "../../redux/categories";
 import Category from "../Category";
 import {
   CategoriesGreeting,
@@ -8,7 +9,7 @@ import {
 } from "./Categories.styles";
 
 type Props = {
-  categories: [];
+  categories: Array<CategoryState>;
 };
 
 export default function Categories(props: Props) {
@@ -18,7 +19,7 @@ export default function Categories(props: Props) {
     return null;
   }
 
-  const categoriesList = categories.map((category: any) => (
+  const categoriesList = categories.map((category: CategoryState) => (
     <Category key={category._links.self.href} category={category} />
   ));
 
