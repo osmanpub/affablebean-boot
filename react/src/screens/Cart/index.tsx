@@ -16,7 +16,7 @@ type Props = {
   match: any;
 };
 
-export function Cart(props: Props) {
+function Cart(props: Props) {
   const { cart, clearCart, dispatch, match } = props;
   const { numberOfItems } = cart;
 
@@ -29,13 +29,7 @@ export function Cart(props: Props) {
   }, [cart.numberOfItems, clearCart, match]);
 
   const items = cart.items.map((item, index) => (
-    <CartItem
-      key={index}
-      cart={cart}
-      dispatch={dispatch}
-      index={index}
-      item={item}
-    />
+    <CartItem key={index} dispatch={dispatch} index={index} item={item} />
   ));
 
   const clear =

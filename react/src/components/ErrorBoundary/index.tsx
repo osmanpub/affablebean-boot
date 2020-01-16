@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 
-export class ErrorBoundary extends Component {
-  constructor(props) {
+type State = {
+  error: any;
+  errorInfo: any;
+};
+
+export default class ErrorBoundary extends Component<any, State> {
+  constructor(props: any) {
     super(props);
     this.state = { error: null, errorInfo: null };
   }
 
-  componentDidCatch(error, errorInfo) {
-    // Catch errors in any components below and re-render with error message
+  componentDidCatch(error: any, errorInfo: any) {
     this.setState({
       error: error,
       errorInfo: errorInfo
     });
-    // You can also log error messages to an error reporting service here
   }
 
   render() {

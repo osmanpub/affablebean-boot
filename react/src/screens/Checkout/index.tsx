@@ -4,18 +4,16 @@ import CheckoutForm from "../../components/CheckoutForm";
 import Confirmation from "../../components/Confirmation";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { Cart } from "../../interfaces/cart";
 import { Purchase } from "../../interfaces/purchase";
 import { RootState } from "../../redux";
 
 type Props = {
-  cart: Cart;
   match: any;
   purchase: Purchase;
 };
 
-export function Checkout(props: Props) {
-  const { cart, match, purchase } = props;
+function Checkout(props: Props) {
+  const { match, purchase } = props;
   const { order } = purchase;
   const details = order.hasOwnProperty("customer") ? (
     <Confirmation order={order} />
@@ -33,7 +31,6 @@ export function Checkout(props: Props) {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  cart: state.cart,
   purchase: state.purchase
 });
 

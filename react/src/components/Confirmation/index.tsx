@@ -13,7 +13,7 @@ import {
 } from "./Confirmation.styles";
 import "./Confirmation.css";
 
-export function Confirmation(props) {
+export default function Confirmation(props) {
   const { customer, orderedProducts, orderRecord, products } = props.order;
 
   const orderedProductsList = orderedProducts.map((product, index) => {

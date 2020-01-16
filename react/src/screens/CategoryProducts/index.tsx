@@ -3,20 +3,18 @@ import { connect } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Products from "../../components/Products";
-import { Cart } from "../../interfaces/cart";
 import { CategoryProducts as CategoryProductsState } from "../../interfaces/categories";
 import { fetchCategoryIfNeeded } from "../../net/category";
 
 type Props = {
-  cart: Cart;
   category: CategoryProductsState;
   clearCart: Function;
   dispatch: Function;
   match: any;
 };
 
-export function CategoryProducts(props: Props) {
-  const { cart, category, dispatch, match } = props;
+function CategoryProducts(props: Props) {
+  const { category, dispatch, match } = props;
   const { params } = match;
   const id = params.id;
 
@@ -43,10 +41,9 @@ export function CategoryProducts(props: Props) {
 }
 
 const mapStateToProps = (state: Props) => {
-  const { cart, category } = state;
+  const { category } = state;
 
   return {
-    cart,
     category
   };
 };

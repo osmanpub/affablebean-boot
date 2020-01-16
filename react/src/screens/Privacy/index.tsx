@@ -1,9 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
-export function Privacy(props) {
+type Props = {
+  url: string;
+};
+
+export default function Privacy(props: Props) {
   const { url } = props;
 
   return (

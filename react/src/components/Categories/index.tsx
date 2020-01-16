@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Category from "../Category";
 import {
   CategoriesGreeting,
@@ -8,12 +7,18 @@ import {
   CategoriesWelcome
 } from "./Categories.styles";
 
-export function Categories(props) {
-  if (props == null || props.categories.length === 0) {
+type Props = {
+  categories: [];
+};
+
+export default function Categories(props: Props) {
+  const { categories } = props;
+
+  if (!categories || categories.length === 0) {
     return null;
   }
 
-  const categories = props.categories.map(category => (
+  const categoriesList = categories.map((category: any) => (
     <Category key={category._links.self.href} category={category} />
   ));
 
@@ -32,11 +37,7 @@ export function Categories(props) {
         </CategoriesWelcome>
       </CategoriesLeft>
 
-      <CategoriesRight>{categories}</CategoriesRight>
+      <CategoriesRight>{categoriesList}</CategoriesRight>
     </div>
   );
 }
-
-Categories.propTypes = {
-  categories: PropTypes.array.isRequired
-};

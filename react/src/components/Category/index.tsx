@@ -1,9 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Category.css";
+import { Category as CategoryState } from "../../interfaces/categories";
 
-export function Category(props) {
+type Props = {
+  category: CategoryState;
+};
+
+export default function Category(props: Props) {
   const { category } = props;
   const { name } = category;
 
@@ -21,7 +25,3 @@ export function Category(props) {
     </span>
   );
 }
-
-Category.propTypes = {
-  category: PropTypes.object.isRequired
-};

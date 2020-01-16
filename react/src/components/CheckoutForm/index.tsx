@@ -10,7 +10,7 @@ import {
 import "./CheckoutForm.css";
 import { validateField } from "../../utils";
 
-export class CheckoutForm extends Component {
+export default class CheckoutForm extends Component {
   constructor(props) {
     super(props);
 
@@ -242,7 +242,3 @@ export class CheckoutForm extends Component {
     );
   }
 }
-
-CheckoutForm.propTypes = {
-  cart: PropTypes.object.isRequired
-};
