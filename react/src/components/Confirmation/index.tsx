@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { OrderedProduct, Order } from "../../interfaces/purchase";
+import "./Confirmation.css";
 import {
   ConfirmationText,
   DateProcessedRow,
@@ -11,30 +13,33 @@ import {
   TotalCellLeft,
   TotalCellRight
 } from "./Confirmation.styles";
-import "./Confirmation.css";
 
-export default function Confirmation(props) {
+type Props = {
+  order: Order;
+};
+
+export default function Confirmation(props: Props) {
   const { customer, orderedProducts, orderRecord, products } = props.order;
 
-  const orderedProductsList = orderedProducts.map((product, index) => {
-    const rowCol = index % 2 === 0 ? "white" : "lightBlue";
-    const qty = product.quantity;
-    const subtotal = (products[index].price * qty).toFixed(2);
+  const orderedProductsList = orderedProducts.map(
+    (product: OrderedProduct, index: number) => {
+      const rowCol = index % 2 === 0 ? "white" : "lightBlue";
+      const qty = product.quantity;
+      const subtotal = (products[index].price * qty).toFixed(2);
 
-    return (
-      <tr className={`${rowCol}`} key={products[index].id}>
-        <td>{products[index].name}</td>
-        <td className="quantityColumn">{qty}</td>
-        <td className="confirmationPriceColumn">&euro; {subtotal}</td>
-      </tr>
-    );
-  });
+      return (
+        <tr className={`${rowCol}`} key={products[index].id}>
+          <td>{products[index].name}</td>
+          <td className="quantityColumn">{qty}</td>
+          <td className="confirmationPriceColumn">&euro; {subtotal}</td>
+        </tr>
+      );
+    }
+  );
 
   const tdStyle = {
     padding: "0 20px"
   };
-
-  const surcharge = 3;
 
   return (
     <div className="singleColumn">
@@ -127,3 +132,5 @@ export default function Confirmation(props) {
     </div>
   );
 }
+
+const surcharge = 3;

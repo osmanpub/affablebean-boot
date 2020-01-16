@@ -18,11 +18,11 @@ export interface Purchase {
   order: Order;
 }
 
-interface OrderedProduct {
+export interface OrderedProduct {
   quantity: number;
 }
 
-interface OrderRecord {
+export interface OrderRecord {
   amount: number;
   confirmationNumber: string;
   dateCreated: string;

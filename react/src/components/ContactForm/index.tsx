@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Subjects } from "../../interfaces/subjects";
@@ -36,7 +36,7 @@ function ContactForm(props: Props) {
     setState({ ...state, [input.name]: input.value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let validForm = true;
 
