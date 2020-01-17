@@ -128,7 +128,7 @@ function ContactForm(props: Props) {
               ref={nameInputRef}
               type="text"
               className="form-control"
-              name="name1"
+              name="name"
               maxLength={45}
               placeholder="At least 8 chars and no more than 45 chars"
               size={31}
