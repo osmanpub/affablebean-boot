@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { validateField } from "../../helpers/utils";
 import { Cart } from "../../interfaces/cart";
 import { purchaseOrder } from "../../net/checkout";
 import { RootState } from "../../redux";
-import { validateField } from "../../helpers/utils";
 import "./CheckoutForm.css";
 import {
   InfoBox,
@@ -14,11 +14,10 @@ import {
 
 type Props = {
   cart: Cart;
-  dispatch: Function;
 };
 
 function CheckoutForm(props: Props) {
-  const { cart, dispatch } = props;
+  const { cart } = props;
   const [state, setState] = useState({
     address: "",
     creditcard: "",
@@ -26,6 +25,7 @@ function CheckoutForm(props: Props) {
     name: "",
     phone: ""
   });
+  const dispatch = useDispatch();
 
   const addressErrorRef = useRef(null);
   const addressInputRef = useRef(null);

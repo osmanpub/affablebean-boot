@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Cart } from "../../interfaces/cart";
 import {
@@ -24,15 +24,14 @@ type Props = {
   categories: Array<CategoryState>;
   category: Category;
   clearPurchase: Function;
-  dispatch: Function;
   products: Array<ProductState>;
 };
 
 export function Products(props: Props) {
   const { cart, categories, clearPurchase, products } = props;
+  const dispatch = useDispatch();
 
   const addToCart = (id: number) => {
-    const { dispatch } = props;
     const update = cart.items.filter(item => item.product.id === id);
 
     clearPurchase();

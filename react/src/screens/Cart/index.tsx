@@ -13,12 +13,11 @@ import { ActionBar, CartTable, ShoppingCart, Subtotal } from "./Cart.styles";
 type Props = {
   cart: CartState;
   clearCart: Function;
-  dispatch: Function;
   match: Match;
 };
 
 function Cart(props: Props) {
-  const { cart, clearCart, dispatch, match } = props;
+  const { cart, clearCart, match } = props;
   const { numberOfItems } = cart;
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function Cart(props: Props) {
   }, [cart.numberOfItems, clearCart, match]);
 
   const items = cart.items.map((item, index) => (
-    <CartItem key={index} dispatch={dispatch} index={index} item={item} />
+    <CartItem key={index} index={index} item={item} />
   ));
 
   const clear =

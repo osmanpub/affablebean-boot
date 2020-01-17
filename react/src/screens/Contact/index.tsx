@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import ContactForm from "../../components/ContactForm";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -8,18 +8,17 @@ import { fetchSubjectsIfNeeded } from "../../net/subjects";
 import { RootState } from "../../redux";
 
 type Props = {
-  dispatch: Function;
   match: Match;
   subjects: any;
 };
 
 function Contact(props: Props) {
   const { match, subjects } = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const { dispatch } = props;
     dispatch(fetchSubjectsIfNeeded());
-  });
+  }, [dispatch, subjects]);
 
   const { items } = subjects;
 

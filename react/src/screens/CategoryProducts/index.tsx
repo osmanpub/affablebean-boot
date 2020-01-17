@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Products from "../../components/Products";
@@ -10,14 +10,14 @@ import { fetchCategoryIfNeeded } from "../../net/category";
 type Props = {
   category: CategoryProductsState;
   clearCart: Function;
-  dispatch: Function;
   match: Match;
 };
 
 function CategoryProducts(props: Props) {
-  const { category, dispatch, match } = props;
+  const { category, match } = props;
   const { params } = match;
   const id = params.id;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategoryIfNeeded(id));
@@ -33,7 +33,6 @@ function CategoryProducts(props: Props) {
       <Products
         categories={category.categories}
         category={category.category}
-        dispatch={dispatch}
         products={category.products}
       />
       <Footer />

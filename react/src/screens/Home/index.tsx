@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Categories from "../../components/Categories";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -10,18 +10,18 @@ import { RootState } from "../../redux";
 
 type Props = {
   categories: CategoriesState;
-  dispatch: Function;
   match: Match;
 };
 
 function Home(props: Props) {
-  const { categories, dispatch, match } = props;
+  const { categories, match } = props;
   const { items } = categories;
   const url = match ? match.url : "";
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategoriesIfNeeded());
-  }, [dispatch]);
+  }, [dispatch, categories]);
 
   if (items.length === 0) {
     return null;

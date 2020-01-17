@@ -1,18 +1,19 @@
 import React, { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { CartItem as CartItemState } from "../../interfaces/cart";
 import { updateProductInCart } from "../../net/cart";
 import { CartTableTd } from "./CartItem.styles";
-import { CartItem as CartItemState } from "../../interfaces/cart";
 
 type Props = {
-  dispatch: Function;
   index: number;
   item: CartItemState;
 };
 
 export default function CartItem(props: Props) {
-  const { dispatch, index, item } = props;
+  const { index, item } = props;
   const { product } = item;
   const [state, setState] = useState({ qty: item.quantity });
+  const dispatch = useDispatch();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
