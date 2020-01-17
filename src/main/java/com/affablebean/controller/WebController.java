@@ -181,7 +181,7 @@ public class WebController implements WebMvcConfigurer {
 		checkoutForm.setAddress((String) formPayload.get("address"));
 		checkoutForm.setCreditCard((String) formPayload.get("creditcard"));
 		checkoutForm.setEmail((String) formPayload.get("email"));
-		checkoutForm.setName((String) formPayload.get("name1"));
+		checkoutForm.setName((String) formPayload.get("name"));
 		checkoutForm.setPhone((String) formPayload.get("phone"));
 
 		Map<String, Object> cartPayload = payload.get("cart");

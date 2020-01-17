@@ -15,11 +15,32 @@ export const purchaseOrder = (data: any) => async (dispatch: Function) => {
     // redirect: "follow", // manual, *follow, error
     // referrer: "no-referrer", // no-referrer, *client
   });
-  const json = await response.json();
-  dispatch(clearCart({}));
-  dispatch(
-    orderPurchase({
-      order: json
-    })
-  );
+
+  try {
+    const json = await response.json();
+    dispatch(clearCart({}));
+    dispatch(
+      orderPurchase({
+        order: json
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  }
 };
+
+// export const purchaseOrder = (data: any) => (dispatch: Function) => {
+//   axios
+//     .post(getPath("purchase2"))
+//     .then(response => {
+//       dispatch(clearCart({}));
+//       dispatch(
+//         orderPurchase({
+//           order: response.data
+//         })
+//       );
+//     })
+//     .catch(function(error) {
+//       console.log(error);
+//     });
+// };

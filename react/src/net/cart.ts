@@ -1,49 +1,37 @@
+import axios from "axios";
 import { getPath } from "../helpers/utils";
 import { addToCart, updateCart } from "../redux/cart";
 
-export const addProductToCart = (id: string) => async (dispatch: Function) => {
-  const response = await fetch(getPath("addToCart2?id=" + id), {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    // credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json"
-    }
-    // redirect: "follow", // manual, *follow, error
-    // referrer: "no-referrer", // no-referrer, *client
-  });
-  const json = await response.json();
-  return dispatch(
-    addToCart({
-      cart: json
-    })
-  );
+export const addProductToCart = (id: string) => (dispatch: Function) => {
+  axios
+    .post(getPath("addToCart2?id=" + id))
+    .then(response =>
+      dispatch(
+        addToCart({
+          cart: response.data
+        })
+      )
+    )
+    .catch(function(error) {
+      console.log(error);
+    });
 };
 
-export const updateProductInCart = (id: number, qty: number) => async (
+export const updateProductInCart = (id: number, qty: number) => (
   dispatch: Function
 ) => {
-  const response = await fetch(
-    getPath("updateCart2?id=" + id + "&qty=" + qty),
-    {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      // credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json"
-      }
-      // redirect: "follow", // manual, *follow, error
-      // referrer: "no-referrer", // no-referrer, *client
-    }
-  );
-  const json = await response.json();
-  return dispatch(
-    updateCart({
-      cart: json,
-      id,
-      qty
-    })
-  );
+  axios
+    .post(getPath("updateCart2?id=" + id + "&qty=" + qty))
+    .then(response =>
+      dispatch(
+        updateCart({
+          cart: response.data,
+          id,
+          qty
+        })
+      )
+    )
+    .catch(function(error) {
+      console.log(error);
+    });
 };
