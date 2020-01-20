@@ -10,7 +10,7 @@ it("load privacy page", () => {
   // click on privacy
   mouseClick(footerButtons[0]);
 
-  const intro = document.querySelector("p");
+  const intro = container.querySelector("p");
   expect(intro.textContent).toContain(
     "AffableBean Co knows that you care how information about you is used and shared and we appreciate your trust in us to do that carefully and sensibly. This notice describes the privacy policy of AffableBean Co."
   );
