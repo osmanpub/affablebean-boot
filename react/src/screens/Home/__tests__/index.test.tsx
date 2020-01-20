@@ -1,4 +1,4 @@
-import { setupAll, container } from "../../setupTests";
+import { container, setupAll } from "../../setupTests";
 
 setupAll();
 

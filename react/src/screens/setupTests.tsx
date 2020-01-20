@@ -8,7 +8,9 @@ import reducer from "../redux";
 import Cart from "./Cart";
 import CategoryProducts from "./CategoryProducts";
 import Checkout from "./Checkout";
+import Contact from "./Contact";
 import Home from "./Home";
+import Privacy from "./Privacy";
 
 jest.mock("../net/cart");
 jest.mock("../net/category");
@@ -33,6 +35,8 @@ export const setupAll = (callback?: Function) =>
             <Route path="/" exact component={Home} />
             <Route path="/category/:id" component={CategoryProducts} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/privacy" component={Privacy} />
             <Route path="/viewCart/:clear" component={Cart} />
           </Router>
         </Provider>
