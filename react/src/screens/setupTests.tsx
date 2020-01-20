@@ -4,16 +4,16 @@ import ReactDOM from "react-dom";
 import ReactTestUtils, { act } from "react-dom/test-utils";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import reducer from "../../redux";
-import Cart from "../Cart";
-import CategoryProducts from "../CategoryProducts";
-import Checkout from "../Checkout";
-import Home from "../Home";
+import reducer from "../redux";
+import Cart from "./Cart";
+import CategoryProducts from "./CategoryProducts";
+import Checkout from "./Checkout";
+import Home from "./Home";
 
-jest.mock("../../net/cart");
-jest.mock("../../net/category");
-jest.mock("../../net/categories");
-jest.mock("../../net/checkout");
+jest.mock("../net/cart");
+jest.mock("../net/category");
+jest.mock("../net/categories");
+jest.mock("../net/checkout");
 
 export let container: any;
 
@@ -54,7 +54,7 @@ export const mouseClick = (widget: any) =>
     widget.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
 
-afterAll(() => {
+export const afterAll = () => {
   document.body.removeChild(container);
   container = null;
-});
+};

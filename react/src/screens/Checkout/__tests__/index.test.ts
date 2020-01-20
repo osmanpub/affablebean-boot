@@ -1,9 +1,4 @@
-import {
-  container,
-  changeValue,
-  mouseClick,
-  setupAll
-} from "../../__tests__/setup";
+import { container, changeValue, mouseClick, setupAll } from "../../setupTests";
 
 setupAll(() => {
   mouseClick(container.querySelector(".categoryImage")); // dairy category

@@ -1,9 +1,10 @@
 import {
+  afterAll,
   container,
   changeValue,
   mouseClick,
   setupAll
-} from "../../__tests__/setup";
+} from "../../setupTests";
 
 setupAll(() => {
   mouseClick(container.querySelector(".categoryImage")); // dairy category
@@ -15,3 +16,5 @@ it("update milk quantity", () => {
   changeValue(container.querySelector("tr input"), "2"); // update qty from 1 to 2
   mouseClick(container.querySelector("tr button")); // click update
 });
+
+// afterAll()

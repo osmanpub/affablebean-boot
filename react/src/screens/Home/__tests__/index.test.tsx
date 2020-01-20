@@ -1,10 +1,10 @@
-import { setupAll, container } from "../../__tests__/setup";
+import { setupAll, container } from "../../setupTests";
 
 setupAll();
 
 it("load home page", () => {
   const greeting = container.querySelector("p");
-
+  // console.warn(greeting)
   expect(greeting.textContent).toBe(
     "Welcome to the online home of the Affable Bean Green Grocer."
   );
