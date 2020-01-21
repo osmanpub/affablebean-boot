@@ -16,6 +16,7 @@ jest.mock("../net/cart");
 jest.mock("../net/category");
 jest.mock("../net/categories");
 jest.mock("../net/checkout");
+jest.mock("../net/subjects");
 
 export let container: any;
 
