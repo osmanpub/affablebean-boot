@@ -74,7 +74,11 @@ export function Products(props: Props) {
     const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
     return (
-      <tr key={product._links.self.href} className={`${rowCol}`}>
+      <tr
+        key={product._links.self.href}
+        className={`${rowCol}`}
+        data-cy={`product-${name}`}
+      >
         <td>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
         </td>

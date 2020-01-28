@@ -1,14 +1,8 @@
-describe("The Home Page", () => {
-  beforeEach(() => {
-    cy.visit("/");
-  });
-
+describe("Home Page", () => {
   it("contains welcome message", () => {
-    cy.get("p")
-      .first()
-      .should(
-        "contain",
-        "Welcome to the online home of the Affable Bean Green Grocer."
-      );
+    cy.get("[data-cy=home-welcome]").should(
+      "contain",
+      "Welcome to the online home of the Affable Bean Green Grocer."
+    );
   });
 });

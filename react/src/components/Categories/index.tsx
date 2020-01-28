@@ -33,7 +33,7 @@ function Categories(props: Props) {
     <div>
       <CategoriesLeft>
         <CategoriesWelcome>
-          <CategoriesGreeting>
+          <CategoriesGreeting data-cy="home-welcome">
             Welcome to the online home of the Affable Bean Green Grocer.
           </CategoriesGreeting>
           <p>

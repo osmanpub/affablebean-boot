@@ -40,7 +40,9 @@ export default function CartItem(props: Props) {
         <CartTableTd>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
         </CartTableTd>
-        <CartTableTd>{name}</CartTableTd>
+        <CartTableTd>
+          <span data-cy={`product-${name}`}>{name}</span>
+        </CartTableTd>
         <CartTableTd>
           &euro;
           {item.total.toFixed(2)}
