@@ -16,7 +16,7 @@ export default function Header(props: Props) {
       <HeaderMain>
         <WidgetBar url={url} />
         <Logo>
-          <Link to={"/"}>
+          <Link to={"/"} data-cy="home-logo">
             <img src="/static/img/logo.png" alt="Affable Bean logo" />
           </Link>
         </Logo>

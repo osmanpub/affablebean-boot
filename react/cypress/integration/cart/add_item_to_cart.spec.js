@@ -6,9 +6,8 @@ describe("Add item to cart", () => {
     );
     cy.get('[data-cy="product-sunflower seed loaf"] > :nth-child(5)').click();
 
-    cy.get(".horizontalMargin").contains("1 item");
-    cy.contains("view cart").click();
-    cy.get('[href="/viewCart/true"]');
+    cy.get('[data-cy="cart-hdr-total"]').contains("1 item");
+    cy.get('[data-cy="cart-hdr-view-cart"]').click();
     cy.contains("subtotal €1.89");
   });
 });

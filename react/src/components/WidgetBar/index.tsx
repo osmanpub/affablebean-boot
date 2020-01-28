@@ -16,7 +16,11 @@ export function WidgetBar(props: Props) {
   const viewCart = url.startsWith("/viewCart") ? (
     ""
   ) : (
-    <Link className="bubble" to={"/viewCart/false"}>
+    <Link
+      className="bubble"
+      to={"/viewCart/false"}
+      data-cy="cart-hdr-view-cart"
+    >
       view cart
     </Link>
   );
@@ -35,7 +39,7 @@ export function WidgetBar(props: Props) {
       {checkout}
 
       <ViewCart className="headerWidget" {...cart}>
-        <span className="horizontalMargin">
+        <span className="horizontalMargin" data-cy="cart-hdr-total">
           <img src="/static/img/cart.gif" alt="shopping cart icon" />
           &nbsp;
           {cart && cart.numberOfItems + " items"}

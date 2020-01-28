@@ -36,12 +36,12 @@ export default function CartItem(props: Props) {
 
   return (
     <React.Fragment>
-      <tr className={`${rowCol}`}>
+      <tr className={`${rowCol}`} data-cy={`product-${name}`}>
         <CartTableTd>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
         </CartTableTd>
         <CartTableTd>
-          <span data-cy={`product-${name}`}>{name}</span>
+          <span>{name}</span>
         </CartTableTd>
         <CartTableTd>
           &euro;
@@ -52,6 +52,7 @@ export default function CartItem(props: Props) {
         <CartTableTd>
           <form onSubmit={handleSubmit}>
             <input
+              data-cy={`input-qty-${name}`}
               className="form-control"
               maxLength={2}
               onChange={handleChange}
@@ -60,7 +61,11 @@ export default function CartItem(props: Props) {
               type="number"
               value={state.qty}
             />
-            <button className="btn btn-primary btn-sm" type="submit">
+            <button
+              className="btn btn-primary btn-sm"
+              type="submit"
+              data-cy={`update-qty-${name}`}
+            >
               update
             </button>
           </form>
