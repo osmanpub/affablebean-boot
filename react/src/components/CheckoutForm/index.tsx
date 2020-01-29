@@ -84,7 +84,7 @@ function CheckoutForm(props: Props) {
   return (
     <div className="singleColumn">
       <h2>checkout</h2>
-      <p>
+      <p data-cy="checkout-intro">
         In order to purchase the items in your shopping cart, please provide us
         with the following information:
       </p>
@@ -96,6 +96,7 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="checkout-name"
               ref={nameInputRef}
               type="text"
               className="form-control"
@@ -117,6 +118,7 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="checkout-email"
               ref={emailInputRef}
               type="email"
               className="form-control"
@@ -138,6 +140,7 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="checkout-phone"
               ref={phoneInputRef}
               type="text"
               className="form-control"
@@ -159,6 +162,7 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="checkout-address"
               ref={addressInputRef}
               type="text"
               className="form-control"
@@ -180,6 +184,7 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="checkout-cc"
               ref={ccInputRef}
               type="text"
               className="form-control"
@@ -198,7 +203,11 @@ function CheckoutForm(props: Props) {
         </div>
         <div className="form-group">
           <div className={`col-sm-offset-2 col-sm-10`}>
-            <button type="submit" className={`btn btn-primary`}>
+            <button
+              type="submit"
+              className={`btn btn-primary`}
+              data-cy="checkout-submit"
+            >
               submit purchase
             </button>
           </div>

@@ -28,7 +28,7 @@ export function WidgetBar(props: Props) {
     ""
   ) : (
     <Checkout className="headerWidget" {...cart}>
-      <Link className="bubble" to={"/checkout"}>
+      <Link className="bubble" to={"/checkout"} data-cy="proceed-checkout">
         proceed to checkout &#x279f;
       </Link>
     </Checkout>

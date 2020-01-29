@@ -36,7 +36,11 @@ function Cart(props: Props) {
     numberOfItems === 0 ? (
       ""
     ) : (
-      <Link className="bubble hMargin" to={"/viewCart/true"}>
+      <Link
+        className="bubble hMargin"
+        to={"/viewCart/true"}
+        data-cy="clear-cart"
+      >
         clear cart
       </Link>
     );
@@ -44,13 +48,13 @@ function Cart(props: Props) {
   return (
     <div>
       <Header url={match.url} />
-      <div className="singleColumn">
+      <div className="singleColumn" data-cy="cart-info">
         {numberOfItems === 0
           ? "Your shopping cart is empty"
           : "Your shopping cart contains " + numberOfItems + " items"}
         <ActionBar>
           {clear}
-          <Link className="bubble hMargin" to={"/"}>
+          <Link className="bubble hMargin" to={"/"} data-cy="continue-shopping">
             continue shopping
           </Link>
         </ActionBar>

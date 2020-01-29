@@ -44,7 +44,7 @@ export default function Confirmation(props: Props) {
   return (
     <div className="singleColumn">
       <ConfirmationText>
-        <strong>
+        <strong data-cy="confirm-success">
           Your order has been successfully processed and will be delivered
           within 24 hours.
         </strong>
