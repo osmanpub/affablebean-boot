@@ -62,7 +62,9 @@ export function Products(props: Props) {
       return (
         <Link key={key} to={`/category/${category.id}`}>
           <span className="categoryButton">
-            <span className="categoryText">{name}</span>
+            <span className="categoryText" data-cy={`category-${name}`}>
+              {name}
+            </span>
           </span>
         </Link>
       );

@@ -3,8 +3,14 @@
   "presets": ["@babel/preset-react"],
   "env": {
     "test": {
-      "plugins": ["istanbul"]
+      "plugins": [
+        ["istanbul", {
+          "exclude": [
+            "**/*.spec.js"
+          ]
+        }]
+      ]
     }
   },
-  "plugins": ["transform-class-properties"]
+  "plugins": ["transform-class-properties", "istanbul"]
 }

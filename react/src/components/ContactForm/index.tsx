@@ -90,7 +90,7 @@ function ContactForm(props: Props) {
   return (
     <div className="singleColumn">
       <div>
-        <h2>Contact Us Form</h2>
+        <h2 data-cy="contact-intro">Contact Us Form</h2>
         <p>
           You can use this form for any comments or questions about our company
           or brands.
@@ -125,6 +125,7 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="contact-name"
               ref={nameInputRef}
               type="text"
               className="form-control"
@@ -146,6 +147,7 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
+              data-cy="contact-email"
               ref={emailInputRef}
               type="email"
               className="form-control"
@@ -167,6 +169,7 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <textarea
+              data-cy="contact-msg"
               ref={msgInputRef}
               className="form-control"
               name="msg"
@@ -182,7 +185,11 @@ function ContactForm(props: Props) {
         </div>
         <div className="form-group">
           <div className={`col-sm-offset-2 col-sm-10`}>
-            <button type="submit" className={`btn btn-primary`}>
+            <button
+              type="submit"
+              className={`btn btn-primary`}
+              data-cy="contact-submit"
+            >
               send feedback
             </button>
           </div>
