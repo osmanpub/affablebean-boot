@@ -18,7 +18,7 @@ const fetchCategories = () => (dispatch: Function) => {
       .get(getNodePath("categories"))
       .then(response => {
         const data = response.data.categories.map(
-          (e: { _id: number; name: string }) => ({ ...e, id: e._id })
+          (c: { _id: number; name: string }) => ({ ...c, id: c._id })
         );
         dispatch(receiveCategories(data));
       })
