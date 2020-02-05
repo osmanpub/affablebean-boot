@@ -17,15 +17,15 @@ const fetchCategories = () => (dispatch: Function) => {
     return axios
       .get(getNodePath("categories"))
       .then(response => {
-        const data = response.data.categories.map(
-          (c: { _id: number; name: string }) => ({ ...c, id: c._id })
-        );
+        const data = response.data.categories.map((c: any) => ({
+          ...c,
+          id: c._id
+        }));
         dispatch(receiveCategories(data));
       })
       .catch(error => console.log(error));
   }
 
-  // Java
   return client
     .get(getRestPath("categories"), function(data: any) {
       dispatch(receiveCategories(data._embedded.categoryList));

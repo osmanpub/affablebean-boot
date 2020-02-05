@@ -3,7 +3,9 @@ import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
 import { receiveCategory } from "../redux/category";
 
-export const fetchCategoryIfNeeded = (id: any) => (
+type id = number | string;
+
+export const fetchCategoryIfNeeded = (id: id) => (
   dispatch: Function,
   getState: Function
 ) => {
@@ -12,7 +14,7 @@ export const fetchCategoryIfNeeded = (id: any) => (
   }
 };
 
-const fetchCategory = (id: any) => (dispatch: Function) => {
+const fetchCategory = (id: id) => (dispatch: Function) => {
   if (IS_NODE) {
     return axios
       .get(getNodePath("category/" + id))
@@ -24,7 +26,7 @@ const fetchCategory = (id: any) => (dispatch: Function) => {
         } = response.data.categoryProducts;
         const data = {
           category: { ...category, id: category._id },
-          categories: categories.map((c: { _id: number; name: string }) => ({
+          categories: categories.map((c: any) => ({
             ...c,
             id: c._id
           })),
@@ -45,7 +47,7 @@ const fetchCategory = (id: any) => (dispatch: Function) => {
     });
 };
 
-const shouldFetchCategory = (id: any, state: RootState) => {
+const shouldFetchCategory = (id: id, state: RootState) => {
   const { category } = state;
 
   if (category.categories.length === 0 || Number(id) !== category.category.id) {

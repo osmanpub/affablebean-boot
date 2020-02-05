@@ -21,7 +21,7 @@ function CategoryProducts(props: Props) {
 
   useEffect(() => {
     dispatch(fetchCategoryIfNeeded(id));
-  }, [category, dispatch, id]);
+  }, [dispatch, id]);
 
   if (!category.category.hasOwnProperty("id")) {
     return null;
