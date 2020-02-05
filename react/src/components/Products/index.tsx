@@ -49,7 +49,7 @@ export function Products(props: Props) {
   const selectedCategory = props.category;
 
   const sidePanel = categories.map((category: CategoryState) => {
-    const key = category._links.self.href;
+    const key = category.id;
     const name = category.name;
 
     if (name === selectedCategory.name) {
@@ -76,11 +76,7 @@ export function Products(props: Props) {
     const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
     return (
-      <tr
-        key={product._links.self.href}
-        className={`${rowCol}`}
-        data-cy={`product-${name}`}
-      >
+      <tr key={product.id} className={`${rowCol}`} data-cy={`product-${name}`}>
         <td>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
         </td>

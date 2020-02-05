@@ -3,16 +3,18 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
 
 const indexRouter = require("./src/routes/index");
 
 const app = express();
-const port = 3001;
+app.use(cors());
 
 //Set up mongoose connection
 const mongoose = require("mongoose");
 const mongoDB =
-  "mongodb+srv://admin:LGRn8eOi4QhW6RPs@cluster0-kv8co.mongodb.net/affablebean?retryWrites=true&w=majority";
+  "mongodb+srv://random_user:iamarandomuser@cluster0-kv8co.mongodb.net/affablebean?retryWrites=true&w=majority";
+
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
@@ -42,7 +44,5 @@ app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-app.listen(port, () => console.log("app listening on port " + port));
 
 module.exports = app;

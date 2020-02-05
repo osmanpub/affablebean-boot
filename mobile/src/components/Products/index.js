@@ -138,7 +138,7 @@ export default class Products extends Component {
       >
         <FlatList
           data={this.props.products._embedded.productList}
-          keyExtractor={(item, index) => item._links.self.href}
+          keyExtractor={(item, index) => item.id}
           renderItem={({ item }) => {
             return (
               <View

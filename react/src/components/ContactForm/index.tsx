@@ -82,7 +82,7 @@ function ContactForm(props: Props) {
   };
 
   const subjectsList = subjects.items.map((subject: SubjectState) => (
-    <option key={subject._links.self.href} value={subject.id}>
+    <option key={subject.id} value={subject.id}>
       {subject.name}
     </option>
   ));

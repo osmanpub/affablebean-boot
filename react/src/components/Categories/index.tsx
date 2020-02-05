@@ -26,7 +26,7 @@ function Categories(props: Props) {
   }
 
   const categoriesList = items.map((category: CategoryState) => (
-    <Category key={category._links.self.href} category={category} />
+    <Category key={category.id} category={category} />
   ));
 
   return (

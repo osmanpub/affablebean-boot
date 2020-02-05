@@ -1,4 +1,5 @@
-import { client, getRestPath, IS_NODE } from "../helpers/utils";
+import axios from "axios";
+import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
 import { receiveCategories } from "../redux/categories";
 
@@ -13,6 +14,15 @@ export const fetchCategoriesIfNeeded = () => (
 
 const fetchCategories = () => (dispatch: Function) => {
   if (IS_NODE) {
+    return axios
+      .get(getNodePath("categories"))
+      .then(response => {
+        const data = response.data.categories.map(
+          (e: { _id: number; name: string }) => ({ ...e, id: e._id })
+        );
+        dispatch(receiveCategories(data));
+      })
+      .catch(error => console.log(error));
   }
 
   // Java
