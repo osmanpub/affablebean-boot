@@ -1,4 +1,4 @@
-import { client, getRestPath } from "../helpers/utils";
+import { client, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
 import { receiveCategories } from "../redux/categories";
 
@@ -12,6 +12,10 @@ export const fetchCategoriesIfNeeded = () => (
 };
 
 const fetchCategories = () => (dispatch: Function) => {
+  if (IS_NODE) {
+  }
+
+  // Java
   return client
     .get(getRestPath("categories"), function(data: any) {
       dispatch(receiveCategories(data._embedded.categoryList));

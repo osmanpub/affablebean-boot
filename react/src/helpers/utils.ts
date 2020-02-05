@@ -1,6 +1,8 @@
 // @ts-ignore
 import { Client } from "node-rest-client";
 
+export const IS_NODE = true; // false for SPRING / JAVA server
+
 const root = "http://localhost:8080/";
 
 const root_api = root + "api/";
