@@ -17,12 +17,20 @@ const fetchCategory = (id: any) => (dispatch: Function) => {
     return axios
       .get(getNodePath("category/" + id))
       .then(response => {
-        const { category, products } = response.data.categoryProducts;
+        const {
+          category,
+          categories,
+          products
+        } = response.data.categoryProducts;
         const data = {
           category: { ...category, id: category._id },
+          categories: categories.map((c: { _id: number; name: string }) => ({
+            ...c,
+            id: c._id
+          })),
           products: products.map((p: any) => ({ ...p, id: p._id }))
         };
-        console.log(data);
+
         dispatch(receiveCategory(data));
       })
       .catch(error => console.log(error));

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IS_NODE } from "../helpers/utils";
 import { CategoryProducts } from "../interfaces/categories";
 
 export const initialState: CategoryProducts = {
@@ -19,7 +20,7 @@ const category = createSlice({
       state.category = category;
       state.didInvalidate = false;
       state.isFetching = false;
-      state.products = products._embedded.productList;
+      state.products = IS_NODE ? products : products._embedded.productList;
     }
   }
 });

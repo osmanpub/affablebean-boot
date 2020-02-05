@@ -14,6 +14,7 @@ exports.categoriesList = (req, res) =>
 exports.categoryProducts = (req, res) =>
   async.parallel(
     {
+      categories: callback => Category.find().exec(callback),
       category: callback => Category.findById(req.params.id).exec(callback),
       products: callback =>
         Product.find(
