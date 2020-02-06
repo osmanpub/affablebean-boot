@@ -21,17 +21,22 @@ const app = express();
 
 app.use(cors());
 
-const session = {
+const store = new session.MemoryStore();
+
+const sess = {
+  resave: false,
+  saveUninitialized: false,
   secret: "keyboard cat",
-  cookie: { maxAge: 60000 }
+  store,
+  cookie: { secure: false, httpOnly: false, maxAge: 3600000 }
 };
 
-if (app.get("env") === "production") {
-  app.set("trust proxy", 1); // trust first proxy
-  session.cookie.secure = true; // serve secure cookies
-}
+// if (app.get("env") === "production") {
+//   app.set("trust proxy", 1); // trust first proxy
+//   sess.cookie.secure = true; // serve secure cookies
+// }
 
-app.use(session(session));
+app.use(session(sess));
 
 app.use(logger("dev"));
 app.use(express.json());

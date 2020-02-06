@@ -10,31 +10,26 @@ exports.addToCart = (req, res) =>
       return;
     }
 
-    const cart = new ShoppingCart();
+    const cart = req.session.cart || new ShoppingCart();
     cart.addItem(product);
-
+    console.log(cart.getItems());
     req.session.cart = cart;
     res.json({ cart });
   });
 
 exports.updateCart = (req, res) =>
-  async.parallel(
-    {
-      categories: callback => Category.find().exec(callback),
-      category: callback => Category.findById(req.params.id).exec(callback),
-      products: callback =>
-        Product.find(
-          { category: req.params.id },
-          "name price description category"
-        )
-          .populate("category")
-          .exec(callback)
-    },
-    (err, categoryProducts) => {
-      if (err) {
-        return;
-      }
-
-      res.json({ categoryProducts });
+  Product.findById(req.params.id).exec((err, product) => {
+    if (err) {
+      return;
     }
-  );
+
+    const cart = req.session.cart;
+
+    if (!cart) {
+      return;
+    }
+
+    cart.update(product, req.params.qty);
+    req.session.cart = cart;
+    res.json({ cart });
+  });

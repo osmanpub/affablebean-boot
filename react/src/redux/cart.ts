@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IS_NODE } from "../helpers/utils";
 import { Cart, CartItem } from "../interfaces/cart";
 
 export const initialState: Cart = {
@@ -62,8 +63,8 @@ const cart = createSlice({
   }
 });
 
-function getCartItem(cart: Cart) {
-  return JSON.parse(JSON.stringify(cart.items[0]));
+function getCartItem(cart: any) {
+  return IS_NODE ? cart.cart.items : JSON.parse(JSON.stringify(cart.items[0]));
 }
 
 export const { addToCart, clearCart, updateCart } = cart.actions;

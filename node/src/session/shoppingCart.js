@@ -6,6 +6,10 @@ class ShoppingCart {
     this.items = [];
   }
 
+  getItems() {
+    return this.items;
+  }
+
   addItem(product) {
     const productIndex = this.items.findIndex(
       item => item.product.id === product.id
@@ -15,7 +19,7 @@ class ShoppingCart {
       const item = this.items[productIndex];
       item.incrementQuantity();
     } else {
-      items.push(new ShoppingCartItem(product));
+      this.items.push(new ShoppingCartItem(product));
     }
   }
 
@@ -34,13 +38,9 @@ class ShoppingCart {
       if (quantity > 0) {
         item.quantity = quantity;
       } else {
-        items.splice(productIndex, 1);
+        this.items.splice(productIndex, 1);
       }
     }
-  }
-
-  get items() {
-    return items;
   }
 
   get numberOfItems() {

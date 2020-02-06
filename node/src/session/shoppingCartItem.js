@@ -4,19 +4,19 @@ class ShoppingCartItem {
     this.quantity = 1;
   }
 
-  get product() {
+  getProduct() {
     return this.product;
   }
 
-  get quantity() {
+  getQuantity() {
     return this.quantity;
   }
 
-  set quantity(quantity) {
+  setQuantity(quantity) {
     this.quantity = quantity;
   }
 
-  get total() {
+  getTotal() {
     return this.quantity * this.product.price;
   }
 

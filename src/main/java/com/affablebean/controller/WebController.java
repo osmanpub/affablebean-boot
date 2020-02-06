@@ -73,7 +73,7 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/category?id=" + categoryId;
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@PostMapping({ "/addToCart2" })
 	@ResponseBody
 	public ShoppingCart addToCart2(@ModelAttribute("cart") ShoppingCart cart,
@@ -115,7 +115,7 @@ public class WebController implements WebMvcConfigurer {
 		return "contact";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@PostMapping({ "/contact2" })
 	@ResponseBody
 	public String contact(@RequestBody ContactForm contactForm) {
@@ -170,7 +170,7 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/confirmation";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@PostMapping({ "/purchase2" })
 	@ResponseBody
 	@SuppressWarnings("unchecked")
@@ -223,7 +223,7 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/cart";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@PostMapping({ "/updateCart2" })
 	@ResponseBody
 	public ShoppingCart updateCart2(@ModelAttribute("cart") ShoppingCart cart,
