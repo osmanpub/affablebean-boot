@@ -4,11 +4,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-
+const session = require("express-session");
 const indexRouter = require("./src/routes/index");
-
-const app = express();
-app.use(cors());
 
 //Set up mongoose connection
 const mongoose = require("mongoose");
@@ -19,6 +16,22 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+const app = express();
+
+app.use(cors());
+
+const session = {
+  secret: "keyboard cat",
+  cookie: { maxAge: 60000 }
+};
+
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  session.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(session));
 
 app.use(logger("dev"));
 app.use(express.json());

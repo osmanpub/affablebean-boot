@@ -1,0 +1,34 @@
+const async = require("async");
+const Category = require("../models/category");
+const Product = require("../models/product");
+
+exports.addToCart = (req, res) =>
+  Category.find().exec((err, categories) => {
+    if (err) {
+      return;
+    }
+
+    res.json({ categories });
+  });
+
+exports.updateCart = (req, res) =>
+  async.parallel(
+    {
+      categories: callback => Category.find().exec(callback),
+      category: callback => Category.findById(req.params.id).exec(callback),
+      products: callback =>
+        Product.find(
+          { category: req.params.id },
+          "name price description category"
+        )
+          .populate("category")
+          .exec(callback)
+    },
+    (err, categoryProducts) => {
+      if (err) {
+        return;
+      }
+
+      res.json({ categoryProducts });
+    }
+  );
