@@ -1,14 +1,20 @@
 const async = require("async");
-const Category = require("../models/category");
 const Product = require("../models/product");
+const Cart = require("../session/shoppingCart");
+
+const ShoppingCart = Cart.ShoppingCart;
 
 exports.addToCart = (req, res) =>
-  Category.find().exec((err, categories) => {
+  Product.findById(req.params.id).exec((err, product) => {
     if (err) {
       return;
     }
 
-    res.json({ categories });
+    const cart = new ShoppingCart();
+    cart.addItem(product);
+
+    req.session.cart = cart;
+    res.json({ cart });
   });
 
 exports.updateCart = (req, res) =>

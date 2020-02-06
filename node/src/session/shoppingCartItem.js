@@ -28,3 +28,7 @@ class ShoppingCartItem {
     this.quantity--;
   }
 }
+
+module.exports = {
+  ShoppingCartItem
+};

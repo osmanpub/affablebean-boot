@@ -1,8 +1,23 @@
 import axios from "axios";
-import { getPath } from "../helpers/utils";
+import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
 import { addToCart, updateCart } from "../redux/cart";
 
 export const addProductToCart = (id: string) => (dispatch: Function) => {
+  if (IS_NODE) {
+    axios
+      .post(getNodePath("addToCart/" + id))
+      .then(response =>
+        dispatch(
+          addToCart({
+            cart: response.data
+          })
+        )
+      )
+      .catch(error => console.log(error));
+
+    return;
+  }
+
   axios
     .post(getPath("addToCart2?id=" + id))
     .then(response =>
@@ -12,14 +27,27 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
         })
       )
     )
-    .catch(function(error) {
-      console.log(error);
-    });
+    .catch(error => console.log(error));
 };
 
 export const updateProductInCart = (id: number, qty: number) => (
   dispatch: Function
 ) => {
+  if (IS_NODE) {
+    axios
+      .post(getNodePath("updateCart/" + id + "/qty/") + qty)
+      .then(response =>
+        dispatch(
+          addToCart({
+            cart: response.data
+          })
+        )
+      )
+      .catch(error => console.log(error));
+
+    return;
+  }
+
   axios
     .post(getPath("updateCart2?id=" + id + "&qty=" + qty))
     .then(response =>

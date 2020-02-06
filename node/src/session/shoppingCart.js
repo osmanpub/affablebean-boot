@@ -1,3 +1,6 @@
+const ScItem = require("./shoppingCartItem");
+const ShoppingCartItem = ScItem.ShoppingCartItem;
+
 class ShoppingCart {
   constructor() {
     this.items = [];
@@ -12,7 +15,7 @@ class ShoppingCart {
       const item = this.items[productIndex];
       item.incrementQuantity();
     } else {
-      items.push(product);
+      items.push(new ShoppingCartItem(product));
     }
   }
 
@@ -56,4 +59,6 @@ class ShoppingCart {
   }
 }
 
-module.export = ShoppingCart;
+module.exports = {
+  ShoppingCart
+};

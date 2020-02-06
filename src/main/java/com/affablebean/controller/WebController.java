@@ -73,11 +73,11 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/category?id=" + categoryId;
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
 	@PostMapping({ "/addToCart2" })
 	@ResponseBody
-	public ShoppingCart addToCart2(@RequestParam(name = "id", required = true) Integer id) {
-		ShoppingCart cart = new ShoppingCart();
+	public ShoppingCart addToCart2(@ModelAttribute("cart") ShoppingCart cart,
+			@RequestParam(name = "id", required = true) Integer id) {
 		addToShoppingCart(cart, id);
 		return cart;
 	}
@@ -115,7 +115,7 @@ public class WebController implements WebMvcConfigurer {
 		return "contact";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
 	@PostMapping({ "/contact2" })
 	@ResponseBody
 	public String contact(@RequestBody ContactForm contactForm) {
@@ -170,7 +170,7 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/confirmation";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
 	@PostMapping({ "/purchase2" })
 	@ResponseBody
 	@SuppressWarnings("unchecked")
@@ -223,13 +223,15 @@ public class WebController implements WebMvcConfigurer {
 		return "redirect:/cart";
 	}
 
-	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 30000)
 	@PostMapping({ "/updateCart2" })
 	@ResponseBody
-	public ShoppingCart updateCart2(@RequestParam(name = "id", required = true) Integer id,
+	public ShoppingCart updateCart2(@ModelAttribute("cart") ShoppingCart cart,
+			@RequestParam(name = "id", required = true) Integer id,
 			@RequestParam(name = "qty", required = true) Short qty) {
 
-		return updateShoppingCart(id, qty);
+		updateShoppingCart(cart, id, qty);
+		return cart;
 	}
 
 	@GetMapping({ "/viewCart" })
@@ -309,23 +311,5 @@ public class WebController implements WebMvcConfigurer {
 		if (product.isPresent()) {
 			cart.update(product.get(), quantity);
 		}
-	}
-
-	private ShoppingCart updateShoppingCart(Integer productId, Short quantity) {
-		ShoppingCart cart = new ShoppingCart();
-
-		if (quantity == null) {
-			return cart;
-		}
-
-		Optional<Product> optProduct = productRepository.findById(productId);
-
-		if (optProduct.isPresent()) {
-			Product product = optProduct.get();
-			cart.addItem(product);
-			cart.update(product, quantity);
-		}
-
-		return cart;
 	}
 }

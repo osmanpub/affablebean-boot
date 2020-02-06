@@ -6,7 +6,7 @@ const categoryController = require("../controllers/categoryController");
 
 router.get("/addToCart/:id", cartController.addToCart);
 
-router.get("/updateToCart/:id/quantity/:qty", cartController.updateCart);
+router.get("/updateToCart/:id/qty/:qty", cartController.updateCart);
 
 router.get("/categories", categoryController.categoriesList);
 
