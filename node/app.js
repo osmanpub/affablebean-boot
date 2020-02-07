@@ -19,22 +19,23 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const app = express();
 
-app.use(cors());
-
-const store = new session.MemoryStore();
+app.use(
+  cors({
+    credentials: true,
+    maxAge: 3600000,
+    origin: "http://localhost:3000"
+  })
+);
 
 const sess = {
-  resave: false,
-  saveUninitialized: false,
   secret: "keyboard cat",
-  store,
   cookie: { secure: false, httpOnly: false, maxAge: 3600000 }
 };
 
-// if (app.get("env") === "production") {
-//   app.set("trust proxy", 1); // trust first proxy
-//   sess.cookie.secure = true; // serve secure cookies
-// }
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // trust first proxy
+  sess.cookie.secure = true; // serve secure cookies
+}
 
 app.use(session(sess));
 

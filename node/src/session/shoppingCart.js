@@ -10,6 +10,14 @@ class ShoppingCart {
     return this.items;
   }
 
+  load(cart) {
+    if (!cart || !cart.items || !Array.isArray(cart.items)) {
+      return;
+    }
+
+    this.items = cart.items;
+  }
+
   addItem(product) {
     const productIndex = this.items.findIndex(
       item => item.product.id === product.id

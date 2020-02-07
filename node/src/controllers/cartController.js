@@ -10,9 +10,15 @@ exports.addToCart = (req, res) =>
       return;
     }
 
-    const cart = req.session.cart || new ShoppingCart();
+    const cart = new ShoppingCart();
+
+    if (req.session.cart) {
+      cart.load(req.session.cart);
+    }
+
+    console.log(cart);
     cart.addItem(product);
-    console.log(cart.getItems());
+
     req.session.cart = cart;
     res.json({ cart });
   });
