@@ -15,8 +15,10 @@ const cart = createSlice({
     addToCart: (state, action) => {
       const { cart } = action.payload;
       state.items = state.items.concat(getCartItem(cart));
-      state.numberOfItems += cart.numberOfItems;
-      state.subtotal += cart.subtotal;
+      state.numberOfItems += IS_NODE
+        ? action.payload.numberOfItems
+        : cart.numberOfItems;
+      state.subtotal += IS_NODE ? action.payload.subtotal : cart.subtotal;
     },
     clearCart: (state, action) => {
       state.items = [];
@@ -64,7 +66,7 @@ const cart = createSlice({
 });
 
 function getCartItem(cart: any) {
-  return IS_NODE ? cart.cart.items : JSON.parse(JSON.stringify(cart.items[0]));
+  return IS_NODE ? cart.items : JSON.parse(JSON.stringify(cart.items[0]));
 }
 
 export const { addToCart, clearCart, updateCart } = cart.actions;

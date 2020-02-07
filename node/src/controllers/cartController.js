@@ -1,4 +1,3 @@
-const async = require("async");
 const Product = require("../models/product");
 const Cart = require("../session/shoppingCart");
 
@@ -17,9 +16,12 @@ exports.addToCart = (req, res) =>
     }
 
     cart.addItem(product);
-
     req.session.cart = cart;
-    res.json({ cart });
+    res.json({
+      cart,
+      numberOfItems: cart.numberOfItems,
+      subtotal: cart.subtotal
+    });
   });
 
 exports.updateCart = (req, res) =>
@@ -37,5 +39,9 @@ exports.updateCart = (req, res) =>
 
     cart.update(product, req.params.qty);
     req.session.cart = cart;
-    res.json({ cart });
+    res.json({
+      cart,
+      numberOfItems: cart.numberOfItems,
+      subtotal: cart.subtotal
+    });
   });

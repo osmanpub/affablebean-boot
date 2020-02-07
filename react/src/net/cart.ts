@@ -10,9 +10,12 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
       withCredentials: true
     })
       .then(response => {
+        const { cart, numberOfItems, subtotal } = response.data;
         dispatch(
           addToCart({
-            cart: response.data
+            cart,
+            numberOfItems,
+            subtotal
           })
         );
       })
@@ -26,7 +29,7 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
     .then(response =>
       dispatch(
         addToCart({
-          cart: response.data
+          cart: response.data.cart
         })
       )
     )

@@ -42,10 +42,11 @@ class ShoppingCart {
     const productIndex = this.items.findIndex(item => item.product._id === id);
 
     if (productIndex > -1) {
-      const item = this.items[productIndex];
+      const scItem = new ShoppingCartItem(product);
 
       if (quantity > 0) {
-        item.quantity = quantity;
+        scItem.setQuantity(quantity);
+        this.items[productIndex] = scItem;
       } else {
         this.items.splice(productIndex, 1);
       }
