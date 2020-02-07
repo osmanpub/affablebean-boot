@@ -58,7 +58,7 @@ export default function CartItem(props: Props) {
               maxLength={2}
               onChange={handleChange}
               size={2}
-              style={{ margin: "5px", textAlign: "center" }}
+              style={{ margin: "5px", textAlign: "center", width: "90%" }}
               type="number"
               value={state.qty}
             />

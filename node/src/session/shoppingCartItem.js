@@ -13,9 +13,13 @@ class ShoppingCartItem {
     return this.quantity;
   }
 
+  getTotal() {
+    return this.total;
+  }
+
   setQuantity(quantity) {
     this.quantity = quantity;
-    this.total = quantity * product.price;
+    this.total = quantity * this.product.price;
   }
 }
 

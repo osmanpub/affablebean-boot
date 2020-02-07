@@ -26,11 +26,7 @@ exports.addToCart = (req, res) =>
 
 exports.updateCart = (req, res) =>
   Product.findById(req.params.id).exec((err, product) => {
-    if (err) {
-      return;
-    }
-
-    if (!req.session.cart) {
+    if (err || !req.session.cart) {
       return;
     }
 

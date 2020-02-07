@@ -1,32 +1,32 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../../components/CartItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { Cart as CartState } from "../../interfaces/cart";
 import { Match } from "../../interfaces/router";
+import { emptyCart } from "../../net/cart";
 import { RootState } from "../../redux";
-import { clearCart } from "../../redux/cart";
 import { ActionBar, CartTable, ShoppingCart, Subtotal } from "./Cart.styles";
 
 type Props = {
   cart: CartState;
-  clearCart: Function;
   match: Match;
 };
 
 function Cart(props: Props) {
-  const { cart, clearCart, match } = props;
+  const { cart, match } = props;
   const { numberOfItems } = cart;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const { params } = match;
 
     if (cart.numberOfItems > 0 && params.clear === "true") {
-      clearCart();
+      dispatch(emptyCart());
     }
-  }, [cart.numberOfItems, clearCart, match]);
+  }, [cart.numberOfItems, dispatch, match]);
 
   const items = cart.items.map((item, index) => (
     <CartItem key={index} index={index} item={item} />
@@ -85,8 +85,4 @@ const mapStateToProps = (state: RootState) => ({
   cart: state.cart
 });
 
-const mapDispatchToProps = {
-  clearCart
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps)(Cart);
