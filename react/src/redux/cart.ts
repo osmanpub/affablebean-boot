@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IS_NODE } from "../helpers/utils";
-import { Cart, CartItem } from "../interfaces/cart";
+import { Cart } from "../interfaces/cart";
 
 export const initialState: Cart = {
   items: [],
@@ -14,7 +14,7 @@ const cart = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const { cart, numberOfItems, subtotal } = action.payload;
-      state.items = state.items.concat(getCartItem(cart));
+      state.items = getCartItems(cart);
       state.numberOfItems = IS_NODE ? numberOfItems : cart.numberOfItems;
       state.subtotal = IS_NODE ? subtotal : cart.subtotal;
     },
@@ -24,47 +24,16 @@ const cart = createSlice({
       state.subtotal = 0;
     },
     updateCart: (state, action) => {
-      const { cart, id, qty } = action.payload;
-
-      if (qty < 0) {
-        return state;
-      }
-
-      const updatedItem = cart.items[0];
-      let numberOfItemsChange = 0;
-      let subtotalChange = 0;
-
-      let items: Array<CartItem> = [];
-
-      if (qty === 0) {
-        const removedItem: CartItem = state.items.filter(
-          (item: CartItem) => item.product.id === id
-        )[0];
-
-        numberOfItemsChange = removedItem.quantity * -1;
-        subtotalChange = removedItem.total * -1;
-        items = state.items.filter((item: CartItem) => item.product.id !== id);
-      } else {
-        items = state.items.map((item: CartItem) => {
-          if (item.product.id === id) {
-            numberOfItemsChange = updatedItem.quantity - item.quantity;
-            subtotalChange = updatedItem.total - item.total;
-            return getCartItem(cart);
-          }
-
-          return item;
-        });
-      }
-
-      state.items = items;
-      state.numberOfItems += numberOfItemsChange;
-      state.subtotal += subtotalChange;
+      const { cart, numberOfItems, subtotal } = action.payload;
+      state.items = getCartItems(cart);
+      state.numberOfItems = IS_NODE ? numberOfItems : cart.numberOfItems;
+      state.subtotal = IS_NODE ? subtotal : cart.subtotal;
     }
   }
 });
 
-function getCartItem(cart: any) {
-  return IS_NODE ? cart.items : JSON.parse(JSON.stringify(cart.items[0]));
+function getCartItems(cart: any) {
+  return IS_NODE ? cart.items : JSON.parse(cart.items);
 }
 
 export const { addToCart, clearCart, updateCart } = cart.actions;

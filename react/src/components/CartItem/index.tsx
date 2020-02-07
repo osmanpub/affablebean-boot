@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { getId } from "../../helpers/utils";
 import { CartItem as CartItemState } from "../../interfaces/cart";
 import { updateProductInCart } from "../../net/cart";
 import { CartTableTd } from "./CartItem.styles";
@@ -28,7 +29,7 @@ export default function CartItem(props: Props) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(updateProductInCart(product.id, Number(state.qty)));
+    dispatch(updateProductInCart(getId(product), Number(state.qty)));
   };
 
   const name = product.name;

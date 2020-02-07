@@ -53,9 +53,7 @@ export const updateProductInCart = (id: id, qty: number) => (
           updateCart({
             cart,
             numberOfItems,
-            subtotal,
-            id,
-            qty
+            subtotal
           })
         );
       })
@@ -69,9 +67,7 @@ export const updateProductInCart = (id: id, qty: number) => (
     .then(response =>
       dispatch(
         updateCart({
-          cart: response.data,
-          id,
-          qty
+          cart: response.data
         })
       )
     )

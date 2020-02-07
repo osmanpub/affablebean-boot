@@ -2,6 +2,7 @@ class ShoppingCartItem {
   constructor(product) {
     this.product = product;
     this.quantity = 1;
+    this.total = product.price;
   }
 
   getProduct() {
@@ -14,10 +15,7 @@ class ShoppingCartItem {
 
   setQuantity(quantity) {
     this.quantity = quantity;
-  }
-
-  getTotal() {
-    return this.quantity * this.product.price;
+    this.total = quantity * product.price;
   }
 }
 
