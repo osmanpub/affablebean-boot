@@ -23,7 +23,10 @@ function CategoryProducts(props: Props) {
     dispatch(fetchCategoryIfNeeded(id));
   }, [dispatch, id]);
 
-  if (!category.category.hasOwnProperty("id")) {
+  if (
+    !category.category.hasOwnProperty("id") &&
+    !category.category.hasOwnProperty("_id")
+  ) {
     return null;
   }
 

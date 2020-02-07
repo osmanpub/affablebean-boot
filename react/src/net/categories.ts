@@ -17,11 +17,7 @@ const fetchCategories = () => (dispatch: Function) => {
     return axios
       .get(getNodePath("categories"))
       .then(response => {
-        const data = response.data.categories.map((c: any) => ({
-          ...c,
-          id: c._id
-        }));
-        dispatch(receiveCategories(data));
+        dispatch(receiveCategories(response.data.categories));
       })
       .catch(error => console.log(error));
   }

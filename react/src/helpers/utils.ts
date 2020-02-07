@@ -23,6 +23,10 @@ export function getRestPath(path: string) {
   return root_api + path;
 }
 
+export function getId(model: any) {
+  return model.id || model._id;
+}
+
 export function validateField(
   input: any,
   error: any,

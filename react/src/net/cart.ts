@@ -2,7 +2,9 @@ import axios from "axios";
 import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
 import { addToCart, updateCart } from "../redux/cart";
 
-export const addProductToCart = (id: string) => (dispatch: Function) => {
+type id = number | string;
+
+export const addProductToCart = (id: id) => (dispatch: Function) => {
   if (IS_NODE) {
     axios({
       method: "post",
@@ -36,7 +38,7 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
     .catch(error => console.log(error));
 };
 
-export const updateProductInCart = (id: number, qty: number) => (
+export const updateProductInCart = (id: id, qty: number) => (
   dispatch: Function
 ) => {
   if (IS_NODE) {
@@ -46,9 +48,12 @@ export const updateProductInCart = (id: number, qty: number) => (
       withCredentials: true
     })
       .then(response => {
+        const { cart, numberOfItems, subtotal } = response.data;
         dispatch(
           updateCart({
-            cart: response.data,
+            cart,
+            numberOfItems,
+            subtotal,
             id,
             qty
           })

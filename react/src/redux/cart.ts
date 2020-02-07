@@ -13,12 +13,10 @@ const cart = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const { cart } = action.payload;
+      const { cart, numberOfItems, subtotal } = action.payload;
       state.items = state.items.concat(getCartItem(cart));
-      state.numberOfItems += IS_NODE
-        ? action.payload.numberOfItems
-        : cart.numberOfItems;
-      state.subtotal += IS_NODE ? action.payload.subtotal : cart.subtotal;
+      state.numberOfItems = IS_NODE ? numberOfItems : cart.numberOfItems;
+      state.subtotal = IS_NODE ? subtotal : cart.subtotal;
     },
     clearCart: (state, action) => {
       state.items = [];

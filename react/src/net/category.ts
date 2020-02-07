@@ -1,5 +1,11 @@
 import axios from "axios";
-import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
+import {
+  client,
+  getId,
+  getNodePath,
+  getRestPath,
+  IS_NODE
+} from "../helpers/utils";
 import { RootState } from "../redux";
 import { receiveCategory } from "../redux/category";
 
@@ -24,16 +30,13 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
           categories,
           products
         } = response.data.categoryProducts;
-        const data = {
-          category: { ...category, id: category._id },
-          categories: categories.map((c: any) => ({
-            ...c,
-            id: c._id
-          })),
-          products: products.map((p: any) => ({ ...p, id: p._id }))
-        };
-
-        dispatch(receiveCategory(data));
+        dispatch(
+          receiveCategory({
+            category,
+            categories,
+            products
+          })
+        );
       })
       .catch(error => console.log(error));
   }
@@ -50,7 +53,10 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
 const shouldFetchCategory = (id: id, state: RootState) => {
   const { category } = state;
 
-  if (category.categories.length === 0 || Number(id) !== category.category.id) {
+  if (
+    category.categories.length === 0 ||
+    Number(id) !== getId(category.category)
+  ) {
     return true;
   }
 

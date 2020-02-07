@@ -1,3 +1,4 @@
+import { getId } from "../../helpers/utils";
 import { RootState } from "../../redux";
 import { receiveCategory } from "../../redux/category";
 
@@ -131,7 +132,10 @@ const fetchCategory = (id: number) => (dispatch: Function) => {
 const shouldFetchCategory = (id: number, state: RootState) => {
   const { category } = state;
 
-  if (category.categories.length === 0 || Number(id) !== category.category.id) {
+  if (
+    category.categories.length === 0 ||
+    Number(id) !== getId(category.category)
+  ) {
     return true;
   }
 

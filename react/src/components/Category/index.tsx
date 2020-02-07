@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Category.css";
+import { getId } from "../../helpers/utils";
 import { Category as CategoryState } from "../../interfaces/categories";
+import "./Category.css";
 
 type Props = {
   category: CategoryState;
@@ -10,10 +11,11 @@ type Props = {
 export default function Category(props: Props) {
   const { category } = props;
   const { name } = category;
+  const id = getId(category);
 
   return (
     <span className="categoryBox">
-      <Link to={`/category/${category.id}`}>
+      <Link to={`/category/${id}`}>
         <span className="categoryLabel" />
         <span className="categoryLabelText">{name}</span>
         <img

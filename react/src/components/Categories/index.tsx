@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { getId } from "../../helpers/utils";
 import {
   Categories as CategoriesState,
   CategoryState
@@ -26,7 +27,7 @@ function Categories(props: Props) {
   }
 
   const categoriesList = items.map((category: CategoryState) => (
-    <Category key={category.id} category={category} />
+    <Category key={getId(category)} category={category} />
   ));
 
   return (

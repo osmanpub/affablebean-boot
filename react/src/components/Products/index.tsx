@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { getId } from "../../helpers/utils";
 import { Cart } from "../../interfaces/cart";
 import {
   Category,
@@ -31,8 +32,8 @@ export function Products(props: Props) {
   const { cart, categories, clearPurchase, products } = props;
   const dispatch = useDispatch();
 
-  const addToCart = (id: number) => {
-    const update = cart.items.filter(item => item.product.id === id);
+  const addToCart = (id: number | string) => {
+    const update = cart.items.filter(item => getId(item.product) === id);
 
     clearPurchase();
     dispatch(
@@ -49,18 +50,18 @@ export function Products(props: Props) {
   const selectedCategory = props.category;
 
   const sidePanel = categories.map((category: CategoryState) => {
-    const key = category.id;
+    const id = getId(category);
     const name = category.name;
 
     if (name === selectedCategory.name) {
       return (
-        <SelectedCategory key={key}>
+        <SelectedCategory key={id}>
           <span className="categoryText">{name}</span>
         </SelectedCategory>
       );
     } else {
       return (
-        <Link key={key} to={`/category/${category.id}`}>
+        <Link key={id} to={`/category/${id}`}>
           <span className="categoryButton">
             <span className="categoryText" data-cy={`category-${name}`}>
               {name}
@@ -72,11 +73,12 @@ export function Products(props: Props) {
   });
 
   const productsList = products.map((product: ProductState, index: number) => {
+    const id = getId(product);
     const name = product.name;
     const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
     return (
-      <tr key={product.id} className={`${rowCol}`} data-cy={`product-${name}`}>
+      <tr key={id} className={`${rowCol}`} data-cy={`product-${name}`}>
         <td>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
         </td>
@@ -97,7 +99,7 @@ export function Products(props: Props) {
         <td>
           <button
             className="btn btn-primary btn-sm"
-            onClick={() => addToCart(product.id)}
+            onClick={() => addToCart(id)}
           >
             add
           </button>
