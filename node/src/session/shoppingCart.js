@@ -19,15 +19,17 @@ class ShoppingCart {
   }
 
   addItem(product) {
-    const productIndex = this.items.findIndex(
-      item => item.product.id === product.id
-    );
+    const id = product._id.toString();
+    const productIndex = this.items.findIndex(item => item.product._id === id);
+
+    const scItem = new ShoppingCartItem(product);
 
     if (productIndex > -1) {
       const item = this.items[productIndex];
-      item.incrementQuantity();
+      scItem.setQuantity(item.quantity + 1);
+      this.items[productIndex] = scItem;
     } else {
-      this.items.push(new ShoppingCartItem(product));
+      this.items.push(scItem);
     }
   }
 
@@ -36,9 +38,8 @@ class ShoppingCart {
       return;
     }
 
-    const productIndex = this.items.findIndex(
-      item => item.product.id === product.id
-    );
+    const id = product._id.toString();
+    const productIndex = this.items.findIndex(item => item.product._id === id);
 
     if (productIndex > -1) {
       const item = this.items[productIndex];
@@ -52,11 +53,11 @@ class ShoppingCart {
   }
 
   get numberOfItems() {
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return this.items.reduce((total, item) => total + item.quantity, 0);
   }
 
   get subtotal() {
-    return items.reduce(
+    return this.items.reduce(
       (total, item) => total + item.quantity * item.product.price,
       0
     );

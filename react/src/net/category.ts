@@ -17,7 +17,7 @@ export const fetchCategoryIfNeeded = (id: id) => (
 const fetchCategory = (id: id) => (dispatch: Function) => {
   if (IS_NODE) {
     return axios
-      .get(getNodePath("category/" + id))
+      .get(getNodePath(`category/${id}`))
       .then(response => {
         const {
           category,
@@ -39,7 +39,7 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
   }
 
   return client
-    .get(getRestPath("category/" + id), function(data: any) {
+    .get(getRestPath(`category/${id}`), function(data: any) {
       dispatch(receiveCategory(data.content));
     })
     .on("error", function(err: any) {

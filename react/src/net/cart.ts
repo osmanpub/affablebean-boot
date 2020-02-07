@@ -6,7 +6,7 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
   if (IS_NODE) {
     axios({
       method: "post",
-      url: getNodePath("addToCart/" + id),
+      url: getNodePath(`addToCart/${id}`),
       withCredentials: true
     })
       .then(response => {
@@ -22,7 +22,7 @@ export const addProductToCart = (id: string) => (dispatch: Function) => {
   }
 
   axios
-    .post(getPath("addToCart2?id=" + id))
+    .post(getPath(`addToCart2?id=${id}`))
     .then(response =>
       dispatch(
         addToCart({
@@ -37,22 +37,27 @@ export const updateProductInCart = (id: number, qty: number) => (
   dispatch: Function
 ) => {
   if (IS_NODE) {
-    axios
-      .post(getNodePath("updateCart/" + id + "/qty/") + qty)
-      .then(response =>
+    axios({
+      method: "post",
+      url: getNodePath(`updateCart/${id}/qty/${qty}`),
+      withCredentials: true
+    })
+      .then(response => {
         dispatch(
-          addToCart({
-            cart: response.data
+          updateCart({
+            cart: response.data,
+            id,
+            qty
           })
-        )
-      )
+        );
+      })
       .catch(error => console.log(error));
 
     return;
   }
 
   axios
-    .post(getPath("updateCart2?id=" + id + "&qty=" + qty))
+    .post(getPath(`updateCart2?id=${id}&qty=${qty}`))
     .then(response =>
       dispatch(
         updateCart({
@@ -62,7 +67,5 @@ export const updateProductInCart = (id: number, qty: number) => (
         })
       )
     )
-    .catch(function(error) {
-      console.log(error);
-    });
+    .catch(error => console.log(error));
 };

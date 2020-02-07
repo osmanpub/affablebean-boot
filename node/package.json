@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node --inspect ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=affablebean:* npm run devstart",
     "format": "prettier --write app.js 'src/**/*'"

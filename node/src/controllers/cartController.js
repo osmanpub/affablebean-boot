@@ -16,7 +16,6 @@ exports.addToCart = (req, res) =>
       cart.load(req.session.cart);
     }
 
-    // console.log(cart);
     cart.addItem(product);
 
     req.session.cart = cart;
@@ -29,11 +28,12 @@ exports.updateCart = (req, res) =>
       return;
     }
 
-    const cart = req.session.cart;
-
-    if (!cart) {
+    if (!req.session.cart) {
       return;
     }
+
+    const cart = new ShoppingCart();
+    cart.load(req.session.cart);
 
     cart.update(product, req.params.qty);
     req.session.cart = cart;

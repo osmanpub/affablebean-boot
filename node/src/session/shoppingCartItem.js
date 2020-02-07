@@ -19,14 +19,6 @@ class ShoppingCartItem {
   getTotal() {
     return this.quantity * this.product.price;
   }
-
-  incrementQuantity() {
-    this.quantity++;
-  }
-
-  decrementQuantity() {
-    this.quantity--;
-  }
 }
 
 module.exports = {
