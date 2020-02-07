@@ -16,7 +16,7 @@ exports.addToCart = (req, res) =>
       cart.load(req.session.cart);
     }
 
-    console.log(cart);
+    // console.log(cart);
     cart.addItem(product);
 
     req.session.cart = cart;

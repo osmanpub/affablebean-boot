@@ -28,8 +28,10 @@ app.use(
 );
 
 const sess = {
-  secret: "keyboard cat",
-  cookie: { secure: false, httpOnly: false, maxAge: 3600000 }
+  cookie: { secure: false, httpOnly: false, maxAge: 3600000 },
+  resave: false,
+  saveUninitialized: false,
+  secret: "keyboard cat"
 };
 
 if (app.get("env") === "production") {
