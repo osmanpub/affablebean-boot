@@ -15,7 +15,7 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
         const { cart, numberOfItems, subtotal } = response.data;
         dispatch(
           addToCart({
-            cart,
+            items: cart,
             numberOfItems,
             subtotal
           })
@@ -31,13 +31,16 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
     url: getPath(`addToCart2?id=${id}`),
     withCredentials: true
   })
-    .then(response =>
+    .then(response => {
+      const { items, numberOfItems, subtotal } = response.data;
       dispatch(
         addToCart({
-          cart: response.data.cart
+          items,
+          numberOfItems,
+          subtotal
         })
-      )
-    )
+      );
+    })
     .catch(error => console.log(error));
 };
 
@@ -75,8 +78,11 @@ export const updateProductInCart = (id: id, qty: number) => (
     return;
   }
 
-  axios
-    .post(getPath(`updateCart2?id=${id}&qty=${qty}`))
+  axios({
+    method: "post",
+    url: getPath(`updateCart2?id=${id}&qty=${qty}`),
+    withCredentials: true
+  })
     .then(response =>
       dispatch(
         updateCart({
