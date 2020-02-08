@@ -234,6 +234,7 @@ public class WebController implements WebMvcConfigurer {
 		return cart;
 	}
 
+	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@GetMapping({ "/viewCart" })
 	public String viewCart(@ModelAttribute("cart") ShoppingCart cart, Model model,
 			@RequestParam(name = "clear", required = true) Boolean clear) {

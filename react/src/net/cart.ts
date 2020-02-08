@@ -46,8 +46,10 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
 
 export const emptyCart = () => (dispatch: Function) => {
   axios({
-    method: "post",
-    url: IS_NODE ? getNodePath("clearCart") : getPath("clearCart"),
+    method: "get",
+    url: IS_NODE
+      ? getNodePath("viewCart/true")
+      : getPath("viewCart?clear=true"),
     withCredentials: true
   })
     .then(() => dispatch(clearCart({})))
