@@ -6,10 +6,6 @@ class ShoppingCart {
     this.items = [];
   }
 
-  getItems() {
-    return this.items;
-  }
-
   load(cart) {
     if (!cart || !cart.items || !Array.isArray(cart.items)) {
       return;

@@ -1,7 +1,10 @@
 package com.affablebean.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Basic;
@@ -64,7 +67,9 @@ public class Category implements Serializable {
 	}
 
 	public Collection<Product> getProductCollection() {
-		return productCollection;
+		List<Product> products = new ArrayList<>(productCollection);
+		products.sort(Comparator.comparing(Product::getName));
+		return products;
 	}
 
 	public void setProductCollection(Collection<Product> productCollection) {

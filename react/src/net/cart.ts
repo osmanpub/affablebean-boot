@@ -5,30 +5,11 @@ import { addToCart, clearCart, updateCart } from "../redux/cart";
 type id = number | string;
 
 export const addProductToCart = (id: id) => (dispatch: Function) => {
-  if (IS_NODE) {
-    axios({
-      method: "post",
-      url: getNodePath(`addToCart/${id}`),
-      withCredentials: true
-    })
-      .then(response => {
-        const { cart, numberOfItems, subtotal } = response.data;
-        dispatch(
-          addToCart({
-            items: cart,
-            numberOfItems,
-            subtotal
-          })
-        );
-      })
-      .catch(error => console.log(error));
-
-    return;
-  }
-
   axios({
     method: "post",
-    url: getPath(`addToCart2?id=${id}`),
+    url: IS_NODE
+      ? getNodePath(`addToCart/${id}`)
+      : getPath(`addToCart2?id=${id}`),
     withCredentials: true
   })
     .then(response => {
@@ -47,9 +28,7 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
 export const emptyCart = () => (dispatch: Function) => {
   axios({
     method: "get",
-    url: IS_NODE
-      ? getNodePath("viewCart/true")
-      : getPath("viewCart?clear=true"),
+    url: IS_NODE ? getNodePath("clearCart") : getPath("viewCart?clear=true"),
     withCredentials: true
   })
     .then(() => dispatch(clearCart({})))
@@ -59,38 +38,22 @@ export const emptyCart = () => (dispatch: Function) => {
 export const updateProductInCart = (id: id, qty: number) => (
   dispatch: Function
 ) => {
-  if (IS_NODE) {
-    axios({
-      method: "post",
-      url: getNodePath(`updateCart/${id}/qty/${qty}`),
-      withCredentials: true
-    })
-      .then(response => {
-        const { cart, numberOfItems, subtotal } = response.data;
-        dispatch(
-          updateCart({
-            cart,
-            numberOfItems,
-            subtotal
-          })
-        );
-      })
-      .catch(error => console.log(error));
-
-    return;
-  }
-
   axios({
     method: "post",
-    url: getPath(`updateCart2?id=${id}&qty=${qty}`),
+    url: IS_NODE
+      ? getNodePath(`updateCart/${id}/qty/${qty}`)
+      : getPath(`updateCart2?id=${id}&qty=${qty}`),
     withCredentials: true
   })
-    .then(response =>
+    .then(response => {
+      const { items, numberOfItems, subtotal } = response.data;
       dispatch(
         updateCart({
-          cart: response.data
+          items,
+          numberOfItems,
+          subtotal
         })
-      )
-    )
+      );
+    })
     .catch(error => console.log(error));
 };

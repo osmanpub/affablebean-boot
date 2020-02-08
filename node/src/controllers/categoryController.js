@@ -3,18 +3,23 @@ const Category = require("../models/category");
 const Product = require("../models/product");
 
 exports.categoriesList = (req, res) =>
-  Category.find().exec((err, categories) => {
-    if (err) {
-      return;
-    }
+  Category.find()
+    .sort("name")
+    .exec((err, categories) => {
+      if (err) {
+        return;
+      }
 
-    res.json({ categories });
-  });
+      res.json({ categories });
+    });
 
 exports.categoryProducts = (req, res) =>
   async.parallel(
     {
-      categories: callback => Category.find().exec(callback),
+      categories: callback =>
+        Category.find()
+          .sort("name")
+          .exec(callback),
       category: callback => Category.findById(req.params.id).exec(callback),
       products: callback =>
         Product.find(
@@ -22,6 +27,7 @@ exports.categoryProducts = (req, res) =>
           "name price description category"
         )
           .populate("category")
+          .sort("name")
           .exec(callback)
     },
     (err, categoryProducts) => {

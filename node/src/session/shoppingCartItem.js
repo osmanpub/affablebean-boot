@@ -5,18 +5,6 @@ class ShoppingCartItem {
     this.total = product.price;
   }
 
-  getProduct() {
-    return this.product;
-  }
-
-  getQuantity() {
-    return this.quantity;
-  }
-
-  getTotal() {
-    return this.total;
-  }
-
   setQuantity(quantity) {
     this.quantity = quantity;
     this.total = quantity * this.product.price;

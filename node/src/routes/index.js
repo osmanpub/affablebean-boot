@@ -6,6 +6,8 @@ const categoryController = require("../controllers/categoryController");
 
 router.post("/addToCart/:id", cartController.addToCart);
 
+router.get("/clearCart", cartController.clearCart);
+
 router.post("/updateToCart/:id/qty/:qty", cartController.updateCart);
 
 router.get("/categories", categoryController.categoriesList);

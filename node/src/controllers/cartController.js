@@ -18,11 +18,29 @@ exports.addToCart = (req, res) =>
     cart.addItem(product);
     req.session.cart = cart;
     res.json({
-      cart,
+      items: cart.items,
       numberOfItems: cart.numberOfItems,
       subtotal: cart.subtotal
     });
   });
+
+exports.clearCart = (req, res) => {
+  if (!req.session.cart) {
+    res.json({
+      success: false
+    });
+    return;
+  }
+
+  const cart = new ShoppingCart();
+  cart.load(req.session.cart);
+  cart.clear();
+
+  req.session.cart = cart;
+  res.json({
+    success: true
+  });
+};
 
 exports.updateCart = (req, res) =>
   Product.findById(req.params.id).exec((err, product) => {
@@ -36,7 +54,7 @@ exports.updateCart = (req, res) =>
     cart.update(product, req.params.qty);
     req.session.cart = cart;
     res.json({
-      cart,
+      items: cart.items,
       numberOfItems: cart.numberOfItems,
       subtotal: cart.subtotal
     });
