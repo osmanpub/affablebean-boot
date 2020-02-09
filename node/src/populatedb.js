@@ -2,6 +2,7 @@
 
 const async = require("async");
 const Category = require("./models/category");
+const MsgSubject = require("./models/msgSubject");
 const Product = require("./models/product");
 
 const mongoose = require("mongoose");
@@ -252,7 +253,35 @@ function createProducts(cb) {
   );
 }
 
-async.series([createCategories, createProducts], err => {
+function subjectCreate(name, cb) {
+  const subject = new MsgSubject({ name });
+
+  subject.save(function(err) {
+    if (err) {
+      cb(err, null);
+      return;
+    }
+    console.log("New MsgSubject: " + subject);
+    cb(null, subject);
+  });
+}
+
+function createSubjects(cb) {
+  async.series(
+    [
+      callback => subjectCreate("Brands or product", callback),
+      callback => subjectCreate("Investor relations", callback),
+      callback => subjectCreate("Sustainability", callback),
+      callback => subjectCreate("The Company", callback),
+      callback => subjectCreate("Media enquiry", callback),
+      callback => subjectCreate("Website feedback", callback),
+      callback => subjectCreate("Other", callback)
+    ],
+    cb
+  );
+}
+
+async.series([createCategories, createProducts, createSubjects], err => {
   mongoose.connection.close();
 
   if (err) {

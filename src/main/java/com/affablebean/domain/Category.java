@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,6 +39,7 @@ public class Category implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "name")
 	@NotBlank
+	@Size(min = 3, max = 64)
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

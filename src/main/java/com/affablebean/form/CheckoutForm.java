@@ -6,25 +6,25 @@ import javax.validation.constraints.Size;
 
 public class CheckoutForm {
 
-	@NotNull
 	@Email
-	@Size(min = 8, max = 45)
+	@NotNull
+	@Size(min = 8, max = 64)
 	private String email;
 
 	@NotNull
-	@Size(min = 3, max = 45)
+	@Size(min = 3, max = 64)
 	private String name;
 
 	@NotNull
-	@Size(min = 8, max = 30)
+	@Size(min = 8, max = 32)
 	private String phone;
 
 	@NotNull
-	@Size(min = 8, max = 45)
+	@Size(min = 8, max = 256)
 	private String address;
 
 	@NotNull
-	@Size(min = 1, max = 2)
+	@Size(min = 2, max = 2)
 	private String cityRegion = "NY"; // hard coded for now :(
 
 	@NotNull

@@ -14,10 +14,10 @@ DROP TABLE IF EXISTS `affablebean`.`customer` ;
 
 CREATE  TABLE IF NOT EXISTS `affablebean`.`customer` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(45) NOT NULL ,
-  `phone` VARCHAR(45) NOT NULL ,
-  `address` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(64) NOT NULL ,
+  `email` VARCHAR(32) NOT NULL ,
+  `phone` VARCHAR(32) NOT NULL ,
+  `address` VARCHAR(256) NOT NULL ,
   `city_region` VARCHAR(2) NOT NULL ,
   `cc_number` VARCHAR(19) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `affablebean`.`category` ;
 
 CREATE  TABLE IF NOT EXISTS `affablebean`.`category` (
   `id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(64) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'contains product categories, e.g., dairy, meats, etc.';
@@ -67,7 +67,7 @@ DROP TABLE IF EXISTS `affablebean`.`product` ;
 
 CREATE  TABLE IF NOT EXISTS `affablebean`.`product` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(64) NOT NULL ,
   `price` DECIMAL(5,2) NOT NULL ,
 
   -- Delete after description is moved to resource bundle
@@ -119,7 +119,7 @@ DROP TABLE IF EXISTS `affablebean`.`msg_subject` ;
 
 CREATE  TABLE IF NOT EXISTS `affablebean`.`msg_subject` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(64) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'feedback form subject list';
@@ -129,9 +129,9 @@ DROP TABLE IF EXISTS `affablebean`.`msg_feedback` ;
 
 CREATE  TABLE IF NOT EXISTS `affablebean`.`msg_feedback` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(45) NOT NULL ,
-  `msg` VARCHAR(1000) NOT NULL ,
+  `name` VARCHAR(64) NOT NULL ,
+  `email` VARCHAR(32) NOT NULL ,
+  `msg` VARCHAR(1024) NOT NULL ,
   `subject_id` INT UNSIGNED,
   PRIMARY KEY (`id`) ,
   CONSTRAINT `fk_msg_subject`

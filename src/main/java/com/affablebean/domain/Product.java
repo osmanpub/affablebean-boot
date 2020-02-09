@@ -45,9 +45,9 @@ public class Product implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Size(max = 255)
 	@Column(name = "description")
 	@NotBlank
+	@Size(min = 3, max = 256)
 	private String description;
 
 	@Basic(optional = false)
@@ -59,6 +59,7 @@ public class Product implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "name")
 	@NotBlank
+	@Size(min = 3, max = 64)
 	private String name;
 
 	@Basic(optional = false)

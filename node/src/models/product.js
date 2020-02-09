@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-  name: { type: String, required: true, max: 64 },
+  name: { type: String, required: true, min: 3, max: 64 },
   price: { type: Number, required: true },
-  description: { type: String, required: true, max: 256 },
+  description: { type: String, required: true, min: 3, max: 256 },
   lastUpdate: { type: Date, default: Date.now() },
   category: { type: Schema.Types.ObjectId, ref: "Category" }
 });

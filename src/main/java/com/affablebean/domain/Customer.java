@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,6 +38,7 @@ public class Customer implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "address")
 	@NotBlank
+	@Size(min = 8, max = 256)
 	private String address;
 
 	@Basic(optional = false)
@@ -48,22 +50,26 @@ public class Customer implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "city_region")
 	@NotBlank
+	@Size(min = 2, max = 2)
 	private String cityRegion;
 
 	@Basic(optional = false)
 	@Column(name = "email")
 	@Email
 	@NotBlank
+	@Size(min = 8, max = 32)	
 	private String email;
 
 	@Basic(optional = false)
 	@Column(name = "name")
 	@NotBlank
+	@Size(min = 3, max = 64)	
 	private String name;
 
 	@Basic(optional = false)
 	@Column(name = "phone")
 	@NotBlank
+	@Size(min = 8, max = 32)	
 	private String phone;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")

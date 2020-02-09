@@ -40,22 +40,22 @@ public class MsgFeedback implements Serializable {
 	// message="Invalid email")//if the field contains email address consider using
 	// this annotation to enforce field validation
 	@Basic(optional = false)
+	@Column(name = "email")
 	@Email
 	@NotNull
-	@Size(min = 1, max = 45)
-	@Column(name = "email")
+	@Size(min = 8, max = 32)
 	private String email;
 
 	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 1000)
 	@Column(name = "msg")
+	@NotNull
+	@Size(min = 8, max = 1024)
 	private String msg;
 
 	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 45)
 	@Column(name = "name")
+	@NotNull
+	@Size(min = 3, max = 64)
 	private String name;
 
 	@JoinColumn(name = "subject_id", referencedColumnName = "id")

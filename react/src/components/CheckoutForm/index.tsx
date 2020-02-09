@@ -20,7 +20,7 @@ function CheckoutForm(props: Props) {
   const { cart } = props;
   const [state, setState] = useState({
     address: "",
-    creditcard: "",
+    creditCard: "",
     email: "",
     name: "",
     phone: ""
@@ -51,7 +51,7 @@ function CheckoutForm(props: Props) {
     event.preventDefault();
     let validForm = true;
 
-    if (!validateField(addressInputRef, addressErrorRef, 8, 45)) {
+    if (!validateField(addressInputRef, addressErrorRef, 8, 256)) {
       validForm = false;
     }
 
@@ -59,25 +59,20 @@ function CheckoutForm(props: Props) {
       validForm = false;
     }
 
-    if (!validateField(emailInputRef, emailErrorRef, 8, 45)) {
+    if (!validateField(emailInputRef, emailErrorRef, 8, 32)) {
       validForm = false;
     }
 
-    if (!validateField(nameInputRef, nameErrorRef, 8, 45)) {
+    if (!validateField(nameInputRef, nameErrorRef, 3, 64)) {
       validForm = false;
     }
 
-    if (!validateField(phoneInputRef, phoneErrorRef, 8, 30)) {
+    if (!validateField(phoneInputRef, phoneErrorRef, 8, 32)) {
       validForm = false;
     }
 
     if (validForm) {
-      dispatch(
-        purchaseOrder({
-          cart: cart,
-          form: state
-        })
-      );
+      dispatch(purchaseOrder({ ...state }));
     }
   };
 
@@ -193,7 +188,7 @@ function CheckoutForm(props: Props) {
               placeholder="At least 16 chars and no more than 19 chars"
               size={31}
               onChange={handleChange}
-              value={state.creditcard}
+              value={state.creditCard}
             />
           </div>
           <div className="formError" ref={ccErrorRef}>

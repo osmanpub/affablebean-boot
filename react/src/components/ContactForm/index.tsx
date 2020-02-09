@@ -42,15 +42,15 @@ function ContactForm(props: Props) {
     event.preventDefault();
     let validForm = true;
 
-    if (!validateField(emailInputRef, emailErrorRef, 8, 45)) {
+    if (!validateField(emailInputRef, emailErrorRef, 8, 32)) {
       validForm = false;
     }
 
-    if (!validateField(msgInputRef, msgErrorRef, 8, 256)) {
+    if (!validateField(msgInputRef, msgErrorRef, 8, 1024)) {
       validForm = false;
     }
 
-    if (!validateField(nameInputRef, nameErrorRef, 8, 45)) {
+    if (!validateField(nameInputRef, nameErrorRef, 3, 64)) {
       validForm = false;
     }
 
@@ -59,16 +59,7 @@ function ContactForm(props: Props) {
     }
 
     if (validForm) {
-      sendFeedback({
-        // @ts-ignore
-        email: emailInputRef.current.value,
-        // @ts-ignore
-        msg: msgInputRef.current.value,
-        // @ts-ignore
-        name: nameInputRef.current.value,
-        // @ts-ignore
-        subjectId: subjectInputRef.current.value
-      });
+      sendFeedback({ ...state });
 
       // @ts-ignore
       emailInputRef.current.value = "";

@@ -15,15 +15,15 @@ public class ContactForm {
 
 	@NotNull
 	@Email
-	@Size(min = 8, max = 45)
+	@Size(min = 8, max = 64)
 	private String email;
 
 	@NotNull
-	@Size(min = 8, max = 1000)
+	@Size(min = 8, max = 1024)
 	private String msg;
 
 	@NotNull
-	@Size(min = 3, max = 45)
+	@Size(min = 3, max = 64)
 	private String name;
 
 	public Integer getSubjectId() {

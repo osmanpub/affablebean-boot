@@ -16,10 +16,11 @@ exports.addToCart = (req, res) =>
     }
 
     cart.addItem(product);
+
     req.session.cart = cart;
     res.json({
       items: cart.items,
-      numberOfItems: cart.numberOfItems,
+      numberOfItems: Number(cart.numberOfItems),
       subtotal: cart.subtotal
     });
   });
@@ -33,6 +34,7 @@ exports.clearCart = (req, res) => {
   }
 
   const cart = new ShoppingCart();
+
   cart.load(req.session.cart);
   cart.clear();
 
@@ -49,13 +51,14 @@ exports.updateCart = (req, res) =>
     }
 
     const cart = new ShoppingCart();
-    cart.load(req.session.cart);
 
+    cart.load(req.session.cart);
     cart.update(product, req.params.qty);
+
     req.session.cart = cart;
     res.json({
       items: cart.items,
-      numberOfItems: cart.numberOfItems,
+      numberOfItems: Number(cart.numberOfItems),
       subtotal: cart.subtotal
     });
   });
