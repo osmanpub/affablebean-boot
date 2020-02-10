@@ -80,49 +80,45 @@ exports.purchaseOrder = [
           return next(err);
         }
 
+        const orderedProducts = [];
+        const products = [];
+
         cart.items.forEach(item => {
           Product.findById(item.product._id).exec((err, product) => {
             if (err) {
               return;
             }
 
-            const orderedItem = new OrderedProduct({
+            products.push(product);
+
+            const orderedProduct = new OrderedProduct({
               quantity: item.quantity,
               customerOrder,
               product
             });
 
-            orderedItem.save(err => {
+            orderedProduct.save(err => {
               if (err) {
                 return next(err);
               }
+
+              orderedProducts.push(orderedProduct);
             });
           });
         });
 
-        // List<Product> products = new ArrayList<>();
-
-        // orderedProducts.forEach(op -> {
-        //   Optional<Product> p = productRepository.findById(op.getOrderedProductPK().getProductId());
-
-        //   if (p.isPresent()) {
-        //     products.add(p.get());
-        //   }
-        // });
-
-        // // add each item to orderMap
-        // Map<String, Object> orderMap = new HashMap<>();
-
-        // orderMap.put("orderRecord", customerOrder);
-        // orderMap.put("customer", customer);
-        // orderMap.put("orderedProducts", orderedProducts);
-        // orderMap.put("products", products);
-
         cart.clear();
         req.session.cart = null;
 
+        const orderMap = new Map();
+
+        orderMap.set("orderRecord", customerOrder);
+        orderMap.set("customer", customer);
+        orderMap.set("orderedProducts", orderedProducts);
+        orderMap.set("products", products);
+
         res.json({
-          success: true
+          orderMap
         });
       });
     });

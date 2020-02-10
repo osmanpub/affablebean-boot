@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import React, { lazy, Suspense } from "react";
+import { positions, Provider as AlertProvider, transitions } from "react-alert";
+// @ts-ignore
+import AlertTemplate from "react-alert-template-basic";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -13,14 +16,21 @@ const Contact = lazy(() => import("./screens/Contact"));
 const Home = lazy(() => import("./screens/Home"));
 const Privacy = lazy(() => import("./screens/Privacy"));
 
+const alertOptions = {
+  position: positions.MIDDLE,
+  offset: "30px",
+  transition: transitions.SCALE
+};
+
 const store = configureStore({
   reducer: rootReducer
 });
 
 render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <Provider store={store}>
+  // <React.StrictMode>
+  <ErrorBoundary>
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
         <Router>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
@@ -33,9 +43,10 @@ render(
             </Switch>
           </Suspense>
         </Router>
-      </Provider>
-    </ErrorBoundary>
-  </React.StrictMode>,
+      </AlertProvider>
+    </Provider>
+  </ErrorBoundary>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getPath } from "../helpers/utils";
+import { goHome } from "../redux/ui";
 
-export const sendFeedback = (data: any) => {
+export const sendFeedback = (data: any) => (dispatch: Function) => {
   axios({
     method: "post",
     url: getPath("contact2"),
@@ -10,6 +11,8 @@ export const sendFeedback = (data: any) => {
     },
     data: JSON.stringify(data)
   })
-    .then(response => response.data)
+    .then(response => {
+      dispatch(goHome({}));
+    })
     .catch(error => console.log(error));
 };

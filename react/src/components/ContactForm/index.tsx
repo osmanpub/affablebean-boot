@@ -1,23 +1,31 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { types, useAlert } from "react-alert";
+import { connect, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { validateField } from "../../helpers/utils";
 import { Subjects, SubjectState } from "../../interfaces/subjects";
 import { sendFeedback } from "../../net/contact";
-import { validateField } from "../../helpers/utils";
 import { RootState } from "../../redux";
+import { goHome } from "../../redux/ui";
 
 type Props = {
+  goHome: Function;
+  home: boolean;
   subjects: Subjects;
 };
 
 function ContactForm(props: Props) {
-  const { subjects } = props;
+  const { goHome, home, subjects } = props;
   const [state, setState] = useState({
     email: "",
     msg: "",
     name: "",
     subjectId: ""
   });
+
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const emailErrorRef = useRef(null);
   const emailInputRef = useRef(null);
@@ -59,7 +67,10 @@ function ContactForm(props: Props) {
     }
 
     if (validForm) {
-      sendFeedback({ ...state });
+      dispatch(
+        // @ts-ignore
+        sendFeedback({ ...state, subjectId: subjectInputRef.current.value })
+      );
 
       // @ts-ignore
       emailInputRef.current.value = "";
@@ -77,6 +88,15 @@ function ContactForm(props: Props) {
       {subject.name}
     </option>
   ));
+
+  if (home) {
+    goHome(false);
+    alert.show("Message sent successfully!", {
+      onClose: () => history.push("/"),
+      timeout: 3000,
+      type: types.SUCCESS
+    });
+  }
 
   return (
     <div className="singleColumn">
@@ -210,7 +230,12 @@ function ContactForm(props: Props) {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  subjects: state.subjects
+  subjects: state.subjects,
+  home: state.ui.home
 });
 
-export default connect(mapStateToProps)(ContactForm);
+const mapDispatchToProps = {
+  goHome
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

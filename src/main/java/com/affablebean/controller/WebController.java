@@ -185,6 +185,7 @@ public class WebController implements WebMvcConfigurer {
 			return null;
 		}
 
+		cart.clear();
 		return orderManager.getOrderDetails(orderId);
 	}
 

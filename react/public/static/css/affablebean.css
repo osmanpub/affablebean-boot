@@ -117,3 +117,9 @@ label.error {
   display: none;
   font-weight: bold;
 }
+
+.toast {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+}

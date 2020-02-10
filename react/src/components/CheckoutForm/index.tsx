@@ -183,7 +183,7 @@ function CheckoutForm(props: Props) {
               ref={ccInputRef}
               type="text"
               className="form-control"
-              name="creditcard"
+              name="creditCard"
               maxLength={45}
               placeholder="At least 16 chars and no more than 19 chars"
               size={31}
