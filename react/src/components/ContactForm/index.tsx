@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { types, useAlert } from "react-alert";
 import { connect, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { validateField } from "../../helpers/utils";
+import { getId, IS_NODE, validateField } from "../../helpers/utils";
 import { Subjects, SubjectState } from "../../interfaces/subjects";
 import { sendFeedback } from "../../net/contact";
 import { RootState } from "../../redux";
@@ -62,7 +62,7 @@ function ContactForm(props: Props) {
       validForm = false;
     }
 
-    if (!validateField(subjectInputRef, subjectErrorRef, 1, 1)) {
+    if (!IS_NODE && !validateField(subjectInputRef, subjectErrorRef, 1, 1)) {
       validForm = false;
     }
 
@@ -83,11 +83,14 @@ function ContactForm(props: Props) {
     }
   };
 
-  const subjectsList = subjects.items.map((subject: SubjectState) => (
-    <option key={subject.id} value={subject.id}>
-      {subject.name}
-    </option>
-  ));
+  const subjectsList = subjects.items.map((subject: SubjectState) => {
+    const id = getId(subject);
+    return (
+      <option key={id} value={id}>
+        {subject.name}
+      </option>
+    );
+  });
 
   if (home) {
     goHome(false);

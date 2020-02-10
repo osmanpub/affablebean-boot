@@ -19,7 +19,7 @@ exports.purchaseOrder = [
     .isLength({ min: 8, max: 64 })
     .trim()
     .withMessage("Email must be specified.")
-    .isAlphanumeric()
+    .isEmail()
     .withMessage("Email must be a valid email address."),
   body("phone")
     .isLength({ min: 8, max: 64 })
@@ -46,10 +46,7 @@ exports.purchaseOrder = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty() || !req.session.cart) {
-      res.json({
-        success: false
-      });
-      return;
+      return next(err);
     }
 
     const { name, email, phone, address, creditCard } = req.body;

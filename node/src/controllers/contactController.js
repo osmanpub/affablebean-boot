@@ -12,9 +12,8 @@ exports.contact = [
   body("email")
     .isLength({ min: 8, max: 32 })
     .trim()
-    .withMessage("Email must be specified.")
-    .isAlphanumeric()
-    .withMessage("Email must be a valid email address."),
+    .isEmail()
+    .withMessage("Email must be specified."),
   body("msg")
     .isLength({ min: 8, max: 1024 })
     .trim()
@@ -33,14 +32,12 @@ exports.contact = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-
+    console.log(errors);
     if (!errors.isEmpty()) {
-      res.json({
-        success: false
-      });
-      return;
+      return next(err);
     }
 
+    console.log(req.body);
     const { name, email, msg, subjectId } = req.body;
 
     MsgSubject.findById(subjectId).exec((err, subject) => {
