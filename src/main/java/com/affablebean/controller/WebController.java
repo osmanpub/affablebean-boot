@@ -117,8 +117,8 @@ public class WebController implements WebMvcConfigurer {
 	@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600000)
 	@PostMapping({ "/contact2" })
 	@ResponseBody
-	public String contact(@RequestBody ContactForm contactForm) {
-		return saveFeedback(contactForm);
+	public boolean contact(@RequestBody ContactForm contactForm) {
+		return saveFeedback(contactForm).contains("index");
 	}
 
 	@PostMapping({ "/feedback" })

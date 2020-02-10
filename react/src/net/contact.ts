@@ -1,18 +1,21 @@
 import axios from "axios";
-import { getPath } from "../helpers/utils";
+import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
 import { goHome } from "../redux/ui";
 
 export const sendFeedback = (data: any) => (dispatch: Function) => {
   axios({
     method: "post",
-    url: getPath("contact2"),
+    url: IS_NODE ? getNodePath("contact") : getPath("contact2"),
     headers: {
       "Content-Type": "application/json"
     },
-    data: JSON.stringify(data)
+    data: JSON.stringify(data),
+    withCredentials: true
   })
     .then(response => {
-      dispatch(goHome({}));
+      if (response.data === true) {
+        dispatch(goHome({}));
+      }
     })
     .catch(error => console.log(error));
 };

@@ -1,4 +1,5 @@
-import { client, getRestPath } from "../helpers/utils";
+import axios from "axios";
+import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
 import { receiveSubjects } from "../redux/subjects";
 
@@ -12,6 +13,15 @@ export const fetchSubjectsIfNeeded = () => (
 };
 
 const fetchSubjects = () => (dispatch: Function) => {
+  if (IS_NODE) {
+    return axios
+      .get(getNodePath("subjects"))
+      .then(response => {
+        dispatch(receiveSubjects(response.data.subjects));
+      })
+      .catch(error => console.log(error));
+  }
+
   return client
     .get(getRestPath("subjects"), function(data: any) {
       dispatch(receiveSubjects(data._embedded.msgSubjectList));
