@@ -46,10 +46,10 @@ public class OrderManager {
 	public int placeOrder(ShoppingCart cart, String surcharge, CheckoutForm checkoutForm) {
 
 		Customer customer = addCustomer(checkoutForm);
-		CustomerOrder co = addOrder(customer, cart, surcharge);
+		CustomerOrder order = addOrder(customer, cart, surcharge);
 
-		addOrderedItems(co, cart);
-		return co.getId();
+		addOrderedItems(order, cart);
+		return order.getId();
 	}
 
 	public Map<String, Object> getOrderDetails(int orderId) {
