@@ -14,12 +14,12 @@ exports.purchaseOrder = [
     .trim()
     .isLength({ min: 3, max: 64 })
     .withMessage("Name must be specified.")
-    .isAlphanumeric()
+    .matches(/^[\w\s]+$/i)
     .withMessage("Name has non-alphanumeric characters."),
   body("email")
     .escape()
     .trim()
-    .isLength({ min: 8, max: 64 })
+    .isLength({ min: 8, max: 32 })
     .withMessage("Email must be specified.")
     .normalizeEmail()
     .isEmail()
@@ -27,12 +27,12 @@ exports.purchaseOrder = [
   body("phone")
     .escape()
     .trim()
-    .isLength({ min: 8, max: 64 })
+    .isLength({ min: 8, max: 32 })
     .withMessage("Phone must be specified."),
   body("address")
     .escape()
     .trim()
-    .isLength({ min: 8, max: 64 })
+    .isLength({ min: 8, max: 256 })
     .withMessage("Address must be specified."),
   body("creditCard")
     .escape()
@@ -44,11 +44,10 @@ exports.purchaseOrder = [
 
   (req, res, next) => {
     const errors = validationResult(req);
-    // console.log(errors)
 
     if (!errors.isEmpty()) {
       res.json({
-        errors,
+        errors: errors.errors,
         success: false
       });
       return;
@@ -78,7 +77,7 @@ exports.purchaseOrder = [
 
       const customerOrder = new CustomerOrder({
         amount: (cart.subtotal + surcharge).toFixed(2),
-        customer
+        customer: customer._id
       });
 
       customerOrder.save(err => {
@@ -92,7 +91,7 @@ exports.purchaseOrder = [
         cart.items.forEach(item => {
           Product.findById(item.product._id).exec((err, product) => {
             if (err) {
-              return;
+              return next(err);
             }
 
             products.push(product);
@@ -100,7 +99,7 @@ exports.purchaseOrder = [
             const orderedProduct = new OrderedProduct({
               quantity: item.quantity,
               customerOrder,
-              product
+              product: product._id
             });
 
             orderedProduct.save(err => {
@@ -113,18 +112,20 @@ exports.purchaseOrder = [
           });
         });
 
+        console.log(products);
+        console.log(orderedProducts);
+
         cart.clear();
         req.session.cart = null;
 
-        const orderMap = new Map();
-
-        orderMap.set("orderRecord", customerOrder);
-        orderMap.set("customer", customer);
-        orderMap.set("orderedProducts", orderedProducts);
-        orderMap.set("products", products);
-
         res.json({
-          orderMap
+          success: true,
+          order: {
+            customer,
+            orderedProducts,
+            orderRecord: customerOrder,
+            products
+          }
         });
       });
     });

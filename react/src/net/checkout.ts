@@ -2,6 +2,7 @@ import axios from "axios";
 import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
 import { clearCart } from "../redux/cart";
 import { orderPurchase } from "../redux/purchase";
+import { setFormErrors } from "../redux/ui";
 
 export const purchaseOrder = (data: any) => (dispatch: Function) => {
   axios({
@@ -14,12 +15,31 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
     withCredentials: true
   })
     .then(response => {
-      dispatch(clearCart({}));
-      dispatch(
-        orderPurchase({
-          order: response.data
-        })
-      );
+      const { data } = response;
+
+      if (!data) {
+        return;
+      }
+
+      if (data === true) {
+        // java
+        dispatch(clearCart({}));
+        dispatch(
+          orderPurchase({
+            order: response.data
+          })
+        );
+      } else if (data.success === true) {
+        // node
+        dispatch(clearCart({}));
+        dispatch(
+          orderPurchase({
+            order: response.data.order
+          })
+        );
+      } else if (data.success === false) {
+        dispatch(setFormErrors(data.errors));
+      }
     })
     .catch(error => console.log(error));
 };

@@ -1,9 +1,12 @@
-import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
+import React from "react";
+import { types, useAlert } from "react-alert";
+import { useForm } from "react-hook-form";
 import { connect, useDispatch } from "react-redux";
-import { validateField } from "../../helpers/utils";
 import { Cart } from "../../interfaces/cart";
+import { FormErrors } from "../../interfaces/ui";
 import { purchaseOrder } from "../../net/checkout";
 import { RootState } from "../../redux";
+import { setFormErrors } from "../../redux/ui";
 import "./CheckoutForm.css";
 import {
   InfoBox,
@@ -14,67 +17,47 @@ import {
 
 type Props = {
   cart: Cart;
+  formErrors: Array<FormErrors>;
+  setFormErrors: Function;
+};
+
+type FormData = {
+  address: string;
+  creditCard: string;
+  email: string;
+  name: string;
+  phone: string;
 };
 
 function CheckoutForm(props: Props) {
-  const { cart } = props;
-  const [state, setState] = useState({
-    address: "",
-    creditCard: "",
-    email: "",
-    name: "",
-    phone: ""
-  });
+  const { cart, formErrors, setFormErrors } = props;
+  const alert = useAlert();
   const dispatch = useDispatch();
+  const { register, handleSubmit, errors } = useForm<FormData>();
 
-  const addressErrorRef = useRef(null);
-  const addressInputRef = useRef(null);
-
-  const ccErrorRef = useRef(null);
-  const ccInputRef = useRef(null);
-
-  const emailErrorRef = useRef(null);
-  const emailInputRef = useRef(null);
-
-  const nameErrorRef = useRef(null);
-  const nameInputRef = useRef(null);
-
-  const phoneErrorRef = useRef(null);
-  const phoneInputRef = useRef(null);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const input = event.target;
-    setState({ ...state, [input.name]: input.value });
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    let validForm = true;
-
-    if (!validateField(addressInputRef, addressErrorRef, 8, 256)) {
-      validForm = false;
+  const onSubmit = handleSubmit(
+    ({ address, creditCard, email, name, phone }) => {
+      dispatch(purchaseOrder({ address, creditCard, email, name, phone }));
     }
+  );
 
-    if (!validateField(ccInputRef, ccErrorRef, 16, 19)) {
-      validForm = false;
-    }
+  if (formErrors && Array.isArray(formErrors) && formErrors.length > 0) {
+    let msg = "";
 
-    if (!validateField(emailInputRef, emailErrorRef, 8, 32)) {
-      validForm = false;
-    }
+    formErrors.forEach(error => {
+      msg += `Field "${error.param}" with value "${error.value}" has the following problem:\n"${error.msg}"`;
+    });
 
-    if (!validateField(nameInputRef, nameErrorRef, 3, 64)) {
-      validForm = false;
-    }
+    setFormErrors([]);
 
-    if (!validateField(phoneInputRef, phoneErrorRef, 8, 32)) {
-      validForm = false;
-    }
-
-    if (validForm) {
-      dispatch(purchaseOrder({ ...state }));
-    }
-  };
+    alert.show(
+      `There was a problem processing your order.\nPlease correct the following errors:\n${msg}`,
+      {
+        timeout: 0,
+        type: types.ERROR
+      }
+    );
+  }
 
   return (
     <div className="singleColumn">
@@ -84,7 +67,7 @@ function CheckoutForm(props: Props) {
         with the following information:
       </p>
       <br />
-      <form className="form-horizontal" onSubmit={handleSubmit}>
+      <form className="form-horizontal" onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name" className={`col-sm-2 control-label`}>
             name
@@ -92,20 +75,19 @@ function CheckoutForm(props: Props) {
           <div className="col-sm-10">
             <input
               data-cy="checkout-name"
-              ref={nameInputRef}
+              ref={register({ required: true, minLength: 3, maxLength: 64 })}
               type="text"
               className="form-control"
               name="name"
-              maxLength={45}
-              placeholder="At least 8 chars and no more than 45 chars"
-              size={31}
-              onChange={handleChange}
-              value={state.name}
+              placeholder="At least 3 chars and no more than 64 chars"
+              size={32}
             />
           </div>
-          <div className="formError" ref={nameErrorRef}>
-            Name shoud be at least 8 chars and no more than 45 chars
-          </div>
+          {errors.name && (
+            <div className="formError">
+              Name shoud be at least 3 chars and no more than 64 chars
+            </div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="email" className={`col-sm-2 control-label`}>
@@ -114,20 +96,19 @@ function CheckoutForm(props: Props) {
           <div className="col-sm-10">
             <input
               data-cy="checkout-email"
-              ref={emailInputRef}
+              ref={register({ required: true, minLength: 8, maxLength: 32 })}
               type="email"
               className="form-control"
               name="email"
-              maxLength={45}
-              placeholder="At least 8 chars and no more than 45 chars"
-              size={31}
-              onChange={handleChange}
-              value={state.email}
+              placeholder="At least 8 chars and no more than 32 chars"
+              size={32}
             />
           </div>
-          <div className="formError" ref={emailErrorRef}>
-            Email shoud be at least 8 chars and no more than 45 chars
-          </div>
+          {errors.email && (
+            <div className="formError">
+              Email shoud be at least 8 chars and no more than 32 chars
+            </div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="phone" className={`col-sm-2 control-label`}>
@@ -136,20 +117,19 @@ function CheckoutForm(props: Props) {
           <div className="col-sm-10">
             <input
               data-cy="checkout-phone"
-              ref={phoneInputRef}
+              ref={register({ required: true, minLength: 8, maxLength: 32 })}
               type="text"
               className="form-control"
               name="phone"
-              maxLength={45}
-              placeholder="At least 8 chars and no more than 30 chars"
-              size={31}
-              onChange={handleChange}
-              value={state.phone}
+              placeholder="At least 8 chars and no more than 32 chars"
+              size={32}
             />
           </div>
-          <div className="formError" ref={phoneErrorRef}>
-            Phone shoud be at least 8 chars and no more than 30 chars
-          </div>
+          {errors.email && (
+            <div className="formError">
+              Phone shoud be at least 8 chars and no more than 32 chars
+            </div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="address" className={`col-sm-2 control-label`}>
@@ -158,20 +138,19 @@ function CheckoutForm(props: Props) {
           <div className="col-sm-10">
             <input
               data-cy="checkout-address"
-              ref={addressInputRef}
+              ref={register({ required: true, minLength: 8, maxLength: 256 })}
               type="text"
               className="form-control"
               name="address"
-              maxLength={45}
-              placeholder="At least 8 chars and no more than 45 chars"
-              size={31}
-              onChange={handleChange}
-              value={state.address}
+              placeholder="At least 8 chars and no more than 256 chars"
+              size={32}
             />
           </div>
-          <div className="formError" ref={addressErrorRef}>
-            Address shoud be at least 8 chars and no more than 45 chars
-          </div>
+          {errors.address && (
+            <div className="formError">
+              Address shoud be at least 8 chars and no more than 256 chars
+            </div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="creditcard" className={`col-sm-2 control-label`}>
@@ -180,21 +159,20 @@ function CheckoutForm(props: Props) {
           <div className="col-sm-10">
             <input
               data-cy="checkout-cc"
-              ref={ccInputRef}
+              ref={register({ required: true, minLength: 16, maxLength: 19 })}
               type="text"
               className="form-control"
               name="creditCard"
-              maxLength={45}
               placeholder="At least 16 chars and no more than 19 chars"
-              size={31}
-              onChange={handleChange}
-              value={state.creditCard}
+              size={32}
             />
           </div>
-          <div className="formError" ref={ccErrorRef}>
-            Credit card number shoud be at least 16 chars and no more than 19
-            chars
-          </div>
+          {errors.creditCard && (
+            <div className="formError">
+              Credit card number shoud be at least 16 chars and no more than 19
+              chars
+            </div>
+          )}
         </div>
         <div className="form-group">
           <div className={`col-sm-offset-2 col-sm-10`}>
@@ -246,7 +224,12 @@ function CheckoutForm(props: Props) {
 const surcharge = 3;
 
 const mapStateToProps = (state: RootState) => ({
-  cart: state.cart
+  cart: state.cart,
+  formErrors: state.ui.formErrors
 });
 
-export default connect(mapStateToProps)(CheckoutForm);
+const mapDispatchToProps = {
+  setFormErrors
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);

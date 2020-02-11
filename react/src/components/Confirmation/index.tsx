@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { OrderedProduct, Order } from "../../interfaces/purchase";
+import { getId } from "../../helpers/utils";
+import { Order, OrderedProduct } from "../../interfaces/purchase";
 import "./Confirmation.css";
 import {
   ConfirmationText,
@@ -28,7 +29,7 @@ export default function Confirmation(props: Props) {
       const subtotal = (products[index].price * qty).toFixed(2);
 
       return (
-        <tr className={`${rowCol}`} key={products[index].id}>
+        <tr className={`${rowCol}`} key={getId(products[index])}>
           <td>{products[index].name}</td>
           <td className="quantityColumn">{qty}</td>
           <td className="confirmationPriceColumn">&euro; {subtotal}</td>
