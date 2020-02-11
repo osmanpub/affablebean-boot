@@ -1,4 +1,4 @@
-const { body, sanitizeBody, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const Cart = require("../session/shoppingCart");
 const Customer = require("../models/customer");
 const CustomerOrder = require("../models/customerOrder");
@@ -10,42 +10,51 @@ const surcharge = 3;
 
 exports.purchaseOrder = [
   body("name")
-    .isLength({ min: 3, max: 64 })
+    .escape()
     .trim()
+    .isLength({ min: 3, max: 64 })
     .withMessage("Name must be specified.")
     .isAlphanumeric()
     .withMessage("Name has non-alphanumeric characters."),
   body("email")
-    .isLength({ min: 8, max: 64 })
+    .escape()
     .trim()
+    .isLength({ min: 8, max: 64 })
     .withMessage("Email must be specified.")
+    .normalizeEmail()
     .isEmail()
     .withMessage("Email must be a valid email address."),
   body("phone")
-    .isLength({ min: 8, max: 64 })
+    .escape()
     .trim()
+    .isLength({ min: 8, max: 64 })
     .withMessage("Phone must be specified."),
   body("address")
-    .isLength({ min: 8, max: 64 })
+    .escape()
     .trim()
+    .isLength({ min: 8, max: 64 })
     .withMessage("Address must be specified."),
   body("creditCard")
-    .isLength({ min: 16, max: 19 })
+    .escape()
     .trim()
+    .isLength({ min: 16, max: 19 })
     .withMessage("Cc number must be specified.")
     .isNumeric()
     .withMessage("CC number has non-numeric characters."),
 
-  sanitizeBody("name").escape(),
-  sanitizeBody("email").escape(),
-  sanitizeBody("phone").escape(),
-  sanitizeBody("address").escape(),
-  sanitizeBody("creditCard").escape(),
-
   (req, res, next) => {
     const errors = validationResult(req);
+    // console.log(errors)
 
-    if (!errors.isEmpty() || !req.session.cart) {
+    if (!errors.isEmpty()) {
+      res.json({
+        errors,
+        success: false
+      });
+      return;
+    }
+
+    if (!req.session.cart) {
       return next(err);
     }
 

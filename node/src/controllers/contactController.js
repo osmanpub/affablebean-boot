@@ -1,43 +1,48 @@
-const { body, sanitizeBody, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const MsgFeedback = require("../models/msgFeedback");
 const MsgSubject = require("../models/msgSubject");
 
 exports.contact = [
   body("name")
-    .isLength({ min: 3, max: 64 })
+    .escape()
     .trim()
+    .isLength({ min: 3, max: 64 })
     .withMessage("Name must be specified.")
-    .isAlphanumeric()
+    .matches(/^[\w\s]+$/i)
     .withMessage("Name has non-alphanumeric characters."),
   body("email")
-    .isLength({ min: 8, max: 32 })
+    .escape()
     .trim()
+    .isLength({ min: 8, max: 32 })
+    .normalizeEmail()
     .isEmail()
     .withMessage("Email must be specified."),
   body("msg")
-    .isLength({ min: 8, max: 1024 })
+    .escape()
     .trim()
+    .isLength({ min: 8, max: 1024 })
     .isAlphanumeric()
     .withMessage("Message must be specified."),
   body("subjectId")
+    .escape()
+    .trim()
     .isLength({ min: 1 })
     .withMessage("Subject must be specified.")
     .isAlphanumeric()
     .withMessage("Select a subject."),
 
-  sanitizeBody("name").escape(),
-  sanitizeBody("email").escape(),
-  sanitizeBody("msg").escape(),
-  sanitizeBody("subjectId").escape(),
-
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
+    // console.log(errors)
+
     if (!errors.isEmpty()) {
-      return next(err);
+      res.json({
+        errors,
+        success: false
+      });
+      return;
     }
 
-    console.log(req.body);
     const { name, email, msg, subjectId } = req.body;
 
     MsgSubject.findById(subjectId).exec((err, subject) => {
@@ -64,3 +69,11 @@ exports.contact = [
     });
   }
 ];
+
+// errors:
+// errors: Array(1)
+// 0:
+// value: "joe bloggs"
+// msg: "Name has non-alphanumeric characters."
+// param: "name"
+// location: "body"
