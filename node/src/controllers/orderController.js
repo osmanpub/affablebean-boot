@@ -95,6 +95,7 @@ exports.purchaseOrder = [
             }
 
             products.push(product);
+            console.log(products);
 
             const orderedProduct = new OrderedProduct({
               quantity: item.quantity,
@@ -108,10 +109,12 @@ exports.purchaseOrder = [
               }
 
               orderedProducts.push(orderedProduct);
+              console.log(orderedProducts);
             });
           });
         });
 
+        // these arrays are being reset - why??
         console.log(products);
         console.log(orderedProducts);
 

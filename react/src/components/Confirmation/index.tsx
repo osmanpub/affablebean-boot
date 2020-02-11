@@ -20,6 +20,7 @@ type Props = {
 };
 
 export default function Confirmation(props: Props) {
+  // BUG:for node, the orderedProducts and products arrays are not working!
   const { customer, orderedProducts, orderRecord, products } = props.order;
 
   const orderedProductsList = orderedProducts.map(
