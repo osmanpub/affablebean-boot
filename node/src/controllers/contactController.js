@@ -37,7 +37,7 @@ exports.contact = [
 
     if (!errors.isEmpty()) {
       res.json({
-        errors,
+        errors: errors.errors,
         success: false
       });
       return;
@@ -54,7 +54,7 @@ exports.contact = [
         name,
         email,
         msg,
-        subject
+        subject: subjectId
       });
 
       msgFeedback.save(err => {
@@ -69,11 +69,3 @@ exports.contact = [
     });
   }
 ];
-
-// errors:
-// errors: Array(1)
-// 0:
-// value: "joe bloggs"
-// msg: "Name has non-alphanumeric characters."
-// param: "name"
-// location: "body"

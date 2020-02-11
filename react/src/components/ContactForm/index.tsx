@@ -5,13 +5,16 @@ import { connect, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getId } from "../../helpers/utils";
 import { Subjects, SubjectState } from "../../interfaces/subjects";
+import { FormErrors } from "../../interfaces/ui";
 import { sendFeedback } from "../../net/contact";
 import { RootState } from "../../redux";
-import { goHome } from "../../redux/ui";
+import { goHome, setFormErrors } from "../../redux/ui";
 
 type Props = {
+  formErrors: Array<FormErrors>;
   goHome: Function;
   home: boolean;
+  setFormErrors: Function;
   subjects: Subjects;
 };
 
@@ -23,18 +26,14 @@ type FormData = {
 };
 
 function ContactForm(props: Props) {
-  const { goHome, home, subjects } = props;
+  const { formErrors, goHome, home, setFormErrors, subjects } = props;
   const alert = useAlert();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm<FormData>();
 
   const onSubmit = handleSubmit(({ email, msg, name, subject }) => {
-    console.log(`${email} ${msg} ${name} ${subject}`);
-    // dispatch(
-    //   // @ts-ignore
-    //   sendFeedback({ ...state, subjectId: subjectInputRef.current.value })
-    // );
+    dispatch(sendFeedback({ email, msg, name, subjectId: subject }));
   });
 
   const subjectsList = subjects.items.map((subject: SubjectState) => {
@@ -46,8 +45,25 @@ function ContactForm(props: Props) {
     );
   });
 
-  if (home) {
+  if (formErrors && Array.isArray(formErrors) && formErrors.length > 0) {
+    let msg = "";
+
+    formErrors.forEach(error => {
+      msg += `Field "${error.param}" with value "${error.value}" has the following problem:\n"${error.msg}"`;
+    });
+
+    setFormErrors([]);
+
+    alert.show(
+      `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`,
+      {
+        timeout: 0,
+        type: types.ERROR
+      }
+    );
+  } else if (home) {
     goHome(false);
+
     alert.show("Message sent successfully!", {
       onClose: () => history.push("/"),
       timeout: 3000,
@@ -184,12 +200,14 @@ function ContactForm(props: Props) {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  subjects: state.subjects,
-  home: state.ui.home
+  formErrors: state.ui.formErrors,
+  home: state.ui.home,
+  subjects: state.subjects
 });
 
 const mapDispatchToProps = {
-  goHome
+  goHome,
+  setFormErrors
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

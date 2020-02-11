@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
-import { goHome } from "../redux/ui";
+import { goHome, setFormErrors } from "../redux/ui";
 
 export const sendFeedback = (data: any) => (dispatch: Function) => {
   axios({
@@ -13,8 +13,16 @@ export const sendFeedback = (data: any) => (dispatch: Function) => {
     withCredentials: true
   })
     .then(response => {
-      if (response.data === true) {
+      const { data } = response;
+
+      if (!data) {
+        return;
+      }
+
+      if (data === true || data.success === true) {
         dispatch(goHome({}));
+      } else if (data.success === false) {
+        dispatch(setFormErrors(data.errors));
       }
     })
     .catch(error => console.log(error));
