@@ -43,7 +43,7 @@ Some of these services are used by the react apps.
 
 ## React apps
 
-See the [React README](./react-ts/README.md) on running the webapp
+See the [React README](./react/README.md) on running the webapp
 
 See the [React README](./native/README.md) on running the mobile app
 
