@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Client } from "node-rest-client";
 
-export const IS_NODE = false; // false for SPRING / JAVA server
+export const IS_NODE = true; // false for SPRING / JAVA server
 
 const node = "http://localhost:3001/";
 
