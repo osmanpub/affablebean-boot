@@ -1,8 +1,9 @@
 import React from "react";
-import { types, useAlert } from "react-alert";
+// import { types, useAlert } from "react-alert";
 import { useForm } from "react-hook-form";
 import { connect, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
 import { getId } from "../../helpers/utils";
 import { Subjects, SubjectState } from "../../interfaces/subjects";
 import { FormErrors } from "../../interfaces/ui";
@@ -27,9 +28,10 @@ type FormData = {
 
 function ContactForm(props: Props) {
   const { formErrors, goHome, home, setFormErrors, subjects } = props;
-  const alert = useAlert();
+  // Problem with jest - https://github.com/schiehll/react-alert/issues/148
+  // const alert = useAlert();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const { register, handleSubmit, errors } = useForm<FormData>();
 
   const onSubmit = handleSubmit(({ email, msg, name, subject }) => {
@@ -53,22 +55,26 @@ function ContactForm(props: Props) {
     });
 
     setFormErrors([]);
-
-    alert.show(
-      `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`,
-      {
-        timeout: 0,
-        type: types.ERROR
-      }
+    alert(
+      `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`
     );
+
+    // alert.show(
+    //   `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`,
+    //   {
+    //     timeout: 0,
+    //     type: types.ERROR
+    //   }
+    // );
   } else if (home) {
     goHome(false);
+    alert("Message sent successfully!");
 
-    alert.show("Message sent successfully!", {
-      onClose: () => history.push("/"),
-      timeout: 3000,
-      type: types.SUCCESS
-    });
+    // alert.show("Message sent successfully!", {
+    //   onClose: () => history.push("/"),
+    //   timeout: 3000,
+    //   type: types.SUCCESS
+    // });
   }
 
   return (

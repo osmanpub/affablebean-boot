@@ -1,5 +1,5 @@
 import React from "react";
-import { types, useAlert } from "react-alert";
+// import { types, useAlert } from "react-alert";
 import { useForm } from "react-hook-form";
 import { connect, useDispatch } from "react-redux";
 import { Cart } from "../../interfaces/cart";
@@ -31,7 +31,8 @@ type FormData = {
 
 function CheckoutForm(props: Props) {
   const { cart, formErrors, setFormErrors } = props;
-  const alert = useAlert();
+  // Problem with jest - https://github.com/schiehll/react-alert/issues/148
+  // const alert = useAlert();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm<FormData>();
 
@@ -50,13 +51,17 @@ function CheckoutForm(props: Props) {
 
     setFormErrors([]);
 
-    alert.show(
-      `There was a problem processing your order.\nPlease correct the following errors:\n${msg}`,
-      {
-        timeout: 0,
-        type: types.ERROR
-      }
+    alert(
+      `There was a problem processing your order.\nPlease correct the following errors:\n${msg}`
     );
+
+    // alert.show(
+    //   `There was a problem processing your order.\nPlease correct the following errors:\n${msg}`,
+    //   {
+    //     timeout: 0,
+    //     type: types.ERROR
+    //   }
+    // );
   }
 
   return (

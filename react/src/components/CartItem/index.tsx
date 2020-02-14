@@ -1,9 +1,14 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getId } from "../../helpers/utils";
 import { CartItem as CartItemState } from "../../interfaces/cart";
 import { updateProductInCart } from "../../net/cart";
 import { CartTableTd } from "./CartItem.styles";
+
+type FormData = {
+  quantity: number;
+};
 
 type Props = {
   index: number;
@@ -13,24 +18,12 @@ type Props = {
 export default function CartItem(props: Props) {
   const { index, item } = props;
   const { product } = item;
-  const [state, setState] = useState({ qty: item.quantity });
   const dispatch = useDispatch();
+  const { register, handleSubmit, errors } = useForm<FormData>();
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const input = event.target;
-    let qty = Number(input.value);
-
-    if (qty >= 0 && qty <= 10) {
-      setState({ ...state, qty });
-    } else {
-      input.value = qty.toString();
-    }
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    dispatch(updateProductInCart(getId(product), Number(state.qty)));
-  };
+  const onSubmit = handleSubmit(({ quantity }) => {
+    dispatch(updateProductInCart(getId(product), quantity));
+  });
 
   const name = product.name;
   const rowCol = index % 2 === 0 ? "white" : "lightBlue";
@@ -51,16 +44,16 @@ export default function CartItem(props: Props) {
           {product.price}
         </CartTableTd>
         <CartTableTd>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmit}>
             <input
               data-cy={`input-qty-${name}`}
+              ref={register({ required: true, min: 0, max: 100 })}
               className="form-control"
-              maxLength={2}
-              onChange={handleChange}
+              defaultValue={item.quantity}
+              name="quantity"
               size={2}
               style={{ margin: "5px", textAlign: "center", width: "90%" }}
               type="number"
-              value={state.qty}
             />
             <button
               className="btn btn-primary btn-sm"
@@ -69,6 +62,11 @@ export default function CartItem(props: Props) {
             >
               update
             </button>
+            {errors.quantity && (
+              <div className="formError">
+                Enter a quantity between 0 and 100
+              </div>
+            )}
           </form>
         </CartTableTd>
       </tr>
