@@ -30,6 +30,10 @@ Once you've set up the database:
  
 ![Home page](/home.jpg "Affablebean")
 
+## Node server
+
+See the [Node README](./node/README.md) on running the node backend
+
 ## RESTful API services
 
 See the [README-REST](./README-REST.md) on how these services are implemented.
@@ -39,9 +43,7 @@ Some of these services are used by the react apps.
 
 ## React apps
 
-See the [React README](./react/README.md) on running the JS app
-
-See the [React README](./react-ts/README.md) on running the Typescript app
+See the [React README](./react-ts/README.md) on running the webapp
 
 See the [React README](./native/README.md) on running the mobile app
 
