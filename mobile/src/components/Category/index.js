@@ -1,49 +1,49 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Image,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
-  View
-} from "react-native";
+  View,
+} from 'react-native';
 
 export default function Category(props) {
-  const { category, setCategoryProduct } = props;
-  const { id, name } = category;
+  const {category, setCategoryProduct} = props;
+  const {id, name} = category;
 
   const styles = StyleSheet.create({
     category: {
-      alignItems: "center",
-      paddingBottom: 24
-    }
+      alignItems: 'center',
+      paddingBottom: 24,
+    },
   });
 
-  var icon = "";
+  var icon = '';
 
   switch (name) {
-    case "bakery":
-      icon = require("../../../assets/img/categories/bakery.jpg");
+    case 'bakery':
+      icon = require('../../../assets/img/categories/bakery.jpg');
       break;
 
-    case "cereals":
-      icon = require("../../../assets/img/categories/cereals.jpg");
+    case 'cereals':
+      icon = require('../../../assets/img/categories/cereals.jpg');
       break;
 
-    case "dairy":
-      icon = require("../../../assets/img/categories/dairy.jpg");
+    case 'dairy':
+      icon = require('../../../assets/img/categories/dairy.jpg');
       break;
 
-    case "drinks":
-      icon = require("../../../assets/img/categories/drinks.jpg");
+    case 'drinks':
+      icon = require('../../../assets/img/categories/drinks.jpg');
       break;
 
-    case "fruit & veg":
-      icon = require("../../../assets/img/categories/fruitveg.jpg");
+    case 'fruit & veg':
+      icon = require('../../../assets/img/categories/fruitveg.jpg');
       break;
 
-    case "meats":
-      icon = require("../../../assets/img/categories/meats.jpg");
+    case 'meats':
+      icon = require('../../../assets/img/categories/meats.jpg');
       break;
 
     default:
@@ -64,5 +64,5 @@ export default function Category(props) {
 }
 
 Category.propTypes = {
-  category: PropTypes.object.isRequired
+  category: PropTypes.object.isRequired,
 };

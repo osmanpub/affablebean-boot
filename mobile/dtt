@@ -1,0 +1,6 @@
+if [ $# -gt 0 ] && [ "$1" = "-r" ]; then
+    sh run
+fi
+
+adb reverse tcp:8081 tcp:8081
+detox test -c android.emu.debug --loglevel trace

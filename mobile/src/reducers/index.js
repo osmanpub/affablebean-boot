@@ -1,15 +1,15 @@
-import { combineReducers } from "redux";
-import { createReducer } from "redux-starter-kit";
+import {combineReducers} from 'redux';
+import {createReducer} from 'redux-starter-kit';
 
 const cart = createReducer(
   {
     items: [],
     numberOfItems: 0,
-    subtotal: 0
+    subtotal: 0,
   },
   {
     ADD_TO_CART: (state, action) => {
-      const { cart } = action.payload;
+      const {cart} = action.payload;
 
       state.items = state.items.concat(getCartItem(cart));
       state.numberOfItems += cart.numberOfItems;
@@ -21,13 +21,13 @@ const cart = createReducer(
       state.subtotal = 0;
     },
     UPDATE_CART: (state, action) => {
-      const { qty } = action.payload;
+      const {qty} = action.payload;
 
       if (qty < 0) {
         return state;
       }
 
-      const { cart, id } = action.payload;
+      const {cart, id} = action.payload;
       const updatedItem = cart.items[0];
 
       let numberOfItemsChange = 0;
@@ -37,7 +37,7 @@ const cart = createReducer(
 
       if (qty === 0) {
         const removedItem = state.items.filter(
-          item => item.product.id === id
+          item => item.product.id === id,
         )[0];
 
         numberOfItemsChange = removedItem.quantity * -1;
@@ -58,8 +58,8 @@ const cart = createReducer(
       state.items = items;
       state.numberOfItems += numberOfItemsChange;
       state.subtotal += subtotalChange;
-    }
-  }
+    },
+  },
 );
 
 function getCartItem(cart) {
@@ -72,7 +72,7 @@ const category = createReducer(
     category: {},
     isFetching: false,
     didInvalidate: false,
-    products: []
+    products: [],
   },
   {
     RECEIVE_CATEGORY: (state, action) => {
@@ -81,52 +81,52 @@ const category = createReducer(
       state.didInvalidate = false;
       state.isFetching = false;
       state.products = action.payload.products;
-    }
-  }
+    },
+  },
 );
 
 const categories = createReducer(
   {
     isFetching: false,
     didInvalidate: false,
-    items: []
+    items: [],
   },
   {
     RECEIVE_CATEGORIES: (state, action) => {
       state.didInvalidate = false;
       state.isFetching = false;
       state.items = action.payload;
-    }
-  }
+    },
+  },
 );
 
 const purchase = createReducer(
   {
-    order: {}
+    order: {},
   },
   {
     CLEAR_PURCHASE: (state, action) => {
       state.order = {};
     },
     ORDER_PURCHASE: (state, action) => {
-      state.order = { ...action.payload.order };
-    }
-  }
+      state.order = {...action.payload.order};
+    },
+  },
 );
 
 const subjects = createReducer(
   {
     isFetching: false,
     didInvalidate: false,
-    items: []
+    items: [],
   },
   {
     RECEIVE_SUBJECTS: (state, action) => {
       state.didInvalidate = false;
       state.isFetching = false;
       state.items = action.payload;
-    }
-  }
+    },
+  },
 );
 
 const rootReducer = combineReducers({
@@ -134,7 +134,7 @@ const rootReducer = combineReducers({
   category,
   categories,
   purchase,
-  subjects
+  subjects,
 });
 
 export default rootReducer;

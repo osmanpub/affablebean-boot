@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Text, View } from "react-native";
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: null, errorInfo: null };
+    this.state = {error: null, errorInfo: null};
   }
 
   componentDidCatch(error, errorInfo) {
     // Catch errors in any components below and re-render with error message
     this.setState({
       error: error,
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
     });
     // You can also log error messages to an error reporting service here
   }
@@ -23,10 +23,10 @@ export default class ErrorBoundary extends Component {
 
       return (
         <View>
-          <Text style={{ fontWeight: "bold", paddingBottom: 8 }}>
+          <Text style={{fontWeight: 'bold', paddingBottom: 8}}>
             Something went wrong.
           </Text>
-          <Text style={{ paddingBottom: 8 }}>{error && error.toString()}</Text>
+          <Text style={{paddingBottom: 8}}>{error && error.toString()}</Text>
           <Text>{this.state.errorInfo.componentStack}</Text>
         </View>
       );

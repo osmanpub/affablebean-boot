@@ -1,0 +1,11 @@
+killall chrome
+killall java
+killall node
+rm -rf node_modules/
+rm -rf /tmp/haste-map*
+rm -rf /tmp/metro-*
+rm -rf /tmp/react*
+rm package-lock.json
+npm cache clean --force && npm install && npm audit fix
+android/gradlew clean
+sh run

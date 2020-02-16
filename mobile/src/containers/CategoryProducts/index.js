@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { ScrollView } from "react-native";
-import Header from "../../components/Header";
-import Products from "../../components/Products";
-import { fetchCategoryIfNeeded } from "../../net/category";
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ScrollView} from 'react-native';
+import Header from '../../components/Header';
+import Products from '../../components/Products';
+import {fetchCategoryIfNeeded} from '../../net/category';
 
 class CategoryProducts extends Component {
   componentDidMount() {
-    const { dispatch, id } = this.props;
+    const {dispatch, id} = this.props;
     dispatch(fetchCategoryIfNeeded(id));
   }
 
   componentDidUpdate(prevProps) {
-    const { category, dispatch, id } = this.props;
+    const {category, dispatch, id} = this.props;
 
     if (category.categories.length > 0 && Number(id) !== category.category.id) {
       dispatch(fetchCategoryIfNeeded(id));
@@ -21,9 +21,9 @@ class CategoryProducts extends Component {
   }
 
   render() {
-    const { cart, category, dispatch, setScreen } = this.props;
+    const {cart, category, dispatch, setScreen} = this.props;
 
-    if (!category.category.hasOwnProperty("id")) {
+    if (!category.category.hasOwnProperty('id')) {
       return null;
     }
 
@@ -47,16 +47,16 @@ class CategoryProducts extends Component {
 }
 
 const mapStateToProps = state => {
-  const { cart, category } = state;
+  const {cart, category} = state;
 
   return {
     cart,
-    category
+    category,
   };
 };
 
 export const ConnectedCategoryProducts = connect(mapStateToProps)(
-  CategoryProducts
+  CategoryProducts,
 );
 
 CategoryProducts.propTypes = {
@@ -64,5 +64,5 @@ CategoryProducts.propTypes = {
   category: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  setScreen: PropTypes.func.isRequired
+  setScreen: PropTypes.func.isRequired,
 };

@@ -1,0 +1,2 @@
+#sh run
+detox build -c android.emu.debug

@@ -1,3 +1,3 @@
-import { WidgetBar } from "./WidgetBar";
+import {WidgetBar} from './WidgetBar';
 
 export default WidgetBar;

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { ScrollView } from "react-native";
-import Categories from "../../components/Categories";
-import Header from "../../components/Header";
-import { fetchCategoriesIfNeeded } from "../../net/categories";
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ScrollView} from 'react-native';
+import Categories from '../../components/Categories';
+import Header from '../../components/Header';
+import {fetchCategoriesIfNeeded} from '../../net/categories';
 
 class Home extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(fetchCategoriesIfNeeded());
   }
 
   render() {
-    const { cart, categories, setCategoryProduct, setScreen } = this.props;
+    const {cart, categories, setCategoryProduct, setScreen} = this.props;
 
-    const { items } = categories;
+    const {items} = categories;
 
     if (items.length === 0) {
       return null;
@@ -34,11 +34,11 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  const { cart, categories } = state;
+  const {cart, categories} = state;
 
   return {
     cart,
-    categories
+    categories,
   };
 };
 
@@ -49,5 +49,5 @@ Home.propTypes = {
   categories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   setCategoryProduct: PropTypes.func.isRequired,
-  setScreen: PropTypes.func.isRequired
+  setScreen: PropTypes.func.isRequired,
 };
