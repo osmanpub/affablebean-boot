@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {purchaseOrder} from '../../net/checkout';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import {validateField} from '../../utils';
+import {validateField} from '../../helpers/utils';
 
 export default class CheckoutForm extends Component {
   constructor(props) {

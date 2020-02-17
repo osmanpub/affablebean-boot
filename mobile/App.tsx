@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import ErrorBoundary from './src/components/ErrorBoundary';
 import {ConnectedCart} from './src/containers/Cart';
@@ -22,6 +23,10 @@ function App() {
     categoryId: 0,
     screen: 'Home',
   });
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   const setCategoryProduct = (categoryId: number) => {
     setState({categoryId, screen: 'CategoryProducts'});

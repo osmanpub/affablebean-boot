@@ -174,8 +174,3 @@ export default class CartItem extends Component {
     );
   }
 }
-
-CartItem.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-};
