@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getNodePath, IS_NODE} from '../helpers/utils';
+import {getNodePath, getRestPath, IS_NODE} from '../helpers/utils';
 import {RootState} from '../redux';
 import {receiveCategories} from '../redux/categories';
 
@@ -22,13 +22,19 @@ const fetchCategories = () => (dispatch: Function) => {
       .catch(error => console.log(error));
   }
 
-  // return client
-  //   .get(getRestPath("categories"), function(data: any) {
-  //     dispatch(receiveCategories(data._embedded.categoryList));
-  //   })
-  //   .on("error", function(err: any) {
-  //     console.log("something went wrong on the request", err.request.options);
-  //   });
+  fetch(getRestPath('categories'), {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // redirect: "follow", // manual, *follow, error
+    // referrer: "no-referrer", // no-referrer, *client
+  })
+    .then(response => response.json())
+    .then(json => dispatch(receiveCategories(json._embedded.categoryList)));
 };
 
 const shouldFetchCategories = (state: RootState) => {

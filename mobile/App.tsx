@@ -3,11 +3,11 @@ import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import ErrorBoundary from './src/components/ErrorBoundary';
-import {ConnectedCart} from './src/containers/Cart';
-import {ConnectedCategoryProducts} from './src/containers/CategoryProducts';
-import {ConnectedCheckout} from './src/containers/Checkout';
-import {ConnectedHome} from './src/containers/Home';
 import rootReducer from './src/redux';
+import {ConnectedCart} from './src/screens/Cart';
+import {ConnectedCategoryProducts} from './src/screens/CategoryProducts';
+import {ConnectedCheckout} from './src/screens/Checkout';
+import {ConnectedHome} from './src/screens/Home';
 
 type State = {
   categoryId: number;
