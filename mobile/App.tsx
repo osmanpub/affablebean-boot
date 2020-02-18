@@ -3,9 +3,9 @@ import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import rootReducer from './src/redux';
-import {ConnectedCart} from './src/screens/Cart';
-import {ConnectedCategoryProducts} from './src/screens/CategoryProducts';
-import {ConnectedCheckout} from './src/screens/Checkout';
+import Cart from './src/screens/Cart';
+import CategoryProducts from './src/screens/CategoryProducts';
+import Checkout from './src/screens/Checkout';
 import Home from './src/screens/Home';
 
 type State = {
@@ -39,20 +39,17 @@ function App() {
 
   switch (state.screen) {
     case 'Cart':
-      nextScreen = <ConnectedCart setScreen={setScreen} />;
+      nextScreen = <Cart setScreen={setScreen} />;
       break;
 
     case 'CategoryProducts':
       nextScreen = (
-        <ConnectedCategoryProducts
-          id={state.categoryId}
-          setScreen={setScreen}
-        />
+        <CategoryProducts id={state.categoryId} setScreen={setScreen} />
       );
       break;
 
     case 'Checkout':
-      nextScreen = <ConnectedCheckout setScreen={setScreen} />;
+      nextScreen = <Checkout setScreen={setScreen} />;
       break;
 
     default:
