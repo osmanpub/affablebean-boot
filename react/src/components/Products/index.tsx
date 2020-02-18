@@ -8,6 +8,7 @@ import {
   CategoryState,
   ProductState
 } from "../../interfaces/categories";
+import { id } from "../../interfaces/id";
 import { addProductToCart, updateProductInCart } from "../../net/cart";
 import { RootState } from "../../redux";
 import { clearPurchase } from "../../redux/purchase";
@@ -32,7 +33,7 @@ export function Products(props: Props) {
   const { cart, categories, clearPurchase, products } = props;
   const dispatch = useDispatch();
 
-  const addToCart = (id: number | string) => {
+  const addToCart = (id: id) => {
     const update = cart.items.filter(item => getId(item.product) === id);
 
     clearPurchase();

@@ -49,6 +49,7 @@ export const getCategoryIcon = (name: string) => {
       break;
 
     case 'fruit & veg':
+    case 'fruit n veg':
       icon = require('../../assets/img/categories/fruitveg.jpg');
       break;
 

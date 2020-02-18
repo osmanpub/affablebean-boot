@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {connect, useDispatch} from 'react-redux';
 import Categories from '../../components/Categories';
 import Header from '../../components/Header';
@@ -28,10 +28,10 @@ function Home(props: Props) {
   }
 
   return (
-    <ScrollView>
+    <SafeAreaView style={{flex: 1}}>
       <Header currentScreen="Home" setScreen={setScreen} />
       <Categories setCategoryProduct={setCategoryProduct} />
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 

@@ -1,5 +1,7 @@
+import { id } from "./id";
+
 export interface Category {
-  id: number;
+  id: id;
   name: string;
 }
 
@@ -13,7 +15,7 @@ export interface Categories {
 
 export interface Product {
   description: string;
-  id: number;
+  id: id;
   name: string;
   price: number;
 }

@@ -1,3 +1,5 @@
+import { id } from "./id";
+
 export interface Subjects {
   isFetching: boolean;
   didInvalidate: boolean;
@@ -5,7 +7,7 @@ export interface Subjects {
 }
 
 export interface Subject {
-  id: number;
+  id: id;
   name: string;
 }
 

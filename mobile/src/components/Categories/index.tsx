@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, View} from 'react-native';
 import {connect} from 'react-redux';
+import {getId} from '../../helpers/utils';
 import {
   Categories as CategoriesState,
   CategoryState,
@@ -28,7 +29,7 @@ function Categories(props: Props) {
       }}>
       <FlatList
         data={items}
-        keyExtractor={(item: CategoryState) => item.id.toString()}
+        keyExtractor={(item: CategoryState) => getId(item)}
         renderItem={({item}) => (
           <Category category={item} setCategoryProduct={setCategoryProduct} />
         )}

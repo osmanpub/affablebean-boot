@@ -47,7 +47,7 @@ export function Products(props: Props) {
       }}>
       <FlatList
         data={products}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => getId(item)}
         renderItem={({item}) => {
           return (
             <View

@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {getCategoryIcon} from '../../helpers/utils';
+import {getCategoryIcon, getId} from '../../helpers/utils';
 import {Category as CategoryState} from '../../interfaces/categories';
 
 type Props = {
@@ -16,12 +16,13 @@ type Props = {
 
 export default function Category(props: Props) {
   const {category, setCategoryProduct} = props;
-  const {id, name} = category;
+  const {name} = category;
 
   return (
     <View style={styles.category}>
       <Text>{name}</Text>
-      <TouchableWithoutFeedback onPress={() => setCategoryProduct(id)}>
+      <TouchableWithoutFeedback
+        onPress={() => setCategoryProduct(getId(category))}>
         <Image source={getCategoryIcon(name)} />
       </TouchableWithoutFeedback>
     </View>
