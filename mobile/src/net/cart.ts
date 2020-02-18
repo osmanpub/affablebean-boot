@@ -25,13 +25,16 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
     .catch(error => console.log(error));
 };
 
-export const emptyCart = () => (dispatch: Function) => {
+export const emptyCart = (cb: Function) => (dispatch: Function) => {
   axios({
     method: 'get',
     url: IS_NODE ? getNodePath('clearCart') : getPath('viewCart?clear=true'),
     withCredentials: true,
   })
-    .then(() => dispatch(clearCart({})))
+    .then(() => {
+      cb();
+      dispatch(clearCart({}));
+    })
     .catch(error => console.log(error));
 };
 

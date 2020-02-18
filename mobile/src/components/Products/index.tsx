@@ -47,7 +47,7 @@ export function Products(props: Props) {
       }}>
       <FlatList
         data={products}
-        keyExtractor={item => getId(item)}
+        keyExtractor={item => getId(item).toString()}
         renderItem={({item}) => {
           return (
             <View
@@ -63,7 +63,7 @@ export function Products(props: Props) {
                 <Text style={{paddingBottom: 8}}>
                   &euro; {item.price.toFixed(2)}
                 </Text>
-                <Button onPress={() => addToCart(item.id)} title="add" />
+                <Button onPress={() => addToCart(getId(item))} title="add" />
               </View>
             </View>
           );

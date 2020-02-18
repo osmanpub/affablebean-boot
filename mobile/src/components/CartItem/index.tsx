@@ -47,7 +47,7 @@ export default function CartItem(props: Props) {
           name="quantity"
           onChange={onChange}
           rules={{required: true, min: 0, max: 100}}
-          defaultValue={item.quantity}
+          defaultValue={item.quantity.toString()}
           placeholder="Enter quantity"
           style={styles.qty}
         />

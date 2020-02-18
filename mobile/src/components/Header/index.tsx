@@ -7,8 +7,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import {Cart} from '../../interfaces/cart';
+import {emptyCart} from '../../net/cart';
 import {RootState} from '../../redux';
 
 type Props = {
@@ -19,6 +20,19 @@ type Props = {
 
 function Header(props: Props) {
   const {cart, currentScreen, setScreen} = props;
+  const dispatch = useDispatch();
+
+  const clearCart = () => {
+    if (cart.numberOfItems > 0) {
+      dispatch(
+        emptyCart(() => {
+          if (currentScreen === 'Cart') {
+            setScreen('Home');
+          }
+        }),
+      );
+    }
+  };
 
   let cartWidget = null;
   let checkoutWidget = null;
@@ -27,7 +41,7 @@ function Header(props: Props) {
     if (currentScreen !== 'Cart') {
       cartWidget = (
         <TouchableHighlight onPress={() => setScreen('Cart')}>
-          <Text style={styles.checkout}>view cart</Text>
+          <Text style={styles.button}>view cart</Text>
         </TouchableHighlight>
       );
     }
@@ -35,7 +49,7 @@ function Header(props: Props) {
     if (currentScreen !== 'Checkout') {
       checkoutWidget = (
         <TouchableWithoutFeedback onPress={() => setScreen('Checkout')}>
-          <Text style={styles.viewCart}>checkout</Text>
+          <Text style={styles.button}>checkout</Text>
         </TouchableWithoutFeedback>
       );
     }
@@ -51,10 +65,15 @@ function Header(props: Props) {
       </TouchableWithoutFeedback>
 
       {cart && cart.numberOfItems > 0 && (
-        <View style={{flexDirection: 'row'}}>
-          {cartWidget}
-          {checkoutWidget}
-          <View style={{flexDirection: 'row', padding: 8}}>
+        <View>
+          <View style={{flexDirection: 'row', paddingBottom: 16}}>
+            <TouchableHighlight onPress={clearCart}>
+              <Text style={styles.button}>clear cart</Text>
+            </TouchableHighlight>
+            {cartWidget}
+            {checkoutWidget}
+          </View>
+          <View style={styles.cart}>
             <Image source={require('./cart.gif')} />
             <Text>&nbsp;{cart.numberOfItems}&nbsp;items</Text>
           </View>
@@ -65,27 +84,23 @@ function Header(props: Props) {
 }
 
 const styles = StyleSheet.create({
-  checkout: {
+  button: {
     borderColor: 'blue',
     borderRadius: 32,
     borderWidth: 1,
     color: 'blue',
     fontWeight: 'bold',
-    padding: 8,
+    marginHorizontal: 8,
+    padding: 12,
+  },
+  cart: {
+    flexDirection: 'row',
+    paddingBottom: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     margin: 16,
-  },
-  viewCart: {
-    borderColor: 'blue',
-    borderRadius: 32,
-    borderWidth: 1,
-    color: 'blue',
-    fontWeight: 'bold',
-    marginBottom: 16,
-    marginLeft: 16,
-    marginRight: 16,
-    padding: 8,
   },
 });
 
