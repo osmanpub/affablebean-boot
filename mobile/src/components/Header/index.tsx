@@ -26,7 +26,7 @@ function Header(props: Props) {
     if (cart.numberOfItems > 0) {
       dispatch(
         emptyCart(() => {
-          if (currentScreen === 'Cart') {
+          if (currentScreen === 'Cart' || currentScreen === 'Checkout') {
             setScreen('Home');
           }
         }),

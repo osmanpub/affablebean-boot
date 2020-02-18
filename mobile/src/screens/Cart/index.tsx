@@ -14,6 +14,11 @@ type Props = {
 function Cart(props: Props) {
   const {cart, setScreen} = props;
 
+  if (cart.numberOfItems === 0) {
+    setScreen('Home');
+    return null;
+  }
+
   const cartItems = cart.items.map((item, index) => (
     <CartItem key={index} item={item} />
   ));

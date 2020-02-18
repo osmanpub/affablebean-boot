@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import {useDispatch} from 'react-redux';
@@ -19,12 +19,16 @@ export default function CartItem(props: Props) {
   const {product} = item;
   const name = product.name;
 
+  const [visible, setVisible] = useState(true);
   const dispatch = useDispatch();
   const {control, handleSubmit, errors} = useForm<FormData>();
 
   const onChange = (args: Array<any>) => {
+    const value = args[0].nativeEvent.text;
+    setVisible(!isNaN(Number(value)));
+
     return {
-      value: args[0].nativeEvent.text,
+      value,
     };
   };
 
@@ -46,13 +50,13 @@ export default function CartItem(props: Props) {
           control={control}
           name="quantity"
           onChange={onChange}
-          rules={{required: true, min: 0, max: 100}}
+          rules={{required: true, maxLength: 3}}
           defaultValue={item.quantity.toString()}
           placeholder="Enter quantity"
           style={styles.qty}
         />
         {errors.quantity && <Text style={styles.error}>Enter a quantity.</Text>}
-        <Button onPress={handleSubmit(onSubmit)} title="update" />
+        {visible && <Button onPress={onSubmit} title="update" />}
       </View>
     </View>
   );

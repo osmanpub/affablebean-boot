@@ -139,7 +139,7 @@ function CheckoutForm(props: Props) {
           Total: &euro; {(cart.subtotal + surcharge).toFixed(2)}{' '}
         </Text>
         <Text style={{marginTop: 8}} />
-        <Button onPress={handleSubmit(onSubmit)} title="Purchase" />
+        <Button onPress={onSubmit} title="Purchase" />
       </View>
     </View>
   );
