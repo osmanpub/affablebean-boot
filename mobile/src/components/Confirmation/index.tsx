@@ -1,7 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import {Order} from '../../interfaces/purchase';
 
-export default function Confirmation(props) {
+type Props = {
+  order: Order;
+};
+
+export default function Confirmation(props: Props) {
   const {orderRecord} = props.order;
 
   return (
