@@ -7,35 +7,18 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Cart} from '../../interfaces/cart';
+import {RootState} from '../../redux';
 
-export default function Header(props) {
+type Props = {
+  cart: Cart;
+  currentScreen: string;
+  setScreen: Function;
+};
+
+function Header(props: Props) {
   const {cart, currentScreen, setScreen} = props;
-
-  const styles = StyleSheet.create({
-    checkout: {
-      borderColor: 'blue',
-      borderRadius: 32,
-      borderWidth: 1,
-      color: 'blue',
-      fontWeight: 'bold',
-      padding: 8,
-    },
-    logo: {
-      margin: 16,
-    },
-    viewCart: {
-      borderColor: 'blue',
-      borderRadius: 32,
-      borderWidth: 1,
-      color: 'blue',
-      fontWeight: 'bold',
-      marginBottom: 16,
-      marginLeft: 16,
-      marginRight: 16,
-      padding: 8,
-    },
-  });
 
   let cartWidget = null;
   let checkoutWidget = null;
@@ -43,7 +26,7 @@ export default function Header(props) {
   if (cart && cart.numberOfItems > 0) {
     if (currentScreen !== 'Cart') {
       cartWidget = (
-        <TouchableHighlight onPress={viewCart}>
+        <TouchableHighlight onPress={() => setScreen('Cart')}>
           <Text style={styles.checkout}>view cart</Text>
         </TouchableHighlight>
       );
@@ -51,23 +34,11 @@ export default function Header(props) {
 
     if (currentScreen !== 'Checkout') {
       checkoutWidget = (
-        <TouchableWithoutFeedback onPress={viewCheckout}>
+        <TouchableWithoutFeedback onPress={() => setScreen('Checkout')}>
           <Text style={styles.viewCart}>checkout</Text>
         </TouchableWithoutFeedback>
       );
     }
-  }
-
-  function goHome() {
-    setScreen('Home');
-  }
-
-  function viewCart() {
-    setScreen('Cart');
-  }
-
-  function viewCheckout() {
-    setScreen('Checkout');
   }
 
   return (
@@ -75,7 +46,7 @@ export default function Header(props) {
       style={{
         alignItems: 'center',
       }}>
-      <TouchableWithoutFeedback onPress={goHome}>
+      <TouchableWithoutFeedback onPress={() => setScreen('Home')}>
         <Image source={require('./logo.jpg')} style={styles.logo} />
       </TouchableWithoutFeedback>
 
@@ -92,3 +63,34 @@ export default function Header(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  checkout: {
+    borderColor: 'blue',
+    borderRadius: 32,
+    borderWidth: 1,
+    color: 'blue',
+    fontWeight: 'bold',
+    padding: 8,
+  },
+  logo: {
+    margin: 16,
+  },
+  viewCart: {
+    borderColor: 'blue',
+    borderRadius: 32,
+    borderWidth: 1,
+    color: 'blue',
+    fontWeight: 'bold',
+    marginBottom: 16,
+    marginLeft: 16,
+    marginRight: 16,
+    padding: 8,
+  },
+});
+
+const mapStateToProps = (state: RootState) => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Header);

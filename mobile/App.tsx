@@ -2,7 +2,6 @@ import {configureStore} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
-import ErrorBoundary from './src/components/ErrorBoundary';
 import rootReducer from './src/redux';
 import {ConnectedCart} from './src/screens/Cart';
 import {ConnectedCategoryProducts} from './src/screens/CategoryProducts';
@@ -62,11 +61,7 @@ function App() {
       );
   }
 
-  return (
-    <ErrorBoundary>
-      <Provider store={store}>{nextScreen}</Provider>
-    </ErrorBoundary>
-  );
+  return <Provider store={store}>{nextScreen}</Provider>;
 }
 
 export default App;
