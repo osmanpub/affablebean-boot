@@ -7,7 +7,7 @@ import rootReducer from './src/redux';
 import {ConnectedCart} from './src/screens/Cart';
 import {ConnectedCategoryProducts} from './src/screens/CategoryProducts';
 import {ConnectedCheckout} from './src/screens/Checkout';
-import {ConnectedHome} from './src/screens/Home';
+import Home from './src/screens/Home';
 
 type State = {
   categoryId: number;
@@ -58,10 +58,7 @@ function App() {
 
     default:
       nextScreen = (
-        <ConnectedHome
-          setCategoryProduct={setCategoryProduct}
-          setScreen={setScreen}
-        />
+        <Home setCategoryProduct={setCategoryProduct} setScreen={setScreen} />
       );
   }
 

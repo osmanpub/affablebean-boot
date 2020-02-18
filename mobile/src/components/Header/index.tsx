@@ -92,9 +92,3 @@ export default function Header(props) {
     </View>
   );
 }
-
-Header.propTypes = {
-  cart: PropTypes.object,
-  currentScreen: PropTypes.string.isRequired,
-  setScreen: PropTypes.func.isRequired,
-};

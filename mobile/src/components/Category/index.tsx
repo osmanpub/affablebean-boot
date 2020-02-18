@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Image,
   StyleSheet,
@@ -7,19 +6,29 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import {Category as CategoryState} from '../../interfaces/categories';
 
-export default function Category(props) {
+type Props = {
+  category: CategoryState;
+  setCategoryProduct: Function;
+};
+
+export default function Category(props: Props) {
   const {category, setCategoryProduct} = props;
   const {id, name} = category;
 
-  const styles = StyleSheet.create({
-    category: {
-      alignItems: 'center',
-      paddingBottom: 24,
-    },
-  });
+  return (
+    <View style={styles.category}>
+      <Text>{name}</Text>
+      <TouchableWithoutFeedback onPress={() => setCategoryProduct(id)}>
+        <Image source={getCategoryIcon(name)} />
+      </TouchableWithoutFeedback>
+    </View>
+  );
+}
 
-  var icon = '';
+const getCategoryIcon = (name: string) => {
+  let icon: any = '';
 
   switch (name) {
     case 'bakery':
@@ -49,20 +58,12 @@ export default function Category(props) {
     default:
   }
 
-  function selectCategory() {
-    setCategoryProduct(id);
-  }
-
-  return (
-    <View style={styles.category}>
-      <Text>{name}</Text>
-      <TouchableWithoutFeedback onPress={selectCategory}>
-        <Image source={icon} />
-      </TouchableWithoutFeedback>
-    </View>
-  );
-}
-
-Category.propTypes = {
-  category: PropTypes.object.isRequired,
+  return icon;
 };
+
+const styles = StyleSheet.create({
+  category: {
+    alignItems: 'center',
+    paddingBottom: 24,
+  },
+});
