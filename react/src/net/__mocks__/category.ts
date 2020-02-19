@@ -72,7 +72,7 @@ const fetchCategory = (id: number) => (dispatch: Function) => {
       }
     },
     products: [
-      // nodew
+      // node
       {
         id: 1,
         description: "semi skimmed (1L)",
