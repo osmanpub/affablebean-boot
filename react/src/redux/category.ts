@@ -14,6 +14,12 @@ const category = createSlice({
   name: "category",
   initialState,
   reducers: {
+    didInvalidate: (state, action) => {
+      state.didInvalidate = action.payload;
+    },
+    isFetching: (state, action) => {
+      state.isFetching = action.payload;
+    },
     receiveCategory: (state, action) => {
       const { category, categories, products } = action.payload;
       state.categories = categories;
@@ -25,7 +31,7 @@ const category = createSlice({
   }
 });
 
-export const { receiveCategory } = category.actions;
+export const { didInvalidate, isFetching, receiveCategory } = category.actions;
 
 const categoryReducer = category.reducer;
 

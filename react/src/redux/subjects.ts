@@ -10,6 +10,12 @@ const subjects = createSlice({
   name: "subjects",
   initialState,
   reducers: {
+    didInvalidate: (state, action) => {
+      state.didInvalidate = action.payload;
+    },
+    isFetching: (state, action) => {
+      state.isFetching = action.payload;
+    },
     receiveSubjects: (state, action) => {
       state.didInvalidate = false;
       state.isFetching = false;
@@ -18,7 +24,7 @@ const subjects = createSlice({
   }
 });
 
-export const { receiveSubjects } = subjects.actions;
+export const { didInvalidate, isFetching, receiveSubjects } = subjects.actions;
 
 const subjectsReducer = subjects.reducer;
 

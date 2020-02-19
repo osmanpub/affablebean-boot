@@ -5,6 +5,7 @@ import Products from '../../components/Products';
 import {CategoryProducts as CategoryProductsState} from '../../interfaces/categories';
 import {id} from '../../interfaces/id';
 import {fetchCategoryIfNeeded} from '../../net/category';
+import {RootState} from '../../redux';
 
 type Props = {
   category: CategoryProductsState;
@@ -39,7 +40,7 @@ function CategoryProducts(props: Props) {
   );
 }
 
-const mapStateToProps = (state: Props) => {
+const mapStateToProps = (state: RootState) => {
   const {category} = state;
 
   return {

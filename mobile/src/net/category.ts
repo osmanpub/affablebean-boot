@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getId, getNodePath, getRestPath, IS_NODE} from '../helpers/utils';
 import {RootState} from '../redux';
-import {receiveCategory} from '../redux/category';
+import {receiveCategory, isFetching} from '../redux/category';
 
 type id = number | string;
 
@@ -15,6 +15,8 @@ export const fetchCategoryIfNeeded = (id: id) => (
 };
 
 const fetchCategory = (id: id) => (dispatch: Function) => {
+  dispatch(isFetching(true));
+
   if (IS_NODE) {
     return axios
       .get(getNodePath(`category/${id}`))
@@ -28,7 +30,8 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
           }),
         );
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => dispatch(isFetching(false)));
   }
 
   fetch(getRestPath('category/' + id), {
@@ -43,7 +46,8 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
     // referrer: "no-referrer", // no-referrer, *client
   })
     .then(response => response.json())
-    .then(json => dispatch(receiveCategory(json.content)));
+    .then(json => dispatch(receiveCategory(json.content)))
+    .finally(() => dispatch(isFetching(false)));
 };
 
 const shouldFetchCategory = (id: id, state: RootState) => {
