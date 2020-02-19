@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getNodePath, getRestPath, IS_NODE} from '../helpers/utils';
 import {RootState} from '../redux';
-import {receiveCategories, isFetching} from '../redux/categories';
+import {isFetching, receiveCategories} from '../redux/categories';
 
 export const fetchCategoriesIfNeeded = () => (
   dispatch: Function,

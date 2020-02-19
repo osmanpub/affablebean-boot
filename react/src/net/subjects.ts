@@ -1,7 +1,7 @@
 import axios from "axios";
 import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
-import { receiveSubjects } from "../redux/subjects";
+import { isFetching, receiveSubjects } from "../redux/subjects";
 
 export const fetchSubjectsIfNeeded = () => (
   dispatch: Function,
@@ -14,12 +14,15 @@ export const fetchSubjectsIfNeeded = () => (
 
 const fetchSubjects = () => (dispatch: Function) => {
   if (IS_NODE) {
+    dispatch(isFetching(true));
+
     return axios
       .get(getNodePath("subjects"))
       .then(response => {
         dispatch(receiveSubjects(response.data.subjects));
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => dispatch(isFetching(false)));
   }
 
   return client

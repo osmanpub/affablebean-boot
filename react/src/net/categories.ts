@@ -1,7 +1,7 @@
 import axios from "axios";
 import { client, getNodePath, getRestPath, IS_NODE } from "../helpers/utils";
 import { RootState } from "../redux";
-import { receiveCategories } from "../redux/categories";
+import { isFetching, receiveCategories } from "../redux/categories";
 
 export const fetchCategoriesIfNeeded = () => (
   dispatch: Function,
@@ -14,12 +14,15 @@ export const fetchCategoriesIfNeeded = () => (
 
 const fetchCategories = () => (dispatch: Function) => {
   if (IS_NODE) {
+    dispatch(isFetching(true));
+
     return axios
       .get(getNodePath("categories"))
       .then(response => {
         dispatch(receiveCategories(response.data.categories));
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => dispatch(isFetching(false)));
   }
 
   return client

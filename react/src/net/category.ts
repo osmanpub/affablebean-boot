@@ -7,7 +7,7 @@ import {
   IS_NODE
 } from "../helpers/utils";
 import { RootState } from "../redux";
-import { receiveCategory } from "../redux/category";
+import { isFetching, receiveCategory } from "../redux/category";
 
 type id = number | string;
 
@@ -22,6 +22,8 @@ export const fetchCategoryIfNeeded = (id: id) => (
 
 const fetchCategory = (id: id) => (dispatch: Function) => {
   if (IS_NODE) {
+    dispatch(isFetching(true));
+
     return axios
       .get(getNodePath(`category/${id}`))
       .then(response => {
@@ -38,7 +40,8 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
           })
         );
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => dispatch(isFetching(false)));
   }
 
   return client

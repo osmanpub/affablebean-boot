@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getId, getNodePath, getRestPath, IS_NODE} from '../helpers/utils';
 import {RootState} from '../redux';
-import {receiveCategory, isFetching} from '../redux/category';
+import {isFetching, receiveCategory} from '../redux/category';
 
 type id = number | string;
 
