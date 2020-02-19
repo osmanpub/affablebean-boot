@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Category /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "paddingBottom": 24,
+    }
+  }
+>
+  <Text>
+    dairy
+  </Text>
+  <Image
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    source={
+      Object {
+        "testUri": "../../../assets/img/categories/dairy.jpg",
+      }
+    }
+  />
+</View>
+`;

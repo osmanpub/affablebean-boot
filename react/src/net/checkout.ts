@@ -21,24 +21,25 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
         return;
       }
 
-      if (data === true) {
-        // java
+      if (IS_NODE) {
+        if (data.success === true) {
+          // node
+          dispatch(clearCart({}));
+          dispatch(
+            orderPurchase({
+              order: response.data.order
+            })
+          );
+        } else if (data.success === false) {
+          dispatch(setFormErrors(data.errors));
+        }
+      } else {
         dispatch(clearCart({}));
         dispatch(
           orderPurchase({
             order: response.data
           })
         );
-      } else if (data.success === true) {
-        // node
-        dispatch(clearCart({}));
-        dispatch(
-          orderPurchase({
-            order: response.data.order
-          })
-        );
-      } else if (data.success === false) {
-        dispatch(setFormErrors(data.errors));
       }
     })
     .catch(error => console.log(error));
