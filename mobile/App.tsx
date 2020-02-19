@@ -25,7 +25,7 @@ function App() {
   });
 
   useEffect(() => {
-    SplashScreen.hide();
+    SplashScreen && SplashScreen.hide();
   }, []);
 
   const setCategoryProduct = (categoryId: id) => {
