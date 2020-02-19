@@ -29,7 +29,7 @@ type Props = {
   products: Array<ProductState>;
 };
 
-export function Products(props: Props) {
+function Products(props: Props) {
   const { cart, categories, clearPurchase, products } = props;
   const dispatch = useDispatch();
 

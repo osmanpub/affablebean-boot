@@ -8,8 +8,8 @@ export interface Category {
 export type CategoryState = Category & {_links: any};
 
 export interface Categories {
-  isFetching: boolean;
   didInvalidate: boolean;
+  isFetching: boolean;
   items: Array<CategoryState>;
 }
 

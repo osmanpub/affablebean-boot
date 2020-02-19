@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {getNodePath, getPath, IS_NODE} from '../helpers/utils';
 import {clearCart} from '../redux/cart';
-import {orderPurchase} from '../redux/purchase';
+import {isPosting, orderPurchase} from '../redux/purchase';
 import {setFormErrors} from '../redux/ui';
 
 export const purchaseOrder = (data: any) => (dispatch: Function) => {
+  dispatch(isPosting(true));
+
   axios({
     method: 'post',
     url: IS_NODE ? getNodePath('purchase') : getPath('purchase2'),
@@ -41,5 +43,6 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
         dispatch(setFormErrors(data.errors));
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => dispatch(isPosting(false)));
 };

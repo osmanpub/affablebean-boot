@@ -1,5 +1,12 @@
 import React from 'react';
-import {Button, FlatList, Image, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  Image,
+  Text,
+  View,
+} from 'react-native';
 import {connect, useDispatch} from 'react-redux';
 import {getId, getProductIcon} from '../../helpers/utils';
 import {Cart} from '../../interfaces/cart';
@@ -21,7 +28,7 @@ type Props = {
   products: Array<ProductState>;
 };
 
-export function Products(props: Props) {
+function Products(props: Props) {
   const {cart, categories, clearPurchase, products} = props;
   const dispatch = useDispatch();
 
@@ -40,7 +47,9 @@ export function Products(props: Props) {
     return null;
   }
 
-  return (
+  return cart.isFetching ? (
+    <ActivityIndicator size="large" color="blue" />
+  ) : (
     <View
       style={{
         alignItems: 'center',

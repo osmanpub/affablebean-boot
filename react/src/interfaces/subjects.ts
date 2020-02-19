@@ -1,8 +1,8 @@
 import { id } from "./id";
 
 export interface Subjects {
-  isFetching: boolean;
   didInvalidate: boolean;
+  isFetching: boolean;
   items: Array<SubjectState>;
 }
 

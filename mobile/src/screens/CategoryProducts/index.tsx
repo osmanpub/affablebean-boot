@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {ActivityIndicator} from 'react-native';
 import {connect, useDispatch} from 'react-redux';
 import Header from '../../components/Header';
 import Products from '../../components/Products';
@@ -15,27 +16,25 @@ type Props = {
 
 function CategoryProducts(props: Props) {
   const {category, id, setScreen} = props;
+  const {isFetching} = category;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategoryIfNeeded(id));
   }, [dispatch, id]);
 
-  if (
-    !category.category.hasOwnProperty('id') &&
-    !category.category.hasOwnProperty('_id')
-  ) {
-    return null;
-  }
-
   return (
     <>
       <Header currentScreen="CategoryProducts" setScreen={setScreen} />
-      <Products
-        categories={category.categories}
-        category={category.category}
-        products={category.products}
-      />
+      {isFetching ? (
+        <ActivityIndicator size="large" color="blue" />
+      ) : (
+        <Products
+          categories={category.categories}
+          category={category.category}
+          products={category.products}
+        />
+      )}
     </>
   );
 }

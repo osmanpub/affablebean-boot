@@ -1,8 +1,16 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {connect, useDispatch} from 'react-redux';
 import {Cart} from '../../interfaces/cart';
+import {Purchase} from '../../interfaces/purchase';
 import {FormErrors} from '../../interfaces/ui';
 import {purchaseOrder} from '../../net/checkout';
 import {RootState} from '../../redux';
@@ -11,6 +19,7 @@ import {setFormErrors} from '../../redux/ui';
 type Props = {
   cart: Cart;
   formErrors: Array<FormErrors>;
+  purchase: Purchase;
   setFormErrors: Function;
 };
 
@@ -23,7 +32,7 @@ type FormData = {
 };
 
 function CheckoutForm(props: Props) {
-  const {cart, formErrors, setFormErrors} = props;
+  const {cart, formErrors, purchase, setFormErrors} = props;
   const dispatch = useDispatch();
   const {control, handleSubmit, errors} = useForm<FormData>();
 
@@ -51,7 +60,9 @@ function CheckoutForm(props: Props) {
     );
   }
 
-  return (
+  return purchase.isPosting ? (
+    <ActivityIndicator size="large" color="blue" />
+  ) : (
     <View>
       {/* <Text style={{padding: 8}} /> */}
       <View style={{backgroundColor: '#f7f7e9', padding: 16}}>
@@ -162,6 +173,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: RootState) => ({
   cart: state.cart,
   formErrors: state.ui.formErrors,
+  purchase: state.purchase,
 });
 
 const mapDispatchToProps = {

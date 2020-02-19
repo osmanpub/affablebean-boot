@@ -15,6 +15,8 @@ export interface Order {
 }
 
 export interface Purchase {
+  didInvalidate: boolean;
+  isPosting: boolean;
   order: Order;
 }
 

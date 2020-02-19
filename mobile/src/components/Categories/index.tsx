@@ -30,6 +30,7 @@ function Categories(props: Props) {
       <FlatList
         data={items}
         keyExtractor={(item: CategoryState) => getId(item).toString()}
+        ListFooterComponent={<View style={{padding: 64}} />}
         renderItem={({item}) => (
           <Category category={item} setCategoryProduct={setCategoryProduct} />
         )}

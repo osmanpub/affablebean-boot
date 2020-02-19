@@ -1,10 +1,11 @@
 import axios from 'axios';
 import {getNodePath, getPath, IS_NODE} from '../helpers/utils';
-import {addToCart, clearCart, updateCart} from '../redux/cart';
-
-type id = number | string;
+import {id} from '../interfaces/id';
+import {addToCart, clearCart, isFetching, updateCart} from '../redux/cart';
 
 export const addProductToCart = (id: id) => (dispatch: Function) => {
+  dispatch(isFetching(true));
+
   axios({
     method: 'post',
     url: IS_NODE
@@ -22,10 +23,13 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
         }),
       );
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => dispatch(isFetching(false)));
 };
 
 export const emptyCart = (cb: Function) => (dispatch: Function) => {
+  dispatch(isFetching(true));
+
   axios({
     method: 'get',
     url: IS_NODE ? getNodePath('clearCart') : getPath('viewCart?clear=true'),
@@ -35,12 +39,15 @@ export const emptyCart = (cb: Function) => (dispatch: Function) => {
       cb();
       dispatch(clearCart({}));
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => dispatch(isFetching(false)));
 };
 
 export const updateProductInCart = (id: id, qty: number) => (
   dispatch: Function,
 ) => {
+  dispatch(isFetching(true));
+
   axios({
     method: 'post',
     url: IS_NODE
@@ -58,5 +65,6 @@ export const updateProductInCart = (id: id, qty: number) => (
         }),
       );
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => dispatch(isFetching(false)));
 };

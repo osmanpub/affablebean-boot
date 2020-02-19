@@ -6,10 +6,9 @@ import {
   getRestPath,
   IS_NODE
 } from "../helpers/utils";
+import { id } from "../interfaces/id";
 import { RootState } from "../redux";
 import { isFetching, receiveCategory } from "../redux/category";
-
-type id = number | string;
 
 export const fetchCategoryIfNeeded = (id: id) => (
   dispatch: Function,

@@ -1,21 +1,31 @@
 import React, {useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {
+  ActivityIndicator,
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import {connect, useDispatch} from 'react-redux';
 import {getId, getProductIcon} from '../../helpers/utils';
-import {CartItem as CartItemState} from '../../interfaces/cart';
+import {Cart, CartItem as CartItemState} from '../../interfaces/cart';
 import {updateProductInCart} from '../../net/cart';
+import {RootState} from '../../redux';
 
 type FormData = {
   quantity: number;
 };
 
 type Props = {
+  cart: Cart;
   item: CartItemState;
 };
 
-export default function CartItem(props: Props) {
-  const {item} = props;
+function CartItem(props: Props) {
+  const {cart, item} = props;
   const {product} = item;
   const name = product.name;
 
@@ -25,7 +35,7 @@ export default function CartItem(props: Props) {
 
   const onChange = (args: Array<any>) => {
     const value = args[0].nativeEvent.text;
-    setVisible(!isNaN(Number(value)));
+    setVisible(value === '' ? false : !isNaN(Number(value)));
 
     return {
       value,
@@ -36,7 +46,9 @@ export default function CartItem(props: Props) {
     dispatch(updateProductInCart(getId(product), quantity));
   });
 
-  return (
+  return cart.isFetching ? (
+    <ActivityIndicator size="large" color="blue" />
+  ) : (
     <View style={styles.container}>
       <Image source={getProductIcon(name)} />
       <View style={{paddingLeft: 24, flexDirection: 'column'}}>
@@ -80,3 +92,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 });
+
+const mapStateToProps = (state: RootState) => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(CartItem);

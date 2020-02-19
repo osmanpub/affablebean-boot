@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 export const initialState = {
+  didInvalidate: false,
+  isPosting: false,
   order: {},
 };
 
@@ -11,13 +13,24 @@ const purchase = createSlice({
     clearPurchase: (state, action) => {
       state.order = {};
     },
+    didInvalidate: (state, action) => {
+      state.didInvalidate = action.payload;
+    },
+    isPosting: (state, action) => {
+      state.isPosting = action.payload;
+    },
     orderPurchase: (state, action) => {
       state.order = {...action.payload.order};
     },
   },
 });
 
-export const {clearPurchase, orderPurchase} = purchase.actions;
+export const {
+  clearPurchase,
+  didInvalidate,
+  isPosting,
+  orderPurchase,
+} = purchase.actions;
 
 const purchaseReducer = purchase.reducer;
 
