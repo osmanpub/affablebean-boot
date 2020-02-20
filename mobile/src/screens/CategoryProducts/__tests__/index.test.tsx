@@ -1,42 +1,93 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
-import Confirmation from '..';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import CategoryProducts from '..';
 
-describe('<Confirmation />', () => {
-  const order = {
-    customer: {
-      id: 1,
-      address: '11111111',
-      ccNumber: '1111111111111111',
-      cityRegion: 'NY',
-      email: 'joe@bloggs.com',
-      name: 'joe bloggs',
-      phone: '11111111',
+const mockStore = configureStore([thunk]);
+
+const initialState = {
+  cart: {
+    isFetching: false,
+  },
+  category: {
+    categories: {
+      didInvalidate: false,
+      isFetching: false,
+      items: [
+        {
+          id: 1,
+          name: 'dairy',
+        },
+        {
+          id: 2,
+          name: 'meats',
+        },
+        {
+          id: 3,
+          name: 'bakery',
+        },
+        {
+          id: 4,
+          name: 'fruit & veg',
+        },
+        {
+          id: 5,
+          name: 'cereals',
+        },
+        {
+          id: 6,
+          name: 'drinks',
+        },
+      ],
     },
-    orderedProducts: [
-      {
-        quantity: 1,
-      },
-    ],
-    orderRecord: {
+    category: {
       id: 1,
-      amount: 5.39,
-      confirmationNumber: '995604757',
-      dateCreated: '1582123900751',
+      name: 'dairy',
     },
+    didInvalidate: false,
+    isFetching: false,
     products: [
       {
-        id: 12,
-        description: 'contain peanuts<br>(3 cookies)',
-        name: 'chocolate cookies',
+        id: 1,
+        description: 'semi skimmed (1L)',
+        name: 'milk',
+        price: 1.7,
+      },
+      {
+        id: 2,
+        description: 'mild cheddar (330g)',
+        name: 'cheese',
         price: 2.39,
-        category: {id: 3, name: 'bakery'},
+      },
+      {
+        id: 3,
+        description: 'unsalted (250g)',
+        name: 'butter',
+        price: 1.09,
+      },
+      {
+        id: 4,
+        description: 'medium-sized (6 eggs)',
+        name: 'free range eggs',
+        price: 1.76,
       },
     ],
-  };
+  },
+};
 
+const store = mockStore(initialState);
+
+describe('<CategoryProducts />', () => {
   it('renders correctly', () => {
-    const component = renderer.create(<Confirmation order={order} />).toJSON();
+    const component = renderer
+      .create(
+        <Provider store={store}>
+          <CategoryProducts id={1} setScreen={jest.fn()} />
+        </Provider>,
+      )
+      .toJSON();
     expect(component).toMatchSnapshot();
   });
 });
