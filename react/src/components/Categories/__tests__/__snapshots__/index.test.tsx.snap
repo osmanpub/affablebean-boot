@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Categories /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AykKD iyhrVf"
+  >
+    <div
+      className="sc-AykKF hLHot"
+    >
+      <p
+        className="sc-AykKC dXPAoV"
+        data-cy="home-welcome"
+      >
+        Welcome to the online home of the Affable Bean Green Grocer.
+      </p>
+      <p>
+        Our unique home delivery service brings you fresh organic produce, dairy, meats, breads and other delicious and healthy items direct to your doorstep.
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-AykKE bRpSsB"
+  >
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/1"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          dairy
+        </span>
+        <img
+          alt="dairy"
+          className="categoryImage"
+          data-cy="category-dairy"
+          src="/static/img/categories/dairy.jpg"
+        />
+      </a>
+    </span>
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/2"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          meats
+        </span>
+        <img
+          alt="meats"
+          className="categoryImage"
+          data-cy="category-meats"
+          src="/static/img/categories/meats.jpg"
+        />
+      </a>
+    </span>
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/3"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          bakery
+        </span>
+        <img
+          alt="bakery"
+          className="categoryImage"
+          data-cy="category-bakery"
+          src="/static/img/categories/bakery.jpg"
+        />
+      </a>
+    </span>
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/4"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          fruit & veg
+        </span>
+        <img
+          alt="fruit & veg"
+          className="categoryImage"
+          data-cy="category-fruit & veg"
+          src="/static/img/categories/fruit & veg.jpg"
+        />
+      </a>
+    </span>
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/5"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          cereals
+        </span>
+        <img
+          alt="cereals"
+          className="categoryImage"
+          data-cy="category-cereals"
+          src="/static/img/categories/cereals.jpg"
+        />
+      </a>
+    </span>
+    <span
+      className="categoryBox"
+    >
+      <a
+        href="/category/6"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryLabel"
+        />
+        <span
+          className="categoryLabelText"
+        >
+          drinks
+        </span>
+        <img
+          alt="drinks"
+          className="categoryImage"
+          data-cy="category-drinks"
+          src="/static/img/categories/drinks.jpg"
+        />
+      </a>
+    </span>
+  </div>
+</div>
+`;

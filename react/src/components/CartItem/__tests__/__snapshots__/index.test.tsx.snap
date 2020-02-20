@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CartItem /> renders correctly 1`] = `
+<tr
+  className="white"
+  data-cy="product-milk"
+>
+  <td
+    className="sc-AykKC bQqdHm"
+  >
+    <img
+      alt="{name}"
+      src="/static/img/products/milk.png"
+    />
+  </td>
+  <td
+    className="sc-AykKC bQqdHm"
+  >
+    <span>
+      milk
+    </span>
+  </td>
+  <td
+    className="sc-AykKC bQqdHm"
+  >
+    €
+    1.70
+    <br />
+    1.7
+  </td>
+  <td
+    className="sc-AykKC bQqdHm"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        className="form-control"
+        data-cy="input-qty-milk"
+        defaultValue={1}
+        name="quantity"
+        size={2}
+        style={
+          Object {
+            "margin": "5px",
+            "textAlign": "center",
+            "width": "90%",
+          }
+        }
+        type="number"
+      />
+      <button
+        className="btn btn-primary btn-sm"
+        data-cy="update-qty-milk"
+        type="submit"
+      >
+        update
+      </button>
+    </form>
+  </td>
+</tr>
+`;
