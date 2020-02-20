@@ -5,7 +5,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
   className="singleColumn"
 >
   <p
-    className="sc-AykKC jWqIUs"
+    className="sc-fzXfMz bdvgPO"
   >
     <strong
       data-cy="confirm-success"
@@ -34,7 +34,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
     className="summaryColumn"
   >
     <table
-      className="sc-AykKI haLdtv detailsTable"
+      className="sc-fzXfNc jFziUF detailsTable"
     >
       <tbody>
         <tr
@@ -95,7 +95,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-AykKG lmcsto"
+            className="sc-fzXfMD beKiFw"
             colSpan={2}
           >
             <strong>
@@ -103,7 +103,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
             </strong>
           </td>
           <td
-            className="sc-AykKH ccixJp"
+            className="sc-fzXfME mmIKd"
           >
             € 
             3.00
@@ -113,7 +113,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-AykKJ eQLGBX"
+            className="sc-fzXfNd bBBQyd"
             colSpan={2}
           >
             <strong>
@@ -121,7 +121,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
             </strong>
           </td>
           <td
-            className="sc-AykKK ioGYgM"
+            className="sc-fzXfNe liTjBi"
           >
             € 
             5.39
@@ -145,7 +145,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-AykKD bLREOA"
+            className="sc-fzXfMA deNqPE"
             colSpan={3}
           >
             <strong>
@@ -163,7 +163,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
     className="summaryColumn"
   >
     <table
-      className="sc-AykKE cuSoPm detailsTable"
+      className="sc-fzXfMB cBbgq detailsTable"
     >
       <tbody>
         <tr
@@ -177,7 +177,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
         </tr>
         <tr>
           <td
-            className="sc-AykKF gXZIvL lightBlue"
+            className="sc-fzXfMC fntJpL lightBlue"
             colSpan={3}
           >
             joe bloggs

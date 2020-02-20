@@ -1,4 +1,9 @@
-import { changeValue, container, mouseClick, setupAll } from "../../setupTests";
+import {
+  changeValue,
+  container,
+  mouseClick,
+  setupAll
+} from "../../../setupTests";
 
 setupAll(() => {
   // privacy and contact buttons

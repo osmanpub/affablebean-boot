@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils, { act } from "react-dom/test-utils";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import reducer from "../redux";
-import Cart from "./Cart";
-import CategoryProducts from "./CategoryProducts";
-import Checkout from "./Checkout";
-import Contact from "./Contact";
-import Home from "./Home";
-import Privacy from "./Privacy";
+import reducer from "./redux";
+import Cart from "./screens/Cart";
+import CategoryProducts from "./screens/CategoryProducts";
+import Checkout from "./screens/Checkout";
+import Contact from "./screens/Contact";
+import Home from "./screens/Home";
+import Privacy from "./screens/Privacy";
 
 // Fixes problem - https://stackoverflow.com/questions/48809753/testing-mutationobserver-with-jest
 // @ts-ignore
@@ -23,11 +25,20 @@ global.MutationObserver = class {
   observe(element, initObject) {}
 };
 
-jest.mock("../net/cart");
-jest.mock("../net/category");
-jest.mock("../net/categories");
-jest.mock("../net/checkout");
-jest.mock("../net/subjects");
+/**
+ * Set up Enzyme to mount to DOM, simulate events,
+ * and inspect the DOM in tests.
+ */
+configure({ adapter: new Adapter() });
+
+/**
+ * Mock components and modules
+ */
+jest.mock("./net/cart");
+jest.mock("./net/category");
+jest.mock("./net/categories");
+jest.mock("./net/checkout");
+jest.mock("./net/subjects");
 
 export let container: any;
 
