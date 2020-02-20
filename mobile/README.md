@@ -1,6 +1,6 @@
 # Affablebean React App
 
-![Native](/native/native.jpg "Affablebean")
+![Native](/mobile/native.jpg "Affablebean")
 
 ## Installation
 
