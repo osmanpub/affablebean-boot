@@ -1,0 +1,507 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Products /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "_links": Object {
+            "products": Object {
+              "href": "http://localhost:8080/api/products",
+            },
+            "self": Object {
+              "href": "http://localhost:8080/api/products/1",
+            },
+          },
+          "category": Object {
+            "id": 1,
+            "name": "dairy",
+          },
+          "description": "semi skimmed (1L)",
+          "id": 1,
+          "name": "milk",
+          "price": 1.7,
+        },
+        Object {
+          "_links": Object {
+            "products": Object {
+              "href": "http://localhost:8080/api/products",
+            },
+            "self": Object {
+              "href": "http://localhost:8080/api/products/2",
+            },
+          },
+          "category": Object {
+            "id": 1,
+            "name": "dairy",
+          },
+          "description": "mild cheddar (330g)",
+          "id": 2,
+          "name": "cheese",
+          "price": 2.39,
+        },
+        Object {
+          "_links": Object {
+            "products": Object {
+              "href": "http://localhost:8080/api/products",
+            },
+            "self": Object {
+              "href": "http://localhost:8080/api/products/3",
+            },
+          },
+          "category": Object {
+            "id": 1,
+            "name": "dairy",
+          },
+          "description": "unsalted (250g)",
+          "id": 3,
+          "name": "butter",
+          "price": 1.09,
+        },
+        Object {
+          "_links": Object {
+            "products": Object {
+              "href": "http://localhost:8080/api/products",
+            },
+            "self": Object {
+              "href": "http://localhost:8080/api/products/4",
+            },
+          },
+          "category": Object {
+            "id": 1,
+            "name": "dairy",
+          },
+          "description": "medium-sized (6 eggs)",
+          "id": 4,
+          "name": "free range eggs",
+          "price": 1.76,
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingBottom": 24,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "testUri": "../../../assets/img/products/milk.png",
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "paddingLeft": 24,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignItems": "flex-start",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              milk
+            </Text>
+            <Text
+              style={
+                Object {
+                  "paddingBottom": 8,
+                }
+              }
+            >
+              € 
+              1.70
+            </Text>
+            <View
+              accessibilityRole="button"
+              accessibilityStates={Array []}
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "color": "#007AFF",
+                        "fontSize": 18,
+                        "padding": 8,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  add
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingBottom": 24,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "testUri": "../../../assets/img/products/cheese.png",
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "paddingLeft": 24,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignItems": "flex-start",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              cheese
+            </Text>
+            <Text
+              style={
+                Object {
+                  "paddingBottom": 8,
+                }
+              }
+            >
+              € 
+              2.39
+            </Text>
+            <View
+              accessibilityRole="button"
+              accessibilityStates={Array []}
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "color": "#007AFF",
+                        "fontSize": 18,
+                        "padding": 8,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  add
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingBottom": 24,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "testUri": "../../../assets/img/products/butter.png",
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "paddingLeft": 24,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignItems": "flex-start",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              butter
+            </Text>
+            <Text
+              style={
+                Object {
+                  "paddingBottom": 8,
+                }
+              }
+            >
+              € 
+              1.09
+            </Text>
+            <View
+              accessibilityRole="button"
+              accessibilityStates={Array []}
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "color": "#007AFF",
+                        "fontSize": 18,
+                        "padding": 8,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  add
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "paddingBottom": 24,
+            }
+          }
+        >
+          <Image
+            source={
+              Object {
+                "testUri": "../../../assets/img/products/free-range-eggs.png",
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "paddingLeft": 24,
+              }
+            }
+          />
+          <View
+            style={
+              Object {
+                "alignItems": "flex-start",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              free range eggs
+            </Text>
+            <Text
+              style={
+                Object {
+                  "paddingBottom": 8,
+                }
+              }
+            >
+              € 
+              1.76
+            </Text>
+            <View
+              accessibilityRole="button"
+              accessibilityStates={Array []}
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    Array [
+                      Object {
+                        "color": "#007AFF",
+                        "fontSize": 18,
+                        "padding": 8,
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  add
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

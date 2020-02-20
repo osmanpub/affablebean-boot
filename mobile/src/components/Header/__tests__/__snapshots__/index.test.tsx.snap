@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <Image
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    source={
+      Object {
+        "testUri": "../../../src/components/Header/logo.jpg",
+      }
+    }
+    style={
+      Object {
+        "margin": 16,
+      }
+    }
+  />
+</View>
+`;
