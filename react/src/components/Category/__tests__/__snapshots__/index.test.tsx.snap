@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Category /> renders correctly 1`] = `
+<span
+  className="categoryBox"
+>
+  <a
+    href="/category/1"
+    onClick={[Function]}
+  >
+    <span
+      className="categoryLabel"
+    />
+    <span
+      className="categoryLabelText"
+    >
+      dairy
+    </span>
+    <img
+      alt="dairy"
+      className="categoryImage"
+      data-cy="category-dairy"
+      src="/static/img/categories/dairy.jpg"
+    />
+  </a>
+</span>
+`;

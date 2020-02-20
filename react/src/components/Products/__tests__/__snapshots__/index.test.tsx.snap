@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Products /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AykKD byDnSu"
+  >
+    <a
+      href="/category/3"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-bakery"
+        >
+          bakery
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/5"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-cereals"
+        >
+          cereals
+        </span>
+      </span>
+    </a>
+    <span
+      className="sc-AykKG eKfmoZ"
+    >
+      <span
+        className="categoryText"
+      >
+        dairy
+      </span>
+    </span>
+    <a
+      href="/category/6"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-drinks"
+        >
+          drinks
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/4"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-fruit & veg"
+        >
+          fruit & veg
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/2"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-meats"
+        >
+          meats
+        </span>
+      </span>
+    </a>
+  </div>
+  <div
+    className="sc-AykKE jBQsYi"
+  >
+    <p
+      className="sc-AykKC gnUqj"
+    >
+      dairy
+    </p>
+    <table
+      className="sc-AykKF jjLbPH"
+    >
+      <tbody>
+        <tr
+          className="white"
+          data-cy="product-milk"
+        >
+          <td>
+            <img
+              alt="{name}"
+              src="/static/img/products/milk.png"
+            />
+          </td>
+          <td>
+            milk
+            <br />
+            <span
+              className="smallText"
+            >
+              semi skimmed (1L)
+            </span>
+          </td>
+          <td>
+            € 
+            1.70
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+          data-cy="product-cheese"
+        >
+          <td>
+            <img
+              alt="{name}"
+              src="/static/img/products/cheese.png"
+            />
+          </td>
+          <td>
+            cheese
+            <br />
+            <span
+              className="smallText"
+            >
+              mild cheddar (330g)
+            </span>
+          </td>
+          <td>
+            € 
+            2.39
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="white"
+          data-cy="product-butter"
+        >
+          <td>
+            <img
+              alt="{name}"
+              src="/static/img/products/butter.png"
+            />
+          </td>
+          <td>
+            butter
+            <br />
+            <span
+              className="smallText"
+            >
+              unsalted (250g)
+            </span>
+          </td>
+          <td>
+            € 
+            1.09
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+          data-cy="product-free range eggs"
+        >
+          <td>
+            <img
+              alt="{name}"
+              src="/static/img/products/free range eggs.png"
+            />
+          </td>
+          <td>
+            free range eggs
+            <br />
+            <span
+              className="smallText"
+            >
+              medium-sized (6 eggs)
+            </span>
+          </td>
+          <td>
+            € 
+            1.76
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders correctly 1`] = `
+<div
+  className="sc-AykKC hozsjV"
+>
+  <br />
+  <span
+    className="sc-AykKD hKnrof"
+  >
+    <a
+      data-cy="privacy"
+      href="/privacy"
+      onClick={[Function]}
+    >
+      <button
+        className="btn btn-link"
+      >
+        Privacy
+      </button>
+    </a>
+    <a
+      data-cy="contact"
+      href="/contact"
+      onClick={[Function]}
+    >
+      <button
+        className="btn btn-link"
+      >
+        Contact
+      </button>
+    </a>
+     © 2019 the affable bean company
+  </span>
+</div>
+`;

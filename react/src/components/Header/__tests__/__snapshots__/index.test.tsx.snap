@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders correctly 1`] = `
+Array [
+  <div
+    className="sc-AykKF dTREWd"
+  >
+    <div
+      className="sc-AykKG hpUlLZ"
+    >
+      <div
+        className="sc-AykKC bnHXXk"
+      >
+        <div
+          className="sc-AykKD cIBYdt headerWidget"
+        >
+          <a
+            className="bubble"
+            data-cy="proceed-checkout"
+            href="/checkout"
+            onClick={[Function]}
+          >
+            proceed to checkout ➟
+          </a>
+        </div>
+        <div
+          className="sc-AykKE eMKgTS headerWidget"
+        >
+          <span
+            className="horizontalMargin"
+            data-cy="cart-hdr-total"
+          >
+            <img
+              alt="shopping cart icon"
+              src="/static/img/cart.gif"
+            />
+             
+            0 items
+          </span>
+          <a
+            className="bubble"
+            data-cy="cart-hdr-view-cart"
+            href="/viewCart/false"
+            onClick={[Function]}
+          >
+            view cart
+          </a>
+        </div>
+      </div>
+      <div
+        className="sc-AykKH kZHudd"
+      >
+        <a
+          data-cy="home-logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Affable Bean logo"
+            src="/static/img/logo.png"
+          />
+        </a>
+      </div>
+      <img
+        alt="the affable bean"
+        id="logoText"
+        src="/static/img/logoText.png"
+      />
+    </div>
+  </div>,
+  ")",
+]
+`;

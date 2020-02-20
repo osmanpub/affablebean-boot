@@ -3,52 +3,66 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import Categories from "..";
+import ContactForm from "..";
 
 const mockStore = configureStore([]);
 
 const initialState = {
-  categories: {
+  cart: {
+    didInvalidate: false,
+    isFetching: false,
+    items: [],
+    numberOfItems: 0,
+    subtotal: 0
+  },
+  subjects: {
     didInvalidate: false,
     isFetching: false,
     items: [
       {
         id: 1,
-        name: "dairy"
+        name: "Brands or product"
       },
       {
         id: 2,
-        name: "meats"
+        name: "Investor relations"
       },
       {
         id: 3,
-        name: "bakery"
+        name: "Sustainability"
       },
       {
         id: 4,
-        name: "fruit & veg"
+        name: "The Company"
       },
       {
         id: 5,
-        name: "cereals"
+        name: "Media enquiry"
       },
       {
         id: 6,
-        name: "drinks"
+        name: "Website feedback"
+      },
+      {
+        id: 7,
+        name: "Other"
       }
     ]
+  },
+  ui: {
+    formErrors: []
   }
 };
 
 const store = mockStore(initialState);
 
-describe("<Categories />", () => {
+describe("<ContactForm />", () => {
   it("renders correctly", () => {
     const component = renderer
       .create(
         <Router>
           <Provider store={store}>
-            <Categories />
+            <ContactForm />
           </Provider>
         </Router>
       )

@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CheckoutForm /> renders correctly 1`] = `
+<div
+  className="singleColumn"
+>
+  <h2>
+    checkout
+  </h2>
+  <p
+    data-cy="checkout-intro"
+  >
+    In order to purchase the items in your shopping cart, please provide us with the following information:
+  </p>
+  <br />
+  <form
+    className="form-horizontal"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="name"
+      >
+        name
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="checkout-name"
+          name="name"
+          placeholder="At least 3 chars and no more than 64 chars"
+          size={32}
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="email"
+      >
+        email
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="checkout-email"
+          name="email"
+          placeholder="At least 8 chars and no more than 32 chars"
+          size={32}
+          type="email"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="phone"
+      >
+        phone
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="checkout-phone"
+          name="phone"
+          placeholder="At least 8 chars and no more than 32 chars"
+          size={32}
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="address"
+      >
+        address
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="checkout-address"
+          name="address"
+          placeholder="At least 8 chars and no more than 256 chars"
+          size={32}
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="creditcard"
+      >
+        credit card
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="checkout-cc"
+          name="creditCard"
+          placeholder="At least 16 chars and no more than 19 chars"
+          size={32}
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className="col-sm-offset-2 col-sm-10"
+      >
+        <button
+          className="btn btn-primary"
+          data-cy="checkout-submit"
+          type="submit"
+        >
+          submit purchase
+        </button>
+      </div>
+    </div>
+  </form>
+  <div
+    className="sc-AykKC gAnQpK"
+  >
+    <ul>
+      <li>
+        Next-day delivery is guaranteed
+      </li>
+      <li>
+        A € 
+        3.00
+         delivery surcharge is applied to all purchase orders
+      </li>
+    </ul>
+    <table
+      className="sc-AykKD jiEZpG"
+    >
+      <tbody>
+        <tr>
+          <td
+            className="sc-AykKE iJOxuv"
+          >
+            subtotal:
+          </td>
+          <td
+            className="sc-AykKF hRloQP checkoutPriceColumn"
+          >
+            € 
+            0.00
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="sc-AykKE iJOxuv"
+          >
+            surcharge:
+          </td>
+          <td
+            className="sc-AykKF hRloQP checkoutPriceColumn"
+          >
+            € 
+            3.00
+          </td>
+        </tr>
+        <tr>
+          <td
+            className="sc-AykKE iJOxuv"
+          >
+            total:
+          </td>
+          <td
+            className="sc-AykKF hRloQP checkoutPriceColumn"
+          >
+            € 
+            3.00
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

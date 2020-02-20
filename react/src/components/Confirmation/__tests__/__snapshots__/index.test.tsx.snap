@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Confirmation /> renders correctly 1`] = `
+<div
+  className="singleColumn"
+>
+  <p
+    className="sc-AykKC jWqIUs"
+  >
+    <strong
+      data-cy="confirm-success"
+    >
+      Your order has been successfully processed and will be delivered within 24 hours.
+    </strong>
+    <br />
+    <br />
+    Please keep a note of your confirmation number:
+    <strong>
+      995604757
+    </strong>
+    <br />
+    If you have a query concerning your order, feel free to 
+    <a
+      href="/contact"
+      onClick={[Function]}
+    >
+      contact us
+    </a>
+    <br />
+    <br />
+    Thank you for shopping at the Affable Bean Green Grocer!
+  </p>
+  <div
+    className="summaryColumn"
+  >
+    <table
+      className="sc-AykKI haLdtv detailsTable"
+    >
+      <tbody>
+        <tr
+          className="header"
+        >
+          <th
+            colSpan={3}
+          >
+            order summary
+          </th>
+        </tr>
+        <tr
+          className="tableHeading"
+        >
+          <td>
+            product
+          </td>
+          <td>
+            quantity
+          </td>
+          <td>
+            price
+          </td>
+        </tr>
+        <tr
+          className="white"
+        >
+          <td>
+            chocolate cookies
+          </td>
+          <td
+            className="quantityColumn"
+          >
+            1
+          </td>
+          <td
+            className="confirmationPriceColumn"
+          >
+            € 
+            2.39
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            colSpan={3}
+            style={
+              Object {
+                "padding": "0 20px",
+              }
+            }
+          >
+            <hr />
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-AykKG lmcsto"
+            colSpan={2}
+          >
+            <strong>
+              surcharge:
+            </strong>
+          </td>
+          <td
+            className="sc-AykKH ccixJp"
+          >
+            € 
+            3.00
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-AykKJ eQLGBX"
+            colSpan={2}
+          >
+            <strong>
+              total:
+            </strong>
+          </td>
+          <td
+            className="sc-AykKK ioGYgM"
+          >
+            € 
+            5.39
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            colSpan={3}
+            style={
+              Object {
+                "padding": "0 20px",
+              }
+            }
+          >
+            <hr />
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-AykKD bLREOA"
+            colSpan={3}
+          >
+            <strong>
+              date processed: 
+            </strong>
+            <span>
+              1582123900751
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="summaryColumn"
+  >
+    <table
+      className="sc-AykKE cuSoPm detailsTable"
+    >
+      <tbody>
+        <tr
+          className="header"
+        >
+          <th
+            colSpan={3}
+          >
+            delivery address
+          </th>
+        </tr>
+        <tr>
+          <td
+            className="sc-AykKF gXZIvL lightBlue"
+            colSpan={3}
+          >
+            joe bloggs
+            <br />
+            11111111
+            <br />
+            NY
+            <br />
+            <hr />
+            joe@bloggs.com
+            <br />
+            11111111
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

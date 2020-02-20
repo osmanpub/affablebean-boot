@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders correctly 1`] = `
+Array [
+  <div
+    className="sc-AykKC bnHXXk"
+  >
+    <div
+      className="sc-AykKD cIBYdt headerWidget"
+    >
+      <a
+        className="bubble"
+        data-cy="proceed-checkout"
+        href="/checkout"
+        onClick={[Function]}
+      >
+        proceed to checkout ➟
+      </a>
+    </div>
+    <div
+      className="sc-AykKE eMKgTS headerWidget"
+    >
+      <span
+        className="horizontalMargin"
+        data-cy="cart-hdr-total"
+      >
+        <img
+          alt="shopping cart icon"
+          src="/static/img/cart.gif"
+        />
+         
+        0 items
+      </span>
+      <a
+        className="bubble"
+        data-cy="cart-hdr-view-cart"
+        href="/viewCart/false"
+        onClick={[Function]}
+      >
+        view cart
+      </a>
+    </div>
+  </div>,
+  ")",
+]
+`;
+
+exports[`<WidgetBar /> renders correctly 1`] = `
+Array [
+  <div
+    className="sc-AykKC bnHXXk"
+  >
+    <div
+      className="sc-AykKD cIBYdt headerWidget"
+    >
+      <a
+        className="bubble"
+        data-cy="proceed-checkout"
+        href="/checkout"
+        onClick={[Function]}
+      >
+        proceed to checkout ➟
+      </a>
+    </div>
+    <div
+      className="sc-AykKE eMKgTS headerWidget"
+    >
+      <span
+        className="horizontalMargin"
+        data-cy="cart-hdr-total"
+      >
+        <img
+          alt="shopping cart icon"
+          src="/static/img/cart.gif"
+        />
+         
+        0 items
+      </span>
+      <a
+        className="bubble"
+        data-cy="cart-hdr-view-cart"
+        href="/viewCart/false"
+        onClick={[Function]}
+      >
+        view cart
+      </a>
+    </div>
+  </div>,
+  ")",
+]
+`;
