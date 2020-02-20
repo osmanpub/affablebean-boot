@@ -1,42 +1,55 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
-import Confirmation from '..';
+import configureStore from 'redux-mock-store';
+import Home from '..';
 
-describe('<Confirmation />', () => {
-  const order = {
-    customer: {
-      id: 1,
-      address: '11111111',
-      ccNumber: '1111111111111111',
-      cityRegion: 'NY',
-      email: 'joe@bloggs.com',
-      name: 'joe bloggs',
-      phone: '11111111',
-    },
-    orderedProducts: [
+const mockStore = configureStore([]);
+
+const initialState = {
+  categories: {
+    didInvalidate: false,
+    isFetching: false,
+    items: [
       {
-        quantity: 1,
+        id: 1,
+        name: 'dairy',
+      },
+      {
+        id: 2,
+        name: 'meats',
+      },
+      {
+        id: 3,
+        name: 'bakery',
+      },
+      {
+        id: 4,
+        name: 'fruit & veg',
+      },
+      {
+        id: 5,
+        name: 'cereals',
+      },
+      {
+        id: 6,
+        name: 'drinks',
       },
     ],
-    orderRecord: {
-      id: 1,
-      amount: 5.39,
-      confirmationNumber: '995604757',
-      dateCreated: '1582123900751',
-    },
-    products: [
-      {
-        id: 12,
-        description: 'contain peanuts<br>(3 cookies)',
-        name: 'chocolate cookies',
-        price: 2.39,
-        category: {id: 3, name: 'bakery'},
-      },
-    ],
-  };
+  },
+};
 
+const store = mockStore(initialState);
+
+describe('<Home />', () => {
   it('renders correctly', () => {
-    const component = renderer.create(<Confirmation order={order} />).toJSON();
+    const component = renderer
+      .create(
+        <Provider store={store}>
+          <Home setCategoryProduct={jest.fn()} setScreen={jest.fn()} />
+        </Provider>,
+      )
+      .toJSON();
     expect(component).toMatchSnapshot();
   });
 });

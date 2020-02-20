@@ -1,91 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Categories /> renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-    }
-  }
->
-  <RCTScrollView
-    ListFooterComponent={
-      <View
+exports[`<Cart /> renders correctly 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Image
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        source={
+          Object {
+            "testUri": "../../../src/components/Header/logo.jpg",
+          }
+        }
         style={
           Object {
-            "padding": 64,
+            "margin": 16,
           }
         }
       />
-    }
-    data={
-      Array [
-        Object {
-          "id": 1,
-          "name": "dairy",
-        },
-        Object {
-          "id": 2,
-          "name": "meats",
-        },
-        Object {
-          "id": 3,
-          "name": "bakery",
-        },
-        Object {
-          "id": 4,
-          "name": "fruit & veg",
-        },
-        Object {
-          "id": 5,
-          "name": "cereals",
-        },
-        Object {
-          "id": 6,
-          "name": "drinks",
-        },
-      ]
-    }
-    disableVirtualization={false}
-    getItem={[Function]}
-    getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
-    onLayout={[Function]}
-    onMomentumScrollEnd={[Function]}
-    onScroll={[Function]}
-    onScrollBeginDrag={[Function]}
-    onScrollEndDrag={[Function]}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
-  >
-    <View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
+      <View>
         <View
           style={
             Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
+              "flexDirection": "row",
+              "paddingBottom": 16,
             }
           }
         >
-          <Text>
-            dairy
-          </Text>
-          <Image
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={null}
+          >
+            <Text
+              style={
+                Object {
+                  "borderColor": "blue",
+                  "borderRadius": 32,
+                  "borderWidth": 1,
+                  "color": "blue",
+                  "fontWeight": "bold",
+                  "marginHorizontal": 8,
+                  "padding": 12,
+                }
+              }
+            >
+              clear cart
+            </Text>
+          </View>
+          <Text
             accessible={true}
             focusable={true}
             onClick={[Function]}
@@ -95,442 +79,160 @@ exports[`<Categories /> renders correctly 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            source={
+            style={
               Object {
-                "testUri": "../../../assets/img/categories/dairy.jpg",
+                "borderColor": "blue",
+                "borderRadius": 32,
+                "borderWidth": 1,
+                "color": "blue",
+                "fontWeight": "bold",
+                "marginHorizontal": 8,
+                "padding": 12,
               }
             }
-          />
+          >
+            checkout
+          </Text>
         </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
         <View
           style={
             Object {
               "alignItems": "center",
-              "paddingBottom": 24,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingBottom": 16,
             }
           }
         >
-          <Text>
-            meats
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
-                "testUri": "../../../assets/img/categories/meats.jpg",
+                "testUri": "../../../src/components/Header/cart.gif",
               }
             }
           />
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
-          }
-        >
           <Text>
-            bakery
+             
+            1
+             items
           </Text>
-          <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            source={
-              Object {
-                "testUri": "../../../assets/img/categories/bakery.jpg",
-              }
-            }
-          />
         </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
-          }
-        >
-          <Text>
-            fruit & veg
-          </Text>
-          <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            source={
-              Object {
-                "testUri": "../../../assets/img/categories/fruitveg.jpg",
-              }
-            }
-          />
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
-          }
-        >
-          <Text>
-            cereals
-          </Text>
-          <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            source={
-              Object {
-                "testUri": "../../../assets/img/categories/cereals.jpg",
-              }
-            }
-          />
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
-          }
-        >
-          <Text>
-            drinks
-          </Text>
-          <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            source={
-              Object {
-                "testUri": "../../../assets/img/categories/drinks.jpg",
-              }
-            }
-          />
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-      >
-        <View
-          style={
-            Object {
-              "padding": 64,
-            }
-          }
-        />
       </View>
     </View>
-  </RCTScrollView>
-</View>
-`;
-
-exports[`<Categories /> should match to snapshot 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "store": Object {
-        "clearActions": [Function],
-        "dispatch": [Function],
-        "getActions": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-      },
-      "subscription": Subscription {
-        "handleChangeWrapper": [Function],
-        "listeners": Object {
-          "notify": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "clearActions": [Function],
-          "dispatch": [Function],
-          "getActions": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-        },
-        "unsubscribe": null,
-      },
-    }
-  }
->
-  <Connect(Categories)
-    setCategoryProduct={[MockFunction]}
-  />
-</ContextProvider>
-`;
-
-exports[`<CheckoutForm /> renders correctly 1`] = `
-<View>
-  <View
-    style={
-      Object {
-        "backgroundColor": "#f7f7e9",
-        "padding": 16,
-      }
-    }
-  >
-    <Text>
-      In order to purchase the items in your shopping cart, please provide us with the following information:
-    </Text>
-    <TextInput
-      allowFontScaling={true}
-      name="name"
-      onChange={[Function]}
-      placeholder="Enter your name"
-      rejectResponderTermination={true}
-      style={
-        Object {
-          "borderBottomColor": "black",
-          "borderBottomWidth": 1,
-          "padding": 8,
-        }
-      }
-      underlineColorAndroid="transparent"
-    />
-    <TextInput
-      allowFontScaling={true}
-      name="email"
-      onChange={[Function]}
-      placeholder="Enter your email address"
-      rejectResponderTermination={true}
-      style={
-        Object {
-          "borderBottomColor": "black",
-          "borderBottomWidth": 1,
-          "padding": 8,
-        }
-      }
-      underlineColorAndroid="transparent"
-    />
-    <TextInput
-      allowFontScaling={true}
-      name="phone"
-      onChange={[Function]}
-      placeholder="Enter your phone number"
-      rejectResponderTermination={true}
-      style={
-        Object {
-          "borderBottomColor": "black",
-          "borderBottomWidth": 1,
-          "padding": 8,
-        }
-      }
-      underlineColorAndroid="transparent"
-    />
-    <TextInput
-      allowFontScaling={true}
-      name="address"
-      onChange={[Function]}
-      placeholder="Enter your address"
-      rejectResponderTermination={true}
-      style={
-        Object {
-          "borderBottomColor": "black",
-          "borderBottomWidth": 1,
-          "padding": 8,
-        }
-      }
-      underlineColorAndroid="transparent"
-    />
-    <TextInput
-      allowFontScaling={true}
-      name="creditCard"
-      onChange={[Function]}
-      placeholder="Enter your credit card number"
-      rejectResponderTermination={true}
-      style={
-        Object {
-          "borderBottomColor": "black",
-          "borderBottomWidth": 1,
-          "padding": 8,
-        }
-      }
-      underlineColorAndroid="transparent"
-    />
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "paddingTop": 16,
-        }
-      }
-    >
-      Subtotal: € 
-      0.00
-    </Text>
-    <Text>
-      Surcharge: € 
-      3.00
-    </Text>
-    <Text
-      style={
-        Object {
-          "fontWeight": "bold",
-        }
-      }
-    >
-      Total: € 
-      3.00
-       
-    </Text>
-    <Text
-      style={
-        Object {
-          "marginTop": 8,
-        }
-      }
-    />
     <View
-      accessibilityRole="button"
-      accessibilityStates={Array []}
-      accessible={true}
-      focusable={true}
-      isTVSelectable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "opacity": 1,
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 24,
+          "paddingLeft": 32,
         }
       }
     >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/img/products/milk.png",
+          }
+        }
+      />
       <View
         style={
-          Array [
-            Object {},
-          ]
+          Object {
+            "flexDirection": "column",
+            "paddingLeft": 24,
+          }
         }
       >
         <Text
           style={
-            Array [
-              Object {
-                "color": "#007AFF",
-                "fontSize": 18,
-                "padding": 8,
-                "textAlign": "center",
-              },
-            ]
+            Object {
+              "fontWeight": "bold",
+            }
           }
         >
-          Purchase
+          milk
         </Text>
+        <Text
+          style={
+            Object {
+              "fontWeight": "bold",
+            }
+          }
+        >
+          € 
+          1.70
+        </Text>
+        <Text
+          style={
+            Object {
+              "paddingBottom": 8,
+            }
+          }
+        >
+          € 
+          1.70
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          name="quantity"
+          onChange={[Function]}
+          placeholder="Enter quantity"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderBottomColor": "black",
+              "borderBottomWidth": 1,
+              "marginBottom": 8,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="1"
+        />
+        <View
+          accessibilityRole="button"
+          accessibilityStates={Array []}
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {},
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#007AFF",
+                    "fontSize": 18,
+                    "padding": 8,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              update
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
-</View>
-`;
-
-exports[`<Confirmation /> renders correctly 1`] = `
-<View
-  style={
-    Object {
-      "padding": 16,
-    }
-  }
->
-  <Text
-    style={
-      Object {
-        "fontWeight": "bold",
-      }
-    }
-  >
-    Your order has been successfully processed and will be delivered within 24 hours.
-  </Text>
-  <Text
-    style={
-      Object {
-        "paddingTop": 8,
-      }
-    }
-  >
-    Please keep a note of your confirmation number:
-    995604757
-  </Text>
-  <Text
-    style={
-      Object {
-        "paddingTop": 8,
-      }
-    }
-  >
-    Thank you for shopping at the Affable Bean Green Grocer!
-  </Text>
-</View>
+</RCTScrollView>
 `;
