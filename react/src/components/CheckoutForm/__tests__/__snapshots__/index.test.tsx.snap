@@ -144,7 +144,7 @@ exports[`<CheckoutForm /> renders correctly 1`] = `
     </div>
   </form>
   <div
-    className="sc-fzXfMv lanVLQ"
+    className="sc-fzoyAV kHIeWT"
   >
     <ul>
       <li>
@@ -157,17 +157,17 @@ exports[`<CheckoutForm /> renders correctly 1`] = `
       </li>
     </ul>
     <table
-      className="sc-fzXfMw eHGHGA"
+      className="sc-fzoLag dCmtSq"
     >
       <tbody>
         <tr>
           <td
-            className="sc-fzXfMx cLCaMR"
+            className="sc-fzoXzr gUBgXC"
           >
             subtotal:
           </td>
           <td
-            className="sc-fzXfMy eXSISp checkoutPriceColumn"
+            className="sc-fzpjYC doNXms checkoutPriceColumn"
           >
             € 
             0.00
@@ -175,12 +175,12 @@ exports[`<CheckoutForm /> renders correctly 1`] = `
         </tr>
         <tr>
           <td
-            className="sc-fzXfMx cLCaMR"
+            className="sc-fzoXzr gUBgXC"
           >
             surcharge:
           </td>
           <td
-            className="sc-fzXfMy eXSISp checkoutPriceColumn"
+            className="sc-fzpjYC doNXms checkoutPriceColumn"
           >
             € 
             3.00
@@ -188,12 +188,12 @@ exports[`<CheckoutForm /> renders correctly 1`] = `
         </tr>
         <tr>
           <td
-            className="sc-fzXfMx cLCaMR"
+            className="sc-fzoXzr gUBgXC"
           >
             total:
           </td>
           <td
-            className="sc-fzXfMy eXSISp checkoutPriceColumn"
+            className="sc-fzpjYC doNXms checkoutPriceColumn"
           >
             € 
             3.00

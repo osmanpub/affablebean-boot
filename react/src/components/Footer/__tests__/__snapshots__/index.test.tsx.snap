@@ -2,11 +2,11 @@
 
 exports[`<Footer /> renders correctly 1`] = `
 <div
-  className="sc-AykKD crBykC"
+  className="sc-AxirZ MueCz"
 >
   <br />
   <span
-    className="sc-AykKE fYjhKo"
+    className="sc-AxiKw gXNbfu"
   >
     <a
       data-cy="privacy"

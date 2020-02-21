@@ -6,7 +6,7 @@ exports[`<CartItem /> renders correctly 1`] = `
   data-cy="product-milk"
 >
   <td
-    className="sc-AykKC bQqdHm"
+    className="sc-AxjAm jhCEof"
   >
     <img
       alt="{name}"
@@ -14,14 +14,14 @@ exports[`<CartItem /> renders correctly 1`] = `
     />
   </td>
   <td
-    className="sc-AykKC bQqdHm"
+    className="sc-AxjAm jhCEof"
   >
     <span>
       milk
     </span>
   </td>
   <td
-    className="sc-AykKC bQqdHm"
+    className="sc-AxjAm jhCEof"
   >
     €
     1.70
@@ -29,7 +29,7 @@ exports[`<CartItem /> renders correctly 1`] = `
     1.7
   </td>
   <td
-    className="sc-AykKC bQqdHm"
+    className="sc-AxjAm jhCEof"
   >
     <form
       onSubmit={[Function]}

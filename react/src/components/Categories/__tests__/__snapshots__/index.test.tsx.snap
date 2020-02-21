@@ -3,13 +3,13 @@
 exports[`<Categories /> renders correctly 1`] = `
 <div>
   <div
-    className="sc-fzXfNg crhOSq"
+    className="sc-fznxKY bbgeym"
   >
     <div
-      className="sc-fzXfNi kwZMKk"
+      className="sc-fznWOq hLglHr"
     >
       <p
-        className="sc-fzXfNf fsXfJA"
+        className="sc-fzpmMD gcKxiF"
         data-cy="home-welcome"
       >
         Welcome to the online home of the Affable Bean Green Grocer.
@@ -20,7 +20,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="sc-fzXfNh gZLYOI"
+    className="sc-fznMAR fFDOkt"
   >
     <span
       className="categoryBox"
