@@ -67,7 +67,7 @@ function CheckoutForm(props: Props) {
   return (
     <div className="singleColumn">
       <h2>checkout</h2>
-      <p data-cy="checkout-intro">
+      <p data-cy="checkout-intro" data-testid="checkout-intro">
         In order to purchase the items in your shopping cart, please provide us
         with the following information:
       </p>

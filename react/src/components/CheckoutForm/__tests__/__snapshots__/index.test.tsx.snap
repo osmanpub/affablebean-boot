@@ -9,6 +9,7 @@ exports[`<CheckoutForm /> renders correctly 1`] = `
   </h2>
   <p
     data-cy="checkout-intro"
+    data-testid="checkout-intro"
   >
     In order to purchase the items in your shopping cart, please provide us with the following information:
   </p>

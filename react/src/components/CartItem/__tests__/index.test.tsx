@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -69,6 +69,39 @@ describe("<CartItem />", () => {
     const { getByDisplayValue } = render(cartItem);
     const input = getByDisplayValue("1");
     expect(input).toBeInTheDocument();
+  });
+
+  it("update quantity to 0", () => {
+    const { getByDisplayValue } = render(cartItem);
+    const input = getByDisplayValue("1");
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "0" } });
+    });
+
+    expect(input.value).toBe("0"); // this would remove the item on update event
+  });
+
+  it("update quantity to 2", () => {
+    const { getByDisplayValue } = render(cartItem);
+    const input = getByDisplayValue("1");
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "2" } });
+    });
+
+    expect(input.value).toBe("2");
+  });
+
+  it("update quantity to 'hello'", () => {
+    const { getByDisplayValue } = render(cartItem);
+    const input = getByDisplayValue("1");
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "hello" } });
+    });
+
+    expect(input.value).toBe(""); // only numeric input
   });
 
   it("update button present", () => {
