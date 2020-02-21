@@ -6,11 +6,11 @@ import {
   getRestPath,
   IS_NODE
 } from "../helpers/utils";
-import { id } from "../interfaces/id";
+import { ID } from "../interfaces/id";
 import { RootState } from "../redux";
 import { isFetching, receiveCategory } from "../redux/category";
 
-export const fetchCategoryIfNeeded = (id: id) => (
+export const fetchCategoryIfNeeded = (id: ID) => (
   dispatch: Function,
   getState: Function
 ) => {
@@ -19,7 +19,7 @@ export const fetchCategoryIfNeeded = (id: id) => (
   }
 };
 
-const fetchCategory = (id: id) => (dispatch: Function) => {
+const fetchCategory = (id: ID) => (dispatch: Function) => {
   if (IS_NODE) {
     dispatch(isFetching(true));
 
@@ -52,7 +52,7 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
     });
 };
 
-const shouldFetchCategory = (id: id, state: RootState) => {
+const shouldFetchCategory = (id: ID, state: RootState) => {
   const { category } = state;
 
   if (

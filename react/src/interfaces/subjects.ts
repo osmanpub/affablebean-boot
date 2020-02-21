@@ -1,4 +1,4 @@
-import { id } from "./id";
+import { ID } from "./id";
 
 export interface Subjects {
   didInvalidate: boolean;
@@ -7,7 +7,7 @@ export interface Subjects {
 }
 
 export interface Subject {
-  id: id;
+  id: ID;
   name: string;
 }
 

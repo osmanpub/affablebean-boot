@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getNodePath, getPath, IS_NODE } from "../helpers/utils";
-import { id } from "../interfaces/id";
+import { ID } from "../interfaces/id";
 import { addToCart, clearCart, isFetching, updateCart } from "../redux/cart";
 
-export const addProductToCart = (id: id) => (dispatch: Function) => {
+export const addProductToCart = (id: ID) => (dispatch: Function) => {
   dispatch(isFetching(true));
 
   axios({
@@ -40,7 +40,7 @@ export const emptyCart = () => (dispatch: Function) => {
     .finally(() => dispatch(isFetching(false)));
 };
 
-export const updateProductInCart = (id: id, qty: number) => (
+export const updateProductInCart = (id: ID, qty: number) => (
   dispatch: Function
 ) => {
   dispatch(isFetching(true));

@@ -1,6 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils, { act } from "react-dom/test-utils";
@@ -24,12 +22,6 @@ global.MutationObserver = class {
   // @ts-ignore
   observe(element, initObject) {}
 };
-
-/**
- * Set up Enzyme to mount to DOM, simulate events,
- * and inspect the DOM in tests.
- */
-configure({ adapter: new Adapter() });
 
 /**
  * Mock components and modules
