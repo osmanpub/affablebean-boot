@@ -1,5 +1,4 @@
-import "@testing-library/jest-dom/extend-expect";
-import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -48,8 +47,26 @@ describe("<CartItem />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("renders correctly", () => {
-    const { getByText, getByRole, container, asFragment } = render(cartItem);
+  it("product image present", () => {
+    const { getByAltText } = render(cartItem);
+    const img = getByAltText(/milk/i);
+    expect(img).toBeInTheDocument();
+  });
+
+  it("product name present", () => {
+    const { getByTestId } = render(cartItem);
+    const name = getByTestId(/milk/i);
+    expect(name).toBeInTheDocument();
+  });
+
+  it("product price present", () => {
+    const { getByTestId } = render(cartItem);
+    const price = getByTestId(/1.7/i);
+    expect(price).toBeInTheDocument();
+  });
+
+  it("update button present", () => {
+    const { getByText } = render(cartItem);
     const updateButton = getByText(/update/i);
     expect(updateButton).toBeInTheDocument();
   });

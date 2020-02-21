@@ -9,19 +9,19 @@ exports[`<CartItem /> renders correctly 1`] = `
     className="sc-AxjAm jhCEof"
   >
     <img
-      alt="{name}"
+      alt="milk"
       src="/static/img/products/milk.png"
     />
   </td>
   <td
     className="sc-AxjAm jhCEof"
+    data-testid="milk"
   >
-    <span>
-      milk
-    </span>
+    milk
   </td>
   <td
     className="sc-AxjAm jhCEof"
+    data-testid={1.7}
   >
     €
     1.70

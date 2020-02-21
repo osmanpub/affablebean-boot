@@ -32,12 +32,10 @@ export default function CartItem(props: Props) {
     <>
       <tr className={`${rowCol}`} data-cy={`product-${name}`}>
         <CartTableTd>
-          <img src={`/static/img/products/${name}.png`} alt="{name}" />
+          <img src={`/static/img/products/${name}.png`} alt={name} />
         </CartTableTd>
-        <CartTableTd>
-          <span>{name}</span>
-        </CartTableTd>
-        <CartTableTd>
+        <CartTableTd data-testid={name}>{name}</CartTableTd>
+        <CartTableTd data-testid={product.price}>
           &euro;
           {item.total.toFixed(2)}
           <br />
