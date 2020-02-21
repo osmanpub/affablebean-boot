@@ -25,12 +25,18 @@
     "start:java": "cd .. && sh server && cd react && node_modules/react-scripts/bin/react-scripts.js start &",
     "test": "react-scripts test"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.5",
     "axios": "^0.19.2",
@@ -50,6 +56,9 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@cypress/code-coverage": "^1.12.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
     "@types/axios": "^0.14.0",
     "@types/cypress": "^1.1.3",
     "@types/jest": "^25.1.3",
@@ -74,7 +83,6 @@
     "redux-mock-store": "^1.5.4",
     "typescript": "^3.8.2"
   },
-  "jest": {},
   "nyc": {
     "sourceMap": false,
     "instrument": false

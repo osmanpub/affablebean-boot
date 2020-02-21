@@ -98,9 +98,9 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <select
+              className="form-control"
               ref={register({ required: true })}
               name="subject"
-              className="form-control"
             >
               {subjectsList}
             </select>
@@ -113,13 +113,13 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="contact-name"
-              ref={register({ required: true, minLength: 3, maxLength: 64 })}
-              type="text"
               className="form-control"
+              data-cy="contact-name"
               name="name"
               placeholder="At least 3 chars and no more than 64 chars"
               size={31}
+              ref={register({ required: true, minLength: 3, maxLength: 64 })}
+              type="text"
             />
           </div>
           {errors.name && (
@@ -134,13 +134,13 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="contact-email"
-              ref={register({ required: true, minLength: 8, maxLength: 32 })}
-              type="email"
               className="form-control"
+              data-cy="contact-email"
               name="email"
               placeholder="At least 8 chars and no more than 32 chars"
               size={31}
+              ref={register({ required: true, minLength: 8, maxLength: 32 })}
+              type="email"
             />
           </div>
           {errors.email && (
@@ -155,13 +155,13 @@ function ContactForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <textarea
-              data-cy="contact-msg"
-              ref={register({ required: true, minLength: 8, maxLength: 1024 })}
               className="form-control"
-              name="msg"
-              placeholder="At least 8 chars and no more than 1024 chars"
               cols={25}
               rows={5}
+              data-cy="contact-msg"
+              name="msg"
+              placeholder="At least 8 chars and no more than 1024 chars"
+              ref={register({ required: true, minLength: 8, maxLength: 1024 })}
             />
           </div>
           {errors.msg && (
@@ -173,9 +173,9 @@ function ContactForm(props: Props) {
         <div className="form-group">
           <div className={`col-sm-offset-2 col-sm-10`}>
             <button
-              type="submit"
               className={`btn btn-primary`}
               data-cy="contact-submit"
+              type="submit"
             >
               send feedback
             </button>

@@ -18,8 +18,8 @@ export function WidgetBar(props: Props) {
   ) : (
     <Link
       className="bubble"
-      to={"/viewCart/false"}
       data-cy="cart-hdr-view-cart"
+      to={"/viewCart/false"}
     >
       view cart
     </Link>

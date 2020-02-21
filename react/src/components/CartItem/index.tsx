@@ -29,7 +29,7 @@ export default function CartItem(props: Props) {
   const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
   return (
-    <React.Fragment>
+    <>
       <tr className={`${rowCol}`} data-cy={`product-${name}`}>
         <CartTableTd>
           <img src={`/static/img/products/${name}.png`} alt="{name}" />
@@ -46,19 +46,19 @@ export default function CartItem(props: Props) {
         <CartTableTd>
           <form onSubmit={onSubmit}>
             <input
-              data-cy={`input-qty-${name}`}
-              ref={register({ required: true, min: 0, max: 100 })}
               className="form-control"
+              data-cy={`input-qty-${name}`}
               defaultValue={item.quantity}
               name="quantity"
+              ref={register({ required: true, min: 0, max: 100 })}
               size={2}
               style={{ margin: "5px", textAlign: "center", width: "90%" }}
               type="number"
             />
             <button
               className="btn btn-primary btn-sm"
-              type="submit"
               data-cy={`update-qty-${name}`}
+              type="submit"
             >
               update
             </button>
@@ -70,6 +70,6 @@ export default function CartItem(props: Props) {
           </form>
         </CartTableTd>
       </tr>
-    </React.Fragment>
+    </>
   );
 }

@@ -19,10 +19,10 @@ export default function Category(props: Props) {
         <span className="categoryLabel" />
         <span className="categoryLabelText">{name}</span>
         <img
-          data-cy={`category-${name}`}
-          src={`/static/img/categories/${name}.jpg`}
           alt={name}
           className="categoryImage"
+          data-cy={`category-${name}`}
+          src={`/static/img/categories/${name}.jpg`}
         />
       </Link>
     </span>

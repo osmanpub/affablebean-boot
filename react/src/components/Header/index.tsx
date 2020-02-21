@@ -21,9 +21,9 @@ export default function Header(props: Props) {
           </Link>
         </Logo>
         <img
+          alt="the affable bean"
           id="logoText"
           src="/static/img/logoText.png"
-          alt="the affable bean"
         />
       </HeaderMain>
     </HeaderWrapper>

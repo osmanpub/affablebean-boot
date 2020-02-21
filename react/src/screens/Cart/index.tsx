@@ -38,8 +38,8 @@ function Cart(props: Props) {
     ) : (
       <Link
         className="bubble hMargin"
-        to={"/viewCart/true"}
         data-cy="clear-cart"
+        to={"/viewCart/true"}
       >
         clear cart
       </Link>

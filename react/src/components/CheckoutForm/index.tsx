@@ -79,13 +79,13 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="checkout-name"
-              ref={register({ required: true, minLength: 3, maxLength: 64 })}
-              type="text"
               className="form-control"
+              data-cy="checkout-name"
               name="name"
               placeholder="At least 3 chars and no more than 64 chars"
               size={32}
+              ref={register({ required: true, minLength: 3, maxLength: 64 })}
+              type="text"
             />
           </div>
           {errors.name && (
@@ -100,13 +100,13 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="checkout-email"
-              ref={register({ required: true, minLength: 8, maxLength: 32 })}
-              type="email"
               className="form-control"
+              data-cy="checkout-email"
               name="email"
               placeholder="At least 8 chars and no more than 32 chars"
               size={32}
+              ref={register({ required: true, minLength: 8, maxLength: 32 })}
+              type="email"
             />
           </div>
           {errors.email && (
@@ -121,13 +121,13 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="checkout-phone"
-              ref={register({ required: true, minLength: 8, maxLength: 32 })}
-              type="text"
               className="form-control"
+              data-cy="checkout-phone"
               name="phone"
               placeholder="At least 8 chars and no more than 32 chars"
               size={32}
+              ref={register({ required: true, minLength: 8, maxLength: 32 })}
+              type="text"
             />
           </div>
           {errors.email && (
@@ -142,13 +142,13 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="checkout-address"
-              ref={register({ required: true, minLength: 8, maxLength: 256 })}
-              type="text"
               className="form-control"
+              data-cy="checkout-address"
               name="address"
               placeholder="At least 8 chars and no more than 256 chars"
               size={32}
+              ref={register({ required: true, minLength: 8, maxLength: 256 })}
+              type="text"
             />
           </div>
           {errors.address && (
@@ -163,13 +163,13 @@ function CheckoutForm(props: Props) {
           </label>
           <div className="col-sm-10">
             <input
-              data-cy="checkout-cc"
-              ref={register({ required: true, minLength: 16, maxLength: 19 })}
-              type="text"
               className="form-control"
+              data-cy="checkout-cc"
               name="creditCard"
               placeholder="At least 16 chars and no more than 19 chars"
               size={32}
+              ref={register({ required: true, minLength: 16, maxLength: 19 })}
+              type="text"
             />
           </div>
           {errors.creditCard && (
@@ -182,9 +182,9 @@ function CheckoutForm(props: Props) {
         <div className="form-group">
           <div className={`col-sm-offset-2 col-sm-10`}>
             <button
-              type="submit"
               className={`btn btn-primary`}
               data-cy="checkout-submit"
+              type="submit"
             >
               submit purchase
             </button>

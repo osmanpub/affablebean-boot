@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactTestUtils, { act } from "react-dom/test-utils";
