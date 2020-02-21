@@ -65,6 +65,12 @@ describe("<CartItem />", () => {
     expect(price).toBeInTheDocument();
   });
 
+  it("quantity present", () => {
+    const { getByDisplayValue } = render(cartItem);
+    const input = getByDisplayValue("1");
+    expect(input).toBeInTheDocument();
+  });
+
   it("update button present", () => {
     const { getByText } = render(cartItem);
     const updateButton = getByText(/update/i);

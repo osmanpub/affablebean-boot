@@ -11,6 +11,7 @@ exports[`<Categories /> renders correctly 1`] = `
       <p
         className="sc-fzpmMD gcKxiF"
         data-cy="home-welcome"
+        data-testid="home-welcome"
       >
         Welcome to the online home of the Affable Bean Green Grocer.
       </p>
@@ -24,6 +25,7 @@ exports[`<Categories /> renders correctly 1`] = `
   >
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/1"
@@ -47,6 +49,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </span>
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/2"
@@ -70,6 +73,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </span>
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/3"
@@ -93,6 +97,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </span>
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/4"
@@ -116,6 +121,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </span>
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/5"
@@ -139,6 +145,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </span>
     <span
       className="categoryBox"
+      data-testid="categoryBox"
     >
       <a
         href="/category/6"

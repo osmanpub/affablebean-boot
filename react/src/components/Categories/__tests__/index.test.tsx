@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -42,17 +43,29 @@ const initialState = {
 
 const store = mockStore(initialState);
 
+const categories = (
+  <Router>
+    <Provider store={store}>
+      <Categories />
+    </Provider>
+  </Router>
+);
+
 describe("<Categories />", () => {
   it("renders correctly", () => {
-    const component = renderer
-      .create(
-        <Router>
-          <Provider store={store}>
-            <Categories />
-          </Provider>
-        </Router>
-      )
-      .toJSON();
+    const component = renderer.create(categories).toJSON();
     expect(component).toMatchSnapshot();
+  });
+
+  it("show welcome paragraph", () => {
+    const { getByTestId } = render(categories);
+    const paragraph = getByTestId(/home-welcome/i);
+    expect(paragraph).toBeInTheDocument();
+  });
+
+  it("six categories present", () => {
+    const { getAllByTestId } = render(categories);
+    const boxes = getAllByTestId(/categoryBox/i);
+    expect(boxes).toHaveLength(6);
   });
 });

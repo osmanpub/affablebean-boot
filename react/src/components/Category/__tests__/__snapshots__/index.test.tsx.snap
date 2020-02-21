@@ -3,6 +3,7 @@
 exports[`<Category /> renders correctly 1`] = `
 <span
   className="categoryBox"
+  data-testid="categoryBox"
 >
   <a
     href="/category/1"

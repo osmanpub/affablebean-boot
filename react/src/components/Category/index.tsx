@@ -14,7 +14,7 @@ export default function Category(props: Props) {
   const id = getId(category);
 
   return (
-    <span className="categoryBox">
+    <span className="categoryBox" data-testid="categoryBox">
       <Link to={`/category/${id}`}>
         <span className="categoryLabel" />
         <span className="categoryLabelText">{name}</span>
