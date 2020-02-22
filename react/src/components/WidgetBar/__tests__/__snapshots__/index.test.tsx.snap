@@ -6,7 +6,7 @@ Array [
     className="sc-AxhCb kdYhXy"
   >
     <div
-      className="sc-AxhUy dXnRMF headerWidget"
+      className="sc-AxhUy bLXZsm headerWidget"
     >
       <a
         className="bubble"
@@ -18,7 +18,7 @@ Array [
       </a>
     </div>
     <div
-      className="sc-AxgMl ghvFLr headerWidget"
+      className="sc-AxgMl kJNXLs headerWidget"
     >
       <span
         className="horizontalMargin"
@@ -30,7 +30,7 @@ Array [
           src="/static/img/cart.gif"
         />
          
-        0 items
+        1 items
       </span>
       <a
         className="bubble"
