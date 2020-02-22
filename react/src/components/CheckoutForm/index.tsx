@@ -189,6 +189,7 @@ function CheckoutForm(props: Props) {
             <button
               className={`btn btn-primary`}
               data-cy="checkout-submit"
+              data-testid="checkout-submit"
               type="submit"
             >
               submit purchase

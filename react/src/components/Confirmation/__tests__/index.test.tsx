@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import renderer from "react-test-renderer";
@@ -7,12 +8,12 @@ describe("<Confirmation />", () => {
   const order = {
     customer: {
       id: 1,
-      address: "11111111",
-      ccNumber: "1111111111111111",
+      address: "none of your business",
+      ccNumber: "1234567890123456",
       cityRegion: "NY",
       email: "joe@bloggs.com",
       name: "joe bloggs",
-      phone: "11111111"
+      phone: "1234567890"
     },
     orderedProducts: [
       {
@@ -36,14 +37,71 @@ describe("<Confirmation />", () => {
     ]
   };
 
+  const confirmation = (
+    <Router>
+      <Confirmation order={order} />
+    </Router>
+  );
+
   it("renders correctly", () => {
-    const component = renderer
-      .create(
-        <Router>
-          <Confirmation order={order} />
-        </Router>
-      )
-      .toJSON();
+    const component = renderer.create(confirmation).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
+  });
+
+  it("confirmation present", () => {
+    const { getByTestId } = render(confirmation);
+    const success = getByTestId(/confirm-success/i);
+    // @ts-ignore
+    expect(success).toBeInTheDocument();
+  });
+
+  it("surcharge is 3.00", () => {
+    const { getByTestId } = render(confirmation);
+    const total = getByTestId(/surcharge/i);
+    // @ts-ignore
+    expect(total).toHaveTextContent(/3.00/i);
+  });
+
+  it("total is 5.39", () => {
+    const { getByTestId } = render(confirmation);
+    const surcharge = getByTestId(/total/i);
+    // @ts-ignore
+    expect(surcharge).toHaveTextContent(/5.39/i);
+  });
+
+  it("customer name is 'joe bloggs'", () => {
+    const { getByTestId } = render(confirmation);
+    const name = getByTestId(/name/i);
+    // @ts-ignore
+    expect(name).toHaveTextContent(/joe bloggs/i);
+  });
+
+  it("customer address is 'none of your business'", () => {
+    const { getByTestId } = render(confirmation);
+    const address = getByTestId(/address/i);
+    // @ts-ignore
+    expect(address).toHaveTextContent(/none of your business/i);
+  });
+
+  it("customer phone is '1234567890'", () => {
+    const { getByTestId } = render(confirmation);
+    const phone = getByTestId(/phone/i);
+    // @ts-ignore
+    expect(phone).toHaveTextContent(/1234567890/i);
+  });
+
+  it("customer email is 'joe@bloggs.com'", () => {
+    const { getByTestId } = render(confirmation);
+    const email = getByTestId(/email/i);
+    // @ts-ignore
+    expect(email).toHaveTextContent(/joe@bloggs.com/i);
+  });
+
+  it("customer cityRegion is 'joe bloggs'", () => {
+    const { getByTestId } = render(confirmation);
+    const region = getByTestId(/cityRegion/i);
+    // @ts-ignore
+    expect(region).toHaveTextContent(/NY/);
   });
 });

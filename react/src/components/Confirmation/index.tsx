@@ -46,7 +46,7 @@ export default function Confirmation(props: Props) {
   return (
     <div className="singleColumn">
       <ConfirmationText>
-        <strong data-cy="confirm-success">
+        <strong data-cy="confirm-success" data-testid="confirm-success">
           Your order has been successfully processed and will be delivered
           within 24 hours.
         </strong>
@@ -82,7 +82,7 @@ export default function Confirmation(props: Props) {
               <DeliverySurchargeCellLeft colSpan={2}>
                 <strong>surcharge:</strong>
               </DeliverySurchargeCellLeft>
-              <DeliverySurchargeCellRight>
+              <DeliverySurchargeCellRight data-testid="surcharge">
                 &euro; {surcharge.toFixed(2)}
               </DeliverySurchargeCellRight>
             </tr>
@@ -90,7 +90,7 @@ export default function Confirmation(props: Props) {
               <TotalCellLeft colSpan={2}>
                 <strong>total:</strong>
               </TotalCellLeft>
-              <TotalCellRight>
+              <TotalCellRight data-testid="total">
                 &euro; {orderRecord.amount.toFixed(2)}
               </TotalCellRight>
             </tr>
@@ -116,16 +116,16 @@ export default function Confirmation(props: Props) {
             </tr>
             <tr>
               <DeliveryAddressTableTd colSpan={3} className="lightBlue">
-                {customer.name}
+                <span data-testid="name">{customer.name}</span>
                 <br />
-                {customer.address}
+                <span data-testid="address">{customer.address}</span>
                 <br />
-                {customer.cityRegion}
+                <span data-testid="cityRegion">{customer.cityRegion}</span>
                 <br />
                 <hr />
-                {customer.email}
+                <span data-testid="email">{customer.email}</span>
                 <br />
-                {customer.phone}
+                <span data-testid="phone">{customer.phone}</span>
               </DeliveryAddressTableTd>
             </tr>
           </tbody>

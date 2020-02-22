@@ -80,7 +80,9 @@ function ContactForm(props: Props) {
   return (
     <div className="singleColumn">
       <div>
-        <h2 data-cy="contact-intro">Contact Us Form</h2>
+        <h2 data-cy="contact-intro" data-testid="contact-intro">
+          Contact Us Form
+        </h2>
         <p>
           You can use this form for any comments or questions about our company
           or brands.
@@ -99,6 +101,8 @@ function ContactForm(props: Props) {
           <div className="col-sm-10">
             <select
               className="form-control"
+              data-cy="contact-subject"
+              data-testid="contact-subject"
               ref={register({ required: true })}
               name="subject"
             >
@@ -115,6 +119,7 @@ function ContactForm(props: Props) {
             <input
               className="form-control"
               data-cy="contact-name"
+              data-testid="contact-name"
               name="name"
               placeholder="At least 3 chars and no more than 64 chars"
               size={31}
@@ -136,6 +141,7 @@ function ContactForm(props: Props) {
             <input
               className="form-control"
               data-cy="contact-email"
+              data-testid="contact-email"
               name="email"
               placeholder="At least 8 chars and no more than 32 chars"
               size={31}
@@ -159,6 +165,7 @@ function ContactForm(props: Props) {
               cols={25}
               rows={5}
               data-cy="contact-msg"
+              data-testid="contact-msg"
               name="msg"
               placeholder="At least 8 chars and no more than 1024 chars"
               ref={register({ required: true, minLength: 8, maxLength: 1024 })}
@@ -175,6 +182,7 @@ function ContactForm(props: Props) {
             <button
               className={`btn btn-primary`}
               data-cy="contact-submit"
+              data-testid="contact-submit"
               type="submit"
             >
               send feedback

@@ -9,6 +9,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
   >
     <strong
       data-cy="confirm-success"
+      data-testid="confirm-success"
     >
       Your order has been successfully processed and will be delivered within 24 hours.
     </strong>
@@ -104,6 +105,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           </td>
           <td
             className="sc-fzqNqU gRQPnX"
+            data-testid="surcharge"
           >
             € 
             3.00
@@ -122,6 +124,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           </td>
           <td
             className="sc-fzoXWK jzJqLr"
+            data-testid="total"
           >
             € 
             5.39
@@ -180,16 +183,36 @@ exports[`<Confirmation /> renders correctly 1`] = `
             className="sc-fzoiQi joKFly lightBlue"
             colSpan={3}
           >
-            joe bloggs
+            <span
+              data-testid="name"
+            >
+              joe bloggs
+            </span>
             <br />
-            11111111
+            <span
+              data-testid="address"
+            >
+              none of your business
+            </span>
             <br />
-            NY
+            <span
+              data-testid="cityRegion"
+            >
+              NY
+            </span>
             <br />
             <hr />
-            joe@bloggs.com
+            <span
+              data-testid="email"
+            >
+              joe@bloggs.com
+            </span>
             <br />
-            11111111
+            <span
+              data-testid="phone"
+            >
+              1234567890
+            </span>
           </td>
         </tr>
       </tbody>

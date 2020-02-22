@@ -40,11 +40,11 @@ describe("<CheckoutForm />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("show checkout paragraph", () => {
+  it("show checkout intro", () => {
     const { getByTestId } = render(checkoutForm);
-    const paragraph = getByTestId(/checkout-intro/i);
+    const intro = getByTestId(/checkout-intro/i);
     // @ts-ignore
-    expect(paragraph).toBeInTheDocument();
+    expect(intro).toBeInTheDocument();
   });
 
   it("show checkout form", () => {
