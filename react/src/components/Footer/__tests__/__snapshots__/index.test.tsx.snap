@@ -10,6 +10,7 @@ exports[`<Footer /> renders correctly 1`] = `
   >
     <a
       data-cy="privacy"
+      data-testid="privacy"
       href="/privacy"
       onClick={[Function]}
     >
@@ -21,6 +22,7 @@ exports[`<Footer /> renders correctly 1`] = `
     </a>
     <a
       data-cy="contact"
+      data-testid="contact"
       href="/contact"
       onClick={[Function]}
     >

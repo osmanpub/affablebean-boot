@@ -1,17 +1,33 @@
+import { render } from "@testing-library/react";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import renderer from "react-test-renderer";
 import Footer from "..";
 
+const footer = (
+  <Router>
+    <Footer />
+  </Router>
+);
+
 describe("<Footer />", () => {
   it("renders correctly", () => {
-    const component = renderer
-      .create(
-        <Router>
-          <Footer />
-        </Router>
-      )
-      .toJSON();
+    const component = renderer.create(footer).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
+  });
+
+  it("show privacy", () => {
+    const { getByTestId } = render(footer);
+    const intro = getByTestId(/privacy/i);
+    // @ts-ignore
+    expect(intro).toBeInTheDocument();
+  });
+
+  it("show contact", () => {
+    const { getByTestId } = render(footer);
+    const intro = getByTestId(/contact/i);
+    // @ts-ignore
+    expect(intro).toBeInTheDocument();
   });
 });

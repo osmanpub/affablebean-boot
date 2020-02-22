@@ -15,6 +15,7 @@ exports[`<Products /> renders correctly 1`] = `
         <span
           className="categoryText"
           data-cy="category-bakery"
+          data-testid="category-bakery"
         >
           bakery
         </span>
@@ -30,6 +31,7 @@ exports[`<Products /> renders correctly 1`] = `
         <span
           className="categoryText"
           data-cy="category-cereals"
+          data-testid="category-cereals"
         >
           cereals
         </span>
@@ -37,6 +39,7 @@ exports[`<Products /> renders correctly 1`] = `
     </a>
     <span
       className="sc-fzqNJr ddDkXI"
+      data-testid="selected-dairy"
     >
       <span
         className="categoryText"
@@ -54,6 +57,7 @@ exports[`<Products /> renders correctly 1`] = `
         <span
           className="categoryText"
           data-cy="category-drinks"
+          data-testid="category-drinks"
         >
           drinks
         </span>
@@ -69,6 +73,7 @@ exports[`<Products /> renders correctly 1`] = `
         <span
           className="categoryText"
           data-cy="category-fruit & veg"
+          data-testid="category-fruit & veg"
         >
           fruit & veg
         </span>
@@ -84,6 +89,7 @@ exports[`<Products /> renders correctly 1`] = `
         <span
           className="categoryText"
           data-cy="category-meats"
+          data-testid="category-meats"
         >
           meats
         </span>
@@ -105,14 +111,17 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="white"
           data-cy="product-milk"
+          data-testid="product-milk"
         >
           <td>
             <img
-              alt="{name}"
+              alt="milk"
               src="/static/img/products/milk.png"
             />
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             milk
             <br />
             <span
@@ -121,7 +130,9 @@ exports[`<Products /> renders correctly 1`] = `
               semi skimmed (1L)
             </span>
           </td>
-          <td>
+          <td
+            data-testid="price"
+          >
             € 
             1.70
           </td>
@@ -143,14 +154,17 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="lightBlue"
           data-cy="product-cheese"
+          data-testid="product-cheese"
         >
           <td>
             <img
-              alt="{name}"
+              alt="cheese"
               src="/static/img/products/cheese.png"
             />
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             cheese
             <br />
             <span
@@ -159,7 +173,9 @@ exports[`<Products /> renders correctly 1`] = `
               mild cheddar (330g)
             </span>
           </td>
-          <td>
+          <td
+            data-testid="price"
+          >
             € 
             2.39
           </td>
@@ -181,14 +197,17 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="white"
           data-cy="product-butter"
+          data-testid="product-butter"
         >
           <td>
             <img
-              alt="{name}"
+              alt="butter"
               src="/static/img/products/butter.png"
             />
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             butter
             <br />
             <span
@@ -197,7 +216,9 @@ exports[`<Products /> renders correctly 1`] = `
               unsalted (250g)
             </span>
           </td>
-          <td>
+          <td
+            data-testid="price"
+          >
             € 
             1.09
           </td>
@@ -219,14 +240,17 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="lightBlue"
           data-cy="product-free range eggs"
+          data-testid="product-free range eggs"
         >
           <td>
             <img
-              alt="{name}"
+              alt="free range eggs"
               src="/static/img/products/free range eggs.png"
             />
           </td>
-          <td>
+          <td
+            data-testid="name"
+          >
             free range eggs
             <br />
             <span
@@ -235,7 +259,9 @@ exports[`<Products /> renders correctly 1`] = `
               medium-sized (6 eggs)
             </span>
           </td>
-          <td>
+          <td
+            data-testid="price"
+          >
             € 
             1.76
           </td>

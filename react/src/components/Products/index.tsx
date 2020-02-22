@@ -56,7 +56,7 @@ function Products(props: Props) {
 
     if (name === selectedCategory.name) {
       return (
-        <SelectedCategory key={id}>
+        <SelectedCategory key={id} data-testid={`selected-${name}`}>
           <span className="categoryText">{name}</span>
         </SelectedCategory>
       );
@@ -64,7 +64,11 @@ function Products(props: Props) {
       return (
         <Link key={id} to={`/category/${id}`}>
           <span className="categoryButton">
-            <span className="categoryText" data-cy={`category-${name}`}>
+            <span
+              className="categoryText"
+              data-cy={`category-${name}`}
+              data-testid={`category-${name}`}
+            >
               {name}
             </span>
           </span>
@@ -79,18 +83,23 @@ function Products(props: Props) {
     const rowCol = index % 2 === 0 ? "white" : "lightBlue";
 
     return (
-      <tr key={id} className={`${rowCol}`} data-cy={`product-${name}`}>
+      <tr
+        key={id}
+        className={`${rowCol}`}
+        data-cy={`product-${name}`}
+        data-testid={`product-${name}`}
+      >
         <td>
-          <img src={`/static/img/products/${name}.png`} alt="{name}" />
+          <img src={`/static/img/products/${name}.png`} alt={name} />
         </td>
 
-        <td>
+        <td data-testid="name">
           {name}
           <br />
           <span className="smallText">{product.description}</span>
         </td>
 
-        <td>
+        <td data-testid="price">
           &euro;&nbsp;
           {product.price.toFixed(2)}
         </td>

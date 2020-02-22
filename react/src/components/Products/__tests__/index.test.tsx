@@ -180,17 +180,18 @@ const category = {
   // }
 };
 
+const products = (
+  <Router>
+    <Provider store={store}>
+      <Products {...category} />
+    </Provider>
+  </Router>
+);
+
 describe("<Products />", () => {
   it("renders correctly", () => {
-    const component = renderer
-      .create(
-        <Router>
-          <Provider store={store}>
-            <Products {...category} />
-          </Provider>
-        </Router>
-      )
-      .toJSON();
+    const component = renderer.create(products).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 });
