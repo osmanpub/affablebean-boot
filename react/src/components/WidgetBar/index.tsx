@@ -39,7 +39,11 @@ export function WidgetBar(props: Props) {
       {checkout}
 
       <ViewCart className="headerWidget" {...cart}>
-        <span className="horizontalMargin" data-cy="cart-hdr-total">
+        <span
+          className="horizontalMargin"
+          data-cy="cart-hdr-total"
+          data-testid="cart-hdr-total"
+        >
           <img src="/static/img/cart.gif" alt="shopping cart icon" />
           &nbsp;
           {cart && cart.numberOfItems + " items"}

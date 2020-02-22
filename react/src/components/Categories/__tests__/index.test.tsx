@@ -54,18 +54,21 @@ const categories = (
 describe("<Categories />", () => {
   it("renders correctly", () => {
     const component = renderer.create(categories).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("show welcome paragraph", () => {
     const { getByTestId } = render(categories);
     const paragraph = getByTestId(/home-welcome/i);
+    // @ts-ignore
     expect(paragraph).toBeInTheDocument();
   });
 
   it("six categories present", () => {
     const { getAllByTestId } = render(categories);
     const boxes = getAllByTestId(/categoryBox/i);
+    // @ts-ignore
     expect(boxes).toHaveLength(6);
   });
 });

@@ -18,18 +18,21 @@ const categoryComponent = (
 describe("<Category />", () => {
   it("renders correctly", () => {
     const component = renderer.create(categoryComponent).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("category present", () => {
     const { getByTestId } = render(categoryComponent);
     const box = getByTestId(/categoryBox/i);
+    // @ts-ignore
     expect(box).toBeInTheDocument();
   });
 
   it("is dairy category", () => {
     const { getByAltText } = render(categoryComponent);
     const img = getByAltText(/dairy/i);
+    // @ts-ignore
     expect(img).toBeInTheDocument();
   });
 });

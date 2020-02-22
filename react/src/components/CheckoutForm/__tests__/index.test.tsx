@@ -36,37 +36,97 @@ const checkoutForm = (
 describe("<CheckoutForm />", () => {
   it("renders correctly", () => {
     const component = renderer.create(checkoutForm).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("show checkout paragraph", () => {
     const { getByTestId } = render(checkoutForm);
     const paragraph = getByTestId(/checkout-intro/i);
+    // @ts-ignore
     expect(paragraph).toBeInTheDocument();
   });
 
   it("show checkout form", () => {
     const { getByRole } = render(checkoutForm);
     const paragraph = getByRole(/form/i);
+    // @ts-ignore
     expect(paragraph).toBeInTheDocument();
   });
 
   it("show 5 input fields", () => {
     const { getAllByRole } = render(checkoutForm);
     const inputs = getAllByRole(/textbox/i);
+    // @ts-ignore
     expect(inputs).toHaveLength(5);
   });
 
-  it("set input name to 'osman'", () => {
-    const { getByPlaceholderText } = render(checkoutForm);
-    const input = getByPlaceholderText(
-      /At least 3 chars and no more than 64 chars/i
-    );
+  it("show submit button", () => {
+    const { getByRole } = render(checkoutForm);
+    const button = getByRole(/button/i);
+    // @ts-ignore
+    expect(button).toBeInTheDocument();
+  });
+
+  it("set name input to 'osman'", () => {
+    const { getByTestId } = render(checkoutForm);
+    const input = getByTestId(/checkout-name/i);
 
     act(() => {
       fireEvent.change(input, { target: { value: "osman" } });
     });
 
+    // @ts-ignore
     expect(input.value).toBe("osman");
+  });
+
+  it("set phone input to '1234567890'", () => {
+    const { getByTestId } = render(checkoutForm);
+    const input = getByTestId(/checkout-phone/i);
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "1234567890" } });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("1234567890");
+  });
+
+  it("set email input to 'osman@gmail.com'", () => {
+    const { getByTestId } = render(checkoutForm);
+    const input = getByTestId(/checkout-email/i);
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "osman@gmail.com" } });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("osman@gmail.com");
+  });
+
+  it("set address input to 'nobody cares where you live'", () => {
+    const { getByTestId } = render(checkoutForm);
+    const input = getByTestId(/checkout-address/i);
+
+    act(() => {
+      fireEvent.change(input, {
+        target: { value: "nobody cares where you live" }
+      });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("nobody cares where you live");
+  });
+
+  it("set cc input to '1234567890123456'", () => {
+    const { getByTestId } = render(checkoutForm);
+    const input = getByTestId(/checkout-cc/i);
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "1234567890123456" } });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("1234567890123456");
   });
 });

@@ -44,30 +44,35 @@ const cartItem = (
 describe("<CartItem />", () => {
   it("renders correctly", () => {
     const component = renderer.create(cartItem).toJSON();
+    // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("product image present", () => {
     const { getByAltText } = render(cartItem);
     const img = getByAltText(/milk/i);
+    // @ts-ignore
     expect(img).toBeInTheDocument();
   });
 
   it("product name present", () => {
     const { getByTestId } = render(cartItem);
     const name = getByTestId(/milk/i);
+    // @ts-ignore
     expect(name).toBeInTheDocument();
   });
 
   it("product price present", () => {
     const { getByTestId } = render(cartItem);
     const price = getByTestId(/1.7/i);
+    // @ts-ignore
     expect(price).toBeInTheDocument();
   });
 
   it("quantity present", () => {
     const { getByDisplayValue } = render(cartItem);
     const input = getByDisplayValue("1");
+    // @ts-ignore
     expect(input).toBeInTheDocument();
   });
 
@@ -79,6 +84,7 @@ describe("<CartItem />", () => {
       fireEvent.change(input, { target: { value: "0" } });
     });
 
+    // @ts-ignore
     expect(input.value).toBe("0"); // this would remove the item on update event
   });
 
@@ -90,6 +96,7 @@ describe("<CartItem />", () => {
       fireEvent.change(input, { target: { value: "2" } });
     });
 
+    // @ts-ignore
     expect(input.value).toBe("2");
   });
 
@@ -101,12 +108,14 @@ describe("<CartItem />", () => {
       fireEvent.change(input, { target: { value: "hello" } });
     });
 
+    // @ts-ignore
     expect(input.value).toBe(""); // only numeric input
   });
 
   it("update button present", () => {
     const { getByText } = render(cartItem);
     const updateButton = getByText(/update/i);
+    // @ts-ignore
     expect(updateButton).toBeInTheDocument();
   });
 });

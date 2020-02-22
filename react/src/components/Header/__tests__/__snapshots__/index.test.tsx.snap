@@ -29,6 +29,7 @@ Array [
           <span
             className="horizontalMargin"
             data-cy="cart-hdr-total"
+            data-testid="cart-hdr-total"
           >
             <img
               alt="shopping cart icon"

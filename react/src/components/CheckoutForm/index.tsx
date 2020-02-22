@@ -81,6 +81,7 @@ function CheckoutForm(props: Props) {
             <input
               className="form-control"
               data-cy="checkout-name"
+              data-testid="checkout-name"
               name="name"
               placeholder="At least 3 chars and no more than 64 chars"
               size={32}
@@ -102,6 +103,7 @@ function CheckoutForm(props: Props) {
             <input
               className="form-control"
               data-cy="checkout-email"
+              data-testid="checkout-email"
               name="email"
               placeholder="At least 8 chars and no more than 32 chars"
               size={32}
@@ -123,6 +125,7 @@ function CheckoutForm(props: Props) {
             <input
               className="form-control"
               data-cy="checkout-phone"
+              data-testid="checkout-phone"
               name="phone"
               placeholder="At least 8 chars and no more than 32 chars"
               size={32}
@@ -144,6 +147,7 @@ function CheckoutForm(props: Props) {
             <input
               className="form-control"
               data-cy="checkout-address"
+              data-testid="checkout-address"
               name="address"
               placeholder="At least 8 chars and no more than 256 chars"
               size={32}
@@ -165,6 +169,7 @@ function CheckoutForm(props: Props) {
             <input
               className="form-control"
               data-cy="checkout-cc"
+              data-testid="checkout-cc"
               name="creditCard"
               placeholder="At least 16 chars and no more than 19 chars"
               size={32}
