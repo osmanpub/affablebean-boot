@@ -87,19 +87,19 @@ function Products(props: Props) {
         key={id}
         className={`${rowCol}`}
         data-cy={`product-${name}`}
-        data-testid={`product-${name}`}
+        data-testid="product"
       >
         <td>
           <img src={`/static/img/products/${name}.png`} alt={name} />
         </td>
 
-        <td data-testid="name">
+        <td data-testid={name}>
           {name}
           <br />
           <span className="smallText">{product.description}</span>
         </td>
 
-        <td data-testid="price">
+        <td data-testid={`price-${name}`}>
           &euro;&nbsp;
           {product.price.toFixed(2)}
         </td>

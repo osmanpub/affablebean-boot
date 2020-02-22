@@ -1,3 +1,4 @@
+import { act, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -193,5 +194,46 @@ describe("<Products />", () => {
     const component = renderer.create(products).toJSON();
     // @ts-ignore
     expect(component).toMatchSnapshot();
+  });
+
+  it("selected category is dairy", () => {
+    const { getByTestId } = render(products);
+    const selected = getByTestId(/selected-dairy/i);
+    // @ts-ignore
+    expect(selected).toHaveTextContent("dairy");
+  });
+
+  it("four products are shown", () => {
+    const { getAllByTestId } = render(products);
+    const items = getAllByTestId(/product/i);
+    // @ts-ignore
+    expect(items).toHaveLength(4);
+  });
+
+  it("show submit buttons", () => {
+    const { getAllByRole } = render(products);
+    const buttons = getAllByRole(/button/i);
+    // @ts-ignore
+    expect(buttons).toHaveLength(4);
+  });
+
+  it("first product is 'milk'", () => {
+    const { getByAltText, getByTestId, getAllByTestId } = render(products);
+    const items = getAllByTestId(/product/i);
+    const milk = items[0];
+    // @ts-ignore
+    expect(milk).toHaveTextContent("milk");
+    // @ts-ignore
+    expect(milk).toHaveTextContent("1.7");
+    // @ts-ignore
+    expect(milk).toHaveTextContent("semi skimmed (1L)");
+
+    const img = getByAltText(/milk/i);
+    // @ts-ignore
+    expect(img).toBeInTheDocument();
+
+    const price = getByTestId(/price-milk/i);
+    // @ts-ignore
+    expect(price).toHaveTextContent("1.7");
   });
 });

@@ -111,7 +111,7 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="white"
           data-cy="product-milk"
-          data-testid="product-milk"
+          data-testid="product"
         >
           <td>
             <img
@@ -120,7 +120,7 @@ exports[`<Products /> renders correctly 1`] = `
             />
           </td>
           <td
-            data-testid="name"
+            data-testid="milk"
           >
             milk
             <br />
@@ -131,7 +131,7 @@ exports[`<Products /> renders correctly 1`] = `
             </span>
           </td>
           <td
-            data-testid="price"
+            data-testid="price-milk"
           >
             € 
             1.70
@@ -154,7 +154,7 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="lightBlue"
           data-cy="product-cheese"
-          data-testid="product-cheese"
+          data-testid="product"
         >
           <td>
             <img
@@ -163,7 +163,7 @@ exports[`<Products /> renders correctly 1`] = `
             />
           </td>
           <td
-            data-testid="name"
+            data-testid="cheese"
           >
             cheese
             <br />
@@ -174,7 +174,7 @@ exports[`<Products /> renders correctly 1`] = `
             </span>
           </td>
           <td
-            data-testid="price"
+            data-testid="price-cheese"
           >
             € 
             2.39
@@ -197,7 +197,7 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="white"
           data-cy="product-butter"
-          data-testid="product-butter"
+          data-testid="product"
         >
           <td>
             <img
@@ -206,7 +206,7 @@ exports[`<Products /> renders correctly 1`] = `
             />
           </td>
           <td
-            data-testid="name"
+            data-testid="butter"
           >
             butter
             <br />
@@ -217,7 +217,7 @@ exports[`<Products /> renders correctly 1`] = `
             </span>
           </td>
           <td
-            data-testid="price"
+            data-testid="price-butter"
           >
             € 
             1.09
@@ -240,7 +240,7 @@ exports[`<Products /> renders correctly 1`] = `
         <tr
           className="lightBlue"
           data-cy="product-free range eggs"
-          data-testid="product-free range eggs"
+          data-testid="product"
         >
           <td>
             <img
@@ -249,7 +249,7 @@ exports[`<Products /> renders correctly 1`] = `
             />
           </td>
           <td
-            data-testid="name"
+            data-testid="free range eggs"
           >
             free range eggs
             <br />
@@ -260,7 +260,7 @@ exports[`<Products /> renders correctly 1`] = `
             </span>
           </td>
           <td
-            data-testid="price"
+            data-testid="price-free range eggs"
           >
             € 
             1.76
