@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-fzozJi gYhGck"
+  >
+    <div
+      className="sc-fzoLsD kcEwNV"
+    >
+      <div
+        className="sc-AxheI dnzAqr"
+      >
+        <div
+          className="sc-Axmtr ivQZfu headerWidget"
+        >
+          <a
+            className="bubble"
+            data-cy="proceed-checkout"
+            href="/checkout"
+            onClick={[Function]}
+          >
+            proceed to checkout ➟
+          </a>
+        </div>
+        <div
+          className="sc-AxmLO dmEyYL headerWidget"
+        >
+          <span
+            className="horizontalMargin"
+            data-cy="cart-hdr-total"
+            data-testid="cart-hdr-total"
+          >
+            <img
+              alt="shopping cart icon"
+              src="/static/img/cart.gif"
+            />
+             
+          </span>
+          <a
+            className="bubble"
+            data-cy="cart-hdr-view-cart"
+            href="/viewCart/false"
+            onClick={[Function]}
+          >
+            view cart
+          </a>
+        </div>
+      </div>
+      <div
+        className="sc-fzpans iWSqNc"
+      >
+        <a
+          data-cy="home-logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Affable Bean logo"
+            src="/static/img/logo.png"
+          />
+        </a>
+      </div>
+      <img
+        alt="the affable bean"
+        id="logoText"
+        src="/static/img/logoText.png"
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      className="sc-AxirZ jHmcxa"
+    >
+      <div
+        className="sc-AxhCb cVYmNY"
+      >
+        <p
+          className="sc-AxjAm dUXPTK"
+          data-cy="home-welcome"
+          data-testid="home-welcome"
+        >
+          Welcome to the online home of the Affable Bean Green Grocer.
+        </p>
+        <p>
+          Our unique home delivery service brings you fresh organic produce, dairy, meats, breads and other delicious and healthy items direct to your doorstep.
+        </p>
+      </div>
+    </div>
+    <div
+      className="sc-AxiKw kHzIbN"
+    >
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/1"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            dairy
+          </span>
+          <img
+            alt="dairy"
+            className="categoryImage"
+            data-cy="category-dairy"
+            data-testid="category-dairy"
+            src="/static/img/categories/dairy.jpg"
+          />
+        </a>
+      </span>
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/2"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            meats
+          </span>
+          <img
+            alt="meats"
+            className="categoryImage"
+            data-cy="category-meats"
+            data-testid="category-meats"
+            src="/static/img/categories/meats.jpg"
+          />
+        </a>
+      </span>
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/3"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            bakery
+          </span>
+          <img
+            alt="bakery"
+            className="categoryImage"
+            data-cy="category-bakery"
+            data-testid="category-bakery"
+            src="/static/img/categories/bakery.jpg"
+          />
+        </a>
+      </span>
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/4"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            fruit & veg
+          </span>
+          <img
+            alt="fruit & veg"
+            className="categoryImage"
+            data-cy="category-fruit & veg"
+            data-testid="category-fruit & veg"
+            src="/static/img/categories/fruit & veg.jpg"
+          />
+        </a>
+      </span>
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/5"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            cereals
+          </span>
+          <img
+            alt="cereals"
+            className="categoryImage"
+            data-cy="category-cereals"
+            data-testid="category-cereals"
+            src="/static/img/categories/cereals.jpg"
+          />
+        </a>
+      </span>
+      <span
+        className="categoryBox"
+        data-testid="categoryBox"
+      >
+        <a
+          href="/category/6"
+          onClick={[Function]}
+        >
+          <span
+            className="categoryLabel"
+          />
+          <span
+            className="categoryLabelText"
+          >
+            drinks
+          </span>
+          <img
+            alt="drinks"
+            className="categoryImage"
+            data-cy="category-drinks"
+            data-testid="category-drinks"
+            src="/static/img/categories/drinks.jpg"
+          />
+        </a>
+      </span>
+    </div>
+  </div>
+  <div
+    className="sc-AxhUy rbvJG"
+  >
+    <br />
+    <span
+      className="sc-AxgMl jzkpql"
+    >
+      <a
+        data-cy="privacy"
+        data-testid="privacy"
+        href="/privacy"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Privacy
+        </button>
+      </a>
+      <a
+        data-cy="contact"
+        data-testid="contact"
+        href="/contact"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Contact
+        </button>
+      </a>
+       © 2019 the affable bean company
+    </span>
+  </div>
+</div>
+`;

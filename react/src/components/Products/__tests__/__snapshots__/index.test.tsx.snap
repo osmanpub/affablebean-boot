@@ -3,7 +3,7 @@
 exports[`<Products /> renders correctly 1`] = `
 <div>
   <div
-    className="sc-fznZeY iUOeJ"
+    className="sc-AxirZ hJZGhZ"
   >
     <a
       href="/category/3"
@@ -38,7 +38,7 @@ exports[`<Products /> renders correctly 1`] = `
       </span>
     </a>
     <span
-      className="sc-fzqNJr ddDkXI"
+      className="sc-AxhUy fKFZuq"
       data-testid="selected-dairy"
     >
       <span
@@ -97,15 +97,15 @@ exports[`<Products /> renders correctly 1`] = `
     </a>
   </div>
   <div
-    className="sc-fzokOt jfgkMv"
+    className="sc-AxiKw jGFftw"
   >
     <p
-      className="sc-fznKkj fQnMFj"
+      className="sc-AxjAm ekMBNw"
     >
       dairy
     </p>
     <table
-      className="sc-fzqBZW igCcce"
+      className="sc-AxhCb eIRkWE"
     >
       <tbody>
         <tr

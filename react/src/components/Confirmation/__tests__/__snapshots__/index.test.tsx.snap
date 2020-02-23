@@ -5,7 +5,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
   className="singleColumn"
 >
   <p
-    className="sc-fznxsB LMNBB"
+    className="sc-AxjAm jweHSd"
   >
     <strong
       data-cy="confirm-success"
@@ -35,7 +35,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
     className="summaryColumn"
   >
     <table
-      className="sc-fzoyTs jLIpLc detailsTable"
+      className="sc-AxheI bWJbzc detailsTable"
     >
       <tbody>
         <tr
@@ -96,7 +96,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-fzqARJ bQIqfM"
+            className="sc-AxhUy cbmOPV"
             colSpan={2}
           >
             <strong>
@@ -104,7 +104,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
             </strong>
           </td>
           <td
-            className="sc-fzqNqU gRQPnX"
+            className="sc-AxgMl jRFoKn"
             data-testid="surcharge"
           >
             € 
@@ -115,7 +115,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-fzoNJl gyueDb"
+            className="sc-Axmtr bWYfEK"
             colSpan={2}
           >
             <strong>
@@ -123,7 +123,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
             </strong>
           </td>
           <td
-            className="sc-fzoXWK jzJqLr"
+            className="sc-AxmLO kTrtID"
             data-testid="total"
           >
             € 
@@ -148,7 +148,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
           className="lightBlue"
         >
           <td
-            className="sc-fznJRM bhObLI"
+            className="sc-AxirZ fjNOmz"
             colSpan={3}
           >
             <strong>
@@ -166,7 +166,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
     className="summaryColumn"
   >
     <table
-      className="sc-fznWqX bzpSuQ detailsTable"
+      className="sc-AxiKw jehySk detailsTable"
     >
       <tbody>
         <tr
@@ -180,7 +180,7 @@ exports[`<Confirmation /> renders correctly 1`] = `
         </tr>
         <tr>
           <td
-            className="sc-fzoiQi joKFly lightBlue"
+            className="sc-AxhCb hlelyg lightBlue"
             colSpan={3}
           >
             <span

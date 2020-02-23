@@ -3,13 +3,13 @@
 exports[`<Categories /> renders correctly 1`] = `
 <div>
   <div
-    className="sc-fznxKY bbgeym"
+    className="sc-AxirZ jHmcxa"
   >
     <div
-      className="sc-fznWOq hLglHr"
+      className="sc-AxhCb cVYmNY"
     >
       <p
-        className="sc-fzpmMD gcKxiF"
+        className="sc-AxjAm dUXPTK"
         data-cy="home-welcome"
         data-testid="home-welcome"
       >
@@ -21,7 +21,7 @@ exports[`<Categories /> renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="sc-fznMAR fFDOkt"
+    className="sc-AxiKw kHzIbN"
   >
     <span
       className="categoryBox"

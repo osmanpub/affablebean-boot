@@ -3,16 +3,16 @@
 exports[`<Header /> renders correctly 1`] = `
 Array [
   <div
-    className="sc-AxheI igDRXH"
+    className="sc-AxhCb kYRjhm"
   >
     <div
-      className="sc-Axmtr iitsqH"
+      className="sc-AxhUy EsjBI"
     >
       <div
-        className="sc-AxhCb kdYhXy"
+        className="sc-AxjAm cHCNiJ"
       >
         <div
-          className="sc-AxhUy dXnRMF headerWidget"
+          className="sc-AxirZ enfYhw headerWidget"
         >
           <a
             className="bubble"
@@ -24,7 +24,7 @@ Array [
           </a>
         </div>
         <div
-          className="sc-AxgMl ghvFLr headerWidget"
+          className="sc-AxiKw fRiXyM headerWidget"
         >
           <span
             className="horizontalMargin"
@@ -49,7 +49,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-AxmLO bFONzf"
+        className="sc-AxgMl kvztNL"
       >
         <a
           data-cy="home-logo"
