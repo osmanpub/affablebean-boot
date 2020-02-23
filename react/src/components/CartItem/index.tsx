@@ -46,6 +46,7 @@ export default function CartItem(props: Props) {
             <input
               className="form-control"
               data-cy={`input-qty-${name}`}
+              data-testid={`input-qty-${name}`}
               defaultValue={item.quantity}
               name="quantity"
               ref={register({ required: true, min: 0, max: 100 })}
@@ -56,6 +57,7 @@ export default function CartItem(props: Props) {
             <button
               className="btn btn-primary btn-sm"
               data-cy={`update-qty-${name}`}
+              data-testid={`update-qty-${name}`}
               type="submit"
             >
               update

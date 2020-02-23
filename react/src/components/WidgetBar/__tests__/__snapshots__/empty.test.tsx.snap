@@ -35,6 +35,7 @@ Array [
       <a
         className="bubble"
         data-cy="cart-hdr-view-cart"
+        data-testid="cart-hdr-view-cart"
         href="/viewCart/false"
         onClick={[Function]}
       >

@@ -109,6 +109,7 @@ function Products(props: Props) {
         <td>
           <button
             className="btn btn-primary btn-sm"
+            data-testid={`add-qty-${name}`}
             onClick={() => addToCart(id)}
           >
             add

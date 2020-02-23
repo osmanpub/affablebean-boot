@@ -142,6 +142,7 @@ exports[`<Products /> renders correctly 1`] = `
           <td>
             <button
               className="btn btn-primary btn-sm"
+              data-testid="add-qty-milk"
               onClick={[Function]}
             >
               add
@@ -185,6 +186,7 @@ exports[`<Products /> renders correctly 1`] = `
           <td>
             <button
               className="btn btn-primary btn-sm"
+              data-testid="add-qty-cheese"
               onClick={[Function]}
             >
               add
@@ -228,6 +230,7 @@ exports[`<Products /> renders correctly 1`] = `
           <td>
             <button
               className="btn btn-primary btn-sm"
+              data-testid="add-qty-butter"
               onClick={[Function]}
             >
               add
@@ -271,6 +274,7 @@ exports[`<Products /> renders correctly 1`] = `
           <td>
             <button
               className="btn btn-primary btn-sm"
+              data-testid="add-qty-free range eggs"
               onClick={[Function]}
             >
               add

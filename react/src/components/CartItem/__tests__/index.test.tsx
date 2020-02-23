@@ -56,10 +56,10 @@ describe("<CartItem />", () => {
   });
 
   it("show name", () => {
-    const { getByTestId } = render(cartItem);
-    const name = getByTestId(/milk/i);
+    const { getAllByTestId } = render(cartItem);
+    const name = getAllByTestId(/milk/i);
     // @ts-ignore
-    expect(name).toBeInTheDocument();
+    expect(name[0]).toBeInTheDocument();
   });
 
   it("show price", () => {

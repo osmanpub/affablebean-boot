@@ -41,6 +41,7 @@ exports[`<CategoryProducts /> renders correctly 1`] = `
           <a
             className="bubble"
             data-cy="cart-hdr-view-cart"
+            data-testid="cart-hdr-view-cart"
             href="/viewCart/false"
             onClick={[Function]}
           >
@@ -210,6 +211,7 @@ exports[`<CategoryProducts /> renders correctly 1`] = `
             <td>
               <button
                 className="btn btn-primary btn-sm"
+                data-testid="add-qty-milk"
                 onClick={[Function]}
               >
                 add
@@ -253,6 +255,7 @@ exports[`<CategoryProducts /> renders correctly 1`] = `
             <td>
               <button
                 className="btn btn-primary btn-sm"
+                data-testid="add-qty-cheese"
                 onClick={[Function]}
               >
                 add
@@ -296,6 +299,7 @@ exports[`<CategoryProducts /> renders correctly 1`] = `
             <td>
               <button
                 className="btn btn-primary btn-sm"
+                data-testid="add-qty-butter"
                 onClick={[Function]}
               >
                 add
@@ -339,6 +343,7 @@ exports[`<CategoryProducts /> renders correctly 1`] = `
             <td>
               <button
                 className="btn btn-primary btn-sm"
+                data-testid="add-qty-free range eggs"
                 onClick={[Function]}
               >
                 add

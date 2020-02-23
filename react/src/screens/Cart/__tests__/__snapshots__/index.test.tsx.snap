@@ -152,6 +152,7 @@ exports[`<Cart /> renders correctly 1`] = `
                 <input
                   className="form-control"
                   data-cy="input-qty-milk"
+                  data-testid="input-qty-milk"
                   defaultValue={1}
                   name="quantity"
                   size={2}
@@ -167,6 +168,7 @@ exports[`<Cart /> renders correctly 1`] = `
                 <button
                   className="btn btn-primary btn-sm"
                   data-cy="update-qty-milk"
+                  data-testid="update-qty-milk"
                   type="submit"
                 >
                   update
