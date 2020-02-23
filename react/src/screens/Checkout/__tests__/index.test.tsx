@@ -4,10 +4,9 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
-import Contact from "..";
+import Checkout from "..";
 
-const mockStore = configureStore([thunk]);
+const mockStore = configureStore([]);
 
 const initialState = {
   cart: {
@@ -17,39 +16,10 @@ const initialState = {
     numberOfItems: 0,
     subtotal: 0
   },
-  subjects: {
+  purchase: {
     didInvalidate: false,
-    isFetching: false,
-    items: [
-      {
-        id: 1,
-        name: "Brands or product"
-      },
-      {
-        id: 2,
-        name: "Investor relations"
-      },
-      {
-        id: 3,
-        name: "Sustainability"
-      },
-      {
-        id: 4,
-        name: "The Company"
-      },
-      {
-        id: 5,
-        name: "Media enquiry"
-      },
-      {
-        id: 6,
-        name: "Website feedback"
-      },
-      {
-        id: 7,
-        name: "Other"
-      }
-    ]
+    isPosting: false,
+    order: {}
   },
   ui: {
     formErrors: []
@@ -58,13 +28,13 @@ const initialState = {
 
 const store = mockStore(initialState);
 
-const contact = (
+const checkout = (
   <Router>
     <Provider store={store}>
-      <Contact
+      <Checkout
         match={{
-          path: "/contact",
-          url: "/contact",
+          path: "/checkout",
+          url: "/checkout",
           isExact: true,
           params: {}
         }}
@@ -73,101 +43,88 @@ const contact = (
   </Router>
 );
 
-describe("<Contact />", () => {
+describe("<Checkout />", () => {
   it("renders correctly", () => {
-    const component = renderer.create(contact).toJSON();
+    const component = renderer.create(checkout).toJSON();
     // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("show smaller navigatioal logo, on left", () => {
-    const { getByAltText } = render(contact);
+    const { getByAltText } = render(checkout);
     const logo = getByAltText(/Affable Bean logo/i);
     // @ts-ignore
     expect(logo).toBeInTheDocument();
   });
 
   it("show larger logo, on right", () => {
-    const { getByAltText } = render(contact);
+    const { getByAltText } = render(checkout);
     const logo = getByAltText(/the affable bean/i);
     // @ts-ignore
     expect(logo).toBeInTheDocument();
   });
 
   it("don't show view cart link", () => {
-    const { getByText } = render(contact);
+    const { getByText } = render(checkout);
     const link = getByText(/view cart/i);
     // @ts-ignore
     expect(link).not.toBeVisible();
   });
 
   it("don't show cart header total", () => {
-    const { getByTestId } = render(contact);
+    const { getByTestId } = render(checkout);
     const cart = getByTestId(/cart-hdr-total/i);
     // @ts-ignore
     expect(cart).not.toBeVisible();
   });
 
   it("show intro", () => {
-    const { getByTestId } = render(contact);
-    const intro = getByTestId(/contact-intro/i);
+    const { getByTestId } = render(checkout);
+    const intro = getByTestId(/checkout-intro/i);
     // @ts-ignore
     expect(intro).toBeInTheDocument();
   });
 
   it("show contact", () => {
-    const { getByTestId } = render(contact);
-    const intro = getByTestId(/footer-contact/i);
+    const { getByTestId } = render(checkout);
+    const contact = getByTestId(/footer-contact/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(contact).toBeInTheDocument();
   });
 
   it("show privacy", () => {
-    const { getByTestId } = render(contact);
+    const { getByTestId } = render(checkout);
     const privacy = getByTestId(/footer-privacy/i);
     // @ts-ignore
     expect(privacy).toBeInTheDocument();
   });
 });
 
-describe("<Data Entry />", () => {
-  it("renders correctly", () => {
-    const component = renderer.create(contact).toJSON();
-    // @ts-ignore
-    expect(component).toMatchSnapshot();
-  });
-
+describe("<Data entry />", () => {
   it("show intro", () => {
-    const { getByTestId } = render(contact);
-    const intro = getByTestId(/contact-intro/i);
+    const { getByTestId } = render(checkout);
+    const intro = getByTestId(/checkout-intro/i);
     // @ts-ignore
     expect(intro).toBeInTheDocument();
   });
 
   it("show form", () => {
-    const { getByRole } = render(contact);
-    const form = getByRole(/form/i);
+    const { getByRole } = render(checkout);
+    const paragraph = getByRole(/form/i);
     // @ts-ignore
-    expect(form).toBeInTheDocument();
+    expect(paragraph).toBeInTheDocument();
   });
 
-  it("show select box", () => {
-    const { getByRole } = render(contact);
-    const input = getByRole(/listbox/i);
-    // @ts-ignore
-    expect(input).toBeInTheDocument();
-  });
-
-  it("show 3 input fields", () => {
-    const { getAllByRole } = render(contact);
+  it("show 5 input fields", () => {
+    const { getAllByRole } = render(checkout);
     const inputs = getAllByRole(/textbox/i);
     // @ts-ignore
-    expect(inputs).toHaveLength(3);
+    expect(inputs).toHaveLength(5);
   });
 
   it("set name to 'osman'", () => {
-    const { getByTestId } = render(contact);
-    const input = getByTestId(/contact-name/i);
+    const { getByTestId } = render(checkout);
+    const input = getByTestId(/checkout-name/i);
 
     act(() => {
       fireEvent.change(input, { target: { value: "osman" } });
@@ -177,9 +134,21 @@ describe("<Data Entry />", () => {
     expect(input.value).toBe("osman");
   });
 
+  it("set phone to '1234567890'", () => {
+    const { getByTestId } = render(checkout);
+    const input = getByTestId(/checkout-phone/i);
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "1234567890" } });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("1234567890");
+  });
+
   it("set email to 'osman@gmail.com'", () => {
-    const { getByTestId } = render(contact);
-    const input = getByTestId(/contact-email/i);
+    const { getByTestId } = render(checkout);
+    const input = getByTestId(/checkout-email/i);
 
     act(() => {
       fireEvent.change(input, { target: { value: "osman@gmail.com" } });
@@ -189,15 +158,29 @@ describe("<Data Entry />", () => {
     expect(input.value).toBe("osman@gmail.com");
   });
 
-  it("set message to 'hello there!'", () => {
-    const { getByTestId } = render(contact);
-    const input = getByTestId(/contact-msg/i);
+  it("set address to 'nobody cares where you live'", () => {
+    const { getByTestId } = render(checkout);
+    const input = getByTestId(/checkout-address/i);
 
     act(() => {
-      fireEvent.change(input, { target: { value: "hello there!" } });
+      fireEvent.change(input, {
+        target: { value: "nobody cares where you live" }
+      });
     });
 
     // @ts-ignore
-    expect(input.value).toBe("hello there!");
+    expect(input.value).toBe("nobody cares where you live");
+  });
+
+  it("set cc to '1234567890123456'", () => {
+    const { getByTestId } = render(checkout);
+    const input = getByTestId(/checkout-cc/i);
+
+    act(() => {
+      fireEvent.change(input, { target: { value: "1234567890123456" } });
+    });
+
+    // @ts-ignore
+    expect(input.value).toBe("1234567890123456");
   });
 });

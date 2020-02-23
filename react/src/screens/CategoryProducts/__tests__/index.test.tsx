@@ -7,6 +7,8 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import CategoryProducts from "..";
 
+jest.mock("../../../net/cart");
+
 const mockStore = configureStore([thunk]);
 
 const initialState = {
