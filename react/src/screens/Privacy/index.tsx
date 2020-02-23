@@ -14,7 +14,7 @@ export default function Privacy(props: Props) {
     <div>
       <Header url={match.url} />
       <div className="singleColumn">
-        <p data-cy="privacy-intro">
+        <p data-cy="privacy-intro" data-testid="privacy-intro">
           AffableBean Co knows that you care how information about you is used
           and shared and we appreciate your trust in us to do that carefully and
           sensibly. This notice describes the privacy policy of AffableBean Co.{" "}

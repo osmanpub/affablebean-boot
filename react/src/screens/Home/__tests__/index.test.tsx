@@ -44,7 +44,7 @@ const initialState = {
 
 const store = mockStore(initialState);
 
-const homeScreen = (
+const home = (
   <Router>
     <Provider store={store}>
       <Home match={{ path: "/", url: "/", isExact: true, params: {} }} />
@@ -54,71 +54,71 @@ const homeScreen = (
 
 describe("<Home />", () => {
   it("renders correctly", () => {
-    const component = renderer.create(homeScreen).toJSON();
+    const component = renderer.create(home).toJSON();
     // @ts-ignore
     expect(component).toMatchSnapshot();
   });
 
   it("show smaller navigatioal logo, on left", () => {
-    const { getByAltText } = render(homeScreen);
-    const intro = getByAltText(/Affable Bean logo/i);
+    const { getByAltText } = render(home);
+    const logo = getByAltText(/Affable Bean logo/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(logo).toBeInTheDocument();
   });
 
   it("show larger logo, on right", () => {
-    const { getByAltText } = render(homeScreen);
-    const intro = getByAltText(/the affable bean/i);
+    const { getByAltText } = render(home);
+    const logo = getByAltText(/the affable bean/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(logo).toBeInTheDocument();
   });
 
   it("don't show view cart link", () => {
-    const { getByText } = render(homeScreen);
+    const { getByText } = render(home);
     const link = getByText(/view cart/i);
     // @ts-ignore
     expect(link).not.toBeVisible();
   });
 
   it("don't show proceed to checkout link", () => {
-    const { getByText } = render(homeScreen);
+    const { getByText } = render(home);
     const link = getByText(/proceed to checkout/i);
     // @ts-ignore
     expect(link).not.toBeVisible();
   });
 
   it("don't show cart header total", () => {
-    const { getByTestId } = render(homeScreen);
+    const { getByTestId } = render(home);
     const cart = getByTestId(/cart-hdr-total/i);
     // @ts-ignore
     expect(cart).not.toBeVisible();
   });
 
   it("show welcome paragraph", () => {
-    const { getByTestId } = render(homeScreen);
-    const paragraph = getByTestId(/home-welcome/i);
+    const { getByTestId } = render(home);
+    const welcome = getByTestId(/home-welcome/i);
     // @ts-ignore
-    expect(paragraph).toBeInTheDocument();
+    expect(welcome).toBeInTheDocument();
   });
 
   it("show six categories", () => {
-    const { getAllByTestId } = render(homeScreen);
+    const { getAllByTestId } = render(home);
     const boxes = getAllByTestId(/categoryBox/i);
     // @ts-ignore
     expect(boxes).toHaveLength(6);
   });
 
   it("show privacy", () => {
-    const { getByTestId } = render(homeScreen);
-    const intro = getByTestId(/privacy/i);
+    const { getByTestId } = render(home);
+    const privacy = getByTestId(/footer-privacy/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(privacy).toBeInTheDocument();
   });
 
   it("show contact", () => {
-    const { getByTestId } = render(homeScreen);
-    const intro = getByTestId(/contact/i);
+    const { getByTestId } = render(home);
+    const contact = getByTestId(/footer-contact/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(contact).toBeInTheDocument();
   });
 });

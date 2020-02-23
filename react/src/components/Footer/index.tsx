@@ -7,13 +7,13 @@ export default function Footer() {
     <FooterWrapper>
       <br />
       <FooterText>
-        <Link to={"/privacy"} data-cy="privacy" data-testid="privacy">
+        <Link to={"/privacy"} data-cy="privacy" data-testid="footer-privacy">
           <button className="btn btn-link">Privacy</button>
         </Link>
-        <Link to={"/contact"} data-cy="contact" data-testid="contact">
+        <Link to={"/contact"} data-cy="contact" data-testid="footer-contact">
           <button className="btn btn-link">Contact</button>
         </Link>
-        &nbsp;&copy;&nbsp;2019 the affable bean company
+        &nbsp;&copy;&nbsp;2020 the affable bean company
       </FooterText>
     </FooterWrapper>
   );

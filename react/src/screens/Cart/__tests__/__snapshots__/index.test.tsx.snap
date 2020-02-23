@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cart /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AxheI igDRXH"
+  >
+    <div
+      className="sc-Axmtr iitsqH"
+    >
+      <div
+        className="sc-AxhCb kdYhXy"
+      >
+        <div
+          className="sc-AxhUy bLXZsm headerWidget"
+        >
+          <a
+            className="bubble"
+            data-cy="proceed-checkout"
+            href="/checkout"
+            onClick={[Function]}
+          >
+            proceed to checkout ➟
+          </a>
+        </div>
+        <div
+          className="sc-AxgMl kJNXLs headerWidget"
+        >
+          <span
+            className="horizontalMargin"
+            data-cy="cart-hdr-total"
+            data-testid="cart-hdr-total"
+          >
+            <img
+              alt="shopping cart icon"
+              src="/static/img/cart.gif"
+            />
+             
+            1 items
+          </span>
+          
+        </div>
+      </div>
+      <div
+        className="sc-AxmLO bFONzf"
+      >
+        <a
+          data-cy="home-logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Affable Bean logo"
+            src="/static/img/logo.png"
+          />
+        </a>
+      </div>
+      <img
+        alt="the affable bean"
+        id="logoText"
+        src="/static/img/logoText.png"
+      />
+    </div>
+  </div>
+  <div
+    className="singleColumn"
+    data-cy="cart-info"
+  >
+    Your shopping cart contains 1 items
+    <div
+      className="sc-fzozJi vlZWm"
+    >
+      <a
+        className="bubble hMargin"
+        data-cy="clear-cart"
+        href="/viewCart/true"
+        onClick={[Function]}
+      >
+        clear cart
+      </a>
+      <a
+        className="bubble hMargin"
+        data-cy="continue-shopping"
+        href="/"
+        onClick={[Function]}
+      >
+        continue shopping
+      </a>
+    </div>
+    <div
+      className="sc-fzplWN czluRe"
+    >
+      <h4
+        className="sc-fznyAO dAtAtF"
+      >
+        subtotal €
+        1.70
+      </h4>
+      <table
+        className="sc-fzoLsD gXeYhr"
+      >
+        <tbody>
+          <tr
+            className="header"
+          >
+            <th>
+              product
+            </th>
+            <th>
+              name
+            </th>
+            <th>
+              price
+            </th>
+            <th>
+              quantity
+            </th>
+          </tr>
+          <tr
+            className="white"
+            data-cy="product-milk"
+          >
+            <td
+              className="sc-AxjAm jhCEof"
+            >
+              <img
+                alt="milk"
+                src="/static/img/products/milk.png"
+              />
+            </td>
+            <td
+              className="sc-AxjAm jhCEof"
+              data-testid="milk"
+            >
+              milk
+            </td>
+            <td
+              className="sc-AxjAm jhCEof"
+              data-testid={1.7}
+            >
+              €
+              1.70
+              <br />
+              1.7
+            </td>
+            <td
+              className="sc-AxjAm jhCEof"
+            >
+              <form
+                onSubmit={[Function]}
+              >
+                <input
+                  className="form-control"
+                  data-cy="input-qty-milk"
+                  defaultValue={1}
+                  name="quantity"
+                  size={2}
+                  style={
+                    Object {
+                      "margin": "5px",
+                      "textAlign": "center",
+                      "width": "90%",
+                    }
+                  }
+                  type="number"
+                />
+                <button
+                  className="btn btn-primary btn-sm"
+                  data-cy="update-qty-milk"
+                  type="submit"
+                >
+                  update
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    className="sc-AxirZ MueCz"
+  >
+    <br />
+    <span
+      className="sc-AxiKw gXNbfu"
+    >
+      <a
+        data-cy="privacy"
+        data-testid="footer-privacy"
+        href="/privacy"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Privacy
+        </button>
+      </a>
+      <a
+        data-cy="contact"
+        data-testid="footer-contact"
+        href="/contact"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Contact
+        </button>
+      </a>
+       © 2020 the affable bean company
+    </span>
+  </div>
+</div>
+`;

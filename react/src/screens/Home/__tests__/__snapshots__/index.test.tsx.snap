@@ -251,7 +251,7 @@ exports[`<Home /> renders correctly 1`] = `
     >
       <a
         data-cy="privacy"
-        data-testid="privacy"
+        data-testid="footer-privacy"
         href="/privacy"
         onClick={[Function]}
       >
@@ -263,7 +263,7 @@ exports[`<Home /> renders correctly 1`] = `
       </a>
       <a
         data-cy="contact"
-        data-testid="contact"
+        data-testid="footer-contact"
         href="/contact"
         onClick={[Function]}
       >
@@ -273,7 +273,7 @@ exports[`<Home /> renders correctly 1`] = `
           Contact
         </button>
       </a>
-       © 2019 the affable bean company
+       © 2020 the affable bean company
     </span>
   </div>
 </div>

@@ -38,15 +38,15 @@ describe("<Header />", () => {
 
   it("show smaller navigatioal logo, on left", () => {
     const { getByAltText } = render(header);
-    const intro = getByAltText(/Affable Bean logo/i);
+    const logo = getByAltText(/Affable Bean logo/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(logo).toBeInTheDocument();
   });
 
   it("show larger logo, on right", () => {
     const { getByAltText } = render(header);
-    const intro = getByAltText(/the affable bean/i);
+    const logo = getByAltText(/the affable bean/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(logo).toBeInTheDocument();
   });
 });

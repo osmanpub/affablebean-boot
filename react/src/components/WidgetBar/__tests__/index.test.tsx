@@ -14,13 +14,18 @@ const initialState = {
     isFetching: false,
     items: [
       {
-        name: "butter",
-        price: 1.09,
-        description: "unsalted (250g)"
+        product: {
+          id: 1,
+          description: "semi skimmed (1L)",
+          name: "milk",
+          price: 1.7
+        },
+        quantity: 1,
+        total: 1.7
       }
     ],
     numberOfItems: 1,
-    subtotal: 1.09
+    subtotal: 1.7
   }
 };
 

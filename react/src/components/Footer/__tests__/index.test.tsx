@@ -19,15 +19,15 @@ describe("<Footer />", () => {
 
   it("show privacy", () => {
     const { getByTestId } = render(footer);
-    const intro = getByTestId(/privacy/i);
+    const privacy = getByTestId(/footer-privacy/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(privacy).toBeInTheDocument();
   });
 
   it("show contact", () => {
     const { getByTestId } = render(footer);
-    const intro = getByTestId(/contact/i);
+    const contact = getByTestId(/footer-contact/i);
     // @ts-ignore
-    expect(intro).toBeInTheDocument();
+    expect(contact).toBeInTheDocument();
   });
 });
