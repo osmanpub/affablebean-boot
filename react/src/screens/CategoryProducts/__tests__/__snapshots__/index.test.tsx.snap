@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CategoryProducts /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AxgMl kehYEp"
+  >
+    <div
+      className="sc-AxheI jbKZFY"
+    >
+      <div
+        className="sc-AxiKw byMOZe"
+      >
+        <div
+          className="sc-AxhCb kneLnw headerWidget"
+        >
+          <a
+            className="bubble"
+            data-cy="proceed-checkout"
+            href="/checkout"
+            onClick={[Function]}
+          >
+            proceed to checkout ➟
+          </a>
+        </div>
+        <div
+          className="sc-AxhUy dXnRMF headerWidget"
+        >
+          <span
+            className="horizontalMargin"
+            data-cy="cart-hdr-total"
+            data-testid="cart-hdr-total"
+          >
+            <img
+              alt="shopping cart icon"
+              src="/static/img/cart.gif"
+            />
+             
+            0 items
+          </span>
+          <a
+            className="bubble"
+            data-cy="cart-hdr-view-cart"
+            href="/viewCart/false"
+            onClick={[Function]}
+          >
+            view cart
+          </a>
+        </div>
+      </div>
+      <div
+        className="sc-Axmtr cYyhem"
+      >
+        <a
+          data-cy="home-logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Affable Bean logo"
+            src="/static/img/logo.png"
+          />
+        </a>
+      </div>
+      <img
+        alt="the affable bean"
+        id="logoText"
+        src="/static/img/logoText.png"
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      className="sc-fzozJi fFXNmT"
+    >
+      <span
+        className="sc-fzplWN hydICK"
+        data-testid="selected-dairy"
+      >
+        <span
+          className="categoryText"
+        >
+          dairy
+        </span>
+      </span>
+      <a
+        href="/category/2"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryButton"
+        >
+          <span
+            className="categoryText"
+            data-cy="category-meats"
+            data-testid="category-meats"
+          >
+            meats
+          </span>
+        </span>
+      </a>
+      <a
+        href="/category/3"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryButton"
+        >
+          <span
+            className="categoryText"
+            data-cy="category-bakery"
+            data-testid="category-bakery"
+          >
+            bakery
+          </span>
+        </span>
+      </a>
+      <a
+        href="/category/4"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryButton"
+        >
+          <span
+            className="categoryText"
+            data-cy="category-fruit & veg"
+            data-testid="category-fruit & veg"
+          >
+            fruit & veg
+          </span>
+        </span>
+      </a>
+      <a
+        href="/category/5"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryButton"
+        >
+          <span
+            className="categoryText"
+            data-cy="category-cereals"
+            data-testid="category-cereals"
+          >
+            cereals
+          </span>
+        </span>
+      </a>
+      <a
+        href="/category/6"
+        onClick={[Function]}
+      >
+        <span
+          className="categoryButton"
+        >
+          <span
+            className="categoryText"
+            data-cy="category-drinks"
+            data-testid="category-drinks"
+          >
+            drinks
+          </span>
+        </span>
+      </a>
+    </div>
+    <div
+      className="sc-fzoLsD fTHuRQ"
+    >
+      <p
+        className="sc-AxmLO hwiCmk"
+      >
+        dairy
+      </p>
+      <table
+        className="sc-fzpans iXbeQw"
+      >
+        <tbody>
+          <tr
+            className="white"
+            data-cy="product-milk"
+            data-testid="product"
+          >
+            <td>
+              <img
+                alt="milk"
+                src="/static/img/products/milk.png"
+              />
+            </td>
+            <td
+              data-testid="milk"
+            >
+              milk
+              <br />
+              <span
+                className="smallText"
+              >
+                semi skimmed (1L)
+              </span>
+            </td>
+            <td
+              data-testid="price-milk"
+            >
+              € 
+              1.70
+            </td>
+            <td>
+                
+            </td>
+            <td>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={[Function]}
+              >
+                add
+              </button>
+            </td>
+            <td>
+                
+            </td>
+          </tr>
+          <tr
+            className="lightBlue"
+            data-cy="product-cheese"
+            data-testid="product"
+          >
+            <td>
+              <img
+                alt="cheese"
+                src="/static/img/products/cheese.png"
+              />
+            </td>
+            <td
+              data-testid="cheese"
+            >
+              cheese
+              <br />
+              <span
+                className="smallText"
+              >
+                mild cheddar (330g)
+              </span>
+            </td>
+            <td
+              data-testid="price-cheese"
+            >
+              € 
+              2.39
+            </td>
+            <td>
+                
+            </td>
+            <td>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={[Function]}
+              >
+                add
+              </button>
+            </td>
+            <td>
+                
+            </td>
+          </tr>
+          <tr
+            className="white"
+            data-cy="product-butter"
+            data-testid="product"
+          >
+            <td>
+              <img
+                alt="butter"
+                src="/static/img/products/butter.png"
+              />
+            </td>
+            <td
+              data-testid="butter"
+            >
+              butter
+              <br />
+              <span
+                className="smallText"
+              >
+                unsalted (250g)
+              </span>
+            </td>
+            <td
+              data-testid="price-butter"
+            >
+              € 
+              1.09
+            </td>
+            <td>
+                
+            </td>
+            <td>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={[Function]}
+              >
+                add
+              </button>
+            </td>
+            <td>
+                
+            </td>
+          </tr>
+          <tr
+            className="lightBlue"
+            data-cy="product-free range eggs"
+            data-testid="product"
+          >
+            <td>
+              <img
+                alt="free range eggs"
+                src="/static/img/products/free range eggs.png"
+              />
+            </td>
+            <td
+              data-testid="free range eggs"
+            >
+              free range eggs
+              <br />
+              <span
+                className="smallText"
+              >
+                medium-sized (6 eggs)
+              </span>
+            </td>
+            <td
+              data-testid="price-free range eggs"
+            >
+              € 
+              1.76
+            </td>
+            <td>
+                
+            </td>
+            <td>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={[Function]}
+              >
+                add
+              </button>
+            </td>
+            <td>
+                
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    className="sc-AxjAm jZHPdI"
+  >
+    <br />
+    <span
+      className="sc-AxirZ bSLrDO"
+    >
+      <a
+        data-cy="privacy"
+        data-testid="footer-privacy"
+        href="/privacy"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Privacy
+        </button>
+      </a>
+      <a
+        data-cy="contact"
+        data-testid="footer-contact"
+        href="/contact"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Contact
+        </button>
+      </a>
+       © 2020 the affable bean company
+    </span>
+  </div>
+  O
+</div>
+`;
