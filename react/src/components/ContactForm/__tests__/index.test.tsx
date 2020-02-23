@@ -72,14 +72,14 @@ describe("<ContactForm />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("show contact intro", () => {
+  it("show intro", () => {
     const { getByTestId } = render(contactForm);
     const intro = getByTestId(/contact-intro/i);
     // @ts-ignore
     expect(intro).toBeInTheDocument();
   });
 
-  it("show checkout form", () => {
+  it("show form", () => {
     const { getByRole } = render(contactForm);
     const form = getByRole(/form/i);
     // @ts-ignore
@@ -107,7 +107,7 @@ describe("<ContactForm />", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("set name input to 'osman'", () => {
+  it("set name to 'osman'", () => {
     const { getByTestId } = render(contactForm);
     const input = getByTestId(/contact-name/i);
 
@@ -119,7 +119,7 @@ describe("<ContactForm />", () => {
     expect(input.value).toBe("osman");
   });
 
-  it("set email input to 'osman@gmail.com'", () => {
+  it("set email to 'osman@gmail.com'", () => {
     const { getByTestId } = render(contactForm);
     const input = getByTestId(/contact-email/i);
 
@@ -131,7 +131,7 @@ describe("<ContactForm />", () => {
     expect(input.value).toBe("osman@gmail.com");
   });
 
-  it("set message input to 'hello there!'", () => {
+  it("set message to 'hello there!'", () => {
     const { getByTestId } = render(contactForm);
     const input = getByTestId(/contact-msg/i);
 

@@ -49,7 +49,7 @@ describe("<Confirmation />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("confirmation present", () => {
+  it("show success paragraph", () => {
     const { getByTestId } = render(confirmation);
     const success = getByTestId(/confirm-success/i);
     // @ts-ignore

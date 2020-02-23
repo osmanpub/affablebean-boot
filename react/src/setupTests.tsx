@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import "@testing-library/jest-dom/extend-expect";
+import { render } from "@testing-library/react";
 import React from "react";
-import ReactDOM from "react-dom";
 import ReactTestUtils, { act } from "react-dom/test-utils";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -34,6 +34,7 @@ jest.mock("./net/checkout");
 jest.mock("./net/subjects");
 
 export let container: any;
+export let queries: any;
 
 export const setupAll = (callback?: Function) =>
   beforeAll(() => {
@@ -45,7 +46,7 @@ export const setupAll = (callback?: Function) =>
         reducer
       });
 
-      const home = (
+      const app = (
         <Provider store={store}>
           <Router>
             <Route path="/" exact component={Home} />
@@ -58,7 +59,7 @@ export const setupAll = (callback?: Function) =>
         </Provider>
       );
 
-      ReactDOM.render(home, container);
+      queries = render(app);
     });
 
     callback && callback();

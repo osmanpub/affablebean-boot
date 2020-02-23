@@ -12,15 +12,9 @@ const initialState = {
   cart: {
     didInvalidate: false,
     isFetching: false,
-    items: [
-      {
-        name: "butter",
-        price: 1.09,
-        description: "unsalted (250g)"
-      }
-    ],
-    numberOfItems: 1,
-    subtotal: 1.09
+    items: [],
+    numberOfItems: 0,
+    subtotal: 0
   }
 };
 
@@ -42,24 +36,24 @@ describe("<WidgetBar />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("show view cart link", () => {
+  it("don't show view cart link", () => {
     const { getByText } = render(widgetBar);
     const link = getByText(/view cart/i);
     // @ts-ignore
-    expect(link).toBeVisible();
+    expect(link).not.toBeVisible();
   });
 
-  it("show proceed to checkout link", () => {
+  it("don't show proceed to checkout link", () => {
     const { getByText } = render(widgetBar);
     const link = getByText(/proceed to checkout/i);
     // @ts-ignore
-    expect(link).toBeVisible();
+    expect(link).not.toBeVisible();
   });
 
-  it("cart header total has 1 item", () => {
-    const { getByText } = render(widgetBar);
-    const cart = getByText(/1 items/i);
+  it("don't show cart header total", () => {
+    const { getByTestId } = render(widgetBar);
+    const cart = getByTestId(/cart-hdr-total/i);
     // @ts-ignore
-    expect(cart).toBeVisible();
+    expect(cart).not.toBeVisible();
   });
 });

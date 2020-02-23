@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WidgetBar /> renders correctly 1`] = `
+Array [
+  <div
+    className="sc-AxhCb kdYhXy"
+  >
+    <div
+      className="sc-AxhUy dXnRMF headerWidget"
+    >
+      <a
+        className="bubble"
+        data-cy="proceed-checkout"
+        href="/checkout"
+        onClick={[Function]}
+      >
+        proceed to checkout ➟
+      </a>
+    </div>
+    <div
+      className="sc-AxgMl ghvFLr headerWidget"
+    >
+      <span
+        className="horizontalMargin"
+        data-cy="cart-hdr-total"
+        data-testid="cart-hdr-total"
+      >
+        <img
+          alt="shopping cart icon"
+          src="/static/img/cart.gif"
+        />
+         
+        0 items
+      </span>
+      <a
+        className="bubble"
+        data-cy="cart-hdr-view-cart"
+        href="/viewCart/false"
+        onClick={[Function]}
+      >
+        view cart
+      </a>
+    </div>
+  </div>,
+  ")",
+]
+`;

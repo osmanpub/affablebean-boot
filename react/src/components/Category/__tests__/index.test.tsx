@@ -22,7 +22,7 @@ describe("<Category />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("category present", () => {
+  it("show category", () => {
     const { getByTestId } = render(categoryComponent);
     const box = getByTestId(/categoryBox/i);
     // @ts-ignore

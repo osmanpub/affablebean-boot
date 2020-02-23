@@ -43,6 +43,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="dairy"
           className="categoryImage"
           data-cy="category-dairy"
+          data-testid="category-dairy"
           src="/static/img/categories/dairy.jpg"
         />
       </a>
@@ -67,6 +68,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="meats"
           className="categoryImage"
           data-cy="category-meats"
+          data-testid="category-meats"
           src="/static/img/categories/meats.jpg"
         />
       </a>
@@ -91,6 +93,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="bakery"
           className="categoryImage"
           data-cy="category-bakery"
+          data-testid="category-bakery"
           src="/static/img/categories/bakery.jpg"
         />
       </a>
@@ -115,6 +118,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="fruit & veg"
           className="categoryImage"
           data-cy="category-fruit & veg"
+          data-testid="category-fruit & veg"
           src="/static/img/categories/fruit & veg.jpg"
         />
       </a>
@@ -139,6 +143,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="cereals"
           className="categoryImage"
           data-cy="category-cereals"
+          data-testid="category-cereals"
           src="/static/img/categories/cereals.jpg"
         />
       </a>
@@ -163,6 +168,7 @@ exports[`<Categories /> renders correctly 1`] = `
           alt="drinks"
           className="categoryImage"
           data-cy="category-drinks"
+          data-testid="category-drinks"
           src="/static/img/categories/drinks.jpg"
         />
       </a>

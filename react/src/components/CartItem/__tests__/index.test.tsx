@@ -48,28 +48,28 @@ describe("<CartItem />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("product image present", () => {
+  it("show image", () => {
     const { getByAltText } = render(cartItem);
     const img = getByAltText(/milk/i);
     // @ts-ignore
     expect(img).toBeInTheDocument();
   });
 
-  it("product name present", () => {
+  it("show name", () => {
     const { getByTestId } = render(cartItem);
     const name = getByTestId(/milk/i);
     // @ts-ignore
     expect(name).toBeInTheDocument();
   });
 
-  it("product price present", () => {
+  it("show price", () => {
     const { getByTestId } = render(cartItem);
     const price = getByTestId(/1.7/i);
     // @ts-ignore
     expect(price).toBeInTheDocument();
   });
 
-  it("quantity present", () => {
+  it("show quantity", () => {
     const { getByDisplayValue } = render(cartItem);
     const input = getByDisplayValue("1");
     // @ts-ignore
@@ -112,7 +112,7 @@ describe("<CartItem />", () => {
     expect(input.value).toBe(""); // only numeric input
   });
 
-  it("update button present", () => {
+  it("show update button", () => {
     const { getByText } = render(cartItem);
     const updateButton = getByText(/update/i);
     // @ts-ignore

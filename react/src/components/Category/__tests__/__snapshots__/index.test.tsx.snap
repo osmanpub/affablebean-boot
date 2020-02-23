@@ -21,6 +21,7 @@ exports[`<Category /> renders correctly 1`] = `
       alt="dairy"
       className="categoryImage"
       data-cy="category-dairy"
+      data-testid="category-dairy"
       src="/static/img/categories/dairy.jpg"
     />
   </a>

@@ -22,6 +22,7 @@ export default function Category(props: Props) {
           alt={name}
           className="categoryImage"
           data-cy={`category-${name}`}
+          data-testid={`category-${name}`}
           src={`/static/img/categories/${name}.jpg`}
         />
       </Link>

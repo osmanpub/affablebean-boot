@@ -65,7 +65,7 @@ describe("<Categories />", () => {
     expect(paragraph).toBeInTheDocument();
   });
 
-  it("six categories present", () => {
+  it("show six categories", () => {
     const { getAllByTestId } = render(categories);
     const boxes = getAllByTestId(/categoryBox/i);
     // @ts-ignore

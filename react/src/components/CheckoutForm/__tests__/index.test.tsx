@@ -40,14 +40,14 @@ describe("<CheckoutForm />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("show checkout intro", () => {
+  it("show intro", () => {
     const { getByTestId } = render(checkoutForm);
     const intro = getByTestId(/checkout-intro/i);
     // @ts-ignore
     expect(intro).toBeInTheDocument();
   });
 
-  it("show checkout form", () => {
+  it("show form", () => {
     const { getByRole } = render(checkoutForm);
     const paragraph = getByRole(/form/i);
     // @ts-ignore
@@ -68,7 +68,7 @@ describe("<CheckoutForm />", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("set name input to 'osman'", () => {
+  it("set name to 'osman'", () => {
     const { getByTestId } = render(checkoutForm);
     const input = getByTestId(/checkout-name/i);
 
@@ -80,7 +80,7 @@ describe("<CheckoutForm />", () => {
     expect(input.value).toBe("osman");
   });
 
-  it("set phone input to '1234567890'", () => {
+  it("set phone to '1234567890'", () => {
     const { getByTestId } = render(checkoutForm);
     const input = getByTestId(/checkout-phone/i);
 
@@ -92,7 +92,7 @@ describe("<CheckoutForm />", () => {
     expect(input.value).toBe("1234567890");
   });
 
-  it("set email input to 'osman@gmail.com'", () => {
+  it("set email to 'osman@gmail.com'", () => {
     const { getByTestId } = render(checkoutForm);
     const input = getByTestId(/checkout-email/i);
 
@@ -104,7 +104,7 @@ describe("<CheckoutForm />", () => {
     expect(input.value).toBe("osman@gmail.com");
   });
 
-  it("set address input to 'nobody cares where you live'", () => {
+  it("set address to 'nobody cares where you live'", () => {
     const { getByTestId } = render(checkoutForm);
     const input = getByTestId(/checkout-address/i);
 
@@ -118,7 +118,7 @@ describe("<CheckoutForm />", () => {
     expect(input.value).toBe("nobody cares where you live");
   });
 
-  it("set cc input to '1234567890123456'", () => {
+  it("set cc to '1234567890123456'", () => {
     const { getByTestId } = render(checkoutForm);
     const input = getByTestId(/checkout-cc/i);
 
