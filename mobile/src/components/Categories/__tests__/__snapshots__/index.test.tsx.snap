@@ -8,7 +8,7 @@ exports[`<Categories /> renders correctly 1`] = `
     }
   }
 >
-  <RCTScrollView
+  <ScrollView
     ListFooterComponent={
       <View
         style={
@@ -69,217 +69,185 @@ exports[`<Categories /> renders correctly 1`] = `
     viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
-    <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          dairy
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            dairy
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/dairy.jpg",
               }
             }
           />
-        </View>
+        </TouchableWithoutFeedback>
       </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          meats
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            meats
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/meats.jpg",
               }
             }
           />
-        </View>
+        </TouchableWithoutFeedback>
       </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          bakery
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            bakery
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/bakery.jpg",
               }
             }
           />
-        </View>
+        </TouchableWithoutFeedback>
       </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          fruit & veg
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            fruit & veg
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/fruitveg.jpg",
               }
             }
           />
-        </View>
+        </TouchableWithoutFeedback>
       </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          cereals
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            cereals
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/cereals.jpg",
               }
             }
           />
-        </View>
+        </TouchableWithoutFeedback>
       </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "paddingBottom": 24,
-            }
+        style={
+          Object {
+            "alignItems": "center",
+            "paddingBottom": 24,
           }
+        }
+      >
+        <Text>
+          drinks
+        </Text>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
         >
-          <Text>
-            drinks
-          </Text>
           <Image
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             source={
               Object {
                 "testUri": "../../../assets/img/categories/drinks.jpg",
               }
             }
           />
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-      >
-        <View
-          style={
-            Object {
-              "padding": 64,
-            }
-          }
-        />
+        </TouchableWithoutFeedback>
       </View>
     </View>
-  </RCTScrollView>
+    <View
+      onLayout={[Function]}
+    >
+      <View
+        style={
+          Object {
+            "padding": 64,
+          }
+        }
+      />
+    </View>
+  </ScrollView>
 </View>
 `;

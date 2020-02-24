@@ -50,21 +50,23 @@ function CartItem(props: Props) {
     <ActivityIndicator size="large" color="blue" />
   ) : (
     <View style={styles.container}>
-      <Image source={getProductIcon(name)} />
+      <Image source={getProductIcon(name)} testID={`image-${name}`} />
       <View style={{paddingLeft: 24, flexDirection: 'column'}}>
-        <Text style={styles.desc}>{name}</Text>
+        <Text style={styles.desc} testID={`name-${name}`}>
+          {name}
+        </Text>
         <Text style={styles.desc}>&euro; {item.total.toFixed(2)}</Text>
-        <Text style={{paddingBottom: 8}}>
+        <Text style={{paddingBottom: 8}} testID={`price-${name}`}>
           &euro; {product.price.toFixed(2)}
         </Text>
         <Controller
           as={<TextInput />}
           control={control}
+          defaultValue={item.quantity.toString()}
           name="quantity"
           onChange={onChange}
-          rules={{required: true, maxLength: 3}}
-          defaultValue={item.quantity.toString()}
           placeholder="Enter quantity"
+          rules={{required: true, maxLength: 3}}
           style={styles.qty}
         />
         {errors.quantity && <Text style={styles.error}>Enter a quantity.</Text>}

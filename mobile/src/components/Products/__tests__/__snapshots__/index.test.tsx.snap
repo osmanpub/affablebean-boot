@@ -8,7 +8,7 @@ exports[`<Products /> renders correctly 1`] = `
     }
   }
 >
-  <RCTScrollView
+  <ScrollView
     data={
       Array [
         Object {
@@ -108,400 +108,246 @@ exports[`<Products /> renders correctly 1`] = `
     viewabilityConfigCallbackPairs={Array []}
     windowSize={21}
   >
-    <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
       <View
-        onLayout={[Function]}
-        style={null}
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingBottom": 24,
+          }
+        }
       >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/img/products/milk.png",
+            }
+          }
+        />
         <View
           style={
             Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingBottom": 24,
+              "paddingLeft": 24,
             }
           }
-        >
-          <Image
-            source={
-              Object {
-                "testUri": "../../../assets/img/products/milk.png",
-              }
-            }
-          />
-          <View
-            style={
-              Object {
-                "paddingLeft": 24,
-              }
-            }
-          />
-          <View
-            style={
-              Object {
-                "alignItems": "flex-start",
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "fontWeight": "bold",
-                }
-              }
-            >
-              milk
-            </Text>
-            <Text
-              style={
-                Object {
-                  "paddingBottom": 8,
-                }
-              }
-            >
-              € 
-              1.70
-            </Text>
-            <View
-              accessibilityRole="button"
-              accessibilityStates={Array []}
-              accessible={true}
-              focusable={true}
-              isTVSelectable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                  ]
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "color": "#007AFF",
-                        "fontSize": 18,
-                        "padding": 8,
-                        "textAlign": "center",
-                      },
-                    ]
-                  }
-                >
-                  add
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
+        />
         <View
           style={
             Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingBottom": 24,
+              "alignItems": "flex-start",
             }
           }
         >
-          <Image
-            source={
-              Object {
-                "testUri": "../../../assets/img/products/cheese.png",
-              }
-            }
-          />
-          <View
+          <Text
             style={
               Object {
-                "paddingLeft": 24,
-              }
-            }
-          />
-          <View
-            style={
-              Object {
-                "alignItems": "flex-start",
+                "fontWeight": "bold",
               }
             }
           >
-            <Text
-              style={
-                Object {
-                  "fontWeight": "bold",
-                }
-              }
-            >
-              cheese
-            </Text>
-            <Text
-              style={
-                Object {
-                  "paddingBottom": 8,
-                }
-              }
-            >
-              € 
-              2.39
-            </Text>
-            <View
-              accessibilityRole="button"
-              accessibilityStates={Array []}
-              accessible={true}
-              focusable={true}
-              isTVSelectable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                  ]
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "color": "#007AFF",
-                        "fontSize": 18,
-                        "padding": 8,
-                        "textAlign": "center",
-                      },
-                    ]
-                  }
-                >
-                  add
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingBottom": 24,
-            }
-          }
-        >
-          <Image
-            source={
-              Object {
-                "testUri": "../../../assets/img/products/butter.png",
-              }
-            }
-          />
-          <View
+            milk
+          </Text>
+          <Text
             style={
               Object {
-                "paddingLeft": 24,
-              }
-            }
-          />
-          <View
-            style={
-              Object {
-                "alignItems": "flex-start",
+                "paddingBottom": 8,
               }
             }
           >
-            <Text
-              style={
-                Object {
-                  "fontWeight": "bold",
-                }
-              }
-            >
-              butter
-            </Text>
-            <Text
-              style={
-                Object {
-                  "paddingBottom": 8,
-                }
-              }
-            >
-              € 
-              1.09
-            </Text>
-            <View
-              accessibilityRole="button"
-              accessibilityStates={Array []}
-              accessible={true}
-              focusable={true}
-              isTVSelectable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                  ]
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "color": "#007AFF",
-                        "fontSize": 18,
-                        "padding": 8,
-                        "textAlign": "center",
-                      },
-                    ]
-                  }
-                >
-                  add
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "paddingBottom": 24,
-            }
-          }
-        >
-          <Image
-            source={
-              Object {
-                "testUri": "../../../assets/img/products/free-range-eggs.png",
-              }
-            }
+            € 
+            1.70
+          </Text>
+          <Button
+            onPress={[Function]}
+            title="add"
           />
-          <View
-            style={
-              Object {
-                "paddingLeft": 24,
-              }
-            }
-          />
-          <View
-            style={
-              Object {
-                "alignItems": "flex-start",
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "fontWeight": "bold",
-                }
-              }
-            >
-              free range eggs
-            </Text>
-            <Text
-              style={
-                Object {
-                  "paddingBottom": 8,
-                }
-              }
-            >
-              € 
-              1.76
-            </Text>
-            <View
-              accessibilityRole="button"
-              accessibilityStates={Array []}
-              accessible={true}
-              focusable={true}
-              isTVSelectable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "opacity": 1,
-                }
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                  ]
-                }
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "color": "#007AFF",
-                        "fontSize": 18,
-                        "padding": 8,
-                        "textAlign": "center",
-                      },
-                    ]
-                  }
-                >
-                  add
-                </Text>
-              </View>
-            </View>
-          </View>
         </View>
       </View>
     </View>
-  </RCTScrollView>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingBottom": 24,
+          }
+        }
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/img/products/cheese.png",
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "paddingLeft": 24,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontWeight": "bold",
+              }
+            }
+          >
+            cheese
+          </Text>
+          <Text
+            style={
+              Object {
+                "paddingBottom": 8,
+              }
+            }
+          >
+            € 
+            2.39
+          </Text>
+          <Button
+            onPress={[Function]}
+            title="add"
+          />
+        </View>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingBottom": 24,
+          }
+        }
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/img/products/butter.png",
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "paddingLeft": 24,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontWeight": "bold",
+              }
+            }
+          >
+            butter
+          </Text>
+          <Text
+            style={
+              Object {
+                "paddingBottom": 8,
+              }
+            }
+          >
+            € 
+            1.09
+          </Text>
+          <Button
+            onPress={[Function]}
+            title="add"
+          />
+        </View>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "paddingBottom": 24,
+          }
+        }
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/img/products/free-range-eggs.png",
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "paddingLeft": 24,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontWeight": "bold",
+              }
+            }
+          >
+            free range eggs
+          </Text>
+          <Text
+            style={
+              Object {
+                "paddingBottom": 8,
+              }
+            }
+          >
+            € 
+            1.76
+          </Text>
+          <Button
+            onPress={[Function]}
+            title="add"
+          />
+        </View>
+      </View>
+    </View>
+  </ScrollView>
 </View>
 `;

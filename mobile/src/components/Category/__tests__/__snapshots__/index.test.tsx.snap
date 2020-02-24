@@ -12,21 +12,16 @@ exports[`<Category /> renders correctly 1`] = `
   <Text>
     dairy
   </Text>
-  <Image
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    source={
-      Object {
-        "testUri": "../../../assets/img/categories/dairy.jpg",
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/img/categories/dairy.jpg",
+        }
       }
-    }
-  />
+    />
+  </TouchableWithoutFeedback>
 </View>
 `;

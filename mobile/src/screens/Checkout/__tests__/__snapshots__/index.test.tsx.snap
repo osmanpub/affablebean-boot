@@ -1,25 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Checkout /> renders correctly 1`] = `
-<RCTScrollView>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-        }
+<ScrollView>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
       }
+    }
+  >
+    <TouchableWithoutFeedback
+      onPress={[Function]}
     >
       <Image
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         source={
           Object {
             "testUri": "../../../src/components/Header/logo.jpg",
@@ -31,178 +24,140 @@ exports[`<Checkout /> renders correctly 1`] = `
           }
         }
       />
+    </TouchableWithoutFeedback>
+  </View>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#f7f7e9",
+          "padding": 16,
+        }
+      }
+    >
+      <Text>
+        In order to purchase the items in your shopping cart, please provide us with the following information:
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        name="name"
+        onChange={[Function]}
+        placeholder="Enter your name"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "padding": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <TextInput
+        allowFontScaling={true}
+        name="email"
+        onChange={[Function]}
+        placeholder="Enter your email address"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "padding": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <TextInput
+        allowFontScaling={true}
+        name="phone"
+        onChange={[Function]}
+        placeholder="Enter your phone number"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "padding": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <TextInput
+        allowFontScaling={true}
+        name="address"
+        onChange={[Function]}
+        placeholder="Enter your address"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "padding": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <TextInput
+        allowFontScaling={true}
+        name="creditCard"
+        onChange={[Function]}
+        placeholder="Enter your credit card number"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "padding": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
     </View>
-    <View>
-      <View
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text
         style={
           Object {
-            "backgroundColor": "#f7f7e9",
-            "padding": 16,
+            "paddingTop": 16,
           }
         }
       >
-        <Text>
-          In order to purchase the items in your shopping cart, please provide us with the following information:
-        </Text>
-        <TextInput
-          allowFontScaling={true}
-          name="name"
-          onChange={[Function]}
-          placeholder="Enter your name"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "padding": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          allowFontScaling={true}
-          name="email"
-          onChange={[Function]}
-          placeholder="Enter your email address"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "padding": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          allowFontScaling={true}
-          name="phone"
-          onChange={[Function]}
-          placeholder="Enter your phone number"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "padding": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          allowFontScaling={true}
-          name="address"
-          onChange={[Function]}
-          placeholder="Enter your address"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "padding": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          allowFontScaling={true}
-          name="creditCard"
-          onChange={[Function]}
-          placeholder="Enter your credit card number"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "padding": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <View
+        Subtotal: € 
+        0.00
+      </Text>
+      <Text>
+        Surcharge: € 
+        3.00
+      </Text>
+      <Text
         style={
           Object {
-            "alignItems": "center",
+            "fontWeight": "bold",
           }
         }
       >
-        <Text
-          style={
-            Object {
-              "paddingTop": 16,
-            }
+        Total: € 
+        3.00
+         
+      </Text>
+      <Text
+        style={
+          Object {
+            "marginTop": 8,
           }
-        >
-          Subtotal: € 
-          0.00
-        </Text>
-        <Text>
-          Surcharge: € 
-          3.00
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontWeight": "bold",
-            }
-          }
-        >
-          Total: € 
-          3.00
-           
-        </Text>
-        <Text
-          style={
-            Object {
-              "marginTop": 8,
-            }
-          }
-        />
-        <View
-          accessibilityRole="button"
-          accessibilityStates={Array []}
-          accessible={true}
-          focusable={true}
-          isTVSelectable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {},
-              ]
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "#007AFF",
-                    "fontSize": 18,
-                    "padding": 8,
-                    "textAlign": "center",
-                  },
-                ]
-              }
-            >
-              Purchase
-            </Text>
-          </View>
-        </View>
-      </View>
+        }
+      />
+      <Button
+        onPress={[Function]}
+        title="Purchase"
+      />
     </View>
   </View>
-</RCTScrollView>
+</ScrollView>
 `;

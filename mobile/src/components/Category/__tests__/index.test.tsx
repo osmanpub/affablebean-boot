@@ -1,4 +1,3 @@
-import {shallow} from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Category from '..';
@@ -14,12 +13,5 @@ describe('<Category />', () => {
       .create(<Category category={category} setCategoryProduct={jest.fn()} />)
       .toJSON();
     expect(component).toMatchSnapshot();
-  });
-
-  it('should render my component', () => {
-    const component = shallow(
-      <Category category={category} setCategoryProduct={jest.fn()} />,
-    );
-    console.warn(component);
   });
 });

@@ -8,26 +8,21 @@ exports[`<Header /> renders correctly 1`] = `
     }
   }
 >
-  <Image
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    source={
-      Object {
-        "testUri": "../../../src/components/Header/logo.jpg",
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/components/Header/logo.jpg",
+        }
       }
-    }
-    style={
-      Object {
-        "margin": 16,
+      style={
+        Object {
+          "margin": 16,
+        }
       }
-    }
-  />
+    />
+  </TouchableWithoutFeedback>
 </View>
 `;

@@ -1,25 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Cart /> renders correctly 1`] = `
-<RCTScrollView>
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-        }
+<ScrollView>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
       }
+    }
+  >
+    <TouchableWithoutFeedback
+      onPress={[Function]}
     >
       <Image
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         source={
           Object {
             "testUri": "../../../src/components/Header/logo.jpg",
@@ -31,54 +24,42 @@ exports[`<Cart /> renders correctly 1`] = `
           }
         }
       />
-      <View>
-        <View
-          style={
-            Object {
-              "flexDirection": "row",
-              "paddingBottom": 16,
-            }
+    </TouchableWithoutFeedback>
+    <View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "paddingBottom": 16,
           }
+        }
+      >
+        <TouchableHighlight
+          activeOpacity={0.85}
+          delayPressOut={100}
+          onPress={[Function]}
+          underlayColor="black"
         >
-          <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
-          >
-            <Text
-              style={
-                Object {
-                  "borderColor": "blue",
-                  "borderRadius": 32,
-                  "borderWidth": 1,
-                  "color": "blue",
-                  "fontWeight": "bold",
-                  "marginHorizontal": 8,
-                  "padding": 12,
-                }
-              }
-            >
-              clear cart
-            </Text>
-          </View>
           <Text
-            accessible={true}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "borderColor": "blue",
+                "borderRadius": 32,
+                "borderWidth": 1,
+                "color": "blue",
+                "fontWeight": "bold",
+                "marginHorizontal": 8,
+                "padding": 12,
+              }
+            }
+          >
+            clear cart
+          </Text>
+        </TouchableHighlight>
+        <TouchableWithoutFeedback
+          onPress={[Function]}
+        >
+          <Text
             style={
               Object {
                 "borderColor": "blue",
@@ -93,146 +74,109 @@ exports[`<Cart /> renders correctly 1`] = `
           >
             checkout
           </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingBottom": 16,
-            }
-          }
-        >
-          <Image
-            source={
-              Object {
-                "testUri": "../../../src/components/Header/cart.gif",
-              }
-            }
-          />
-          <Text>
-             
-            1
-             items
-          </Text>
-        </View>
+        </TouchableWithoutFeedback>
       </View>
-    </View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "paddingBottom": 24,
-          "paddingLeft": 32,
-        }
-      }
-    >
-      <Image
-        source={
-          Object {
-            "testUri": "../../../assets/img/products/milk.png",
-          }
-        }
-      />
       <View
         style={
           Object {
-            "flexDirection": "column",
-            "paddingLeft": 24,
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingBottom": 16,
           }
         }
       >
-        <Text
-          style={
+        <Image
+          source={
             Object {
-              "fontWeight": "bold",
+              "testUri": "../../../src/components/Header/cart.gif",
             }
           }
-        >
-          milk
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontWeight": "bold",
-            }
-          }
-        >
-          € 
-          1.70
-        </Text>
-        <Text
-          style={
-            Object {
-              "paddingBottom": 8,
-            }
-          }
-        >
-          € 
-          1.70
-        </Text>
-        <TextInput
-          allowFontScaling={true}
-          name="quantity"
-          onChange={[Function]}
-          placeholder="Enter quantity"
-          rejectResponderTermination={true}
-          style={
-            Object {
-              "borderBottomColor": "black",
-              "borderBottomWidth": 1,
-              "marginBottom": 8,
-            }
-          }
-          underlineColorAndroid="transparent"
-          value="1"
         />
-        <View
-          accessibilityRole="button"
-          accessibilityStates={Array []}
-          accessible={true}
-          focusable={true}
-          isTVSelectable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "opacity": 1,
-            }
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {},
-              ]
-            }
-          >
-            <Text
-              style={
-                Array [
-                  Object {
-                    "color": "#007AFF",
-                    "fontSize": 18,
-                    "padding": 8,
-                    "textAlign": "center",
-                  },
-                ]
-              }
-            >
-              update
-            </Text>
-          </View>
-        </View>
+        <Text>
+           
+          1
+           items
+        </Text>
       </View>
     </View>
   </View>
-</RCTScrollView>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "paddingBottom": 24,
+        "paddingLeft": 32,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/img/products/milk.png",
+        }
+      }
+      testID="image-milk"
+    />
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "paddingLeft": 24,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        milk
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        € 
+        1.70
+      </Text>
+      <Text
+        style={
+          Object {
+            "paddingBottom": 8,
+          }
+        }
+      >
+        € 
+        1.70
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        name="quantity"
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderBottomColor": "black",
+            "borderBottomWidth": 1,
+            "marginBottom": 8,
+          }
+        }
+        underlineColorAndroid="transparent"
+        value="1"
+      />
+      <Button
+        onPress={[Function]}
+        title="update"
+      />
+    </View>
+  </View>
+</ScrollView>
 `;
