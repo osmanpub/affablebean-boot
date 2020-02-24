@@ -1,9 +1,14 @@
+import {
+  act,
+  fireEvent,
+  render,
+  waitForElementToBeRemoved,
+} from '@testing-library/react-native';
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import CartItem from '..';
-import {fireEvent, render, wait} from '@testing-library/react-native';
 
 const mockStore = configureStore([]);
 
@@ -57,5 +62,47 @@ describe('<CartItem />', () => {
     const {getByTestId} = render(cartItem);
     const name = getByTestId(/name-milk/i);
     expect(name).toBeTruthy();
+  });
+
+  it('show price', () => {
+    const {getByTestId} = render(cartItem);
+    const price = getByTestId(/price-milk/i);
+    expect(price).toBeTruthy();
+  });
+
+  it('show quantity', () => {
+    const {getByDisplayValue} = render(cartItem);
+    const input = getByDisplayValue('1');
+    expect(input).toBeTruthy();
+  });
+
+  it('update quantity to 0', () => {
+    const {getByDisplayValue} = render(cartItem);
+    const input = getByDisplayValue('1');
+
+    act(() => {
+      fireEvent.change(input, {nativeEvent: {text: '0'}});
+    });
+
+    // @ts-ignore
+    expect(input.props.value).toBe('0'); // this would remove the item on update event
+  });
+
+  it('update quantity to 2', () => {
+    const {getByDisplayValue} = render(cartItem);
+    const input = getByDisplayValue('1');
+
+    act(() => {
+      fireEvent.change(input, {nativeEvent: {text: '2'}});
+    });
+
+    // @ts-ignore
+    expect(input.props.value).toBe('2');
+  });
+
+  it('show update button', () => {
+    const {getByTestId} = render(cartItem);
+    const updateButton = getByTestId(/submit-milk/i);
+    expect(updateButton).toBeTruthy();
   });
 });

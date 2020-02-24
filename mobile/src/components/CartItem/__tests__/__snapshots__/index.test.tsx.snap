@@ -76,6 +76,7 @@ exports[`<CartItem /> renders correctly 1`] = `
     />
     <Button
       onPress={[Function]}
+      testID="submit-milk"
       title="update"
     />
   </View>

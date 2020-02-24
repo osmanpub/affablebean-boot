@@ -70,7 +70,9 @@ function CartItem(props: Props) {
           style={styles.qty}
         />
         {errors.quantity && <Text style={styles.error}>Enter a quantity.</Text>}
-        {visible && <Button onPress={onSubmit} title="update" />}
+        {visible && (
+          <Button onPress={onSubmit} testID={`submit-${name}`} title="update" />
+        )}
       </View>
     </View>
   );
