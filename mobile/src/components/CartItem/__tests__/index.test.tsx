@@ -56,24 +56,24 @@ describe('<CartItem />', () => {
   it('show name', () => {
     const {getByTestId} = render(cartItem);
     const name = getByTestId(/name-milk/i);
-    expect(name).toBeTruthy();
+    expect(name.children).toContain('milk');
   });
 
   it('show price', () => {
     const {getByTestId} = render(cartItem);
     const price = getByTestId(/price-milk/i);
-    expect(price).toBeTruthy();
+    expect(price.children).toContain('1.70');
   });
 
   it('show quantity', () => {
-    const {getByDisplayValue} = render(cartItem);
-    const input = getByDisplayValue('1');
+    const {getByPlaceholderText} = render(cartItem);
+    const input = getByPlaceholderText('Enter quantity');
     expect(input).toBeTruthy();
   });
 
   it('update quantity to 0', () => {
-    const {getByDisplayValue} = render(cartItem);
-    const input = getByDisplayValue('1');
+    const {getByPlaceholderText} = render(cartItem);
+    const input = getByPlaceholderText('Enter quantity');
 
     act(() => {
       fireEvent.change(input, {nativeEvent: {text: '0'}});
@@ -84,8 +84,8 @@ describe('<CartItem />', () => {
   });
 
   it('update quantity to 2', () => {
-    const {getByDisplayValue} = render(cartItem);
-    const input = getByDisplayValue('1');
+    const {getByPlaceholderText} = render(cartItem);
+    const input = getByPlaceholderText('Enter quantity');
 
     act(() => {
       fireEvent.change(input, {nativeEvent: {text: '2'}});

@@ -1,3 +1,4 @@
+import {render} from '@testing-library/react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Confirmation from '..';
@@ -40,5 +41,18 @@ describe('<Confirmation />', () => {
   it('renders correctly', () => {
     const component = renderer.create(confirmation).toJSON();
     expect(component).toMatchSnapshot();
+  });
+
+  it('show success paragraph', () => {
+    const {getByTestId} = render(confirmation);
+    const success = getByTestId(/confirm-success/i);
+    expect(success).toBeTruthy();
+  });
+
+  it('show confirmation number', () => {
+    const {getByTestId} = render(confirmation);
+    const total = getByTestId(/confirm-number/i);
+    expect(total).toBeTruthy();
+    expect(total.children).toContain('995604757');
   });
 });

@@ -66,7 +66,7 @@ function CheckoutForm(props: Props) {
     <View>
       {/* <Text style={{padding: 8}} /> */}
       <View style={{backgroundColor: '#f7f7e9', padding: 16}}>
-        <Text>
+        <Text testID="checkout-intro">
           In order to purchase the items in your shopping cart, please provide
           us with the following information:
         </Text>
@@ -78,6 +78,7 @@ function CheckoutForm(props: Props) {
           rules={{required: true, minLength: 3, maxLength: 64}}
           placeholder="Enter your name"
           style={styles.textInput}
+          testID="checkout-input"
         />
         {errors.name && (
           <Text style={styles.error}>
@@ -92,6 +93,7 @@ function CheckoutForm(props: Props) {
           rules={{required: true, minLength: 8, maxLength: 32}}
           placeholder="Enter your email address"
           style={styles.textInput}
+          testID="checkout-input"
         />
         {errors.email && (
           <Text style={styles.error}>
@@ -106,6 +108,7 @@ function CheckoutForm(props: Props) {
           rules={{required: true, minLength: 8, maxLength: 32}}
           placeholder="Enter your phone number"
           style={styles.textInput}
+          testID="checkout-input"
         />
         {errors.phone && (
           <Text style={styles.error}>
@@ -120,6 +123,7 @@ function CheckoutForm(props: Props) {
           rules={{required: true, minLength: 8, maxLength: 256}}
           placeholder="Enter your address"
           style={styles.textInput}
+          testID="checkout-input"
         />
         {errors.address && (
           <Text style={styles.error}>
@@ -134,6 +138,7 @@ function CheckoutForm(props: Props) {
           rules={{required: true, minLength: 16, maxLength: 19}}
           placeholder="Enter your credit card number"
           style={styles.textInput}
+          testID="checkout-input"
         />
         {errors.creditCard && (
           <Text style={styles.error}>
@@ -150,7 +155,7 @@ function CheckoutForm(props: Props) {
           Total: &euro; {(cart.subtotal + surcharge).toFixed(2)}{' '}
         </Text>
         <Text style={{marginTop: 8}} />
-        <Button onPress={onSubmit} title="Purchase" />
+        <Button onPress={onSubmit} testID="checkout-submit" title="Purchase" />
       </View>
     </View>
   );

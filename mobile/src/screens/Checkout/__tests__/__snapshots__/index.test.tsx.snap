@@ -35,7 +35,9 @@ exports[`<Checkout /> renders correctly 1`] = `
         }
       }
     >
-      <Text>
+      <Text
+        testID="checkout-intro"
+      >
         In order to purchase the items in your shopping cart, please provide us with the following information:
       </Text>
       <TextInput
@@ -51,6 +53,7 @@ exports[`<Checkout /> renders correctly 1`] = `
             "padding": 8,
           }
         }
+        testID="checkout-input"
         underlineColorAndroid="transparent"
       />
       <TextInput
@@ -66,6 +69,7 @@ exports[`<Checkout /> renders correctly 1`] = `
             "padding": 8,
           }
         }
+        testID="checkout-input"
         underlineColorAndroid="transparent"
       />
       <TextInput
@@ -81,6 +85,7 @@ exports[`<Checkout /> renders correctly 1`] = `
             "padding": 8,
           }
         }
+        testID="checkout-input"
         underlineColorAndroid="transparent"
       />
       <TextInput
@@ -96,6 +101,7 @@ exports[`<Checkout /> renders correctly 1`] = `
             "padding": 8,
           }
         }
+        testID="checkout-input"
         underlineColorAndroid="transparent"
       />
       <TextInput
@@ -111,6 +117,7 @@ exports[`<Checkout /> renders correctly 1`] = `
             "padding": 8,
           }
         }
+        testID="checkout-input"
         underlineColorAndroid="transparent"
       />
     </View>
@@ -155,6 +162,7 @@ exports[`<Checkout /> renders correctly 1`] = `
       />
       <Button
         onPress={[Function]}
+        testID="checkout-submit"
         title="Purchase"
       />
     </View>
