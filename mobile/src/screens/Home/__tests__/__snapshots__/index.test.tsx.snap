@@ -111,6 +111,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             dairy
@@ -124,6 +125,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/dairy.jpg",
                 }
               }
+              testID="img-dairy"
             />
           </TouchableWithoutFeedback>
         </View>
@@ -139,6 +141,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             meats
@@ -152,6 +155,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/meats.jpg",
                 }
               }
+              testID="img-meats"
             />
           </TouchableWithoutFeedback>
         </View>
@@ -167,6 +171,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             bakery
@@ -180,6 +185,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/bakery.jpg",
                 }
               }
+              testID="img-bakery"
             />
           </TouchableWithoutFeedback>
         </View>
@@ -195,6 +201,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             fruit & veg
@@ -208,6 +215,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/fruitveg.jpg",
                 }
               }
+              testID="img-fruit & veg"
             />
           </TouchableWithoutFeedback>
         </View>
@@ -223,6 +231,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             cereals
@@ -236,6 +245,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/cereals.jpg",
                 }
               }
+              testID="img-cereals"
             />
           </TouchableWithoutFeedback>
         </View>
@@ -251,6 +261,7 @@ exports[`<Home /> renders correctly 1`] = `
               "paddingBottom": 24,
             }
           }
+          testID="categoryBox"
         >
           <Text>
             drinks
@@ -264,6 +275,7 @@ exports[`<Home /> renders correctly 1`] = `
                   "testUri": "../../../assets/img/categories/drinks.jpg",
                 }
               }
+              testID="img-drinks"
             />
           </TouchableWithoutFeedback>
         </View>

@@ -4,45 +4,45 @@ import { BrowserRouter as Router } from "react-router-dom";
 import renderer from "react-test-renderer";
 import Confirmation from "..";
 
+const order = {
+  customer: {
+    id: 1,
+    address: "none of your business",
+    ccNumber: "1234567890123456",
+    cityRegion: "NY",
+    email: "joe@bloggs.com",
+    name: "joe bloggs",
+    phone: "1234567890"
+  },
+  orderedProducts: [
+    {
+      quantity: 1
+    }
+  ],
+  orderRecord: {
+    id: 1,
+    amount: 5.39,
+    confirmationNumber: "995604757",
+    dateCreated: "1582123900751"
+  },
+  products: [
+    {
+      id: 12,
+      description: "contain peanuts<br>(3 cookies)",
+      name: "chocolate cookies",
+      price: 2.39,
+      category: { id: 3, name: "bakery" }
+    }
+  ]
+};
+
+const confirmation = (
+  <Router>
+    <Confirmation order={order} />
+  </Router>
+);
+
 describe("<Confirmation />", () => {
-  const order = {
-    customer: {
-      id: 1,
-      address: "none of your business",
-      ccNumber: "1234567890123456",
-      cityRegion: "NY",
-      email: "joe@bloggs.com",
-      name: "joe bloggs",
-      phone: "1234567890"
-    },
-    orderedProducts: [
-      {
-        quantity: 1
-      }
-    ],
-    orderRecord: {
-      id: 1,
-      amount: 5.39,
-      confirmationNumber: "995604757",
-      dateCreated: "1582123900751"
-    },
-    products: [
-      {
-        id: 12,
-        description: "contain peanuts<br>(3 cookies)",
-        name: "chocolate cookies",
-        price: 2.39,
-        category: { id: 3, name: "bakery" }
-      }
-    ]
-  };
-
-  const confirmation = (
-    <Router>
-      <Confirmation order={order} />
-    </Router>
-  );
-
   it("renders correctly", () => {
     const component = renderer.create(confirmation).toJSON();
     // @ts-ignore

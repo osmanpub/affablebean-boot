@@ -133,6 +133,7 @@ exports[`<Cart /> renders correctly 1`] = `
             "fontWeight": "bold",
           }
         }
+        testID="name-milk"
       >
         milk
       </Text>
@@ -152,6 +153,7 @@ exports[`<Cart /> renders correctly 1`] = `
             "paddingBottom": 8,
           }
         }
+        testID="price-milk"
       >
         € 
         1.70
@@ -174,6 +176,7 @@ exports[`<Cart /> renders correctly 1`] = `
       />
       <Button
         onPress={[Function]}
+        testID="submit-milk"
         title="update"
       />
     </View>

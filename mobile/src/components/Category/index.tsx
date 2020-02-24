@@ -19,11 +19,11 @@ export default function Category(props: Props) {
   const {name} = category;
 
   return (
-    <View style={styles.category}>
+    <View style={styles.category} testID="categoryBox">
       <Text>{name}</Text>
       <TouchableWithoutFeedback
         onPress={() => setCategoryProduct(getId(category))}>
-        <Image source={getCategoryIcon(name)} />
+        <Image source={getCategoryIcon(name)} testID={`img-${name}`} />
       </TouchableWithoutFeedback>
     </View>
   );

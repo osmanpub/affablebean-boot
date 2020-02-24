@@ -1,3 +1,4 @@
+import {act, fireEvent, render} from '@testing-library/react';
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
@@ -26,15 +27,15 @@ const initialState = {
 
 const store = mockStore(initialState);
 
+const checkoutForm = (
+  <Provider store={store}>
+    <CheckoutForm />
+  </Provider>
+);
+
 describe('<CheckoutForm />', () => {
   it('renders correctly', () => {
-    const component = renderer
-      .create(
-        <Provider store={store}>
-          <CheckoutForm />
-        </Provider>,
-      )
-      .toJSON();
+    const component = renderer.create(checkoutForm).toJSON();
     expect(component).toMatchSnapshot();
   });
 });

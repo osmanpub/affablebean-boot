@@ -8,6 +8,7 @@ exports[`<Category /> renders correctly 1`] = `
       "paddingBottom": 24,
     }
   }
+  testID="categoryBox"
 >
   <Text>
     dairy
@@ -21,6 +22,7 @@ exports[`<Category /> renders correctly 1`] = `
           "testUri": "../../../assets/img/categories/dairy.jpg",
         }
       }
+      testID="img-dairy"
     />
   </TouchableWithoutFeedback>
 </View>
