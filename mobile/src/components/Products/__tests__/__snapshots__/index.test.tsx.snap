@@ -120,6 +120,7 @@ exports[`<Products /> renders correctly 1`] = `
             "paddingBottom": 24,
           }
         }
+        testID="product-0"
       >
         <Image
           source={
@@ -127,6 +128,7 @@ exports[`<Products /> renders correctly 1`] = `
               "testUri": "../../../assets/img/products/milk.png",
             }
           }
+          testID="img-milk"
         />
         <View
           style={
@@ -148,6 +150,7 @@ exports[`<Products /> renders correctly 1`] = `
                 "fontWeight": "bold",
               }
             }
+            testID="name-milk"
           >
             milk
           </Text>
@@ -157,12 +160,14 @@ exports[`<Products /> renders correctly 1`] = `
                 "paddingBottom": 8,
               }
             }
+            testID="price-milk"
           >
             € 
             1.70
           </Text>
           <Button
             onPress={[Function]}
+            testID="submit-milk"
             title="add"
           />
         </View>
@@ -180,6 +185,7 @@ exports[`<Products /> renders correctly 1`] = `
             "paddingBottom": 24,
           }
         }
+        testID="product-1"
       >
         <Image
           source={
@@ -187,6 +193,7 @@ exports[`<Products /> renders correctly 1`] = `
               "testUri": "../../../assets/img/products/cheese.png",
             }
           }
+          testID="img-cheese"
         />
         <View
           style={
@@ -208,6 +215,7 @@ exports[`<Products /> renders correctly 1`] = `
                 "fontWeight": "bold",
               }
             }
+            testID="name-cheese"
           >
             cheese
           </Text>
@@ -217,12 +225,14 @@ exports[`<Products /> renders correctly 1`] = `
                 "paddingBottom": 8,
               }
             }
+            testID="price-cheese"
           >
             € 
             2.39
           </Text>
           <Button
             onPress={[Function]}
+            testID="submit-cheese"
             title="add"
           />
         </View>
@@ -240,6 +250,7 @@ exports[`<Products /> renders correctly 1`] = `
             "paddingBottom": 24,
           }
         }
+        testID="product-2"
       >
         <Image
           source={
@@ -247,6 +258,7 @@ exports[`<Products /> renders correctly 1`] = `
               "testUri": "../../../assets/img/products/butter.png",
             }
           }
+          testID="img-butter"
         />
         <View
           style={
@@ -268,6 +280,7 @@ exports[`<Products /> renders correctly 1`] = `
                 "fontWeight": "bold",
               }
             }
+            testID="name-butter"
           >
             butter
           </Text>
@@ -277,12 +290,14 @@ exports[`<Products /> renders correctly 1`] = `
                 "paddingBottom": 8,
               }
             }
+            testID="price-butter"
           >
             € 
             1.09
           </Text>
           <Button
             onPress={[Function]}
+            testID="submit-butter"
             title="add"
           />
         </View>
@@ -300,6 +315,7 @@ exports[`<Products /> renders correctly 1`] = `
             "paddingBottom": 24,
           }
         }
+        testID="product-3"
       >
         <Image
           source={
@@ -307,6 +323,7 @@ exports[`<Products /> renders correctly 1`] = `
               "testUri": "../../../assets/img/products/free-range-eggs.png",
             }
           }
+          testID="img-free range eggs"
         />
         <View
           style={
@@ -328,6 +345,7 @@ exports[`<Products /> renders correctly 1`] = `
                 "fontWeight": "bold",
               }
             }
+            testID="name-free range eggs"
           >
             free range eggs
           </Text>
@@ -337,12 +355,14 @@ exports[`<Products /> renders correctly 1`] = `
                 "paddingBottom": 8,
               }
             }
+            testID="price-free range eggs"
           >
             € 
             1.76
           </Text>
           <Button
             onPress={[Function]}
+            testID="submit-free range eggs"
             title="add"
           />
         </View>

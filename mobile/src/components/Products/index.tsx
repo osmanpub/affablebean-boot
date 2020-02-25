@@ -57,22 +57,31 @@ function Products(props: Props) {
       <FlatList
         data={products}
         keyExtractor={item => getId(item).toString()}
-        renderItem={({item}) => {
+        renderItem={({item, index}) => {
+          const name = item.name;
+
           return (
             <View
               style={{
                 alignItems: 'center',
                 flexDirection: 'row',
                 paddingBottom: 24,
-              }}>
-              <Image source={getProductIcon(item.name)} />
+              }}
+              testID={`product-${index}`}>
+              <Image source={getProductIcon(name)} testID={`img-${name}`} />
               <View style={{paddingLeft: 24}} />
               <View style={{alignItems: 'flex-start'}}>
-                <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
-                <Text style={{paddingBottom: 8}}>
+                <Text style={{fontWeight: 'bold'}} testID={`name-${name}`}>
+                  {name}
+                </Text>
+                <Text style={{paddingBottom: 8}} testID={`price-${name}`}>
                   &euro; {item.price.toFixed(2)}
                 </Text>
-                <Button onPress={() => addToCart(getId(item))} title="add" />
+                <Button
+                  onPress={() => addToCart(getId(item))}
+                  testID={`submit-${name}`}
+                  title="add"
+                />
               </View>
             </View>
           );

@@ -1,3 +1,4 @@
+import {render} from '@testing-library/react-native';
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
@@ -179,15 +180,27 @@ const category = {
   // }
 };
 
+const products = (
+  <Provider store={store}>
+    <Products {...category} />
+  </Provider>
+);
+
 describe('<Products />', () => {
   it('renders correctly', () => {
-    const component = renderer
-      .create(
-        <Provider store={store}>
-          <Products {...category} />
-        </Provider>,
-      )
-      .toJSON();
+    const component = renderer.create(products).toJSON();
     expect(component).toMatchSnapshot();
+  });
+
+  it('four products are shown', () => {
+    const {getAllByTestId} = render(products);
+    const items = getAllByTestId(/product/i);
+    expect(items).toHaveLength(4);
+  });
+
+  it('show submit buttons', () => {
+    const {getAllByTitle} = render(products);
+    const buttons = getAllByTitle(/add/i);
+    expect(buttons).toHaveLength(4);
   });
 });
