@@ -41,7 +41,9 @@ function Header(props: Props) {
     if (currentScreen !== 'Cart') {
       cartWidget = (
         <TouchableHighlight onPress={() => setScreen('Cart')}>
-          <Text style={styles.button}>view cart</Text>
+          <Text style={styles.button} testID="view-cart">
+            view cart
+          </Text>
         </TouchableHighlight>
       );
     }
@@ -49,7 +51,9 @@ function Header(props: Props) {
     if (currentScreen !== 'Checkout') {
       checkoutWidget = (
         <TouchableWithoutFeedback onPress={() => setScreen('Checkout')}>
-          <Text style={styles.button}>checkout</Text>
+          <Text style={styles.button} testID="checkout">
+            checkout
+          </Text>
         </TouchableWithoutFeedback>
       );
     }
@@ -61,21 +65,29 @@ function Header(props: Props) {
         alignItems: 'center',
       }}>
       <TouchableWithoutFeedback onPress={() => setScreen('Home')}>
-        <Image source={require('./logo.jpg')} style={styles.logo} />
+        <Image
+          source={require('./logo.jpg')}
+          style={styles.logo}
+          testID="logo"
+        />
       </TouchableWithoutFeedback>
 
       {cart && cart.numberOfItems > 0 && (
         <View>
           <View style={{flexDirection: 'row', paddingBottom: 16}}>
             <TouchableHighlight onPress={clearCart}>
-              <Text style={styles.button}>clear cart</Text>
+              <Text style={styles.button} testID="clear-cart">
+                clear cart
+              </Text>
             </TouchableHighlight>
             {cartWidget}
             {checkoutWidget}
           </View>
           <View style={styles.cart}>
             <Image source={require('./cart.gif')} />
-            <Text>&nbsp;{cart.numberOfItems}&nbsp;items</Text>
+            <Text testID="cart-items">
+              &nbsp;{cart.numberOfItems}&nbsp;items
+            </Text>
           </View>
         </View>
       )}

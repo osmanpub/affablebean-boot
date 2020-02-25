@@ -29,6 +29,7 @@ exports[`<Home /> renders correctly 1`] = `
             "margin": 16,
           }
         }
+        testID="logo"
       />
     </TouchableWithoutFeedback>
   </View>

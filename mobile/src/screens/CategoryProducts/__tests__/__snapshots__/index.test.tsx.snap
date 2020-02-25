@@ -23,6 +23,7 @@ Array [
             "margin": 16,
           }
         }
+        testID="logo"
       />
     </TouchableWithoutFeedback>
   </View>,

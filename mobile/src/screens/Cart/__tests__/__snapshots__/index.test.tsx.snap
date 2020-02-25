@@ -23,6 +23,7 @@ exports[`<Cart /> renders correctly 1`] = `
             "margin": 16,
           }
         }
+        testID="logo"
       />
     </TouchableWithoutFeedback>
     <View>
@@ -52,6 +53,7 @@ exports[`<Cart /> renders correctly 1`] = `
                 "padding": 12,
               }
             }
+            testID="clear-cart"
           >
             clear cart
           </Text>
@@ -71,6 +73,7 @@ exports[`<Cart /> renders correctly 1`] = `
                 "padding": 12,
               }
             }
+            testID="checkout"
           >
             checkout
           </Text>
@@ -93,7 +96,9 @@ exports[`<Cart /> renders correctly 1`] = `
             }
           }
         />
-        <Text>
+        <Text
+          testID="cart-items"
+        >
            
           1
            items

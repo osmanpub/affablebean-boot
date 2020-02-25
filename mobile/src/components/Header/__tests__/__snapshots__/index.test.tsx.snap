@@ -22,7 +22,110 @@ exports[`<Header /> renders correctly 1`] = `
           "margin": 16,
         }
       }
+      testID="logo"
     />
   </TouchableWithoutFeedback>
+  <View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "paddingBottom": 16,
+        }
+      }
+    >
+      <TouchableHighlight
+        activeOpacity={0.85}
+        delayPressOut={100}
+        onPress={[Function]}
+        underlayColor="black"
+      >
+        <Text
+          style={
+            Object {
+              "borderColor": "blue",
+              "borderRadius": 32,
+              "borderWidth": 1,
+              "color": "blue",
+              "fontWeight": "bold",
+              "marginHorizontal": 8,
+              "padding": 12,
+            }
+          }
+          testID="clear-cart"
+        >
+          clear cart
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        activeOpacity={0.85}
+        delayPressOut={100}
+        onPress={[Function]}
+        underlayColor="black"
+      >
+        <Text
+          style={
+            Object {
+              "borderColor": "blue",
+              "borderRadius": 32,
+              "borderWidth": 1,
+              "color": "blue",
+              "fontWeight": "bold",
+              "marginHorizontal": 8,
+              "padding": 12,
+            }
+          }
+          testID="view-cart"
+        >
+          view cart
+        </Text>
+      </TouchableHighlight>
+      <TouchableWithoutFeedback
+        onPress={[Function]}
+      >
+        <Text
+          style={
+            Object {
+              "borderColor": "blue",
+              "borderRadius": 32,
+              "borderWidth": 1,
+              "color": "blue",
+              "fontWeight": "bold",
+              "marginHorizontal": 8,
+              "padding": 12,
+            }
+          }
+          testID="checkout"
+        >
+          checkout
+        </Text>
+      </TouchableWithoutFeedback>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "paddingBottom": 16,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../src/components/Header/cart.gif",
+          }
+        }
+      />
+      <Text
+        testID="cart-items"
+      >
+         
+        1
+         items
+      </Text>
+    </View>
+  </View>
 </View>
 `;
