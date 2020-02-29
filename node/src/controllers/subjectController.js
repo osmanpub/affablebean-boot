@@ -1,3 +1,4 @@
+const debug = require("debug")("customer");
 const MsgSubject = require("../models/msgSubject");
 
 exports.subjectsList = (req, res) =>
@@ -5,6 +6,7 @@ exports.subjectsList = (req, res) =>
     .sort("name")
     .exec((err, subjects) => {
       if (err) {
+        debug("subjectsList:" + err);
         return;
       }
 

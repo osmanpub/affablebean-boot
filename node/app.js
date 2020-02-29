@@ -1,16 +1,19 @@
+const compression = require("compression");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const createError = require("http-errors");
 const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 const logger = require("morgan");
-const cors = require("cors");
+const mongoose = require("mongoose");
+const path = require("path");
 const session = require("express-session");
 const indexRouter = require("./src/routes/index");
 
 //Set up mongoose connection
-const mongoose = require("mongoose");
-const mongoDB =
+const dev_db_url =
   "mongodb+srv://random_user:iamarandomuser@cluster0-kv8co.mongodb.net/affablebean?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -18,6 +21,9 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const app = express();
+
+app.use(compression()); //Compress all routes
+app.use(helmet());
 
 app.use(
   cors({

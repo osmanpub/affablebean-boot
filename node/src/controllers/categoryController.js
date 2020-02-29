@@ -1,4 +1,5 @@
 const async = require("async");
+const debug = require("debug")("categories");
 const Category = require("../models/category");
 const Product = require("../models/product");
 
@@ -7,6 +8,7 @@ exports.categoriesList = (req, res) =>
     .sort("name")
     .exec((err, categories) => {
       if (err) {
+        debug("categoriesList error:" + err);
         return;
       }
 
@@ -32,6 +34,7 @@ exports.categoryProducts = (req, res) =>
     },
     (err, categoryProducts) => {
       if (err) {
+        debug("categoryProducts error:" + err);
         return;
       }
 

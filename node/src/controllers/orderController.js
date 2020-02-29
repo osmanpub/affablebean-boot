@@ -1,4 +1,5 @@
 const { body, validationResult } = require("express-validator");
+const debug = require("debug")("customer");
 const Cart = require("../session/shoppingCart");
 const Customer = require("../models/customer");
 const CustomerOrder = require("../models/customerOrder");
@@ -69,6 +70,7 @@ exports.purchaseOrder = [
 
     customer.save(err => {
       if (err) {
+        debug("customer save:" + err);
         return next(err);
       }
 
@@ -82,6 +84,7 @@ exports.purchaseOrder = [
 
       customerOrder.save(err => {
         if (err) {
+          debug("customerOrder save:" + err);
           return next(err);
         }
 
@@ -91,6 +94,7 @@ exports.purchaseOrder = [
         cart.items.forEach(item => {
           Product.findById(item.product._id).exec((err, product) => {
             if (err) {
+              debug("product find:" + err);
               return next(err);
             }
 
@@ -104,6 +108,7 @@ exports.purchaseOrder = [
 
             orderedProduct.save(err => {
               if (err) {
+                debug("orderedProduct save:" + err);
                 return next(err);
               }
 

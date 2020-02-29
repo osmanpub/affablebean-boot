@@ -1,4 +1,5 @@
 const { body, validationResult } = require("express-validator");
+const debug = require("debug")("categories");
 const MsgFeedback = require("../models/msgFeedback");
 const MsgSubject = require("../models/msgSubject");
 
@@ -46,6 +47,7 @@ exports.contact = [
 
     MsgSubject.findById(subjectId).exec((err, subject) => {
       if (err) {
+        debug("contact MsgSubject find error:" + err);
         return next(err);
       }
 
@@ -58,6 +60,7 @@ exports.contact = [
 
       msgFeedback.save(err => {
         if (err) {
+          debug("contact MsgSubject save error:" + err);
           return next(err);
         }
 
