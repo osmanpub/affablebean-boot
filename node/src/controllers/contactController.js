@@ -22,7 +22,7 @@ exports.contact = [
     .escape()
     .trim()
     .isLength({ min: 8, max: 1024 })
-    .isAlphanumeric()
+    // .isAlphanumeric()
     .withMessage("Message must be specified."),
   body("subjectId")
     .escape()

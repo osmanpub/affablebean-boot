@@ -7,20 +7,18 @@ class ContactAPI extends RESTDataSource {
   }
 
   async sendFeedback(name, email, msg, subjectId) {
-    console.log("sendfeedback");
-    // const payload = JSON.stringify({ email, msg, name, subjectId: subjectId });
-    // console.log(payload)
-    // const response = await this.post("contact", payload, {
-    //   data: payload,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   withCredentials: true,
-    // });
+    const response = await this.post(
+      "contact",
+      JSON.stringify({ email, msg, name, subjectId }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
 
-    return {
-      success: true,
-    };
+    return response;
   }
 }
 
