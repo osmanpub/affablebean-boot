@@ -26,4 +26,13 @@ module.exports = {
     subjects: (_, __, { dataSources }) =>
       dataSources.subjectAPI.getAllSubjects(),
   },
+  Mutation: {
+    contact: (_, { name, email, msg, subjectId }, { dataSources }) => {
+      console.log(name, email, msg, subjectId);
+      // dataSources.contactAPI.sendFeedback(name, email, msg, subjectId)
+      return {
+        success: true,
+      };
+    },
+  },
 };

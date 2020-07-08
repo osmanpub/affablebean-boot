@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 // import { types, useAlert } from "react-alert";
 import { useForm } from "react-hook-form";
@@ -5,9 +6,10 @@ import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 // import { Link, useHistory } from "react-router-dom";
 import { getId } from "../../helpers/utils";
-import { Subjects, SubjectState } from "../../interfaces/subjects";
+import { SubjectState } from "../../interfaces/subjects";
 import { FormErrors } from "../../interfaces/ui";
 import { sendFeedback } from "../../net/contact";
+import { GET_SUBJECTS } from "../../queries";
 import { RootState } from "../../redux";
 import { goHome, setFormErrors } from "../../redux/ui";
 
@@ -16,7 +18,6 @@ type Props = {
   goHome: Function;
   home: boolean;
   setFormErrors: Function;
-  subjects: Subjects;
 };
 
 type FormData = {
@@ -27,7 +28,8 @@ type FormData = {
 };
 
 function ContactForm(props: Props) {
-  const { formErrors, goHome, home, setFormErrors, subjects } = props;
+  const { data } = useQuery(GET_SUBJECTS);
+  const { formErrors, goHome, home, setFormErrors } = props;
   // Problem with jest - https://github.com/schiehll/react-alert/issues/148
   // const alert = useAlert();
   const dispatch = useDispatch();
@@ -38,7 +40,17 @@ function ContactForm(props: Props) {
     dispatch(sendFeedback({ email, msg, name, subjectId: subject }));
   });
 
-  const subjectsList = subjects.items.map((subject: SubjectState) => {
+  if (!data) {
+    return null;
+  }
+
+  const { subjects } = data;
+
+  if (!subjects || !subjects.length) {
+    return null;
+  }
+
+  const subjectsList = subjects.map((subject: SubjectState) => {
     const id = getId(subject);
     return (
       <option key={id} value={id}>
@@ -216,7 +228,6 @@ function ContactForm(props: Props) {
 const mapStateToProps = (state: RootState) => ({
   formErrors: state.ui.formErrors,
   home: state.ui.home,
-  subjects: state.subjects,
 });
 
 const mapDispatchToProps = {

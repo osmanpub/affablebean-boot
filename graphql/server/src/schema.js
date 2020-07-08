@@ -7,25 +7,42 @@ const typeDefs = gql`
     id: String!
     name: String!
   }
+
   type CategoryProducts {
     categories: [Category]!
     category: Category!
     products: [Product]!
   }
+
   type Product {
     id: String!
     description: String
     name: String!
     price: Float!
   }
+
   type Subject {
     id: String!
     name: String!
   }
+
   type Query {
     categories: [Category]!
     category(id: String!): CategoryProducts!
     subjects: [Subject]!
+  }
+
+  type Mutation {
+    contact(
+      name: String!
+      email: String!
+      msg: String!
+      subjectId: String!
+    ): ContactUpdateResponse!
+  }
+
+  type ContactUpdateResponse {
+    success: Boolean!
   }
 `;
 
