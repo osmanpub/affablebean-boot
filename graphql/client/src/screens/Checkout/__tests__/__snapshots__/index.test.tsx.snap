@@ -1,0 +1,306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Checkout /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-fzqNJr UpaPp"
+  >
+    <div
+      className="sc-fzoyAV deFyVI"
+    >
+      <div
+        className="sc-fznZeY gmZmCi"
+      >
+        
+        <div
+          className="sc-fzqBZW FENlm headerWidget"
+        >
+          <span
+            className="horizontalMargin"
+            data-cy="cart-hdr-total"
+            data-testid="cart-hdr-total"
+          >
+            <img
+              alt="shopping cart icon"
+              src="/static/img/cart.gif"
+            />
+             
+            0 items
+          </span>
+          <a
+            className="bubble"
+            data-cy="cart-hdr-view-cart"
+            data-testid="cart-hdr-view-cart"
+            href="/viewCart/false"
+            onClick={[Function]}
+          >
+            view cart
+          </a>
+        </div>
+      </div>
+      <div
+        className="sc-fzoLag bOfIyN"
+      >
+        <a
+          data-cy="home-logo"
+          href="/"
+          onClick={[Function]}
+        >
+          <img
+            alt="Affable Bean logo"
+            src="/static/img/logo.png"
+          />
+        </a>
+      </div>
+      <img
+        alt="the affable bean"
+        id="logoText"
+        src="/static/img/logoText.png"
+      />
+    </div>
+  </div>
+  <div
+    className="singleColumn"
+  >
+    <h2>
+      checkout
+    </h2>
+    <p
+      data-cy="checkout-intro"
+      data-testid="checkout-intro"
+    >
+      In order to purchase the items in your shopping cart, please provide us with the following information:
+    </p>
+    <br />
+    <form
+      className="form-horizontal"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          className="col-sm-2 control-label"
+          htmlFor="name"
+        >
+          name
+        </label>
+        <div
+          className="col-sm-10"
+        >
+          <input
+            className="form-control"
+            data-cy="checkout-name"
+            data-testid="checkout-name"
+            name="name"
+            placeholder="At least 3 chars and no more than 64 chars"
+            size={32}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="col-sm-2 control-label"
+          htmlFor="email"
+        >
+          email
+        </label>
+        <div
+          className="col-sm-10"
+        >
+          <input
+            className="form-control"
+            data-cy="checkout-email"
+            data-testid="checkout-email"
+            name="email"
+            placeholder="At least 8 chars and no more than 32 chars"
+            size={32}
+            type="email"
+          />
+        </div>
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="col-sm-2 control-label"
+          htmlFor="phone"
+        >
+          phone
+        </label>
+        <div
+          className="col-sm-10"
+        >
+          <input
+            className="form-control"
+            data-cy="checkout-phone"
+            data-testid="checkout-phone"
+            name="phone"
+            placeholder="At least 8 chars and no more than 32 chars"
+            size={32}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="col-sm-2 control-label"
+          htmlFor="address"
+        >
+          address
+        </label>
+        <div
+          className="col-sm-10"
+        >
+          <input
+            className="form-control"
+            data-cy="checkout-address"
+            data-testid="checkout-address"
+            name="address"
+            placeholder="At least 8 chars and no more than 256 chars"
+            size={32}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          className="col-sm-2 control-label"
+          htmlFor="creditcard"
+        >
+          credit card
+        </label>
+        <div
+          className="col-sm-10"
+        >
+          <input
+            className="form-control"
+            data-cy="checkout-cc"
+            data-testid="checkout-cc"
+            name="creditCard"
+            placeholder="At least 16 chars and no more than 19 chars"
+            size={32}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="form-group"
+      >
+        <div
+          className="col-sm-offset-2 col-sm-10"
+        >
+          <button
+            className="btn btn-primary"
+            data-cy="checkout-submit"
+            data-testid="checkout-submit"
+            type="submit"
+          >
+            submit purchase
+          </button>
+        </div>
+      </div>
+    </form>
+    <div
+      className="sc-AxjAm jTbjrR"
+    >
+      <ul>
+        <li>
+          Next-day delivery is guaranteed
+        </li>
+        <li>
+          A € 
+          3.00
+           delivery surcharge is applied to all purchase orders
+        </li>
+      </ul>
+      <table
+        className="sc-AxirZ bPUsNL"
+      >
+        <tbody>
+          <tr>
+            <td
+              className="sc-AxiKw bbtJYN"
+            >
+              subtotal:
+            </td>
+            <td
+              className="sc-AxhCb ieXSJc checkoutPriceColumn"
+            >
+              € 
+              0.00
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="sc-AxiKw bbtJYN"
+            >
+              surcharge:
+            </td>
+            <td
+              className="sc-AxhCb ieXSJc checkoutPriceColumn"
+            >
+              € 
+              3.00
+            </td>
+          </tr>
+          <tr>
+            <td
+              className="sc-AxiKw bbtJYN"
+            >
+              total:
+            </td>
+            <td
+              className="sc-AxhCb ieXSJc checkoutPriceColumn"
+            >
+              € 
+              3.00
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    className="sc-fznyAO fXpvEm"
+  >
+    <br />
+    <span
+      className="sc-fznKkj cSluEe"
+    >
+      <a
+        data-cy="privacy"
+        data-testid="footer-privacy"
+        href="/privacy"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Privacy
+        </button>
+      </a>
+      <a
+        data-cy="contact"
+        data-testid="footer-contact"
+        href="/contact"
+        onClick={[Function]}
+      >
+        <button
+          className="btn btn-link"
+        >
+          Contact
+        </button>
+      </a>
+       © 2020 the affable bean company
+    </span>
+  </div>
+</div>
+`;

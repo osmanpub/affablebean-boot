@@ -49,7 +49,7 @@ exports.purchaseOrder = [
     if (!errors.isEmpty()) {
       res.json({
         errors: errors.errors,
-        success: false
+        success: false,
       });
       return;
     }
@@ -65,10 +65,10 @@ exports.purchaseOrder = [
       email,
       phone,
       address,
-      creditCard
+      creditCard,
     });
 
-    customer.save(err => {
+    customer.save((err) => {
       if (err) {
         debug("customer save:" + err);
         return next(err);
@@ -79,10 +79,10 @@ exports.purchaseOrder = [
 
       const customerOrder = new CustomerOrder({
         amount: (cart.subtotal + surcharge).toFixed(2),
-        customer: customer._id
+        customer: customer._id,
       });
 
-      customerOrder.save(err => {
+      customerOrder.save((err) => {
         if (err) {
           debug("customerOrder save:" + err);
           return next(err);
@@ -91,7 +91,7 @@ exports.purchaseOrder = [
         const orderedProducts = [];
         const products = [];
 
-        cart.items.forEach(item => {
+        cart.items.forEach((item) => {
           Product.findById(item.product._id).exec((err, product) => {
             if (err) {
               debug("product find:" + err);
@@ -103,10 +103,10 @@ exports.purchaseOrder = [
             const orderedProduct = new OrderedProduct({
               quantity: item.quantity,
               customerOrder,
-              product: product._id
+              product: product._id,
             });
 
-            orderedProduct.save(err => {
+            orderedProduct.save((err) => {
               if (err) {
                 debug("orderedProduct save:" + err);
                 return next(err);
@@ -129,10 +129,10 @@ exports.purchaseOrder = [
             customer,
             orderedProducts,
             orderRecord: customerOrder,
-            products
-          }
+            products,
+          },
         });
       });
     });
-  }
+  },
 ];

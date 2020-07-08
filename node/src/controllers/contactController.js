@@ -38,7 +38,7 @@ exports.contact = [
     if (!errors.isEmpty()) {
       res.json({
         errors: errors.errors,
-        success: false
+        success: false,
       });
       return;
     }
@@ -55,19 +55,19 @@ exports.contact = [
         name,
         email,
         msg,
-        subject: subjectId
+        subject: subjectId,
       });
 
-      msgFeedback.save(err => {
+      msgFeedback.save((err) => {
         if (err) {
           debug("contact MsgSubject save error:" + err);
           return next(err);
         }
 
         res.json({
-          success: true
+          success: true,
         });
       });
     });
-  }
+  },
 ];

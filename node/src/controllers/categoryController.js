@@ -18,19 +18,16 @@ exports.categoriesList = (req, res) =>
 exports.categoryProducts = (req, res) =>
   async.parallel(
     {
-      categories: callback =>
-        Category.find()
-          .sort("name")
-          .exec(callback),
-      category: callback => Category.findById(req.params.id).exec(callback),
-      products: callback =>
+      categories: (callback) => Category.find().sort("name").exec(callback),
+      category: (callback) => Category.findById(req.params.id).exec(callback),
+      products: (callback) =>
         Product.find(
           { category: req.params.id },
           "name price description category"
         )
           .populate("category")
           .sort("name")
-          .exec(callback)
+          .exec(callback),
     },
     (err, categoryProducts) => {
       if (err) {

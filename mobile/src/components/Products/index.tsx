@@ -33,7 +33,7 @@ function Products(props: Props) {
   const dispatch = useDispatch();
 
   const addToCart = (id: id) => {
-    const update = cart.items.filter(item => getId(item.product) === id);
+    const update = cart.items.filter((item) => getId(item.product) === id);
 
     clearPurchase();
     dispatch(
@@ -56,7 +56,7 @@ function Products(props: Props) {
       }}>
       <FlatList
         data={products}
-        keyExtractor={item => getId(item).toString()}
+        keyExtractor={(item) => getId(item).toString()}
         renderItem={({item, index}) => {
           const name = item.name;
 

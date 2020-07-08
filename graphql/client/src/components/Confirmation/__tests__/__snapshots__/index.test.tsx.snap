@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Confirmation /> renders correctly 1`] = `
+<div
+  className="singleColumn"
+>
+  <p
+    className="sc-AxjAm jweHSd"
+  >
+    <strong
+      data-cy="confirm-success"
+      data-testid="confirm-success"
+    >
+      Your order has been successfully processed and will be delivered within 24 hours.
+    </strong>
+    <br />
+    <br />
+    Please keep a note of your confirmation number:
+    <strong>
+      995604757
+    </strong>
+    <br />
+    If you have a query concerning your order, feel free to 
+    <a
+      href="/contact"
+      onClick={[Function]}
+    >
+      contact us
+    </a>
+    <br />
+    <br />
+    Thank you for shopping at the Affable Bean Green Grocer!
+  </p>
+  <div
+    className="summaryColumn"
+  >
+    <table
+      className="sc-AxheI bWJbzc detailsTable"
+    >
+      <tbody>
+        <tr
+          className="header"
+        >
+          <th
+            colSpan={3}
+          >
+            order summary
+          </th>
+        </tr>
+        <tr
+          className="tableHeading"
+        >
+          <td>
+            product
+          </td>
+          <td>
+            quantity
+          </td>
+          <td>
+            price
+          </td>
+        </tr>
+        <tr
+          className="white"
+        >
+          <td>
+            chocolate cookies
+          </td>
+          <td
+            className="quantityColumn"
+          >
+            1
+          </td>
+          <td
+            className="confirmationPriceColumn"
+          >
+            € 
+            2.39
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            colSpan={3}
+            style={
+              Object {
+                "padding": "0 20px",
+              }
+            }
+          >
+            <hr />
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-AxhUy cbmOPV"
+            colSpan={2}
+          >
+            <strong>
+              surcharge:
+            </strong>
+          </td>
+          <td
+            className="sc-AxgMl jRFoKn"
+            data-testid="surcharge"
+          >
+            € 
+            3.00
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-Axmtr bWYfEK"
+            colSpan={2}
+          >
+            <strong>
+              total:
+            </strong>
+          </td>
+          <td
+            className="sc-AxmLO kTrtID"
+            data-testid="total"
+          >
+            € 
+            5.39
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            colSpan={3}
+            style={
+              Object {
+                "padding": "0 20px",
+              }
+            }
+          >
+            <hr />
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+        >
+          <td
+            className="sc-AxirZ fjNOmz"
+            colSpan={3}
+          >
+            <strong>
+              date processed: 
+            </strong>
+            <span>
+              1582123900751
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="summaryColumn"
+  >
+    <table
+      className="sc-AxiKw jehySk detailsTable"
+    >
+      <tbody>
+        <tr
+          className="header"
+        >
+          <th
+            colSpan={3}
+          >
+            delivery address
+          </th>
+        </tr>
+        <tr>
+          <td
+            className="sc-AxhCb hlelyg lightBlue"
+            colSpan={3}
+          >
+            <span
+              data-testid="name"
+            >
+              joe bloggs
+            </span>
+            <br />
+            <span
+              data-testid="address"
+            >
+              none of your business
+            </span>
+            <br />
+            <span
+              data-testid="cityRegion"
+            >
+              NY
+            </span>
+            <br />
+            <hr />
+            <span
+              data-testid="email"
+            >
+              joe@bloggs.com
+            </span>
+            <br />
+            <span
+              data-testid="phone"
+            >
+              1234567890
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

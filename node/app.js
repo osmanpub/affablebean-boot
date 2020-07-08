@@ -25,11 +25,13 @@ const app = express();
 app.use(compression()); //Compress all routes
 app.use(helmet());
 
+// app.use(cors)
+
 app.use(
   cors({
     credentials: true,
     maxAge: 3600000,
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
   })
 );
 
@@ -37,7 +39,7 @@ const sess = {
   cookie: { secure: false, httpOnly: false, maxAge: 3600000 },
   resave: false,
   saveUninitialized: false,
-  secret: "keyboard cat"
+  secret: "keyboard cat",
 };
 
 if (app.get("env") === "production") {
@@ -57,12 +59,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

@@ -1,0 +1,291 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Products /> renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AxirZ hJZGhZ"
+  >
+    <a
+      href="/category/3"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-bakery"
+          data-testid="category-bakery"
+        >
+          bakery
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/5"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-cereals"
+          data-testid="category-cereals"
+        >
+          cereals
+        </span>
+      </span>
+    </a>
+    <span
+      className="sc-AxhUy fKFZuq"
+      data-testid="selected-dairy"
+    >
+      <span
+        className="categoryText"
+      >
+        dairy
+      </span>
+    </span>
+    <a
+      href="/category/6"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-drinks"
+          data-testid="category-drinks"
+        >
+          drinks
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/4"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-fruit & veg"
+          data-testid="category-fruit & veg"
+        >
+          fruit & veg
+        </span>
+      </span>
+    </a>
+    <a
+      href="/category/2"
+      onClick={[Function]}
+    >
+      <span
+        className="categoryButton"
+      >
+        <span
+          className="categoryText"
+          data-cy="category-meats"
+          data-testid="category-meats"
+        >
+          meats
+        </span>
+      </span>
+    </a>
+  </div>
+  <div
+    className="sc-AxiKw jGFftw"
+  >
+    <p
+      className="sc-AxjAm ekMBNw"
+    >
+      dairy
+    </p>
+    <table
+      className="sc-AxhCb eIRkWE"
+    >
+      <tbody>
+        <tr
+          className="white"
+          data-cy="product-milk"
+          data-testid="product"
+        >
+          <td>
+            <img
+              alt="milk"
+              src="/static/img/products/milk.png"
+            />
+          </td>
+          <td
+            data-testid="milk"
+          >
+            milk
+            <br />
+            <span
+              className="smallText"
+            >
+              semi skimmed (1L)
+            </span>
+          </td>
+          <td
+            data-testid="price-milk"
+          >
+            € 
+            1.70
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              data-testid="add-qty-milk"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+          data-cy="product-cheese"
+          data-testid="product"
+        >
+          <td>
+            <img
+              alt="cheese"
+              src="/static/img/products/cheese.png"
+            />
+          </td>
+          <td
+            data-testid="cheese"
+          >
+            cheese
+            <br />
+            <span
+              className="smallText"
+            >
+              mild cheddar (330g)
+            </span>
+          </td>
+          <td
+            data-testid="price-cheese"
+          >
+            € 
+            2.39
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              data-testid="add-qty-cheese"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="white"
+          data-cy="product-butter"
+          data-testid="product"
+        >
+          <td>
+            <img
+              alt="butter"
+              src="/static/img/products/butter.png"
+            />
+          </td>
+          <td
+            data-testid="butter"
+          >
+            butter
+            <br />
+            <span
+              className="smallText"
+            >
+              unsalted (250g)
+            </span>
+          </td>
+          <td
+            data-testid="price-butter"
+          >
+            € 
+            1.09
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              data-testid="add-qty-butter"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+        <tr
+          className="lightBlue"
+          data-cy="product-free range eggs"
+          data-testid="product"
+        >
+          <td>
+            <img
+              alt="free range eggs"
+              src="/static/img/products/free range eggs.png"
+            />
+          </td>
+          <td
+            data-testid="free range eggs"
+          >
+            free range eggs
+            <br />
+            <span
+              className="smallText"
+            >
+              medium-sized (6 eggs)
+            </span>
+          </td>
+          <td
+            data-testid="price-free range eggs"
+          >
+            € 
+            1.76
+          </td>
+          <td>
+              
+          </td>
+          <td>
+            <button
+              className="btn btn-primary btn-sm"
+              data-testid="add-qty-free range eggs"
+              onClick={[Function]}
+            >
+              add
+            </button>
+          </td>
+          <td>
+              
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

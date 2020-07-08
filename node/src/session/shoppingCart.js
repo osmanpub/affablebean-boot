@@ -16,7 +16,9 @@ class ShoppingCart {
 
   addItem(product) {
     const id = product._id.toString();
-    const productIndex = this.items.findIndex(item => item.product._id === id);
+    const productIndex = this.items.findIndex(
+      (item) => item.product._id === id
+    );
 
     const scItem = new ShoppingCartItem(product);
 
@@ -35,7 +37,9 @@ class ShoppingCart {
     }
 
     const id = product._id.toString();
-    const productIndex = this.items.findIndex(item => item.product._id === id);
+    const productIndex = this.items.findIndex(
+      (item) => item.product._id === id
+    );
 
     if (productIndex > -1) {
       const scItem = new ShoppingCartItem(product);
@@ -66,5 +70,5 @@ class ShoppingCart {
 }
 
 module.exports = {
-  ShoppingCart
+  ShoppingCart,
 };

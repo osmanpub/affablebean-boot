@@ -19,11 +19,11 @@ const Privacy = lazy(() => import("./screens/Privacy"));
 const alertOptions = {
   position: positions.MIDDLE,
   offset: "30px",
-  transition: transitions.SCALE
+  transition: transitions.SCALE,
 };
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
 });
 
 render(

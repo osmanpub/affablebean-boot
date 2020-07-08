@@ -16,7 +16,7 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
     data: JSON.stringify(data),
     withCredentials: true,
   })
-    .then(response => {
+    .then((response) => {
       const {data} = response;
 
       if (!data) {
@@ -43,6 +43,6 @@ export const purchaseOrder = (data: any) => (dispatch: Function) => {
         dispatch(setFormErrors(data.errors));
       }
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error))
     .finally(() => dispatch(isPosting(false)));
 };

@@ -3,27 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect ./bin/www",
-    "devstart": "nodemon ./bin/www",
+    "start": "node --inspect ./bin1/www",
+    "devstart": "nodemon ./bin1/www",
     "serverstart": "DEBUG=affablebean:* npm run devstart",
     "format": "prettier --write app.js 'src/**/*'"
   },
   "dependencies": {
-    "async": "^3.1.1",
+    "async": "^3.2.0",
     "compression": "^1.7.4",
-    "cookie-parser": "~1.4.4",
+    "cookie-parser": "~1.4.5",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-session": "^1.17.0",
-    "express-validator": "^6.3.1",
-    "helmet": "^3.21.3",
-    "http-errors": "~1.6.3",
-    "moment": "^2.24.0",
-    "mongoose": "^5.8.10",
-    "morgan": "~1.9.1"
+    "debug": "~4.1.1",
+    "express": "~4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.0",
+    "helmet": "^3.23.3",
+    "http-errors": "~1.8.0",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.22",
+    "morgan": "~1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.4"
   }
 }

@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactForm /> renders correctly 1`] = `
+<div
+  className="singleColumn"
+>
+  <div>
+    <h2
+      data-cy="contact-intro"
+      data-testid="contact-intro"
+    >
+      Contact Us Form
+    </h2>
+    <p>
+      You can use this form for any comments or questions about our company or brands.
+      <br />
+      For general enquiries please call toll free on 1-800-BEANS-R-US
+    </p>
+  </div>
+  <div>
+    <p>
+      (* Asterisks indicate required field)
+    </p>
+  </div>
+  <form
+    className="form-horizontal"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="subject"
+      >
+        subject
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <select
+          className="form-control"
+          data-cy="contact-subject"
+          data-testid="contact-subject"
+          name="subject"
+        >
+          <option
+            value={1}
+          >
+            Brands or product
+          </option>
+          <option
+            value={2}
+          >
+            Investor relations
+          </option>
+          <option
+            value={3}
+          >
+            Sustainability
+          </option>
+          <option
+            value={4}
+          >
+            The Company
+          </option>
+          <option
+            value={5}
+          >
+            Media enquiry
+          </option>
+          <option
+            value={6}
+          >
+            Website feedback
+          </option>
+          <option
+            value={7}
+          >
+            Other
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="name"
+      >
+        name
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="contact-name"
+          data-testid="contact-name"
+          name="name"
+          placeholder="At least 3 chars and no more than 64 chars"
+          size={31}
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="email"
+      >
+        email
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          data-cy="contact-email"
+          data-testid="contact-email"
+          name="email"
+          placeholder="At least 8 chars and no more than 32 chars"
+          size={31}
+          type="email"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-sm-2 control-label"
+        htmlFor="msg"
+      >
+        message
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <textarea
+          className="form-control"
+          cols={25}
+          data-cy="contact-msg"
+          data-testid="contact-msg"
+          name="msg"
+          placeholder="At least 8 chars and no more than 1024 chars"
+          rows={5}
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className="col-sm-offset-2 col-sm-10"
+      >
+        <button
+          className="btn btn-primary"
+          data-cy="contact-submit"
+          data-testid="contact-submit"
+          type="submit"
+        >
+          send feedback
+        </button>
+      </div>
+    </div>
+  </form>
+  <div>
+    <br />
+    <h3>
+      Privacy
+    </h3>
+    <p>
+      This website is owned and controlled by:
+      <br />
+      <br />
+       The Affable Bean Company Limited 
+      <br />
+      Registered office: AffableBean House, Roast Drive, 
+      <br />
+       Pothead, POT123, BeanieLand
+    </p>
+    <p>
+      (hereinafter referred to as "AffableBean")
+    </p>
+    <p>
+      AffableBean is responsible for the processing of any information collected by or on behalf of AffableBean on or via this website. All such information will be processed in accordance with our 
+      <a
+        href="/privacy"
+        onClick={[Function]}
+      >
+        privacy policy
+      </a>
+      .
+    </p>
+  </div>
+</div>
+`;

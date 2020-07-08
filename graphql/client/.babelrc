@@ -1,0 +1,16 @@
+ 
+{
+  "presets": ["@babel/preset-react"],
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "exclude": [
+            "**/*.spec.js"
+          ]
+        }]
+      ]
+    }
+  },
+  "plugins": ["transform-class-properties", "istanbul"]
+}

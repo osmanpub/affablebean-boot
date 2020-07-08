@@ -19,7 +19,7 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
   if (IS_NODE) {
     return axios
       .get(getNodePath(`category/${id}`))
-      .then(response => {
+      .then((response) => {
         const {category, categories, products} = response.data.categoryProducts;
         dispatch(
           receiveCategory({
@@ -29,7 +29,7 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
           }),
         );
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error))
       .finally(() => dispatch(isFetching(false)));
   }
 
@@ -44,8 +44,8 @@ const fetchCategory = (id: id) => (dispatch: Function) => {
     // redirect: "follow", // manual, *follow, error
     // referrer: "no-referrer", // no-referrer, *client
   })
-    .then(response => response.json())
-    .then(json => dispatch(receiveCategory(json.content)))
+    .then((response) => response.json())
+    .then((json) => dispatch(receiveCategory(json.content)))
     .finally(() => dispatch(isFetching(false)));
 };
 

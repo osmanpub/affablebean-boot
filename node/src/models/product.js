@@ -7,10 +7,10 @@ const ProductSchema = new Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true, min: 3, max: 256 },
   lastUpdate: { type: Date, default: Date.now() },
-  category: { type: Schema.Types.ObjectId, ref: "Category" }
+  category: { type: Schema.Types.ObjectId, ref: "Category" },
 });
 
-ProductSchema.virtual("url").get(function() {
+ProductSchema.virtual("url").get(function () {
   return "/product/" + this._id;
 });
 

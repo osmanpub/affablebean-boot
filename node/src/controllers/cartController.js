@@ -23,14 +23,14 @@ exports.addToCart = (req, res) =>
     res.json({
       items: cart.items,
       numberOfItems: Number(cart.numberOfItems),
-      subtotal: cart.subtotal
+      subtotal: cart.subtotal,
     });
   });
 
 exports.clearCart = (req, res) => {
   if (!req.session.cart) {
     res.json({
-      success: false
+      success: false,
     });
     return;
   }
@@ -42,7 +42,7 @@ exports.clearCart = (req, res) => {
 
   req.session.cart = cart;
   res.json({
-    success: true
+    success: true,
   });
 };
 
@@ -66,6 +66,6 @@ exports.updateCart = (req, res) =>
     res.json({
       items: cart.items,
       numberOfItems: Number(cart.numberOfItems),
-      subtotal: cart.subtotal
+      subtotal: cart.subtotal,
     });
   });

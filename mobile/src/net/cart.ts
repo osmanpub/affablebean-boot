@@ -13,7 +13,7 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
       : getPath(`addToCart2?id=${id}`),
     withCredentials: true,
   })
-    .then(response => {
+    .then((response) => {
       const {items, numberOfItems, subtotal} = response.data;
       dispatch(
         addToCart({
@@ -23,7 +23,7 @@ export const addProductToCart = (id: id) => (dispatch: Function) => {
         }),
       );
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error))
     .finally(() => dispatch(isFetching(false)));
 };
 
@@ -39,7 +39,7 @@ export const emptyCart = (cb: Function) => (dispatch: Function) => {
       cb();
       dispatch(clearCart({}));
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error))
     .finally(() => dispatch(isFetching(false)));
 };
 
@@ -55,7 +55,7 @@ export const updateProductInCart = (id: id, qty: number) => (
       : getPath(`updateCart2?id=${id}&qty=${qty}`),
     withCredentials: true,
   })
-    .then(response => {
+    .then((response) => {
       const {items, numberOfItems, subtotal} = response.data;
       dispatch(
         updateCart({
@@ -65,6 +65,6 @@ export const updateProductInCart = (id: id, qty: number) => (
         }),
       );
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error))
     .finally(() => dispatch(isFetching(false)));
 };

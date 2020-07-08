@@ -8,10 +8,10 @@ const CustomerSchema = new Schema({
   phone: { type: String, required: true, min: 8, max: 32 },
   address: { type: String, required: true, min: 8, max: 256 },
   city_region: { type: String, optional: true, min: 2, max: 2, default: "NY" },
-  creditCard: { type: String, required: true, min: 16, max: 19 }
+  creditCard: { type: String, required: true, min: 16, max: 19 },
 });
 
-CustomerSchema.virtual("url").get(function() {
+CustomerSchema.virtual("url").get(function () {
   return "/customer/" + this._id;
 });
 

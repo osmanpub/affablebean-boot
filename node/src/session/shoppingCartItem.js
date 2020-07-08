@@ -12,5 +12,5 @@ class ShoppingCartItem {
 }
 
 module.exports = {
-  ShoppingCartItem
+  ShoppingCartItem,
 };

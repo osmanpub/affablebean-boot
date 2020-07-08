@@ -21,7 +21,7 @@ const products = [];
 function categoryCreate(name, cb) {
   const category = new Category({ name });
 
-  category.save(function(err) {
+  category.save(function (err) {
     if (err) {
       cb(err, null);
       return;
@@ -35,12 +35,12 @@ function categoryCreate(name, cb) {
 function createCategories(cb) {
   async.series(
     [
-      callback => categoryCreate("dairy", callback),
-      callback => categoryCreate("meats", callback),
-      callback => categoryCreate("bakery", callback),
-      callback => categoryCreate("fruit n veg", callback),
-      callback => categoryCreate("cereals", callback),
-      callback => categoryCreate("drinks", callback)
+      (callback) => categoryCreate("dairy", callback),
+      (callback) => categoryCreate("meats", callback),
+      (callback) => categoryCreate("bakery", callback),
+      (callback) => categoryCreate("fruit n veg", callback),
+      (callback) => categoryCreate("cereals", callback),
+      (callback) => categoryCreate("drinks", callback),
     ],
     cb
   );
@@ -49,7 +49,7 @@ function createCategories(cb) {
 function productCreate(name, price, description, category, cb) {
   const product = new Product({ name, price, description, category });
 
-  product.save(function(err) {
+  product.save(function (err) {
     if (err) {
       cb(err, null);
       return;
@@ -63,7 +63,7 @@ function productCreate(name, price, description, category, cb) {
 function createProducts(cb) {
   async.series(
     [
-      callback =>
+      (callback) =>
         productCreate(
           "milk",
           1.7,
@@ -71,7 +71,7 @@ function createProducts(cb) {
           categories[0],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "cheese",
           2.39,
@@ -79,7 +79,7 @@ function createProducts(cb) {
           categories[0],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "butter",
           1.09,
@@ -87,7 +87,7 @@ function createProducts(cb) {
           categories[0],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "free range eggs",
           1.76,
@@ -96,7 +96,7 @@ function createProducts(cb) {
           callback
         ),
 
-      callback =>
+      (callback) =>
         productCreate(
           "organic meat patties",
           2.29,
@@ -104,7 +104,7 @@ function createProducts(cb) {
           categories[1],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "parma ham",
           3.49,
@@ -112,7 +112,7 @@ function createProducts(cb) {
           categories[1],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "chicken leg",
           2.59,
@@ -120,7 +120,7 @@ function createProducts(cb) {
           categories[1],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "sausages",
           3.55,
@@ -129,7 +129,7 @@ function createProducts(cb) {
           callback
         ),
 
-      callback =>
+      (callback) =>
         productCreate(
           "sunflower seed loaf",
           1.89,
@@ -137,7 +137,7 @@ function createProducts(cb) {
           categories[2],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "sesame seed bagel",
           1.19,
@@ -145,7 +145,7 @@ function createProducts(cb) {
           categories[2],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "pumpkin seed bun",
           1.15,
@@ -153,7 +153,7 @@ function createProducts(cb) {
           categories[2],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "chocolate cookies",
           2.39,
@@ -162,7 +162,7 @@ function createProducts(cb) {
           callback
         ),
 
-      callback =>
+      (callback) =>
         productCreate(
           "corn on the cob",
           1.59,
@@ -170,11 +170,11 @@ function createProducts(cb) {
           categories[3],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate("red currants", 2.49, "150g", categories[3], callback),
-      callback =>
+      (callback) =>
         productCreate("broccoli", 1.29, "500g", categories[3], callback),
-      callback =>
+      (callback) =>
         productCreate(
           "seedless watermelon",
           1.49,
@@ -183,7 +183,7 @@ function createProducts(cb) {
           callback
         ),
 
-      callback =>
+      (callback) =>
         productCreate(
           "jumbo oats",
           1.99,
@@ -191,7 +191,7 @@ function createProducts(cb) {
           categories[4],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "porridge oats",
           2.75,
@@ -199,7 +199,7 @@ function createProducts(cb) {
           categories[4],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "rice flakes",
           2.99,
@@ -207,7 +207,7 @@ function createProducts(cb) {
           categories[4],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "granola",
           3.99,
@@ -216,7 +216,7 @@ function createProducts(cb) {
           callback
         ),
 
-      callback =>
+      (callback) =>
         productCreate(
           "herbal tea",
           2.5,
@@ -224,7 +224,7 @@ function createProducts(cb) {
           categories[5],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "wholebean coffee",
           10.75,
@@ -232,7 +232,7 @@ function createProducts(cb) {
           categories[5],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "green tea",
           1.99,
@@ -240,14 +240,14 @@ function createProducts(cb) {
           categories[5],
           callback
         ),
-      callback =>
+      (callback) =>
         productCreate(
           "organic coffee",
           4.75,
           "Organic Fairtrade Italian Roast Ground Coffee (227g)",
           categories[5],
           callback
-        )
+        ),
     ],
     cb
   );
@@ -256,7 +256,7 @@ function createProducts(cb) {
 function subjectCreate(name, cb) {
   const subject = new MsgSubject({ name });
 
-  subject.save(function(err) {
+  subject.save(function (err) {
     if (err) {
       cb(err, null);
       return;
@@ -269,19 +269,19 @@ function subjectCreate(name, cb) {
 function createSubjects(cb) {
   async.series(
     [
-      callback => subjectCreate("Brands or product", callback),
-      callback => subjectCreate("Investor relations", callback),
-      callback => subjectCreate("Sustainability", callback),
-      callback => subjectCreate("The Company", callback),
-      callback => subjectCreate("Media enquiry", callback),
-      callback => subjectCreate("Website feedback", callback),
-      callback => subjectCreate("Other", callback)
+      (callback) => subjectCreate("Brands or product", callback),
+      (callback) => subjectCreate("Investor relations", callback),
+      (callback) => subjectCreate("Sustainability", callback),
+      (callback) => subjectCreate("The Company", callback),
+      (callback) => subjectCreate("Media enquiry", callback),
+      (callback) => subjectCreate("Website feedback", callback),
+      (callback) => subjectCreate("Other", callback),
     ],
     cb
   );
 }
 
-async.series([createCategories, createProducts, createSubjects], err => {
+async.series([createCategories, createProducts, createSubjects], (err) => {
   mongoose.connection.close();
 
   if (err) {

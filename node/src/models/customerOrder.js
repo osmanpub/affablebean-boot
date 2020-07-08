@@ -8,12 +8,12 @@ const CustomerOrderSchema = new Schema({
   confirmationNumber: {
     type: Number,
     required: true,
-    default: Math.floor(Math.random() * 999999999) + 1
+    default: Math.floor(Math.random() * 999999999) + 1,
   },
-  customer: { type: Schema.Types.ObjectId, ref: "Customer" }
+  customer: { type: Schema.Types.ObjectId, ref: "Customer" },
 });
 
-CustomerOrderSchema.virtual("url").get(function() {
+CustomerOrderSchema.virtual("url").get(function () {
   return "/customerOrder/" + this._id;
 });
 

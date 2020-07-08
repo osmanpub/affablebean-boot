@@ -49,7 +49,7 @@ function CheckoutForm(props: Props) {
   if (formErrors && Array.isArray(formErrors) && formErrors.length > 0) {
     let msg = '';
 
-    formErrors.forEach(error => {
+    formErrors.forEach((error) => {
       msg += `Field "${error.param}" with value "${error.value}" has the following problem:\n"${error.msg}"`;
     });
 

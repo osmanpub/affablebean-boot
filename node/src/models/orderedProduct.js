@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const OrderedProductSchema = new Schema({
   quantity: { type: Number, required: true },
   customerOrder: { type: Schema.Types.ObjectId, ref: "CustomerOrder" },
-  product: { type: Schema.Types.ObjectId, ref: "Product" }
+  product: { type: Schema.Types.ObjectId, ref: "Product" },
 });
 
-OrderedProductSchema.virtual("url").get(function() {
+OrderedProductSchema.virtual("url").get(function () {
   return "/orderedProduct/" + this._id;
 });
 
