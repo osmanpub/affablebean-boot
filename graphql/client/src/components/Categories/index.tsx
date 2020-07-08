@@ -1,11 +1,8 @@
+import { useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { connect } from "react-redux";
 import { getId } from "../../helpers/utils";
-import {
-  Categories as CategoriesState,
-  CategoryState,
-} from "../../interfaces/categories";
-import { RootState } from "../../redux";
+import { CategoryState } from "../../interfaces/categories";
+import { GET_CATEGORIES } from "../../queries";
 import Category from "../Category";
 import {
   CategoriesGreeting,
@@ -14,19 +11,20 @@ import {
   CategoriesWelcome,
 } from "./Categories.styles";
 
-type Props = {
-  categories: CategoriesState;
-};
+function Categories() {
+  const { data } = useQuery(GET_CATEGORIES);
 
-function Categories(props: Props) {
-  const { categories } = props;
-  const { items } = categories;
-
-  if (items.length === 0) {
+  if (!data) {
     return null;
   }
 
-  const categoriesList = items.map((category: CategoryState) => (
+  const { categories } = data;
+
+  if (!categories || !categories.length) {
+    return null;
+  }
+
+  const categoriesList = categories.map((category: CategoryState) => (
     <Category key={getId(category)} category={category} />
   ));
 
@@ -50,8 +48,4 @@ function Categories(props: Props) {
   );
 }
 
-const mapStateToProps = (state: RootState) => ({
-  categories: state.categories,
-});
-
-export default connect(mapStateToProps)(Categories);
+export default Categories;

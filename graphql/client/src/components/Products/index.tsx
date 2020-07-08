@@ -1,15 +1,13 @@
+import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getId } from "../../helpers/utils";
 import { Cart } from "../../interfaces/cart";
-import {
-  Category,
-  CategoryState,
-  ProductState,
-} from "../../interfaces/categories";
+import { CategoryState, ProductState } from "../../interfaces/categories";
 import { ID } from "../../interfaces/id";
 import { addProductToCart, updateProductInCart } from "../../net/cart";
+import { GET_CATEGORY_PRODUCTS } from "../../queries";
 import { RootState } from "../../redux";
 import { clearPurchase } from "../../redux/purchase";
 import "./Products.css";
@@ -23,15 +21,30 @@ import {
 
 type Props = {
   cart: Cart;
-  categories: Array<CategoryState>;
-  category: Category;
   clearPurchase: Function;
-  products: Array<ProductState>;
+  id: string;
 };
 
 function Products(props: Props) {
-  const { cart, categories, clearPurchase, products } = props;
+  const { cart, clearPurchase, id } = props;
+  const { data } = useQuery(GET_CATEGORY_PRODUCTS, { variables: { id } });
   const dispatch = useDispatch();
+
+  if (!data || !data.category) {
+    return null;
+  }
+
+  const { categories, category, products } = data.category;
+
+  if (
+    !categories ||
+    !categories.length ||
+    !category ||
+    !products ||
+    !products.length
+  ) {
+    return null;
+  }
 
   const addToCart = (id: ID) => {
     const update = cart.items.filter((item) => getId(item.product) === id);
@@ -48,7 +61,7 @@ function Products(props: Props) {
     return null;
   }
 
-  const selectedCategory = props.category;
+  const selectedCategory = category;
 
   const sidePanel = categories.map((category: CategoryState) => {
     const id = getId(category);

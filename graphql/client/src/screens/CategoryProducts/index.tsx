@@ -34,12 +34,8 @@ function CategoryProducts(props: Props) {
   return (
     <div>
       <Header url={match.url} />
-      <Products
-        categories={category.categories}
-        category={category.category}
-        products={category.products}
-      />
-      <Footer />O
+      <Products id={id} />
+      <Footer />
     </div>
   );
 }
