@@ -27,6 +27,8 @@ module.exports = {
       dataSources.subjectAPI.getAllSubjects(),
   },
   Mutation: {
+    addToCart: (_, { id }, { dataSources }) =>
+      dataSources.cartAPI.addToCart(id),
     contact: (_, { name, email, msg, subjectId }, { dataSources }) =>
       dataSources.contactAPI.sendFeedback(name, email, msg, subjectId),
   },

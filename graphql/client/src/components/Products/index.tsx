@@ -1,13 +1,14 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { ADD_TO_CART } from "../../graphql/mutations";
+import { GET_CATEGORY_PRODUCTS } from "../../graphql/queries";
 import { getId } from "../../helpers/utils";
 import { Cart } from "../../interfaces/cart";
 import { CategoryState, ProductState } from "../../interfaces/categories";
 import { ID } from "../../interfaces/id";
-import { addProductToCart, updateProductInCart } from "../../net/cart";
-import { GET_CATEGORY_PRODUCTS } from "../../graphql/queries";
+import { updateProductInCart } from "../../net/cart";
 import { RootState } from "../../redux";
 import { clearPurchase } from "../../redux/purchase";
 import "./Products.css";
@@ -28,6 +29,7 @@ type Props = {
 function Products(props: Props) {
   const { cart, clearPurchase, id } = props;
   const { data } = useQuery(GET_CATEGORY_PRODUCTS, { variables: { id } });
+  const [addToCart] = useMutation(ADD_TO_CART);
   const dispatch = useDispatch();
 
   if (!data || !data.category) {
@@ -46,15 +48,25 @@ function Products(props: Props) {
     return null;
   }
 
-  const addToCart = (id: ID) => {
+  const addToShoppingCart = (id: ID) => {
+    clearPurchase();
     const update = cart.items.filter((item) => getId(item.product) === id);
 
-    clearPurchase();
-    dispatch(
-      update.length > 0
-        ? updateProductInCart(id, update[0].quantity + 1)
-        : addProductToCart(id.toString())
-    );
+    update.length
+      ? dispatch(updateProductInCart(id, update[0].quantity + 1))
+      : addToCart({ variables: { id } })
+          .then((response) => {
+            const { data } = response;
+
+            if (!data || !data.cart) {
+              return {};
+            }
+
+            return data.cart;
+          })
+          .catch((e) => {
+            console.log(e);
+          });
   };
 
   if (categories.length === 0) {
@@ -123,7 +135,7 @@ function Products(props: Props) {
           <button
             className="btn btn-primary btn-sm"
             data-testid={`add-qty-${name}`}
-            onClick={() => addToCart(id)}
+            onClick={() => addToShoppingCart(id)}
           >
             add
           </button>
