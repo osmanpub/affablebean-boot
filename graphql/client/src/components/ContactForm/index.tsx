@@ -1,15 +1,13 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
-// import { types, useAlert } from "react-alert";
 import { useForm } from "react-hook-form";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { Link, useHistory } from "react-router-dom";
+import { SEND_FEEDBACK } from "../../graphql/mutations";
+import { GET_SUBJECTS } from "../../graphql/queries";
 import { getId } from "../../helpers/utils";
 import { SubjectState } from "../../interfaces/subjects";
 import { FormErrors } from "../../interfaces/ui";
-import { sendFeedback } from "../../net/contact";
-import { GET_SUBJECTS } from "../../queries";
 import { RootState } from "../../redux";
 import { goHome, setFormErrors } from "../../redux/ui";
 
@@ -28,16 +26,28 @@ type FormData = {
 };
 
 function ContactForm(props: Props) {
-  const { data } = useQuery(GET_SUBJECTS);
-  const { formErrors, goHome, home, setFormErrors } = props;
-  // Problem with jest - https://github.com/schiehll/react-alert/issues/148
-  // const alert = useAlert();
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const { data } = useQuery(GET_SUBJECTS);
+  const [contact] = useMutation(SEND_FEEDBACK);
+
+  const { formErrors, goHome, home, setFormErrors } = props;
   const { register, handleSubmit, errors } = useForm<FormData>();
 
   const onSubmit = handleSubmit(({ email, msg, name, subject }) => {
-    dispatch(sendFeedback({ email, msg, name, subjectId: subject }));
+    contact({ variables: { email, msg, name, subjectId: subject } })
+      .then((response) => {
+        const { data } = response;
+
+        if (!data || !data.contact) {
+          return;
+        }
+
+        const { success } = data.contact;
+        success ? dispatch(goHome({})) : setFormErrors(data.errors);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   });
 
   if (!data) {
@@ -70,23 +80,9 @@ function ContactForm(props: Props) {
     alert(
       `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`
     );
-
-    // alert.show(
-    //   `There was a problem saving your message.\nPlease correct the following errors:\n${msg}`,
-    //   {
-    //     timeout: 0,
-    //     type: types.ERROR
-    //   }
-    // );
   } else if (home) {
     goHome(false);
     alert("Message sent successfully!");
-
-    // alert.show("Message sent successfully!", {
-    //   onClose: () => history.push("/"),
-    //   timeout: 3000,
-    //   type: types.SUCCESS
-    // });
   }
 
   return (

@@ -7,7 +7,7 @@ import { Cart } from "../../interfaces/cart";
 import { CategoryState, ProductState } from "../../interfaces/categories";
 import { ID } from "../../interfaces/id";
 import { addProductToCart, updateProductInCart } from "../../net/cart";
-import { GET_CATEGORY_PRODUCTS } from "../../queries";
+import { GET_CATEGORY_PRODUCTS } from "../../graphql/queries";
 import { RootState } from "../../redux";
 import { clearPurchase } from "../../redux/purchase";
 import "./Products.css";

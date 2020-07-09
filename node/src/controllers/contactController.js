@@ -44,7 +44,6 @@ exports.contact = [
     }
 
     const { name, email, msg, subjectId } = req.body;
-
     MsgSubject.findById(subjectId).exec((err, subject) => {
       if (err) {
         debug("contact MsgSubject find error:" + err);

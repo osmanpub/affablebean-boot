@@ -3,8 +3,18 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   scalar Date
 
+  type Cart {
+    items: [CartItem]!
+  }
+
+  type CartItem {
+    product: Product!
+    quantity: Int!
+    total: Float!
+  }
+
   type Category {
-    id: String!
+    id: ID!
     name: String!
   }
 
@@ -14,15 +24,25 @@ const typeDefs = gql`
     products: [Product]!
   }
 
+  type Customer {
+    id: ID!
+    name: String!
+    email: String!
+    phone: String!
+    address: String!
+    city_region: String!
+    creditCard: String!
+  }
+
   type Product {
-    id: String!
+    id: ID!
     description: String
     name: String!
     price: Float!
   }
 
   type Subject {
-    id: String!
+    id: ID!
     name: String!
   }
 
@@ -33,17 +53,58 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    # addToCart(
+    #   id: ID!
+    # ): AddToCartResponse!
+
+    # clearCart(
+    # ): ClearCartResponse!
+
     contact(
       name: String!
       email: String!
       msg: String!
       subjectId: String!
-    ): ContactUpdateResponse!
+    ): ContactResponse!
+
+    # updateCart(
+    #   id: ID!
+    #   qty: Int!
+    # ): UpdateCartResponse!
   }
 
-  type ContactUpdateResponse {
+  # type AddToCartResponse {
+  #   items: [CartItem]!,
+  #   numberOfItems: Int!
+  #   subtotal: Float!
+  # }
+
+  # type ClearCartResponse {
+  #   success: Boolean!
+  # }
+
+  type ContactResponse {
     success: Boolean!
   }
+
+  # type Order {
+  #   customer: Customer!,
+  #   orderedProducts,
+  #   orderRecord: customerOrder,
+  #   products: [Products]!,
+
+  # }
+
+  # type PurchaseResponse {
+  #   order: Order!
+  #   success: Boolean!
+  # }
+
+  # type UpdateCartResponse {
+  #   items: [CartItem]!,
+  #   numberOfItems: Int!
+  #   subtotal: Float!
+  # }
 `;
 
 module.exports = typeDefs;

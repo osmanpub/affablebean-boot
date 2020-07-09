@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { getId } from "../../helpers/utils";
 import { CategoryState } from "../../interfaces/categories";
-import { GET_CATEGORIES } from "../../queries";
+import { GET_CATEGORIES } from "../../graphql/queries";
 import Category from "../Category";
 import {
   CategoriesGreeting,
