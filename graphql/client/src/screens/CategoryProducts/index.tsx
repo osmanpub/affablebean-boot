@@ -1,35 +1,17 @@
-import React, { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Products from "../../components/Products";
-import { CategoryProducts as CategoryProductsState } from "../../interfaces/categories";
 import { Match } from "../../interfaces/router";
-import { fetchCategoryIfNeeded } from "../../net/category";
-import { RootState } from "../../redux";
 
 type Props = {
-  category: CategoryProductsState;
-  clearCart: Function;
   match: Match;
 };
 
 function CategoryProducts(props: Props) {
-  const { category, match } = props;
+  const { match } = props;
   const { params } = match;
   const id = params.id;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCategoryIfNeeded(id));
-  }, [dispatch, id]);
-
-  if (
-    !category.category.hasOwnProperty("id") &&
-    !category.category.hasOwnProperty("_id")
-  ) {
-    return null;
-  }
 
   return (
     <div>
@@ -40,12 +22,4 @@ function CategoryProducts(props: Props) {
   );
 }
 
-const mapStateToProps = (state: RootState) => {
-  const { category } = state;
-
-  return {
-    category,
-  };
-};
-
-export default connect(mapStateToProps)(CategoryProducts);
+export default CategoryProducts;

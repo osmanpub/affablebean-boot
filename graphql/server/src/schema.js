@@ -34,6 +34,27 @@ const typeDefs = gql`
     creditCard: String!
   }
 
+  type CustomerOrder {
+    id: ID!
+    amount: Float!
+    dateCreated: Date!
+    confirmationNumber: Int!
+    customer: Customer!
+  }
+
+  type Order {
+    customer: Customer!
+    orderedProducts: [OrderedProduct]!
+    orderRecord: CustomerOrder!
+    products: [Product]!
+  }
+
+  type OrderedProduct {
+    quantity: Int!
+    customerOrder: CustomerOrder!
+    product: Product!
+  }
+
   type Product {
     id: ID!
     description: String
@@ -53,9 +74,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    # addToCart(
-    #   id: ID!
-    # ): AddToCartResponse!
+    addToCart(id: ID!): AddToCartResponse!
 
     # clearCart(
     # ): ClearCartResponse!
@@ -67,44 +86,41 @@ const typeDefs = gql`
       subjectId: String!
     ): ContactResponse!
 
-    # updateCart(
-    #   id: ID!
-    #   qty: Int!
-    # ): UpdateCartResponse!
+    purchase(
+      name: String!
+      email: String!
+      phone: String!
+      address: String!
+      creditCard: String!
+    ): PurchaseResponse!
+
+    updateCart(id: ID!, qty: Int!): UpdateCartResponse!
   }
 
-  # type AddToCartResponse {
-  #   items: [CartItem]!,
-  #   numberOfItems: Int!
-  #   subtotal: Float!
-  # }
+  type AddToCartResponse {
+    items: [CartItem]!
+    numberOfItems: Int!
+    subtotal: Float!
+  }
 
-  # type ClearCartResponse {
-  #   success: Boolean!
-  # }
+  type ClearCartResponse {
+    success: Boolean!
+  }
 
   type ContactResponse {
     success: Boolean!
   }
 
-  # type Order {
-  #   customer: Customer!,
-  #   orderedProducts,
-  #   orderRecord: customerOrder,
-  #   products: [Products]!,
+  type PurchaseResponse {
+    order: Order!
+    success: Boolean!
+  }
 
-  # }
-
-  # type PurchaseResponse {
-  #   order: Order!
-  #   success: Boolean!
-  # }
-
-  # type UpdateCartResponse {
-  #   items: [CartItem]!,
-  #   numberOfItems: Int!
-  #   subtotal: Float!
-  # }
+  type UpdateCartResponse {
+    items: [CartItem]!
+    numberOfItems: Int!
+    subtotal: Float!
+  }
 `;
 
 module.exports = typeDefs;
