@@ -1,4 +1,5 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
+const { categoryReducer, productReducer } = require("./reducers");
 
 class CategoryAPI extends RESTDataSource {
   constructor() {
@@ -13,9 +14,7 @@ class CategoryAPI extends RESTDataSource {
       return [];
     }
 
-    return response.categories.map((category) =>
-      this.categoryReducer(category)
-    );
+    return response.categories.map((category) => categoryReducer(category));
   }
 
   async getCategoryProducts(id) {
@@ -29,27 +28,11 @@ class CategoryAPI extends RESTDataSource {
 
     return response
       ? {
-          categories: categories.map((category) =>
-            this.categoryReducer(category)
-          ),
-          category: this.categoryReducer(category),
-          products: products.map((product) => this.productReducer(product)),
+          categories: categories.map((category) => categoryReducer(category)),
+          category: categoryReducer(category),
+          products: products.map((product) => productReducer(product)),
         }
       : {};
-  }
-
-  categoryReducer(category) {
-    return {
-      ...category,
-      id: category._id,
-    };
-  }
-
-  productReducer(product) {
-    return {
-      ...product,
-      id: product._id,
-    };
   }
 }
 

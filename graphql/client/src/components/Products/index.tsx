@@ -10,6 +10,11 @@ import { CategoryState, ProductState } from "../../interfaces/categories";
 import { ID } from "../../interfaces/id";
 import { updateProductInCart } from "../../net/cart";
 import { RootState } from "../../redux";
+import {
+  addToCart as addToShoppingCart,
+  clearCart,
+  updateCart,
+} from "../../redux/cart";
 import { clearPurchase } from "../../redux/purchase";
 import "./Products.css";
 import {
@@ -48,7 +53,7 @@ function Products(props: Props) {
     return null;
   }
 
-  const addToShoppingCart = (id: ID) => {
+  const updateCart = (id: ID) => {
     clearPurchase();
     const update = cart.items.filter((item) => getId(item.product) === id);
 
@@ -58,11 +63,19 @@ function Products(props: Props) {
           .then((response) => {
             const { data } = response;
 
-            if (!data || !data.cart) {
+            if (!data || !data.addToCart) {
               return {};
             }
 
-            return data.cart;
+            const { items, numberOfItems, subtotal } = data.addToCart;
+
+            dispatch(
+              addToShoppingCart({
+                items,
+                numberOfItems,
+                subtotal,
+              })
+            );
           })
           .catch((e) => {
             console.log(e);
@@ -135,7 +148,7 @@ function Products(props: Props) {
           <button
             className="btn btn-primary btn-sm"
             data-testid={`add-qty-${name}`}
-            onClick={() => addToShoppingCart(id)}
+            onClick={() => updateCart(id)}
           >
             add
           </button>

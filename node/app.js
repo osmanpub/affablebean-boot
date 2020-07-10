@@ -25,15 +25,15 @@ const app = express();
 app.use(compression()); //Compress all routes
 app.use(helmet());
 
-// app.use(cors)
+app.use(cors());
 
-app.use(
-  cors({
-    credentials: true,
-    maxAge: 3600000,
-    origin: "http://localhost:3000",
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     maxAge: 3600000,
+//     origin: "http://localhost:4000",
+//   })
+// );
 
 const sess = {
   cookie: { secure: false, httpOnly: false, maxAge: 3600000 },

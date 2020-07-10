@@ -1,4 +1,5 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
+const { productReducer } = require("./reducers");
 
 class CartAPI extends RESTDataSource {
   constructor() {
@@ -7,7 +8,6 @@ class CartAPI extends RESTDataSource {
   }
 
   async addToCart(id) {
-    console.log(`addtocart ${id}`);
     const response = await this.post(`addToCart/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -15,7 +15,11 @@ class CartAPI extends RESTDataSource {
       withCredentials: true,
     });
 
-    console.log(response);
+    response.items = response.items.map((i) => ({
+      ...i,
+      product: productReducer(i.product),
+    }));
+
     return response;
   }
 }
